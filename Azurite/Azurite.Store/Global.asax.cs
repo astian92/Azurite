@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Azurite.Infrastructure.Config;
+using Azurite.Store.Config;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -12,10 +14,13 @@ namespace Azurite.Store
     {
         protected void Application_Start()
         {
+            DependencyResolver.SetResolver(new NinjectDependencyResolver());
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+            AutoMapperConfig.RegisterMappings();
         }
     }
 }

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace Azurite.Storehouse.NinjectConfigurations
+namespace Azurite.Store.Config
 {
     public class NinjectDependencyResolver : IDependencyResolver
     {
@@ -29,17 +29,7 @@ namespace Azurite.Storehouse.NinjectConfigurations
 
         private void AddBindings()
         {
-            //_kernel.Bind<IDbFactory>()
-            //    .To<DbFactory>()
-            //    .InTransientScope();
-
-            //_kernel.Bind<ITranslatedRepository<ProductW, Product, Guid>>()
-            //    .To<GenericTranslatedRepository<ProductW, Product, Guid>>()
-            //    .InTransientScope();
-
-            //_kernel.Bind<IRepository<Product, Guid>>()
-            //    .To<IRepository<Product, Guid>>()
-            //    .InTransientScope();
+            InfrastructureDependencyConfig.RegisterInfrastructure(_kernel);
         }
     }
 }

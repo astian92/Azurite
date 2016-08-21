@@ -1,4 +1,5 @@
-﻿using Azurite.Storehouse.NinjectConfigurations;
+﻿using Azurite.Infrastructure.Config;
+using Azurite.Storehouse.Config;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,6 +19,8 @@ namespace Azurite.Storehouse
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+            AutoMapperConfig.RegisterMappings();
         }
     }
 }
