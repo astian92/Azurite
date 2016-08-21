@@ -1,5 +1,6 @@
 ﻿using Azurite.Infrastructure.Data.Contracts;
 using Azurite.Infrastructure.Data.Implementations;
+using Azurite.Storehouse.Config.Streamline;
 using Azurite.Storehouse.Data;
 using Azurite.Storehouse.Models.Infrastructure;
 using Azurite.Storehouse.Wrappers;
@@ -11,13 +12,13 @@ using System.Web;
 
 namespace Azurite.Storehouse.Config
 {
-    public class InfrastructureDependencyConfig
+    public class InfrastructureDependencyConfig : IServiceRegistrator
     {
-        public static void RegisterInfrastructure(IKernel kernel)
+        public void RegisterServices(IKernel kernel)
         {
             kernel.Bind<IDbFactory>()
                 .To<StorehouseDbFactory>()
-                .InTransientScope(); //make sure
+                .InTransientScope();
 
             kernel.Bind<IStorehouseDbFactory>()
                 .To<StorehouseDbFactory>()

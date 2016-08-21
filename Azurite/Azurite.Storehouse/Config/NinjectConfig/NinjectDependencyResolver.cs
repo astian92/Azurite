@@ -1,6 +1,5 @@
 ﻿using Azurite.Infrastructure.Data.Contracts;
-using Azurite.Storehouse.Config;
-using Azurite.Storehouse.Models.Infrastructure;
+using Azurite.Storehouse.Config.Streamline;
 using Ninject;
 using System;
 using System.Collections.Generic;
@@ -8,7 +7,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace Azurite.Storehouse.Config
+namespace Azurite.Storehouse.Config.NinjectConfig
 {
     public class NinjectDependencyResolver : IDependencyResolver
     {
@@ -32,7 +31,7 @@ namespace Azurite.Storehouse.Config
 
         private void AddBindings()
         {
-            InfrastructureDependencyConfig.RegisterInfrastructure(_kernel);
+            ServiceRegistrator.RegisterAllServices(_kernel);
         }
     }
 }

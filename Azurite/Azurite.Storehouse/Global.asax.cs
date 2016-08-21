@@ -1,5 +1,5 @@
 ﻿using Azurite.Infrastructure.Config;
-using Azurite.Storehouse.Config;
+using Azurite.Storehouse.Config.NinjectConfig;
 using System;
 using System.Collections.Generic;
 using System.Linq;
