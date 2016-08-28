@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Azurite.Infrastructure.Data.Abstractions
 {
-    public abstract class ARepository<TEntity, TKey> : IRepository<TEntity, TKey>
+    public abstract class ARepository<TEntity> : IRepository<TEntity>
         where TEntity : class
     {
         private readonly DbContext db;
@@ -21,35 +21,40 @@ namespace Azurite.Infrastructure.Data.Abstractions
         public virtual void Add(TEntity entity)
         {
             db.Set<TEntity>().Add(entity);
-            db.SaveChanges();
         }
 
-        public virtual void Delete(TKey key)
+        public virtual void AddRange(IEnumerable<TEntity> entities)
+        {
+            db.Set<TEntity>().AddRange(entities);
+        }
+
+        public virtual void Remove<TKey>(TKey key)
         {
             var entity = this.Get(key);
             db.Set<TEntity>().Remove(entity);
-
-            db.SaveChanges();
         }
 
-        public virtual void Edit(TEntity entity)
+        public virtual void RemoveRange(IEnumerable<TEntity> entities)
         {
-            db.Entry(entity).State = EntityState.Modified;
-            db.SaveChanges();
+            db.Set<TEntity>().RemoveRange(entities);
         }
 
-        public virtual TEntity Get(TKey key)
+        public virtual TEntity Get<TKey>(TKey key)
         {
             var entity = db.Set<TEntity>()
                 .Find(key);
 
-            db.Entry(entity).State = EntityState.Detached;
             return entity;
         }
 
         public virtual IQueryable<TEntity> GetAll()
         {
             return db.Set<TEntity>();
+        }
+
+        public void Save()
+        {
+            db.SaveChanges();
         }
     }
 }

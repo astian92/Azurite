@@ -1,4 +1,6 @@
 ﻿using Azurite.Infrastructure.Data.Contracts;
+using Azurite.Infrastructure.Data.Implementations;
+using Azurite.Store.Config.Streamline;
 using Azurite.Store.Models.Infrastructure;
 using Ninject;
 using System;
@@ -8,19 +10,21 @@ using System.Web;
 
 namespace Azurite.Store.Config
 {
-    public class InfrastructureDependencyConfig
+    public class InfrastructureDependencyConfig : IServiceRegistrator
     {
-        public static void RegisterInfrastructure(IKernel kernel)
+        public void RegisterServices(IKernel kernel)
         {
             kernel.Bind<IDbFactory>()
                 .To<StoreDbFactory>()
-                .InTransientScope(); //make sure
+                .InTransientScope();
 
             kernel.Bind<IStoreDbFactory>()
                 .To<StoreDbFactory>()
-                .InTransientScope(); //make sure
+                .InTransientScope();
 
-
+            kernel.Bind(typeof(IRepository<>))
+                .To(typeof(Repository<>))
+                .InTransientScope();
         }
     }
 }

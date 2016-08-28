@@ -1,4 +1,6 @@
 ﻿using Azurite.Infrastructure.Data.Contracts;
+using Azurite.Storehouse.Models;
+using Azurite.Storehouse.Workers.Contracts;
 using Azurite.Storehouse.Wrappers;
 using System;
 using System.Collections.Generic;
@@ -10,17 +12,22 @@ namespace Azurite.Storehouse.Controllers
 {
     public class CategoriesController : Controller
     {
-        private ITranslatedRepository<CategoryW, Guid> rep;
+        private ICategoryWorker worker;
 
-        public CategoriesController(ITranslatedRepository<CategoryW, Guid> rep)
+        public CategoriesController(ICategoryWorker worker)
         {
-            this.rep = rep;
+            this.worker = worker;
         }
 
         public ActionResult Index()
         {
-            var model = rep.GetAll();
-            return View(model);
+            var categories = worker.GetAll();
+            return View(categories);
+        }
+
+        public void ChangeToEnglish()
+        {
+            LanguageChecker.IsEnglish = true;
         }
     }
 }

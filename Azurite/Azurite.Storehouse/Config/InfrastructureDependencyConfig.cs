@@ -24,12 +24,8 @@ namespace Azurite.Storehouse.Config
                 .To<StorehouseDbFactory>()
                 .InTransientScope();
 
-            kernel.Bind<IRepository<Category, Guid>>()
-                .To<Repository<Category, Guid>>()
-                .InTransientScope();
-
-            kernel.Bind<ITranslatedRepository<CategoryW, Guid>>()
-                .To<TranslatedRepository<CategoryW, Category, Guid>>()
+            kernel.Bind(typeof(IRepository<>))
+                .To(typeof(Repository<>))
                 .InTransientScope();
         }
     }

@@ -1,11 +1,12 @@
-﻿using Ninject;
+﻿using Azurite.Store.Config.Streamline;
+using Ninject;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace Azurite.Store.Config
+namespace Azurite.Store.Config.NinjectConfig
 {
     public class NinjectDependencyResolver : IDependencyResolver
     {
@@ -29,7 +30,7 @@ namespace Azurite.Store.Config
 
         private void AddBindings()
         {
-            InfrastructureDependencyConfig.RegisterInfrastructure(_kernel);
+            ServiceRegistrator.RegisterAllServices(_kernel);
         }
     }
 }

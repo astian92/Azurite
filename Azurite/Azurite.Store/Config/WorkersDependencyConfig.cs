@@ -1,9 +1,9 @@
-﻿using Ninject;
-using Azurite.Storehouse.Config.Streamline;
+﻿using Azurite.Store.Config.Streamline;
+using Ninject;
 using Ninject.Extensions.Conventions;
-using Azurite.Storehouse.Config.Constants;
+using Azurite.Store.Config.Constants;
 
-namespace Azurite.Storehouse.Config
+namespace Azurite.Store.Config
 {
     public class WorkersDependencyConfig : IServiceRegistrator
     {

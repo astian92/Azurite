@@ -1,6 +1,6 @@
 ﻿using Ninject;
 
-namespace Azurite.Storehouse.Config.Streamline
+namespace Azurite.Store.Config.Streamline
 {
     public interface IServiceRegistrator
     {

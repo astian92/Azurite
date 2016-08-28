@@ -1,5 +1,5 @@
 ﻿using Azurite.Infrastructure.Config;
-using Azurite.Store.Config;
+using Azurite.Store.Config.NinjectConfig;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -26,26 +26,5 @@ namespace Azurite.Store
             AutoMapperConfig.RegisterMappings();
             Thread.CurrentThread.CurrentCulture = CultureInfo.CreateSpecificCulture("en-GB");
         }
-
-        //protected void Application_PostAuthenticateRequest(Object sender, EventArgs e)
-        //{
-        //    if (FormsAuthentication.CookiesSupported == true)
-        //    {
-        //        if (Request.Cookies[FormsAuthentication.FormsCookieName] != null)
-        //        {
-        //            try
-        //            {
-        //                //let us take out the username now                
-        //                string username = FormsAuthentication.Decrypt(Request.Cookies[FormsAuthentication.FormsCookieName].Value).Name;
-
-        //                HttpContext.Current.User = new RvsPrincipal(new System.Security.Principal.GenericIdentity(username, "Forms"));
-        //            }
-        //            catch (Exception)
-        //            {
-        //                //somehting went wrong
-        //            }
-        //        }
-        //    }
-        //}
     }
 }

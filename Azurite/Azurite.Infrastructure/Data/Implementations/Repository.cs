@@ -8,13 +8,13 @@ using System.Threading.Tasks;
 
 namespace Azurite.Infrastructure.Data.Implementations
 {
-    public class Repository<TEntity, TKey> : ARepository<TEntity, TKey>
+    public class Repository<TEntity> : ARepository<TEntity>
         where TEntity : class
     {
         public Repository(IDbFactory factory)
             : base(factory)
         {
-
+            
         }
     }
 }

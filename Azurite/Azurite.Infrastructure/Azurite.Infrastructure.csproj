@@ -57,12 +57,9 @@
     <Compile Include="Cache\BaseCacheService.cs" />
     <Compile Include="Config\AutoMapperConfig.cs" />
     <Compile Include="Data\Abstractions\ARepository.cs" />
-    <Compile Include="Data\Abstractions\ATranslatedRepository.cs" />
     <Compile Include="Data\Contracts\IDbFactory.cs" />
     <Compile Include="Data\Contracts\IRepository.cs" />
-    <Compile Include="Data\Contracts\ITranslatedRepository.cs" />
     <Compile Include="Data\Implementations\Repository.cs" />
-    <Compile Include="Data\Implementations\TranslatedRepository.cs" />
     <Compile Include="Mapping\Contracts\IHaveCustomMappings.cs" />
     <Compile Include="Mapping\Contracts\IMap.cs" />
     <Compile Include="Mapping\Contracts\IMapFrom.cs" />
