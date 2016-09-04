@@ -24,8 +24,10 @@ namespace Azurite.Storehouse.Data
         public System.Guid Id { get; set; }
         public Nullable<System.Guid> ParentId { get; set; }
         public string Name { get; set; }
+        public string NameEN { get; set; }
         public string ImagePath { get; set; }
         public string Description { get; set; }
+        public string DescriptionEN { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CategoryAttribute> CategoryAttributes { get; set; }

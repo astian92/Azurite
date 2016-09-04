@@ -23,6 +23,7 @@ namespace Azurite.Storehouse.Data
         public System.Guid Id { get; set; }
         public System.Guid CategoryId { get; set; }
         public string AttributeName { get; set; }
+        public string AttributeNameEN { get; set; }
         public int ActiveFilter { get; set; }
     
         public virtual Category Category { get; set; }

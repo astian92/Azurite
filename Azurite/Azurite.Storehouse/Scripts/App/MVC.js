@@ -8,6 +8,10 @@ var MagicStrings = (function () {
         return controller;
     }
 
+    var users = CreateController("Users");
+    users.CreateAction("GetUsers");
+    users.CreateAction("Edit");
+    users.CreateAction("Delete");
   
     return {
         CreateController: CreateController,

@@ -24,10 +24,5 @@ namespace Azurite.Storehouse.Controllers
             var categories = worker.GetAll();
             return View(categories);
         }
-
-        public void ChangeToEnglish()
-        {
-            LanguageChecker.IsEnglish = true;
-        }
     }
 }
