@@ -1,0 +1,118 @@
+﻿@model Azurite.Storehouse.Wrappers.CategoryW
+
+<div class="">
+    <div class="row">
+
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Добави категория</h2>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    @using (Html.BeginForm<CategoriesController>(c => c.Add(), FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <div class="form-horizontal">
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.NameEN, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.NameEN, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.NameEN, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.TextAreaFor(model => model.Description, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.DescriptionEN, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.TextAreaFor(model => model.DescriptionEN, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.DescriptionEN, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.ImagePath, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    <label class="btn btn-default btn-file">
+                                        Зареди <input id="cat-img" type="file" style="display: none;">
+                                    </label>
+                                    <span class="selected-file-name"></span>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label col-md-2">Атрибути:</label>
+                                <div class="col-md-10 row">
+                                    <div class="col-md-4">
+                                        <input type="text" id="attribute-name-textbox" class="form-control" placeholder="Име на атрибут" />
+                                    </div>
+                                    <div class="col-md-4">
+                                        <input type="text" id="attribute-name-textbox" class="form-control" placeholder="Име-EN на атрибут" />
+                                    </div>
+                                    <div class="col-md-2">
+                                        @*<input type="checkbox" />*@
+                                    </div>
+                                    <div class="col-md-2 text-right">
+                                        <a class="btn btn-primary">Добави</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="ln_solid"></div>
+
+                            <div class="form-group">
+                                <div class="col-md-offset-2 col-md-10">
+                                    @foreach (var state in ViewData.ModelState.Values)
+                                    {
+                                        foreach (var error in state.Errors)
+                                        {
+                                            <div class="model-state-error">@error.ErrorMessage</div>
+                                        }
+                                    }
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-md-offset-2 col-md-10">
+                                    <a class="btn btn-default" href="@(Url.Action<CategoriesController>(c => c.Index()))">Откажи</a>
+                                    <input type="submit" value="Създай" class="btn btn-success" />
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+    <script>
+        $('#cat-img').on('change', function () {
+            var fileName = this.files[0].name
+            $('.selected-file-name').text(fileName);
+        });
+    </script>
+}

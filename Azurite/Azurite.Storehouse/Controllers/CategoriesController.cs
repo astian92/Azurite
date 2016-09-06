@@ -1,5 +1,6 @@
 ﻿using Azurite.Infrastructure.Data.Contracts;
 using Azurite.Storehouse.Models;
+using Azurite.Storehouse.Models.Helpers.Datatables;
 using Azurite.Storehouse.Workers.Contracts;
 using Azurite.Storehouse.Wrappers;
 using System;
@@ -21,8 +22,21 @@ namespace Azurite.Storehouse.Controllers
 
         public ActionResult Index()
         {
+            return View();
+        }
+
+        public ActionResult GetCategories()
+        {
             var categories = worker.GetAll();
-            return View(categories);
+            var result = new JqueryListResult<CategoryW>(data: categories);
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public ActionResult Add()
+        {
+            return View();
         }
     }
 }
