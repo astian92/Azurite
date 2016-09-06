@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Mvc.Expressions;
 
 namespace Azurite.Storehouse.Controllers
 {
@@ -20,8 +21,7 @@ namespace Azurite.Storehouse.Controllers
 
         public ActionResult Index()
         {
-            var users = worker.GetAll();
-            return View(users);
+            return View();
         }
 
         public ActionResult GetUsers()
@@ -33,14 +33,50 @@ namespace Azurite.Storehouse.Controllers
         }
 
         [HttpGet]
-        public ActionResult Edit(Guid Id)
+        public ActionResult Add()
         {
-            throw new NotImplementedException();
+            return View();
         }
 
-        public ActionResult Delete(Guid Id)
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Add(UserW userW)
         {
-            throw new NotImplementedException();
+            if (!ModelState.IsValid)
+            {
+                ModelState.AddModelError("Error", "Има проблем с данните!");
+                return View(userW);
+            }
+
+            worker.Add(userW);
+            return Redirect(Url.Action<UsersController>(c => c.Index()));
+        }
+
+        [HttpGet]
+        public ActionResult Edit(Guid Id)
+        {
+            var userW = worker.Get(Id);
+            return View(userW);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(UserW userW)
+        {
+            if (!ModelState.IsValid)
+            {
+                ModelState.AddModelError("Error", "Има проблем с данните!");
+                return View(userW);
+            }
+
+            worker.Edit(userW);
+            return Redirect(Url.Action<UsersController>(c => c.Index()));
+        }
+
+        public bool Delete(Guid Id)
+        {
+            worker.Delete(Id);
+            return true;
         }
     }
 }

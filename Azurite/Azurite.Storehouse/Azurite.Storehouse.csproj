@@ -167,7 +167,6 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Data\Category.cs">
       <DependentUpon>StorehouseModel.tt</DependentUpon>
@@ -224,13 +223,11 @@
     <Compile Include="Config\NinjectConfig\NinjectDependencyResolver.cs" />
     <Compile Include="Models\ViewModels\LoginViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Workers\Contracts\IHomeWorker.cs" />
     <Compile Include="Workers\Contracts\IAccountWorker.cs" />
     <Compile Include="Workers\Contracts\ICategoryWorker.cs" />
     <Compile Include="Workers\Contracts\IUsersWorker.cs" />
     <Compile Include="Workers\Implementations\AccountWorker.cs" />
     <Compile Include="Workers\Implementations\CategoryWorker.cs" />
-    <Compile Include="Workers\Implementations\HomeWorker.cs" />
     <Compile Include="Workers\Implementations\UsersWorker.cs" />
     <Compile Include="Wrappers\CategoryAttributeW.cs" />
     <Compile Include="Wrappers\CategoryW.cs" />
@@ -255,6 +252,47 @@
     <Content Include="Content\gentelella\gentelella-overrides.css" />
     <Content Include="Content\login.css" />
     <Content Include="Content\shared.css" />
+    <Content Include="Content\sweetalert\dev\gulpfile-wrap-template.js" />
+    <Content Include="Content\sweetalert\dev\ie9.css" />
+    <Content Include="Content\sweetalert\dev\loader-animation.css" />
+    <Content Include="Content\sweetalert\dev\modules\default-params.js" />
+    <Content Include="Content\sweetalert\dev\modules\handle-click.js" />
+    <Content Include="Content\sweetalert\dev\modules\handle-dom.js" />
+    <Content Include="Content\sweetalert\dev\modules\handle-key.js" />
+    <Content Include="Content\sweetalert\dev\modules\handle-swal-dom.js" />
+    <Content Include="Content\sweetalert\dev\modules\injected-html.js" />
+    <Content Include="Content\sweetalert\dev\modules\set-params.js" />
+    <Content Include="Content\sweetalert\dev\modules\utils.js" />
+    <Content Include="Content\sweetalert\dev\sweetalert.es6.js" />
+    <Content Include="Content\sweetalert\dist\sweetalert-dev.js" />
+    <Content Include="Content\sweetalert\dist\sweetalert.css" />
+    <Content Include="Content\sweetalert\dist\sweetalert.min.js" />
+    <Content Include="Content\sweetalert\example\example.css" />
+    <Content Include="Content\sweetalert\example\images\logo_big%402x.png" />
+    <Content Include="Content\sweetalert\example\images\logo_big.png" />
+    <Content Include="Content\sweetalert\example\images\logo_small%402x.png" />
+    <Content Include="Content\sweetalert\example\images\logo_small.png" />
+    <Content Include="Content\sweetalert\example\images\te-logo-small.svg" />
+    <Content Include="Content\sweetalert\example\images\thumbs-up.jpg" />
+    <Content Include="Content\sweetalert\example\images\vs_icon%402x.png" />
+    <Content Include="Content\sweetalert\example\images\vs_icon.png" />
+    <Content Include="Content\sweetalert\gulpfile.js" />
+    <Content Include="Content\sweetalert\index.html" />
+    <Content Include="Content\sweetalert\lib\modules\default-params.js" />
+    <Content Include="Content\sweetalert\lib\modules\handle-click.js" />
+    <Content Include="Content\sweetalert\lib\modules\handle-dom.js" />
+    <Content Include="Content\sweetalert\lib\modules\handle-key.js" />
+    <Content Include="Content\sweetalert\lib\modules\handle-swal-dom.js" />
+    <Content Include="Content\sweetalert\lib\modules\injected-html.js" />
+    <Content Include="Content\sweetalert\lib\modules\set-params.js" />
+    <Content Include="Content\sweetalert\lib\modules\utils.js" />
+    <Content Include="Content\sweetalert\lib\sweetalert.js" />
+    <Content Include="Content\sweetalert\sweetalert.gif" />
+    <Content Include="Content\sweetalert\test\index.html" />
+    <Content Include="Content\sweetalert\test\tests.js" />
+    <Content Include="Content\sweetalert\themes\facebook\facebook.css" />
+    <Content Include="Content\sweetalert\themes\google\google.css" />
+    <Content Include="Content\sweetalert\themes\twitter\twitter.css" />
     <Content Include="Data\StorehouseModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>StorehouseModel.edmx</DependentUpon>
@@ -270,6 +308,8 @@
     <Content Include="Content\font-awesome\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="Scripts\App\Helpers\dataTables-wrapper.js" />
+    <Content Include="Scripts\App\Helpers\miscellaneous.js" />
     <Content Include="Scripts\App\MVC.js" />
     <Content Include="Scripts\bootstrap.js" />
     <EntityDeploy Include="Data\StorehouseModel.edmx">
@@ -288,6 +328,19 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Content\sweetalert\.bower.json" />
+    <Content Include="Content\sweetalert\.editorconfig" />
+    <Content Include="Content\sweetalert\.jshintrc" />
+    <Content Include="Content\sweetalert\.travis.yml" />
+    <Content Include="Content\sweetalert\bower.json" />
+    <Content Include="Content\sweetalert\dev\sweetalert.scss" />
+    <Content Include="Content\sweetalert\example\example.scss" />
+    <Content Include="Content\sweetalert\LICENSE" />
+    <Content Include="Content\sweetalert\package.json" />
+    <Content Include="Content\sweetalert\README.md" />
+    <Content Include="Content\sweetalert\themes\facebook\facebook.scss" />
+    <Content Include="Content\sweetalert\themes\google\google.scss" />
+    <Content Include="Content\sweetalert\themes\twitter\twitter.scss" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\datatables\datatables.min.js" />
@@ -323,10 +376,13 @@
     <Content Include="Views\Shared\_Navigation.cshtml" />
     <Content Include="Views\Shared\_TopNavbar.cshtml" />
     <Content Include="Views\Users\Index.cshtml" />
+    <Content Include="Views\Dashboard\Index.cshtml" />
+    <Content Include="Views\Users\Add.cshtml" />
+    <Content Include="Views\Users\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Dashboard\" />
+    <Folder Include="Scripts\sweetalert\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\font-awesome\fonts\glyphicons-halflings-regular.woff" />

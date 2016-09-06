@@ -56,6 +56,7 @@
   <ItemGroup>
     <Compile Include="Cache\BaseCacheService.cs" />
     <Compile Include="Config\AutoMapperConfig.cs" />
+    <Compile Include="Config\AutoMapperTestingConfig.cs" />
     <Compile Include="Data\Abstractions\ARepository.cs" />
     <Compile Include="Data\Contracts\IDbFactory.cs" />
     <Compile Include="Data\Contracts\IRepository.cs" />

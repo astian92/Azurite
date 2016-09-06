@@ -8,6 +8,10 @@ namespace Azurite.Storehouse.Workers.Contracts
 {
     public interface IUsersWorker
     {
+        UserW Get(Guid Id);
         IQueryable<UserW> GetAll();
+        void Add(UserW userW);
+        void Edit(UserW userW);
+        void Delete(Guid Id);
     }
 }

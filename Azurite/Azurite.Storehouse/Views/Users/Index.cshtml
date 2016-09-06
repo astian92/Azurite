@@ -2,6 +2,7 @@
 
 @section styles {
     <link href="~/Content/datatables/datatables.min.css" rel="stylesheet" />
+    <link href="~/Content/sweetalert/dist/sweetalert.css" rel="stylesheet" />
 }
 
 <div class="">
@@ -15,7 +16,7 @@
                 </div>
                 <div class="x_content">
                     <div>
-                        <a class="btn btn-success">
+                        <a class="btn btn-success" href="@(Url.Action<UsersController>(c => c.Add()))">
                             <i class="fa fa-plus"></i>
                             Добави
                         </a>
@@ -41,16 +42,18 @@
 
 @section scripts { 
     <script src="~/Scripts/datatables/datatables.min.js"></script>
+    <script src="~/Scripts/App/Helpers/dataTables-wrapper.js"></script>
+    <script src="~/Content/sweetalert/dist/sweetalert.min.js"></script>
 
 <script>
         $(document).ready(function () {
-            $("#UsersTable").DataTable({
+            Tables.CreateTable("#UsersTable", {
                 //processing: true,
                 //serverSide: true,
                 lengthChange: false,
                 autoWidth: false,
                 order: [],
-                pageLength: 20,
+                pageLength: 10,
                 ajax: {
                     type: "POST",
                     url: MVC.Users.GetUsersFull
@@ -70,10 +73,9 @@
                         "class": "edit-delete-col",
                         render: function (data, type, full, meta) {
                             var html = "<div class=\"edit-delete-col-content-holder\">\
-                                            <a class=\"btn-sm btn-success\" href=\"" + MVC.Users.Edit + "?Id=" + data + "\" title=\"Edit\"><i class=\"fa fa-pencil\"></i></a>\
-                                            <a class='btn-sm btn-danger btn-delete' onclick='onBtnDeleteClick(this,\"" + data + "\")' item-id='" + data + "' title='Delete'><i class='fa fa-trash'></i></a>\
+                                            <a class=\"btn-sm btn-success\" href=\"" + MVC.Users.EditFull + "?Id=" + data + "\" title=\"Edit\"><i class=\"fa fa-pencil\"></i></a>\
+                                            <a class='btn-sm btn-danger btn-delete' onclick='onBtnDeleteClick(this,\"" + data + "\")' title='Delete'><i class='fa fa-trash'></i></a>\
                                         </div>";
-                            var editIcon = $("");
                             return html;
                         }
                     }
@@ -108,23 +110,23 @@
 
         function onBtnDeleteClick(sender, id) {
             swal({
-                title: "Are you sure?",
-                text: "Deleting a feature is a serious business",
+                title: "Сигурни ли сте?",
+                text: "Изтриването на потребител е сериозна работа!",
                 type: "warning",
                 showCancelButton: true,
+                cancelButtonText: "Откажи",
                 confirmButtonColor: "#DD6B55",
-                confirmButtonText: "Yes, delete it!",
+                confirmButtonText: "Да, изтрий!",
                 closeOnConfirm: false
             }, function () {
-                var id = $(sender).attr("item-id");
-                var promise = Ajax.post(MVC.Features.DeleteFeature, { Id: id });
+                var promise = Ajax.post(MVC.Users.DeleteFull, { Id: id });
 
                 promise.done(function (result) {
-                    if (result == true) {
-                        var appTable = Tables.get("#FeaturesTable");
-                        appTable.reload(false);
+                    if (result == true || result == "True") {
+                        var usersTable = Tables.get("#UsersTable");
+                        usersTable.reload(false);
 
-                        swal("Deleted!", "The Feature was Deleted!", "success");
+                        swal("Изтрито!", "Потребителят беше изтрит!", "success");
                     }
                 });
             });
