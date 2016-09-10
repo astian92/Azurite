@@ -34,5 +34,14 @@ namespace Azurite.Storehouse.Workers.Implementations
 
             return wrapped.AsQueryable();
         }
+
+        public void Add(CategoryW categoryW)
+        {
+            var category = Mapper.Map<Category>(categoryW);
+            category.Id = Guid.NewGuid();
+            rep.Add(category);
+
+            rep.Save();
+        }
     }
 }

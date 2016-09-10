@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Mvc.Expressions;
 
 namespace Azurite.Storehouse.Controllers
 {
@@ -37,6 +38,26 @@ namespace Azurite.Storehouse.Controllers
         public ActionResult Add()
         {
             return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Add(CategoryW categoryW)
+        {
+            if (!ModelState.IsValid)
+            {
+                ModelState.AddModelError("Invalid Sate!", "Липсват данни!");
+                return View(categoryW);
+            }
+
+            if (categoryW.CategoryAttributes == null || categoryW.CategoryAttributes.Count() == 0)
+            {
+                ModelState.AddModelError("Missing attributes!", "Категорията задължително трябва да има атрибути!");
+                return View(categoryW);
+            }
+
+            worker.Add(categoryW);
+            return Redirect(Url.Action<CategoriesController>(c => c.Index()));
         }
     }
 }

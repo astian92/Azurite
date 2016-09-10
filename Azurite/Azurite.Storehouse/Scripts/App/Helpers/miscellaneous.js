@@ -143,3 +143,11 @@ function toDecimalHours(hoursMinutes) {
 
     return isMinus * (Math.abs(parseInt(hours)) + parseInt(minutes));
 }
+
+function createICheck(selector) {
+    $(selector).iCheck({
+        checkboxClass: 'icheckbox_square-green',
+        radioClass: 'iradio_square-green',
+        //increaseArea: '20%' // optional
+    });
+}

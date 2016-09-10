@@ -23,7 +23,7 @@ namespace Azurite.Storehouse.Wrappers
         [Display(Name = "Име-EN")]
         public string NameEN { get; set; }
 
-        [Required(ErrorMessage = "Полето \"Изображение\" е задължително!")]
+        //[Required(ErrorMessage = "Полето \"Изображение\" е задължително!")]
         [Display(Name = "Изображение")]
         public string ImagePath { get; set; }
 

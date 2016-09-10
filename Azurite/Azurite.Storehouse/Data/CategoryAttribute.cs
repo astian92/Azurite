@@ -24,7 +24,7 @@ namespace Azurite.Storehouse.Data
         public System.Guid CategoryId { get; set; }
         public string AttributeName { get; set; }
         public string AttributeNameEN { get; set; }
-        public int ActiveFilter { get; set; }
+        public bool ActiveFilter { get; set; }
     
         public virtual Category Category { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
