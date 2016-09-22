@@ -218,18 +218,21 @@
     </Compile>
     <Compile Include="Models\Helpers\Datatables\DtParameters.cs" />
     <Compile Include="Models\Helpers\Datatables\JqueryListResult.cs" />
+    <Compile Include="Models\Helpers\DropDownItem.cs" />
     <Compile Include="Models\Infrastructure\IStorehouseDbFactory.cs" />
     <Compile Include="Models\Infrastructure\StorehouseDbFactory.cs" />
     <Compile Include="Config\NinjectConfig\NinjectDependencyResolver.cs" />
     <Compile Include="Models\ViewModels\LoginViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ServiceFactory.cs" />
     <Compile Include="Workers\Contracts\IAccountWorker.cs" />
-    <Compile Include="Workers\Contracts\ICategoryWorker.cs" />
+    <Compile Include="Workers\Contracts\ICategoriesWorker.cs" />
     <Compile Include="Workers\Contracts\IUsersWorker.cs" />
     <Compile Include="Workers\Implementations\AccountWorker.cs" />
-    <Compile Include="Workers\Implementations\CategoryWorker.cs" />
+    <Compile Include="Workers\Implementations\CategoriesWorker.cs" />
     <Compile Include="Workers\Implementations\UsersWorker.cs" />
     <Compile Include="Wrappers\CategoryAttributeW.cs" />
+    <Compile Include="Wrappers\CategoryNoParent.cs" />
     <Compile Include="Wrappers\CategoryW.cs" />
     <Compile Include="Wrappers\CustomerW.cs" />
     <Compile Include="Wrappers\OrderedProduct.cs" />
@@ -496,6 +499,7 @@
     <Content Include="Views\Users\Add.cshtml" />
     <Content Include="Views\Users\Edit.cshtml" />
     <Content Include="Views\Categories\Add.cshtml" />
+    <Content Include="Views\Categories\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

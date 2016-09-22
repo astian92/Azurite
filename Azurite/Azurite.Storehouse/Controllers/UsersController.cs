@@ -1,4 +1,5 @@
-﻿using Azurite.Storehouse.Models.Helpers.Datatables;
+﻿using Azurite.Infrastructure.ResponseHandling;
+using Azurite.Storehouse.Models.Helpers.Datatables;
 using Azurite.Storehouse.Workers.Contracts;
 using Azurite.Storehouse.Wrappers;
 using System;
@@ -73,10 +74,10 @@ namespace Azurite.Storehouse.Controllers
             return Redirect(Url.Action<UsersController>(c => c.Index()));
         }
 
-        public bool Delete(Guid Id)
+        public ActionResult Delete(Guid Id)
         {
-            worker.Delete(Id);
-            return true;
+            var ticket = worker.Delete(Id);
+            return Json(ticket);
         }
     }
 }

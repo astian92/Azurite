@@ -1,4 +1,5 @@
-﻿using Azurite.Storehouse.Wrappers;
+﻿using Azurite.Infrastructure.ResponseHandling;
+using Azurite.Storehouse.Wrappers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,6 @@ namespace Azurite.Storehouse.Workers.Contracts
         IQueryable<UserW> GetAll();
         void Add(UserW userW);
         void Edit(UserW userW);
-        void Delete(Guid Id);
+        ITicket Delete(Guid Id);
     }
 }

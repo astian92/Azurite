@@ -9,9 +9,18 @@ namespace Azurite.Storehouse.Models.Infrastructure
 {
     public class StorehouseDbFactory : IStorehouseDbFactory
     {
+        private MarketPlaceEntities context;
+
         public DbContext Create()
         {
-            return new MarketPlaceEntities();
+            if (context != null)
+            {
+                return context;
+            }
+
+            // so it gets a scoped context ;)
+            context = new MarketPlaceEntities();
+            return context;
         }
 
         public MarketPlaceEntities CreateConcrete()

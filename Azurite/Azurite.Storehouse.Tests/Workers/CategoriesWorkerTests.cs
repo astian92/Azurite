@@ -15,12 +15,11 @@ using System.Threading.Tasks;
 namespace Azurite.Storehouse.Tests.Workers
 {
     [TestClass]
-    public class UsersWorkerTests
+    public class CategoriesWorkerTests
     {
-        private Category catToEdit;
-        private Mock<IRepository<User>> repMock;
+        private Mock<IRepository<Category>> repMock;
 
-        private IRepository<User> rep
+        private IRepository<Category> rep
         {
             get
             {
@@ -28,48 +27,60 @@ namespace Azurite.Storehouse.Tests.Workers
             }
         }
 
-        private UsersWorker worker;
+        private Mock<IRepository<CategoryAttribute>> attrRepMock;
 
-        public UsersWorkerTests()
+        private IRepository<CategoryAttribute> attrRep
         {
-            this.catToEdit = new Category()
+            get
             {
-                Id = Guid.NewGuid(),
-                Name = "N",
-                NameEN = "NE",
-                Description = "D",
-                DescriptionEN = "DE",
-                
-            };
+                return this.attrRepMock.Object;
+            }
+        }
 
-            this.repMock = new Mock<IRepository<User>>();
-            this.repMock.Setup(m => m.Get(It.IsAny<Guid>())).Returns(new User() { Username = "Un" });
-            this.repMock.Setup(m => m.GetAll()).Returns(new List<User>()
+        private CategoriesWorker worker;
+
+        public CategoriesWorkerTests()
+        {
+            this.repMock = new Mock<IRepository<Category>>();
+            this.repMock.Setup(m => m.Get(It.IsAny<Guid>())).Returns(new Category() { Name = "Nm" });
+            this.repMock.Setup(m => m.GetAll()).Returns(new List<Category>()
             {
-                new User() { Username = "Un1", FirstName = "Fn1" },
-                new User() { Username = "Un2", FirstName = "Fn2" },
-                new User() { Username = "master", FirstName = "Master" },
-                new User() { Username = "Un3", FirstName = "Fn3" }
+                new Category() { Name = "Cat1" },
+                new Category() { Name = "Cat2" },
+                new Category() { Name = "Cat3" }
             }.AsQueryable());
 
-            this.worker = new UsersWorker(this.rep);
+            this.attrRepMock = new Mock<IRepository<CategoryAttribute>>();
+
+            this.worker = new CategoriesWorker(this.rep, this.attrRep);
             AutoMapperTestingConfig.RegisterMappings("Azurite.Storehouse");
         }
 
         [TestMethod]
         public void GetTest()
         {
-            var actual = this.worker.Get(Guid.NewGuid());
+            var id = Guid.NewGuid();
+            var actual = this.worker.Get(id);
 
-            repMock.Verify(m => m.Get(It.IsAny<Guid>()));
+            repMock.Verify(m => m.Get(id));
             Assert.IsNotNull(actual);
-            Assert.AreEqual("Un", actual.Username);
+            Assert.AreEqual("Nm", actual.Name);
         }
 
         [TestMethod]
         public void GetAllTest()
         {
             var actual = this.worker.GetAll();
+
+            repMock.Verify(m => m.GetAll());
+            Assert.IsNotNull(actual);
+            Assert.AreEqual(3, actual.Count());
+        }
+
+        [TestMethod]
+        public void GetAllWithoutParentsTest()
+        {
+            var actual = this.worker.GetAllWithoutParents();
 
             repMock.Verify(m => m.GetAll());
             Assert.IsNotNull(actual);
@@ -86,10 +97,10 @@ namespace Azurite.Storehouse.Tests.Workers
         [TestMethod]
         public void AddTest()
         {
-            var userW = new UserW() { Username = "USN" };
-            this.worker.Add(userW);
+            var catW = new CategoryW() { Name = "Cat4" };
+            this.worker.Add(catW);
 
-            this.repMock.Verify(m => m.Add(It.IsAny<User>()));
+            this.repMock.Verify(m => m.Add(It.IsAny<Category>()));
             this.repMock.Verify(m => m.Save());
         }
 
@@ -101,13 +112,9 @@ namespace Azurite.Storehouse.Tests.Workers
         }
 
         [TestMethod]
-        public void EditTest()
+        public void EditTestSimpleCase()
         {
-            var userW = new UserW() { Username = "USN" };
-            this.worker.Edit(userW);
-
-            this.repMock.Verify(m => m.Get(It.IsAny<Guid>()));
-            this.repMock.Verify(m => m.Save());
+            
         }
 
         [TestMethod]
