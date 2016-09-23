@@ -17,7 +17,6 @@ namespace Azurite.Storehouse.Tests.Workers
     [TestClass]
     public class UsersWorkerTests
     {
-        private Category catToEdit;
         private Mock<IRepository<User>> repMock;
 
         private IRepository<User> rep
@@ -32,16 +31,6 @@ namespace Azurite.Storehouse.Tests.Workers
 
         public UsersWorkerTests()
         {
-            this.catToEdit = new Category()
-            {
-                Id = Guid.NewGuid(),
-                Name = "N",
-                NameEN = "NE",
-                Description = "D",
-                DescriptionEN = "DE",
-                
-            };
-
             this.repMock = new Mock<IRepository<User>>();
             this.repMock.Setup(m => m.Get(It.IsAny<Guid>())).Returns(new User() { Username = "Un" });
             this.repMock.Setup(m => m.GetAll()).Returns(new List<User>()

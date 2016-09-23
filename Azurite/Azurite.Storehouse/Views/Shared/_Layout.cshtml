@@ -9,11 +9,11 @@
     <link href="~/Content/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
     <link href="~/Content/gentelella/animate.min.css" rel="stylesheet" />
     <link href="~/Content/gentelella/custom.min.css" rel="stylesheet" />
-    <link href="~/Content/gentelella/gentelella-overrides.css" rel="stylesheet" />
     <link href="~/Content/shared.css" rel="stylesheet" />
     
     @RenderSection("styles", required: false)
 
+    <link href="~/Content/gentelella/gentelella-overrides.css" rel="stylesheet" /> @*so it overrides even scripts that are included in views!*@
     <script src="~/Scripts/jquery.min.js"></script>
 </head>
 <body class="nav-md">

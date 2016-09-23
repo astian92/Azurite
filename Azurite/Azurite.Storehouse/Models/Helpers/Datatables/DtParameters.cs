@@ -17,14 +17,14 @@ namespace Azurite.Storehouse.Models.Helpers.Datatables
         public int FilterColIndex { get; set; }
         public bool FilterAsc { get; set; }
 
-        public DtParameters(HttpRequest request)
+        public DtParameters(HttpRequestBase request)
         {
             int draw = 0;
             int skip = 0;
             int pageSize = 0;
             int sortCol = 0;
 
-            if (request.Form != null) //may need revision...
+            if (request?.Form != null) //may need revision...
             {
                 var drawStr = request.Form["draw"];
                 int.TryParse(drawStr, out draw);

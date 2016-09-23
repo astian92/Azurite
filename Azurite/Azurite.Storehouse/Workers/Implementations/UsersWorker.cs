@@ -3,6 +3,7 @@ using AutoMapper.QueryableExtensions;
 using Azurite.Infrastructure.Data.Contracts;
 using Azurite.Infrastructure.ResponseHandling;
 using Azurite.Storehouse.Data;
+using Azurite.Storehouse.Models.Helpers;
 using Azurite.Storehouse.Workers.Contracts;
 using Azurite.Storehouse.Wrappers;
 using System;
@@ -68,14 +69,17 @@ namespace Azurite.Storehouse.Workers.Implementations
             }
             catch (DbUpdateException exc)
             {
+                ElmahHelper.Handle(exc);
                 return new Ticket(false, "Опитвате се да изтриете запис, който се използва във връзка с други обекти!");
             }
             catch (SqlException exc)
             {
+                ElmahHelper.Handle(exc);
                 return new Ticket(false, "Възникна проблем при работа с базата!");
             }
             catch (Exception exc)
             {
+                ElmahHelper.Handle(exc);
                 string excName = exc.GetType().Name;
                 return new Ticket(false, "Възникна неочаквана грешка!");
             }

@@ -114,7 +114,11 @@ namespace Azurite.Storehouse.Tests.Workers
         [TestMethod]
         public void EditTestSimpleCase()
         {
-            
+            var catW = new CategoryW() { Name = "Cat" };
+            this.worker.Edit(catW);
+
+            this.repMock.Verify(m => m.Get(It.IsAny<Guid>()));
+            this.repMock.Verify(m => m.Save());
         }
 
         [TestMethod]
