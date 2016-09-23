@@ -166,6 +166,7 @@
     <Compile Include="Config\Streamline\ServiceRegistrator.cs" />
     <Compile Include="Config\WorkersDependencyConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Data\Category.cs">
       <DependentUpon>StoreModel.tt</DependentUpon>
     </Compile>
@@ -214,10 +215,19 @@
     <Compile Include="Models\Infrastructure\IStoreDbFactory.cs" />
     <Compile Include="Models\Infrastructure\StoreDbFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Workers\Contracts\ICategoryWorker.cs" />
+    <Compile Include="Workers\Contracts\IProductWorker.cs" />
+    <Compile Include="Workers\Implementations\ProductWorker.cs" />
+    <Compile Include="Wrappers\CategoryW.cs" />
+    <Compile Include="Wrappers\ProductW.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\font-awesome.css" />
+    <Content Include="Content\font-awesome.min.css" />
     <Content Include="Data\StoreModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>StoreModel.edmx</DependentUpon>
@@ -229,9 +239,22 @@
       <LastGenOutput>StoreModel.cs</LastGenOutput>
     </Content>
     <Content Include="favicon.ico" />
+    <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Content\Site.css" />
+    <Content Include="Content\azurite-theme.css" />
+    <Content Include="Resources\diamond-1186139_1920.jpg" />
+    <Content Include="Resources\dimon-background.jpg" />
+    <Content Include="Resources\radianna-gold-logo-md.png" />
+    <Content Include="Resources\radianna-gold-logo-sm.png" />
+    <Content Include="Resources\radianna-gold-logo-xs-white.png" />
+    <Content Include="Resources\radianna-gold-logo-xxs-white.png" />
+    <Content Include="Resources\radianna-gold-logo.png" />
+    <Content Include="Resources\RG-store-slide1.png" />
+    <Content Include="Resources\RG-store-slide2.png" />
+    <Content Include="Resources\RG-store-slide3.png" />
+    <Content Include="Resources\slide1-img.jpg" />
+    <Content Include="Resources\slide2-img.jpg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <EntityDeploy Include="Data\StoreModel.edmx">
@@ -241,15 +264,35 @@
     <Content Include="Data\StoreModel.edmx.diagram">
       <DependentUpon>StoreModel.edmx</DependentUpon>
     </Content>
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-theme.min.css.map" />
+    <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="fonts\FontAwesome.otf" />
+    <Content Include="fonts\fontawesome-webfont.woff2" />
+    <Content Include="fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\fontawesome-webfont.eot" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
-    <Content Include="Scripts\jquery-1.10.2.js" />
-    <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <None Include="Scripts\jquery-3.1.0.intellisense.js" />
+    <Content Include="Scripts\jquery-3.1.0.js" />
+    <Content Include="Scripts\jquery-3.1.0.min.js" />
+    <Content Include="Scripts\jquery-3.1.0.slim.js" />
+    <Content Include="Scripts\jquery-3.1.0.slim.min.js" />
+    <Content Include="Scripts\jquery-3.1.0.slim.min.map" />
+    <Content Include="Scripts\jquery-3.1.0.min.map" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\Plugins\lightSlider\lightslider.min.css" />
+    <Content Include="Scripts\Plugins\lightSlider\lightslider.min.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
@@ -270,16 +313,11 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Workers\Contracts\" />
-    <Folder Include="Workers\Implementations\" />
-    <Folder Include="Wrappers\" />
+    <Folder Include="Scripts\App\" />
+    <Folder Include="Views\Products\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
-    <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Azurite.Infrastructure\Azurite.Infrastructure.csproj">

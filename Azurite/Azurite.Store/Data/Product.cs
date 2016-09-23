@@ -31,6 +31,8 @@ namespace Azurite.Store.Data
         public double Discount { get; set; }
         public int Quantity { get; set; }
         public int Active { get; set; }
+        public string NameEN { get; set; }
+        public string DescriptionEN { get; set; }
     
         public virtual Category Category { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

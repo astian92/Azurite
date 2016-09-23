@@ -18,8 +18,9 @@ namespace Azurite.Store.Data
         public System.Guid AttributeId { get; set; }
         public System.Guid ProductId { get; set; }
         public string Value { get; set; }
+        public string ValueEN { get; set; }
     
-        public virtual CategoryAttribute CategoryAttribute { get; set; }
         public virtual Product Product { get; set; }
+        public virtual CategoryAttribute CategoryAttribute { get; set; }
     }
 }

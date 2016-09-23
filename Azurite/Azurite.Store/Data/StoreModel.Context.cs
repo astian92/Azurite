@@ -26,7 +26,6 @@ namespace Azurite.Store.Data
         }
     
         public virtual DbSet<Category> Categories { get; set; }
-        public virtual DbSet<CategoryAttribute> CategoryAttributes { get; set; }
         public virtual DbSet<Customer> Customers { get; set; }
         public virtual DbSet<OrderedProduct> OrderedProducts { get; set; }
         public virtual DbSet<Order> Orders { get; set; }
@@ -34,5 +33,6 @@ namespace Azurite.Store.Data
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<ProductAttribute> ProductAttributes { get; set; }
         public virtual DbSet<ProductImage> ProductImages { get; set; }
+        public virtual DbSet<CategoryAttribute> CategoryAttributes { get; set; }
     }
 }
