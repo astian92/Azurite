@@ -1,0 +1,82 @@
+﻿using Azurite.Storehouse.Models.Helpers.Datatables;
+using Azurite.Storehouse.Workers.Contracts;
+using Azurite.Storehouse.Wrappers;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using System.Web.Mvc.Expressions;
+
+namespace Azurite.Storehouse.Controllers
+{
+    public class UsersController : Controller
+    {
+        private readonly IUsersWorker worker;
+
+        public UsersController(IUsersWorker worker)
+        {
+            this.worker = worker;
+        }
+
+        public ActionResult Index()
+        {
+            return View();
+        }
+
+        public ActionResult GetUsers()
+        {
+            var users = worker.GetAll();
+            var result = new JqueryListResult<UserW>(data: users);
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public ActionResult Add()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Add(UserW userW)
+        {
+            if (!ModelState.IsValid)
+            {
+                ModelState.AddModelError("Error", "Има проблем с данните!");
+                return View(userW);
+            }
+
+            worker.Add(userW);
+            return Redirect(Url.Action<UsersController>(c => c.Index()));
+        }
+
+        [HttpGet]
+        public ActionResult Edit(Guid Id)
+        {
+            var userW = worker.Get(Id);
+            return View(userW);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(UserW userW)
+        {
+            if (!ModelState.IsValid)
+            {
+                ModelState.AddModelError("Error", "Има проблем с данните!");
+                return View(userW);
+            }
+
+            worker.Edit(userW);
+            return Redirect(Url.Action<UsersController>(c => c.Index()));
+        }
+
+        public bool Delete(Guid Id)
+        {
+            worker.Delete(Id);
+            return true;
+        }
+    }
+}

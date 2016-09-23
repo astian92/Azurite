@@ -17,19 +17,21 @@ namespace Azurite.Storehouse.Data
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Category()
         {
-            this.CategoryAttributes = new HashSet<CategoryAttribute>();
             this.Products = new HashSet<Product>();
+            this.CategoryAttributes = new HashSet<CategoryAttribute>();
         }
     
         public System.Guid Id { get; set; }
         public Nullable<System.Guid> ParentId { get; set; }
         public string Name { get; set; }
+        public string NameEN { get; set; }
         public string ImagePath { get; set; }
         public string Description { get; set; }
+        public string DescriptionEN { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CategoryAttribute> CategoryAttributes { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Product> Products { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CategoryAttribute> CategoryAttributes { get; set; }
     }
 }

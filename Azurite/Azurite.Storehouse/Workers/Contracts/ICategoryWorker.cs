@@ -10,5 +10,6 @@ namespace Azurite.Storehouse.Workers.Contracts
     public interface ICategoryWorker
     {
         IQueryable<CategoryW> GetAll();
+        void Add(CategoryW categoryW);
     }
 }

@@ -7,6 +7,7 @@ using Azurite.Storehouse.Data;
 using Azurite.Infrastructure.Data.Contracts;
 using Azurite.Storehouse.Wrappers;
 using AutoMapper.QueryableExtensions;
+using AutoMapper;
 
 namespace Azurite.Storehouse.Workers.Implementations
 {
@@ -21,8 +22,26 @@ namespace Azurite.Storehouse.Workers.Implementations
 
         public IQueryable<CategoryW> GetAll()
         {
-            return rep.GetAll()
-                .ProjectTo<CategoryW>();
+            var categories = rep.GetAll();
+            List<CategoryW> wrapped = new List<CategoryW>();
+
+            //because I cant escape circular reference and ProjectTo does not work with max depth
+            foreach (var cat in categories)
+            {
+                var mapped = Mapper.Map<CategoryW>(cat);
+                wrapped.Add(mapped);
+            }
+
+            return wrapped.AsQueryable();
+        }
+
+        public void Add(CategoryW categoryW)
+        {
+            var category = Mapper.Map<Category>(categoryW);
+            category.Id = Guid.NewGuid();
+            rep.Add(category);
+
+            rep.Save();
         }
     }
 }

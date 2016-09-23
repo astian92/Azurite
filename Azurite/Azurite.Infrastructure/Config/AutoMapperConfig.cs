@@ -24,7 +24,7 @@ namespace Azurite.Infrastructure.Config
             Mapper.Initialize(expr);
         }
 
-        private static void LoadStandardMappings(IEnumerable<Type> types, IMapperConfigurationExpression expr)
+        protected static void LoadStandardMappings(IEnumerable<Type> types, IMapperConfigurationExpression expr)
         {
             var maps = (from t in types
                         from i in t.GetInterfaces()
@@ -46,7 +46,7 @@ namespace Azurite.Infrastructure.Config
             }
         }
 
-        private static void LoadCustomMappings(IEnumerable<Type> types, IMapperConfigurationExpression expr)
+        protected static void LoadCustomMappings(IEnumerable<Type> types, IMapperConfigurationExpression expr)
         {
             var maps = types
                 .Where(t => !t.IsAbstract && !t.IsInterface && typeof(IHaveCustomMappings).IsAssignableFrom(t))

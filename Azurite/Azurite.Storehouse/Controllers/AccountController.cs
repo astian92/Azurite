@@ -38,7 +38,7 @@ namespace Azurite.Storehouse.Controllers
                 if (isUser)
                 {
                     FormsAuthentication.SetAuthCookie(model.Username, false);
-                    return Redirect(Url.Action<HomeController>(c => c.Index()));
+                    return Redirect(Url.Action<DashboardController>(c => c.Index()));
                 }
                 else
                 {
