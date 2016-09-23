@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="MarketPlaceModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="MarketPlaceModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Categories">
           <Key>
             <PropertyRef Name="Id" />
@@ -12,8 +12,10 @@
           <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
           <Property Name="ParentId" Type="uniqueidentifier" />
           <Property Name="Name" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="NameEN" Type="nvarchar" MaxLength="300" Nullable="false" />
           <Property Name="ImagePath" Type="nvarchar" MaxLength="300" />
           <Property Name="Description" Type="ntext" Nullable="false" />
+          <Property Name="DescriptionEN" Type="ntext" Nullable="false" />
         </EntityType>
         <EntityType Name="CategoryAttributes">
           <Key>
@@ -22,7 +24,8 @@
           <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
           <Property Name="CategoryId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="AttributeName" Type="nvarchar" MaxLength="200" Nullable="false" />
-          <Property Name="ActiveFilter" Type="int" Nullable="false" />
+          <Property Name="AttributeNameEN" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="ActiveFilter" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Customer">
           <Key>
@@ -48,6 +51,7 @@
           <Property Name="OrderId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="ProductNumber" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="ProductName" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="ProductNameEN" Type="nvarchar" MaxLength="200" Nullable="false" />
           <Property Name="Price" Type="float" Nullable="false" />
           <Property Name="Discount" Type="float" Nullable="false" />
           <Property Name="Quantity" Type="int" Nullable="false" />
@@ -70,6 +74,7 @@
           </Key>
           <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="DisplayName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DisplayNameEN" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="Product">
           <Key>
@@ -79,8 +84,10 @@
           <Property Name="CategoryId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="Number" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="NameEN" Type="nvarchar" MaxLength="200" Nullable="false" />
           <Property Name="Model" Type="nvarchar" MaxLength="200" Nullable="false" />
           <Property Name="Description" Type="ntext" Nullable="false" />
+          <Property Name="DescriptionEN" Type="ntext" Nullable="false" />
           <Property Name="Price" Type="float" Nullable="false" />
           <Property Name="Discount" Type="float" Nullable="false" />
           <Property Name="Quantity" Type="int" Nullable="false" />
@@ -94,6 +101,7 @@
           <Property Name="AttributeId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="ProductId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="Value" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="ValueEN" Type="nvarchar" MaxLength="300" Nullable="false" />
         </EntityType>
         <EntityType Name="ProductImages">
           <Key>
@@ -103,8 +111,22 @@
           <Property Name="ProductId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="ImagePath" Type="nvarchar" MaxLength="300" Nullable="false" />
         </EntityType>
+        <Association Name="FK_Categories_Categories">
+          <End Role="Categories" Type="Self.Categories" Multiplicity="0..1" />
+          <End Role="Categories1" Type="Self.Categories" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categories">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Categories1">
+              <PropertyRef Name="ParentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_CategoryAttributes_Categories">
-          <End Role="Categories" Type="Self.Categories" Multiplicity="1" />
+          <End Role="Categories" Type="Self.Categories" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="CategoryAttributes" Type="Self.CategoryAttributes" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Categories">
@@ -148,18 +170,6 @@
             </Principal>
             <Dependent Role="Orders">
               <PropertyRef Name="StatusId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_OrderStatuses_OrderStatuses">
-          <End Role="OrderStatuses" Type="Self.OrderStatuses" Multiplicity="1" />
-          <End Role="OrderStatuses1" Type="Self.OrderStatuses" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="OrderStatuses">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="OrderStatuses1">
-              <PropertyRef Name="Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -221,6 +231,10 @@
           <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProductAttributes" EntityType="Self.ProductAttributes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProductImages" EntityType="Self.ProductImages" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Categories_Categories" Association="Self.FK_Categories_Categories">
+            <End Role="Categories" EntitySet="Categories" />
+            <End Role="Categories1" EntitySet="Categories" />
+          </AssociationSet>
           <AssociationSet Name="FK_CategoryAttributes_Categories" Association="Self.FK_CategoryAttributes_Categories">
             <End Role="Categories" EntitySet="Categories" />
             <End Role="CategoryAttributes" EntitySet="CategoryAttributes" />
@@ -236,10 +250,6 @@
           <AssociationSet Name="FK_Orders_OrderStatuses" Association="Self.FK_Orders_OrderStatuses">
             <End Role="OrderStatuses" EntitySet="OrderStatuses" />
             <End Role="Orders" EntitySet="Orders" />
-          </AssociationSet>
-          <AssociationSet Name="FK_OrderStatuses_OrderStatuses" Association="Self.FK_OrderStatuses_OrderStatuses">
-            <End Role="OrderStatuses" EntitySet="OrderStatuses" />
-            <End Role="OrderStatuses1" EntitySet="OrderStatuses" />
           </AssociationSet>
           <AssociationSet Name="FK_Product_Categories" Association="Self.FK_Product_Categories">
             <End Role="Categories" EntitySet="Categories" />
@@ -258,8 +268,7 @@
             <End Role="ProductImages" EntitySet="ProductImages" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="MarketPlaceModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -272,19 +281,12 @@
           <Property Name="Name" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="ImagePath" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="CategoryAttributes" Relationship="Self.FK_CategoryAttributes_Categories" FromRole="Categories" ToRole="CategoryAttributes" />
           <NavigationProperty Name="Products" Relationship="Self.FK_Product_Categories" FromRole="Categories" ToRole="Product" />
-        </EntityType>
-        <EntityType Name="CategoryAttribute">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Guid" Nullable="false" />
-          <Property Name="CategoryId" Type="Guid" Nullable="false" />
-          <Property Name="AttributeName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="ActiveFilter" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Category" Relationship="Self.FK_CategoryAttributes_Categories" FromRole="CategoryAttributes" ToRole="Categories" />
-          <NavigationProperty Name="ProductAttributes" Relationship="Self.FK_ProductAttributes_CategoryAttributes" FromRole="CategoryAttributes" ToRole="ProductAttributes" />
+          <Property Name="NameEN" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="DescriptionEN" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Categories1" Relationship="MarketPlaceModel.FK_Categories_Categories" FromRole="Category" ToRole="Category1" />
+          <NavigationProperty Name="Category1" Relationship="MarketPlaceModel.FK_Categories_Categories" FromRole="Category1" ToRole="Category" />
+          <NavigationProperty Name="CategoryAttributes" Relationship="MarketPlaceModel.FK_CategoryAttributes_Categories" FromRole="Category" ToRole="CategoryAttribute" />
         </EntityType>
         <EntityType Name="Customer">
           <Key>
@@ -316,6 +318,7 @@
           <Property Name="Quantity" Type="Int32" Nullable="false" />
           <Property Name="Total" Type="Double" Nullable="false" />
           <NavigationProperty Name="Order" Relationship="Self.FK_OrderedProducts_Orders" FromRole="OrderedProducts" ToRole="Orders" />
+          <Property Name="ProductNameEN" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Order">
           <Key>
@@ -340,6 +343,7 @@
           <NavigationProperty Name="Orders" Relationship="Self.FK_Orders_OrderStatuses" FromRole="OrderStatuses" ToRole="Orders" />
           <NavigationProperty Name="OrderStatuses1" Relationship="Self.FK_OrderStatuses_OrderStatuses" FromRole="OrderStatuses" ToRole="OrderStatuses1" />
           <NavigationProperty Name="OrderStatus1" Relationship="Self.FK_OrderStatuses_OrderStatuses" FromRole="OrderStatuses1" ToRole="OrderStatuses" />
+          <Property Name="DisplayNameEN" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Product">
           <Key>
@@ -358,6 +362,8 @@
           <NavigationProperty Name="Category" Relationship="Self.FK_Product_Categories" FromRole="Product" ToRole="Categories" />
           <NavigationProperty Name="ProductAttributes" Relationship="Self.FK_ProductAttributes_Product" FromRole="Product" ToRole="ProductAttributes" />
           <NavigationProperty Name="ProductImages" Relationship="Self.FK_ProductImages_Product" FromRole="Product" ToRole="ProductImages" />
+          <Property Name="NameEN" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="DescriptionEN" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="ProductAttribute">
           <Key>
@@ -367,8 +373,9 @@
           <Property Name="AttributeId" Type="Guid" Nullable="false" />
           <Property Name="ProductId" Type="Guid" Nullable="false" />
           <Property Name="Value" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="CategoryAttribute" Relationship="Self.FK_ProductAttributes_CategoryAttributes" FromRole="ProductAttributes" ToRole="CategoryAttributes" />
           <NavigationProperty Name="Product" Relationship="Self.FK_ProductAttributes_Product" FromRole="ProductAttributes" ToRole="Product" />
+          <Property Name="ValueEN" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="CategoryAttribute" Relationship="MarketPlaceModel.FK_ProductAttributes_CategoryAttributes" FromRole="ProductAttribute" ToRole="CategoryAttribute" />
         </EntityType>
         <EntityType Name="ProductImage">
           <Key>
@@ -379,18 +386,6 @@
           <Property Name="ImagePath" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Product" Relationship="Self.FK_ProductImages_Product" FromRole="ProductImages" ToRole="Product" />
         </EntityType>
-        <Association Name="FK_CategoryAttributes_Categories">
-          <End Role="Categories" Type="Self.Category" Multiplicity="1" />
-          <End Role="CategoryAttributes" Type="Self.CategoryAttribute" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Categories">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="CategoryAttributes">
-              <PropertyRef Name="CategoryId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Product_Categories">
           <End Role="Categories" Type="Self.Category" Multiplicity="1" />
           <End Role="Product" Type="Self.Product" Multiplicity="*" />
@@ -400,18 +395,6 @@
             </Principal>
             <Dependent Role="Product">
               <PropertyRef Name="CategoryId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ProductAttributes_CategoryAttributes">
-          <End Role="CategoryAttributes" Type="Self.CategoryAttribute" Multiplicity="1" />
-          <End Role="ProductAttributes" Type="Self.ProductAttribute" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CategoryAttributes">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="ProductAttributes">
-              <PropertyRef Name="AttributeId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -489,7 +472,6 @@
         </Association>
         <EntityContainer Name="MarketPlaceEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Categories" EntityType="Self.Category" />
-          <EntitySet Name="CategoryAttributes" EntityType="Self.CategoryAttribute" />
           <EntitySet Name="Customers" EntityType="Self.Customer" />
           <EntitySet Name="OrderedProducts" EntityType="Self.OrderedProduct" />
           <EntitySet Name="Orders" EntityType="Self.Order" />
@@ -497,17 +479,9 @@
           <EntitySet Name="Products" EntityType="Self.Product" />
           <EntitySet Name="ProductAttributes" EntityType="Self.ProductAttribute" />
           <EntitySet Name="ProductImages" EntityType="Self.ProductImage" />
-          <AssociationSet Name="FK_CategoryAttributes_Categories" Association="Self.FK_CategoryAttributes_Categories">
-            <End Role="Categories" EntitySet="Categories" />
-            <End Role="CategoryAttributes" EntitySet="CategoryAttributes" />
-          </AssociationSet>
           <AssociationSet Name="FK_Product_Categories" Association="Self.FK_Product_Categories">
             <End Role="Categories" EntitySet="Categories" />
             <End Role="Product" EntitySet="Products" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ProductAttributes_CategoryAttributes" Association="Self.FK_ProductAttributes_CategoryAttributes">
-            <End Role="CategoryAttributes" EntitySet="CategoryAttributes" />
-            <End Role="ProductAttributes" EntitySet="ProductAttributes" />
           </AssociationSet>
           <AssociationSet Name="FK_Orders_Customer" Association="Self.FK_Orders_Customer">
             <End Role="Customer" EntitySet="Customers" />
@@ -533,7 +507,70 @@
             <End Role="Product" EntitySet="Products" />
             <End Role="ProductImages" EntitySet="ProductImages" />
           </AssociationSet>
+          <AssociationSet Name="FK_Categories_Categories" Association="MarketPlaceModel.FK_Categories_Categories">
+            <End Role="Category" EntitySet="Categories" />
+            <End Role="Category1" EntitySet="Categories" />
+          </AssociationSet>
+          <EntitySet Name="CategoryAttributes" EntityType="MarketPlaceModel.CategoryAttribute" />
+          <AssociationSet Name="FK_CategoryAttributes_Categories" Association="MarketPlaceModel.FK_CategoryAttributes_Categories">
+            <End Role="Category" EntitySet="Categories" />
+            <End Role="CategoryAttribute" EntitySet="CategoryAttributes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductAttributes_CategoryAttributes" Association="MarketPlaceModel.FK_ProductAttributes_CategoryAttributes">
+            <End Role="CategoryAttribute" EntitySet="CategoryAttributes" />
+            <End Role="ProductAttribute" EntitySet="ProductAttributes" />
+          </AssociationSet>
         </EntityContainer>
+        <Association Name="FK_Categories_Categories">
+          <End Type="MarketPlaceModel.Category" Role="Category" Multiplicity="0..1" />
+          <End Type="MarketPlaceModel.Category" Role="Category1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Category1">
+              <PropertyRef Name="ParentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="CategoryAttribute">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="CategoryId" Type="Guid" Nullable="false" />
+          <Property Name="AttributeName" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="AttributeNameEN" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="ActiveFilter" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Category" Relationship="MarketPlaceModel.FK_CategoryAttributes_Categories" FromRole="CategoryAttribute" ToRole="Category" />
+          <NavigationProperty Name="ProductAttributes" Relationship="MarketPlaceModel.FK_ProductAttributes_CategoryAttributes" FromRole="CategoryAttribute" ToRole="ProductAttribute" />
+        </EntityType>
+        <Association Name="FK_CategoryAttributes_Categories">
+          <End Type="MarketPlaceModel.Category" Role="Category" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="MarketPlaceModel.CategoryAttribute" Role="CategoryAttribute" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CategoryAttribute">
+              <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductAttributes_CategoryAttributes">
+          <End Type="MarketPlaceModel.CategoryAttribute" Role="CategoryAttribute" Multiplicity="1" />
+          <End Type="MarketPlaceModel.ProductAttribute" Role="ProductAttribute" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CategoryAttribute">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProductAttribute">
+              <PropertyRef Name="AttributeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -543,21 +580,13 @@
           <EntitySetMapping Name="Categories">
             <EntityTypeMapping TypeName="MarketPlaceModel.Category">
               <MappingFragment StoreEntitySet="Categories">
+                <ScalarProperty Name="DescriptionEN" ColumnName="DescriptionEN" />
+                <ScalarProperty Name="NameEN" ColumnName="NameEN" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="ParentId" ColumnName="ParentId" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="ImagePath" ColumnName="ImagePath" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="CategoryAttributes">
-            <EntityTypeMapping TypeName="MarketPlaceModel.CategoryAttribute">
-              <MappingFragment StoreEntitySet="CategoryAttributes">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
-                <ScalarProperty Name="AttributeName" ColumnName="AttributeName" />
-                <ScalarProperty Name="ActiveFilter" ColumnName="ActiveFilter" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -581,6 +610,7 @@
           <EntitySetMapping Name="OrderedProducts">
             <EntityTypeMapping TypeName="MarketPlaceModel.OrderedProduct">
               <MappingFragment StoreEntitySet="OrderedProducts">
+                <ScalarProperty Name="ProductNameEN" ColumnName="ProductNameEN" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="OrderId" ColumnName="OrderId" />
                 <ScalarProperty Name="ProductNumber" ColumnName="ProductNumber" />
@@ -607,6 +637,7 @@
           <EntitySetMapping Name="OrderStatuses">
             <EntityTypeMapping TypeName="MarketPlaceModel.OrderStatus">
               <MappingFragment StoreEntitySet="OrderStatuses">
+                <ScalarProperty Name="DisplayNameEN" ColumnName="DisplayNameEN" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
               </MappingFragment>
@@ -615,6 +646,8 @@
           <EntitySetMapping Name="Products">
             <EntityTypeMapping TypeName="MarketPlaceModel.Product">
               <MappingFragment StoreEntitySet="Product">
+                <ScalarProperty Name="DescriptionEN" ColumnName="DescriptionEN" />
+                <ScalarProperty Name="NameEN" ColumnName="NameEN" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
                 <ScalarProperty Name="Number" ColumnName="Number" />
@@ -631,6 +664,7 @@
           <EntitySetMapping Name="ProductAttributes">
             <EntityTypeMapping TypeName="MarketPlaceModel.ProductAttribute">
               <MappingFragment StoreEntitySet="ProductAttributes">
+                <ScalarProperty Name="ValueEN" ColumnName="ValueEN" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="AttributeId" ColumnName="AttributeId" />
                 <ScalarProperty Name="ProductId" ColumnName="ProductId" />
@@ -644,6 +678,17 @@
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="ProductId" ColumnName="ProductId" />
                 <ScalarProperty Name="ImagePath" ColumnName="ImagePath" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CategoryAttributes">
+            <EntityTypeMapping TypeName="MarketPlaceModel.CategoryAttribute">
+              <MappingFragment StoreEntitySet="CategoryAttributes">
+                <ScalarProperty Name="ActiveFilter" ColumnName="ActiveFilter" />
+                <ScalarProperty Name="AttributeNameEN" ColumnName="AttributeNameEN" />
+                <ScalarProperty Name="AttributeName" ColumnName="AttributeName" />
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
