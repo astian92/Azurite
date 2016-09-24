@@ -1,0 +1,102 @@
+﻿@model Azurite.Storehouse.Wrappers.ProductW
+
+@section styles_before {
+    <link href="~/Content/select2/dist/css/select2.min.css" rel="stylesheet" />
+}
+@section styles {
+    <link href="~/Content/iCheck/skins/square/green.css" rel="stylesheet" />
+}
+
+<div class="">
+    <div class="row">
+
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Добави продукт</h2>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    @using (Html.BeginForm<ProductsController>(c => c.Add(), FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <div class="form-horizontal">
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.CategoryId, htmlAttributes: new { @class = "control-label col-md-2 col-sm-2 col-xs-12" })
+                                <div class="col-md-10 col-sm-10 col-xs-12">
+                                    @Html.DropDownList("CategoryId", null, htmlAttributes: new { @class = "form-control" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Number, htmlAttributes: new { @class = "control-label col-md-2 col-sm-2 col-xs-12" })
+                                <div class="col-md-10 col-sm-10 col-xs-12">
+                                    @Html.EditorFor(model => model.Number, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Number, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2 col-sm-2 col-xs-12" })
+                                <div class="col-md-10 col-sm-10 col-xs-12">
+                                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.NameEN, htmlAttributes: new { @class = "control-label col-md-2 col-sm-2 col-xs-12" })
+                                <div class="col-md-10 col-sm-10 col-xs-12">
+                                    @Html.TextAreaFor(model => model.NameEN, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.NameEN, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Model, htmlAttributes: new { @class = "control-label col-md-2 col-sm-2 col-xs-12" })
+                                <div class="col-md-10 col-sm-10 col-xs-12">
+                                    @Html.TextAreaFor(model => model.Model, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.Model, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                           
+                            <div class="ln_solid"></div>
+
+                            <div class="form-group">
+                                <div class="col-md-offset-2 col-sm-offset-2 col-md-10">
+                                    @foreach (var state in ViewData.ModelState.Values)
+                                    {
+                                        foreach (var error in state.Errors)
+                                        {
+                                            <div class="model-state-error">@error.ErrorMessage</div>
+                                        }
+                                    }
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-md-offset-2 col-sm-offset-2 col-md-10">
+                                    <a class="btn btn-default" href="@(Url.Action<ProductsController>(c => c.Index()))">Откажи</a>
+                                    <input type="submit" value="Създай" class="btn btn-success" />
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/Content/iCheck/icheck.min.js"></script>
+    <script src="~/Content/select2/dist/js/select2.full.min.js"></script>
+    <script src="~/Scripts/App/productsAddEdit.js"></script>
+}
+
+
