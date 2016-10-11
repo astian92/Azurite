@@ -21,7 +21,7 @@ namespace Azurite.Storehouse.Wrappers
         public double Price { get; set; }
         public double Discount { get; set; }
         public int Quantity { get; set; }
-        public int Active { get; set; }
+        public bool Active { get; set; }
 
         public string CategoryName { get; set; }
 

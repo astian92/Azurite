@@ -46,11 +46,13 @@
                     <li>
                         <a href="@(Url.Action<ProductsController>(c => c.Index()))"><i class="fa fa-cubes"></i> Продукти </a>
                     </li>
+                    <li>
+                        <a href="@(Url.Action<OrdersController>(c => c.Index()))"><i class="fa fa-clipboard"></i> Поръчки </a>
+                    </li>
                 </ul>
             </div>
 
-
-            <div class="menu_section">
+            @*<div class="menu_section">
                 <h3>General</h3>
                 <ul class="nav side-menu">
                     <li>
@@ -69,7 +71,7 @@
                     </li>
                     
                 </ul>
-            </div>
+            </div>*@
             
         </div>
        

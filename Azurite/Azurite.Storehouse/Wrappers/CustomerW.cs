@@ -42,11 +42,11 @@ namespace Azurite.Storehouse.Wrappers
         [Display(Name = "Булстат")]
         public string VatID { get; set; }
 
-        public virtual ICollection<OrderW> Orders { get; set; }
+        public virtual ICollection<OrderViewModel> Orders { get; set; }
 
         public CustomerW()
         {
-            this.Orders = new HashSet<OrderW>();
+            this.Orders = new HashSet<OrderViewModel>();
         }
     }
 }

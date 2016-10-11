@@ -23,7 +23,7 @@ namespace Azurite.Storehouse.Config
 
             kernel.Bind<IDbFactory>()
                 .To<StorehouseDbFactory>()
-                .InScope((f) =>  HttpContext.Current); //so we can scope all repositories to the same context
+                .InScope((f) => HttpContext.Current); //so we can scope all repositories to the same context
 
             kernel.Bind<IStorehouseDbFactory>()
                 .To<StorehouseDbFactory>()

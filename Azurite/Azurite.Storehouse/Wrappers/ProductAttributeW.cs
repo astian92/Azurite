@@ -15,7 +15,7 @@ namespace Azurite.Storehouse.Wrappers
         public string Value { get; set; }
         public string ValueEN { get; set; }
 
-        //public virtual CategoryAttributeW CategoryAttribute { get; set; }
+        public virtual CategoryAttributeSimpleW CategoryAttribute { get; set; }
         //public virtual ProductW Product { get; set; }
     }
 }

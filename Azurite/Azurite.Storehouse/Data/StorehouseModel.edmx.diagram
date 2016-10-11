@@ -7,23 +7,23 @@
       <Diagram DiagramId="61241de037e34a7fad47ad1c39f11f80" Name="Diagram1">
         <EntityTypeShape EntityType="MarketPlaceModel.Customer" Width="1.5" PointX="7.75" PointY="4.75" />
         <EntityTypeShape EntityType="MarketPlaceModel.OrderedProduct" Width="1.5" PointX="12.25" PointY="1" />
-        <EntityTypeShape EntityType="MarketPlaceModel.Order" Width="1.5" PointX="10" PointY="1.125" />
-        <EntityTypeShape EntityType="MarketPlaceModel.Product" Width="1.5" PointX="3" PointY="1.125" />
         <EntityTypeShape EntityType="MarketPlaceModel.ProductAttribute" Width="1.5" PointX="5.25" PointY="5.5" />
         <EntityTypeShape EntityType="MarketPlaceModel.ProductImage" Width="1.5" PointX="5.25" PointY="2.25" />
         <EntityTypeShape EntityType="MarketPlaceModel.User" Width="1.5" PointX="0.75" PointY="9.75" />
-        <AssociationConnector Association="MarketPlaceModel.FK_Orders_Customer" />
-        <AssociationConnector Association="MarketPlaceModel.FK_OrderedProducts_Orders" />
-        <AssociationConnector Association="MarketPlaceModel.FK_ProductAttributes_Product" />
-        <AssociationConnector Association="MarketPlaceModel.FK_ProductImages_Product" />
         <EntityTypeShape EntityType="MarketPlaceModel.OrderStatus" Width="1.5" PointX="3.375" PointY="9.875" />
-        <AssociationConnector Association="MarketPlaceModel.FK_Orders_OrderStatuses" />
         <EntityTypeShape EntityType="MarketPlaceModel.CategoryAttribute" Width="1.5" PointX="3" PointY="6.5" />
         <AssociationConnector Association="MarketPlaceModel.FK_ProductAttributes_CategoryAttributes" />
         <EntityTypeShape EntityType="MarketPlaceModel.Category" Width="1.5" PointX="0.75" PointY="3.375" />
         <AssociationConnector Association="MarketPlaceModel.FK_Categories_Categories" />
         <AssociationConnector Association="MarketPlaceModel.FK_CategoryAttributes_Categories" />
+        <EntityTypeShape EntityType="MarketPlaceModel.Product" Width="1.5" PointX="3" PointY="1" />
         <AssociationConnector Association="MarketPlaceModel.FK_Product_Categories" />
+        <AssociationConnector Association="MarketPlaceModel.FK_ProductAttributes_Product" />
+        <AssociationConnector Association="MarketPlaceModel.FK_ProductImages_Product" />
+        <EntityTypeShape EntityType="MarketPlaceModel.Order" Width="1.5" PointX="9.625" PointY="1.125" />
+        <AssociationConnector Association="MarketPlaceModel.FK_Orders_Customer" />
+        <AssociationConnector Association="MarketPlaceModel.FK_OrderedProducts_Orders" />
+        <AssociationConnector Association="MarketPlaceModel.FK_Orders_OrderStatuses" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

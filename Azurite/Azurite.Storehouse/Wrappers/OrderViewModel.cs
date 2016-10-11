@@ -8,7 +8,7 @@ using AutoMapper;
 
 namespace Azurite.Storehouse.Wrappers
 {
-    public class OrderW : IMap, IMapFrom<Order>, IHaveCustomMappings
+    public class OrderViewModel : IMap, IMapFrom<Order>, IHaveCustomMappings
     {
         public Guid Id { get; set; }
         public Guid CustomerId { get; set; }
@@ -16,22 +16,22 @@ namespace Azurite.Storehouse.Wrappers
         public double Total { get; set; }
         public string Comment { get; set; }
         public DateTime Date { get; set; }
-
-        public virtual CustomerW Customer { get; set; }
-        public virtual ICollection<OrderedProductW> OrderedProducts { get; set; }
+        public string CustomerName { get; set; }
         public virtual OrderStatusW OrderStatus { get; set; }
 
-        public OrderW()
+        public string DateStr
         {
-            this.OrderedProducts = new HashSet<OrderedProductW>();
+            get
+            {
+                return this.Date.ToLocalTime().ToString("dd-MM-yyyy hh:mm");
+            }
         }
 
         public void CreateMappings(IMapperConfigurationExpression configuration)
         {
-            configuration.CreateMap<Order, OrderW>()
-                //.ForMember(d => d.Date, conf => conf.MapFrom(s => s.Date.ToLocalTime())) //not working with LINQ
-                .ReverseMap()
-                .ForMember(d => d.Date, conf => conf.MapFrom(s => s.Date.ToUniversalTime()));
+            configuration.CreateMap<Order, OrderViewModel>()
+                //.ForMember(d => d.Date, conf => conf.MapFrom(s => s.Date.ToLocalTime()))
+                .ForMember(d => d.CustomerName, conf => conf.MapFrom(s => s.Customer.FirstName + " " + s.Customer.LastName));
         }
     }
 }

@@ -79,7 +79,6 @@ namespace Azurite.Storehouse.Workers.Implementations
             }
 
             rep.Add(category);
-
             rep.Save();
         }
 

@@ -29,11 +29,11 @@ namespace Azurite.Storehouse.Wrappers
         [Display(Name = "Изображение")]
         public string ImagePath { get; set; }
 
-        [Required(ErrorMessage = "Полето \"Описание\" е задължително!")]
+        //[Required(ErrorMessage = "Полето \"Описание\" е задължително!")]
         [Display(Name = "Описание")]
         public string Description { get; set; }
 
-        [Required(ErrorMessage = "Полето \"Описание-EN\" е задължително!")]
+        //[Required(ErrorMessage = "Полето \"Описание-EN\" е задължително!")]
         [Display(Name = "Описание-EN")]
         public string DescriptionEN { get; set; }
 

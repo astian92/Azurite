@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Mvc.Expressions;
 
 namespace Azurite.Storehouse.Controllers
 {
@@ -65,10 +66,62 @@ namespace Azurite.Storehouse.Controllers
         }
 
         [HttpGet]
+        public ActionResult GetCategoryAttributes(Guid categoryId)
+        {
+            var attributes = worker.GetCategoryAttributes(categoryId);
+            return Json(attributes, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
         public ActionResult Add()
         {
             ViewBag.CategoryId = new SelectList(worker.GetCategoriesDropDownItems(), "Value", "Text");
             return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Add(ProductW productW)
+        {
+            if (!ModelState.IsValid)
+            {
+                ModelState.AddModelError("Invalid Sate!", "Липсват данни!");
+                ViewBag.CategoryId = new SelectList(worker.GetCategoriesDropDownItems(), "Value", "Text");
+                return View(productW);
+            }
+
+            worker.Add(productW);
+            return Redirect(Url.Action<ProductsController>(c => c.Index()));
+        }
+
+        [HttpGet]
+        public ActionResult Edit(Guid Id)
+        {
+            ViewBag.CategoryId = new SelectList(worker.GetCategoriesDropDownItems(), "Value", "Text");
+            var productW = worker.Get(Id);
+
+            return View(productW);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(ProductW productW)
+        {
+            if (!ModelState.IsValid)
+            {
+                ModelState.AddModelError("Invalid Sate!", "Липсват данни!");
+                ViewBag.CategoryId = new SelectList(worker.GetCategoriesDropDownItems(), "Value", "Text");
+                return View(productW);
+            }
+
+            worker.Edit(productW);
+            return Redirect(Url.Action<ProductsController>(c => c.Index()));
+        }
+
+        public ActionResult Delete(Guid Id)
+        {
+            var ticket = worker.Delete(Id);
+            return Json(ticket);
         }
 
         private IQueryable<ProductIndexViewModel> Filter(IQueryable<ProductIndexViewModel> entities, int colIndex, bool asc)

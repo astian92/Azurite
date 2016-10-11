@@ -13,11 +13,11 @@ namespace Azurite.Storehouse.Wrappers
         public string DisplayName { get; set; }
         public string DisplayNameEN { get; set; }
 
-        public virtual ICollection<OrderW> Orders { get; set; }
+        //public virtual ICollection<OrderW> Orders { get; set; }
 
-        public OrderStatusW()
-        {
-            this.Orders = new HashSet<OrderW>();
-        }
+        //public OrderStatusW()
+        //{
+        //    this.Orders = new HashSet<OrderW>();
+        //}
     }
 }

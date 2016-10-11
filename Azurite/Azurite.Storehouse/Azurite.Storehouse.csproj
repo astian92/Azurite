@@ -176,6 +176,7 @@
     <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\CustomersController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
+    <Compile Include="Controllers\OrdersController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Data\Category.cs">
@@ -233,19 +234,23 @@
     <Compile Include="Models\Infrastructure\IStorehouseDbFactory.cs" />
     <Compile Include="Models\Infrastructure\StorehouseDbFactory.cs" />
     <Compile Include="Config\NinjectConfig\NinjectDependencyResolver.cs" />
+    <Compile Include="Models\OrderStatuses.cs" />
     <Compile Include="Models\ViewModels\LoginViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServiceFactory.cs" />
     <Compile Include="Workers\Contracts\IAccountWorker.cs" />
     <Compile Include="Workers\Contracts\ICategoriesWorker.cs" />
     <Compile Include="Workers\Contracts\ICustomersWorker.cs" />
+    <Compile Include="Workers\Contracts\IOrdersWorker.cs" />
     <Compile Include="Workers\Contracts\IProductsWorker.cs" />
     <Compile Include="Workers\Contracts\IUsersWorker.cs" />
     <Compile Include="Workers\Implementations\AccountWorker.cs" />
     <Compile Include="Workers\Implementations\CategoriesWorker.cs" />
     <Compile Include="Workers\Implementations\CustomersWorker.cs" />
+    <Compile Include="Workers\Implementations\OrdersWorker.cs" />
     <Compile Include="Workers\Implementations\ProductsWorker.cs" />
     <Compile Include="Workers\Implementations\UsersWorker.cs" />
+    <Compile Include="Wrappers\CategoryAttributeSimpleW.cs" />
     <Compile Include="Wrappers\CategoryAttributeW.cs" />
     <Compile Include="Wrappers\CategoryNoParent.cs" />
     <Compile Include="Wrappers\CategoryW.cs" />
@@ -253,6 +258,7 @@
     <Compile Include="Wrappers\CustomerW.cs" />
     <Compile Include="Wrappers\OrderedProduct.cs" />
     <Compile Include="Wrappers\OrderStatusW.cs" />
+    <Compile Include="Wrappers\OrderViewModel.cs" />
     <Compile Include="Wrappers\OrderW.cs" />
     <Compile Include="Wrappers\ProductAttributeW.cs" />
     <Compile Include="Wrappers\ProductImageW.cs" />
@@ -993,6 +999,9 @@
     <Content Include="Views\Customers\Details.cshtml" />
     <Content Include="Views\Products\Index.cshtml" />
     <Content Include="Views\Products\Add.cshtml" />
+    <Content Include="Views\Products\Edit.cshtml" />
+    <Content Include="Views\Orders\Index.cshtml" />
+    <Content Include="Views\Orders\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

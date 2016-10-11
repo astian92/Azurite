@@ -3,7 +3,8 @@ $(document).ready(function () {
     createICheck('.iCheck_cb'); //in miscellaneous
     $("#ParentId").select2({
         placeholder: "Избери Родител",
-        allowClear: false
+        allowClear: false,
+        width: "100%"
     });
 
     $('#cat-img').on('change', function () {
