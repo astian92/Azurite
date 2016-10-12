@@ -22,6 +22,14 @@ namespace Azurite.Storehouse.Workers.Implementations
             this.orderStatusRep = orderStatusRep;
         }
 
+        public OrderW Get(Guid id)
+        {
+            var order = this.rep.Get(id);
+            var orderW = Mapper.Map<OrderW>(order);
+
+            return orderW;
+        }
+
         public IQueryable<OrderW> GetAll()
         {
             return rep.GetAll()

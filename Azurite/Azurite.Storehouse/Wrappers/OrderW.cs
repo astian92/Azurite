@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using AutoMapper;
+using System.ComponentModel.DataAnnotations;
 
 namespace Azurite.Storehouse.Wrappers
 {
@@ -13,9 +14,23 @@ namespace Azurite.Storehouse.Wrappers
         public Guid Id { get; set; }
         public Guid CustomerId { get; set; }
         public int StatusId { get; set; }
+
+        [Display(Name = "Сума")]
         public double Total { get; set; }
+
+        [Display(Name = "Коментар")]
         public string Comment { get; set; }
+
+        [Display(Name = "Дата и час")]
         public DateTime Date { get; set; }
+
+        public string DateStr
+        {
+            get
+            {
+                return this.Date.ToLocalTime().ToString("dd-MM-yyyy hh:mm");
+            }
+        }
 
         public virtual CustomerW Customer { get; set; }
         public virtual ICollection<OrderedProductW> OrderedProducts { get; set; }

@@ -11,6 +11,7 @@ namespace Azurite.Storehouse.Models
         Issued,
         InProcessing,
         Completed,
-        Archived
+        Archived,
+        Cancelled
     }
 }

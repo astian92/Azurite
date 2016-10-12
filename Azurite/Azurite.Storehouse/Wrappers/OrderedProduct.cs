@@ -19,6 +19,6 @@ namespace Azurite.Storehouse.Wrappers
         public int Quantity { get; set; }
         public double Total { get; set; }
 
-        public virtual OrderW Order { get; set; }
+        //public virtual OrderW Order { get; set; }
     }
 }

@@ -1,1 +1,163 @@
-﻿DETAILS
+﻿@model Azurite.Storehouse.Wrappers.OrderW
+
+<div class="">
+    <div class="row">
+
+        <div class="col-md-6 col-sm-6 col-xs-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Данни за поръчката</h2>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <div class="form-horizontal">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Date, htmlAttributes: new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })
+                            <label class="col-md-9 col-sm-9 col-xs-12 content-label">
+                                @Html.DisplayTextFor(model => model.DateStr)
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.OrderStatus.DisplayName, htmlAttributes: new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })
+                            <label class="col-md-9 col-sm-9 col-xs-12 content-label">
+                                @Html.DisplayTextFor(model => model.OrderStatus.DisplayName)
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Total, htmlAttributes: new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })
+                            <label class="col-md-9 col-sm-9 col-xs-12 content-label">
+                                @Html.DisplayTextFor(model => model.Total) лв
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Comment, htmlAttributes: new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })
+                            <label class="col-md-9 col-sm-9 col-xs-12 content-label">
+                                @Html.DisplayTextFor(model => model.Comment)
+                            </label>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-right">
+                <a href="@(Url.Action<CustomersController>(c => c.Index()))" class="btn btn-default">
+                    <i class="fa fa-arrow-left"></i>
+                    Обратно
+                </a>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-sm-6 col-xs-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Данни за клиента</h2>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <div class="form-horizontal">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Customer.FirstName, htmlAttributes: new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })
+                            <label class="col-md-9 col-sm-9 col-xs-12 content-label">
+                                @Html.DisplayTextFor(model => model.Customer.FirstName) 
+                                @Html.DisplayTextFor(model => model.Customer.LastName)
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Customer.Phone, htmlAttributes: new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })
+                            <label class="col-md-9 col-sm-9 col-xs-12 content-label">
+                                @Html.DisplayTextFor(model => model.Customer.Phone)
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Customer.Email, htmlAttributes: new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })
+                            <label class="col-md-9 col-sm-9 col-xs-12 content-label">
+                                @Html.DisplayTextFor(model => model.Customer.Email)
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            @Html.Label("Адрес", new  { @class = "control-label col-md-3 col-sm-3 col-xs-12" })
+                            <label class="col-md-9 col-sm-9 col-xs-12 content-label">
+                                @Html.DisplayTextFor(model => model.Customer.Country), 
+                                @Html.DisplayTextFor(model => model.Customer.City), 
+                                @Html.DisplayTextFor(model => model.Customer.Street), 
+                                @Html.DisplayTextFor(model => model.Customer.ZipCode)
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Customer.Company, htmlAttributes: new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })
+                            <label class="col-md-9 col-sm-9 col-xs-12 content-label">
+                                @Html.DisplayTextFor(model => model.Customer.Company)
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Customer.VatID, htmlAttributes: new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })
+                            <label class="col-md-9 col-sm-9 col-xs-12 content-label">
+                                @Html.DisplayTextFor(model => model.Customer.VatID)
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            
+        </div>
+
+        <div class="col-md-12 col-sm-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Продукти</h2>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <div class="form-horizontal">
+                        @if (Model.OrderedProducts == null || Model.OrderedProducts.Count == 0)
+                        {
+                            <label class="content-label">Не бяха открити продукти</label>
+                        }
+                        else
+                        {
+                            <table class="customer-order-table">
+                                <thead>
+                                    <tr>
+                                        <th>Номер</th>
+                                        <th>Име</th>
+                                        <th>Цена</th>
+                                        <th>Количество</th>
+                                        <th>Отстъпка</th>
+                                        <th>Общо</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var product in Model.OrderedProducts)
+                                    {
+                                        <tr>
+                                            <td>
+                                                @product.ProductNumber
+                                            </td>
+                                            <td>
+                                                @product.ProductName
+                                            </td>
+                                            <td>
+                                                @product.Price лв
+                                            </td>
+                                            <td>
+                                                @product.Quantity бр
+                                            </td>
+                                            <td>
+                                                @product.Discount %
+                                            </td>
+                                            <td>
+                                                <b>@product.Total лв</b>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

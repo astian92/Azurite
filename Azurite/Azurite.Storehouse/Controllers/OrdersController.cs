@@ -32,9 +32,13 @@ namespace Azurite.Storehouse.Controllers
 
             var entities = worker.GetAllVm();
 
-            if (orderStatusId > 0) //filter only if a status is selected, if it is 0 => all
+            if (orderStatusId > 0) 
             {
                 entities = entities.Where(o => o.StatusId == orderStatusId);
+            }
+            else //All = All without the cancelled ones
+            {
+                entities = entities.Where(o => o.StatusId != (int)OrderStatuses.Cancelled);
             }
 
             int totalRecords = entities.Count();
@@ -72,7 +76,8 @@ namespace Azurite.Storehouse.Controllers
 
         public ActionResult Details(Guid Id)
         {
-            return View();
+            var orderW = worker.Get(Id);
+            return View(orderW);
         }
 
         private IQueryable<OrderViewModel> Filter(IQueryable<OrderViewModel> entities, int colIndex, bool asc)
