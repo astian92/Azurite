@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Mvc.Expressions;
 
 namespace Azurite.Storehouse.Controllers
 {
@@ -22,7 +23,7 @@ namespace Azurite.Storehouse.Controllers
 
         public ActionResult Index()
         {
-            ViewBag.OrderStatuses = new SelectList(GetOrderStatusesDropDownItems(), "Value", "Text");
+            ViewBag.OrderStatuses = new SelectList(GetOrderStatusesDropDownItemsWithAll(), "Value", "Text");
             return View();
         }
         
@@ -36,9 +37,9 @@ namespace Azurite.Storehouse.Controllers
             {
                 entities = entities.Where(o => o.StatusId == orderStatusId);
             }
-            else //All = All without the cancelled ones
+            else //All = All without the cancelled and archived ones
             {
-                entities = entities.Where(o => o.StatusId != (int)OrderStatuses.Cancelled);
+                entities = entities.Where(o => o.StatusId != (int)OrderStatuses.Cancelled && o.StatusId != (int)OrderStatuses.Archived);
             }
 
             int totalRecords = entities.Count();
@@ -76,8 +77,18 @@ namespace Azurite.Storehouse.Controllers
 
         public ActionResult Details(Guid Id)
         {
+            ViewBag.StatusId = new SelectList(GetOrderStatusesDropDownItems(), "Value", "Text");
             var orderW = worker.Get(Id);
+
             return View(orderW);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ChangeStatus(Guid orderId, int statusId)
+        {
+            worker.ChangeStatus(orderId, statusId);
+            return Redirect(Url.Action<OrdersController>(c => c.Index()));
         }
 
         private IQueryable<OrderViewModel> Filter(IQueryable<OrderViewModel> entities, int colIndex, bool asc)
@@ -131,15 +142,24 @@ namespace Azurite.Storehouse.Controllers
             return entities;
         }
 
+        private List<DropDownItem> GetOrderStatusesDropDownItemsWithAll()
+        {
+            var items = this.GetOrderStatusesDropDownItems();
+            items.Insert(0, new DropDownItem("0", "Всички"));
+
+            return items;
+        }
+
         private List<DropDownItem> GetOrderStatusesDropDownItems()
         {
             var items = worker.GetOrderStatuses()
                 .Select(c => new DropDownItem(c.Id.ToString(), c.DisplayName))
                 .ToList();
 
-            items.Insert(0, new DropDownItem("0", "Всички"));
-
             return items;
         }
+
+
+
     }
 }

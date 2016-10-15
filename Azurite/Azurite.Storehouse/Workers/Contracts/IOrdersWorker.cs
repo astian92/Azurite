@@ -12,5 +12,6 @@ namespace Azurite.Storehouse.Workers.Contracts
         IQueryable<OrderW> GetAll();
         IQueryable<OrderViewModel> GetAllVm();
         IList<OrderStatusW> GetOrderStatuses();
+        void ChangeStatus(Guid orderid, int statusId);
     }
 }

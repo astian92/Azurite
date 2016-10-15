@@ -54,3 +54,7 @@
     font-weight: bold;
     text-decoration: underline;
 }
+
+.form-horizontal .control-label {
+    margin-bottom: 5px;
+}

@@ -47,5 +47,13 @@ namespace Azurite.Storehouse.Workers.Implementations
             return this.orderStatusRep.GetAll()
                 .ProjectTo<OrderStatusW>().ToList();
         }
+
+        public void ChangeStatus(Guid orderId, int statusId)
+        {
+            var order = rep.Get(orderId);
+            order.StatusId = statusId;
+
+            rep.Save();
+        }
     }
 }

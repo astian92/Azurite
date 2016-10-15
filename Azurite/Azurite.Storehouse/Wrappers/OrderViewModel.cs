@@ -23,7 +23,7 @@ namespace Azurite.Storehouse.Wrappers
         {
             get
             {
-                return this.Date.ToLocalTime().ToString("dd-MM-yyyy hh:mm");
+                return this.Date.ToLocalTime().ToString("dd-MM-yyyy HH:mm");
             }
         }
 

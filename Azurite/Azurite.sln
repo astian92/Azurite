@@ -13,6 +13,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Azurite.Store.Tests", "Azur
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Azurite.Infrastructure", "Azurite.Infrastructure\Azurite.Infrastructure.csproj", "{989DD08F-EE1F-4941-9E32-5E9A21A54C5B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Azurite.CDN", "Azurite.CDN\Azurite.CDN.csproj", "{1046FD44-029D-4EB4-AE87-7CAE3A497764}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Azurite.CDN.Tests", "Azurite.CDN.Tests\Azurite.CDN.Tests.csproj", "{150FDA7D-8F4C-4809-B9A1-CBE42D86945E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +43,14 @@ Global
 		{989DD08F-EE1F-4941-9E32-5E9A21A54C5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{989DD08F-EE1F-4941-9E32-5E9A21A54C5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{989DD08F-EE1F-4941-9E32-5E9A21A54C5B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1046FD44-029D-4EB4-AE87-7CAE3A497764}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1046FD44-029D-4EB4-AE87-7CAE3A497764}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1046FD44-029D-4EB4-AE87-7CAE3A497764}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1046FD44-029D-4EB4-AE87-7CAE3A497764}.Release|Any CPU.Build.0 = Release|Any CPU
+		{150FDA7D-8F4C-4809-B9A1-CBE42D86945E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{150FDA7D-8F4C-4809-B9A1-CBE42D86945E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{150FDA7D-8F4C-4809-B9A1-CBE42D86945E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{150FDA7D-8F4C-4809-B9A1-CBE42D86945E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
