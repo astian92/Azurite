@@ -26,7 +26,5 @@ namespace Azurite.Store.Data
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Order> Orders { get; set; }
-        public virtual OrderStatus OrderStatuses1 { get; set; }
-        public virtual OrderStatus OrderStatus1 { get; set; }
     }
 }

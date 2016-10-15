@@ -1,0 +1,77 @@
+﻿@model Azurite.Store.Wrappers.ProductW
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="page-header">
+                <h3>@Model.Name</h3>
+                <input id="productId" name="productId" value="@Model.Id" type="hidden" />
+                <span class="devider"></span>
+            </div>
+        </div>
+    </div>
+    <div class="row product-info">
+        <div class="col-sm-5 images-block">
+            <p>
+                <img src="" alt="@Model.Name" class="img-responsive thumbnail" />
+            </p>
+            <ul class="list-unstyled list-inline">
+                @foreach (var image in Model.ProductImages)
+                {
+                    <li>
+                        <img id="img_@image.Id" src="@image.ImagePath" alt="" />
+                    </li>
+                }
+            </ul>
+        </div>
+        <div class="col-sm-7 product-details">
+            <h2>@Model.Name</h2>
+            <hr />
+            <ul class="list-unstyled">
+                <li>
+                    <span>Model:</span>
+                    @Model.Model
+                </li>
+                <li>
+                    <span>Number:</span>
+                    @Model.Number
+                </li>
+                <li>
+                    <span>Availability:</span>
+                    @if(Model.Quantity > 0)
+                    {
+                        <strong class="label label-success">In Stock</strong>
+                    }
+                    else
+                    {
+                        <strong class="label label-default">Out of Stock</strong>
+                    }
+                </li>
+            </ul>
+            <hr />
+            <div class="price">
+                <span class="price-head">Price:</span>
+                <span class="price-new">@Model.Price</span>
+            </div>
+            <div class="cart-button">
+                <button type="button" class="btn btn-cart">
+                    Add to cart
+                    <i class="fa fa-shopping-cart"></i>
+                </button>
+            </div>
+            <hr />
+        </div>
+        <div class="col-xs-12 product-info-box">
+            <h4 class="heading">Description</h4>
+            <div class="content panel-gold">
+                <p>@Model.Description</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    

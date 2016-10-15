@@ -1,0 +1,20 @@
+﻿@model IEnumerable<Azurite.Store.Wrappers.CategoryW>
+
+@{
+    ViewBag.Title = "Categories";
+}
+
+@foreach (var item in Model) {
+    <div class="col-md-3">
+        <div class="thumbnail">
+            <a href="/Categories/Index/@item.Id" class="categoryThumb">
+                <div class="imageWrapper">
+                    <img src="@item.ImagePath" alt="feature-collection-image">
+                </div>
+                <div class="caption">
+                    <h4>@item.Name</h4>
+                </div>
+            </a>
+        </div>
+    </div>
+}

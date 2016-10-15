@@ -1,0 +1,12 @@
+﻿@model IEnumerable<Azurite.Store.Wrappers.CategoryW>
+
+@{
+    ViewBag.Title = "Sub Categories";
+}
+
+@foreach (var item in Model)
+{
+    <div>
+        <a href="/Categories/Index/@item.Id">@item.Name</a>
+    </div>
+}

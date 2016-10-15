@@ -1,0 +1,16 @@
+﻿@model IEnumerable<Azurite.Store.Wrappers.CategoryAttributeW>
+
+@foreach (var attr in Model)
+{
+    <div class="panel panel-gold">
+        <div class="panel-heading">@attr.AttributeName</div>
+        <div class="panel-body">
+            @foreach (var productAttr in attr.ProductAttributes)
+            {
+                <div>
+                    <a href="#@productAttr.Id">@productAttr.Value</a>
+                </div>
+            }
+        </div>
+    </div>
+}
