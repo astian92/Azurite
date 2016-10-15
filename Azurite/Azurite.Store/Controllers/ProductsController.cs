@@ -20,5 +20,11 @@ namespace Azurite.Store.Controllers
         {
             return View();
         }
+
+        public ActionResult GetCategoryProducts(Guid categoryId)
+        {
+            var products = worker.GetProducts(categoryId);
+            return PartialView(products);
+        }
     }
 }

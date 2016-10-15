@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using Azurite.Store.Wrappers;
+using AutoMapper;
 
 namespace Azurite.Store.Workers.Implementations
 {
@@ -20,7 +21,16 @@ namespace Azurite.Store.Workers.Implementations
 
         public IQueryable<ProductW> GetProducts(Guid categoryId)
         {
-            throw new NotImplementedException();
+            var products = rep.GetAll();
+            var wrapped = new List<ProductW>();
+
+            foreach (var product in products.Where(x => x.CategoryId == categoryId))
+            {
+                var mapped = Mapper.Map<ProductW>(product);
+                wrapped.Add(mapped);
+            }
+
+            return wrapped.AsQueryable();
         }
     }
 }

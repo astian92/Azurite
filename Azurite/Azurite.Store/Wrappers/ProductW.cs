@@ -8,7 +8,7 @@ using AutoMapper;
 
 namespace Azurite.Store.Wrappers
 {
-    public class ProductW : IMap, IMapFrom<Product>, IHaveCustomMappings
+    public class ProductW : IMap, IMapFrom<Product>
     {
         public Guid Id { get; set; }
         public Guid CategoryId { get; set; }
@@ -23,9 +23,14 @@ namespace Azurite.Store.Wrappers
         public string NameEN { get; set; }
         public string DescriptionEN { get; set; }
 
-        public void CreateMappings(IMapperConfigurationExpression configuration)
+        public virtual CategoryW Category { get; set; }
+        public virtual ICollection<ProductAttributeW> ProductAttributes { get; set; }
+        public virtual ICollection<ProductImageW> ProductImages { get; set; }
+
+        public ProductW()
         {
-            throw new NotImplementedException();
+            this.ProductAttributes = new HashSet<ProductAttributeW>();
+            this.ProductImages = new HashSet<ProductImageW>();
         }
     }
 }

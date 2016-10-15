@@ -1,0 +1,15 @@
+﻿@model IEnumerable<Azurite.Store.Wrappers.CategoryW>
+
+@{
+    ViewBag.Title = "Sub Categories";
+}
+
+@foreach (var item in Model)
+{
+    @Html.DisplayFor(modelItem => item.ParentId)
+    @Html.DisplayFor(modelItem => item.Name)
+    @Html.DisplayFor(modelItem => item.NameEN)
+    @Html.DisplayFor(modelItem => item.ImagePath)
+    @Html.DisplayFor(modelItem => item.Description)
+    @Html.DisplayFor(modelItem => item.DescriptionEN)
+}
