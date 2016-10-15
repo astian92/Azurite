@@ -9,5 +9,7 @@ namespace Azurite.Store.Workers.Contracts
     public interface IProductWorker
     {
         IQueryable<ProductW> GetProducts(Guid categoryId);
+        ProductW GetProduct(Guid productId);
+        IQueryable<CategoryW> GetSubCategories(Guid categoryId);
     }
 }

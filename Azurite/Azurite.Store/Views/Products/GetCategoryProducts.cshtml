@@ -1,0 +1,54 @@
+﻿@model IEnumerable<Azurite.Store.Wrappers.ProductW>
+
+
+<div class="row">
+    <div class="col-xs-12 products-list">
+        @foreach (var item in Model)
+        {
+            var imagePath = "";
+            if (item.ProductImages.Count() > 0)
+            {
+                imagePath = item.ProductImages.First().ImagePath;
+            }
+
+            <div class="col-md-4 col-sm-6">
+                <div class="product-col">
+                    <div class="image">
+                        <a href="/Products/Details/@item.Id">
+                            <img src="@imagePath" alt="@item.Name" />
+                        </a>
+                    </div>
+                    <div class="caption">
+                        <h4>
+                            <a href="/Products/Details/@item.Id">
+                                @item.Name
+                            </a>
+                        </h4>
+                        <div class="price">
+                            @if(item.Discount > 0)
+                            {
+                                double newPrice = item.Price - (item.Price * item.Discount / 100);
+                                <span class="price-new">
+                                    <i class="fa fa-euro"></i>@newPrice
+                                </span>
+                                <span class="price-old">
+                                    <i class="fa fa-euro"></i>@item.Price
+                                </span>
+                            }
+                            else
+                            {
+                                <span class="price-new">@item.Price</span>
+                            }
+                        </div>
+                        <div class="cart-button">
+                            <button type="button" class="btn btn-cart">
+                                Add to cart
+                                <i class="fa fa-shopping-cart"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

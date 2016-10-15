@@ -9,7 +9,7 @@
 function loadSubCategories(categoryId) {
     $('#subCategoriesContainer').html('');
     $.ajax({
-        url: MVC.Categories.GetSubCategoriesFull + '?categoryId' + categoryId,
+        url: MVC.Categories.GetSubCategoriesFull + '?categoryId=' + categoryId,
         dataType: 'html',
         success: function (data) {
             $('#subCategoriesContainer').html(data);
@@ -17,10 +17,10 @@ function loadSubCategories(categoryId) {
     });
 }
 
-function loadCategoryAttr() {
+function loadCategoryAttr(categoryId) {
     $('#categoriesAttrContainer').html('');
     $.ajax({
-        url: MVC.Categories.GetCategoryAttrFull + '?categoryId' + categoryId,
+        url: MVC.Categories.GetCategoryAttrFull + '?categoryId=' + categoryId,
         dataType: 'html',
         success: function (data) {
             $('#categoriesAttrContainer').html(data);
@@ -28,10 +28,10 @@ function loadCategoryAttr() {
     });
 }
 
-function loadProducts() {
+function loadProducts(categoryId) {
     $('#productsContainer').html('');
     $.ajax({
-        url: MVC.Products.GetCategoryProductsFull + '?categoryId' + categoryId,
+        url: MVC.Products.GetCategoryProductsFull + '?categoryId=' + categoryId,
         dataType: 'html',
         success: function (data) {
             $('#productsContainer').html(data);

@@ -14,7 +14,5 @@ namespace Azurite.Store.Wrappers
         public Guid ProductId { get; set; }
         public string Value { get; set; }
         public string ValueEN { get; set; }
-
-        public virtual ProductW Product { get; set; }
     }
 }

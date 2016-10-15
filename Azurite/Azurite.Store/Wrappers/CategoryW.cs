@@ -20,12 +20,12 @@ namespace Azurite.Store.Wrappers
         public string DescriptionEN { get; set; }
 
         //public virtual ICollection<CategoryAttributeW> CategoryAttributes { get; set; }
-        public virtual ICollection<ProductW> Products { get; set; }
+        //public virtual ICollection<ProductW> Products { get; set; }
 
         public CategoryW()
         {
             //this.CategoryAttributes = new HashSet<CategoryAttributeW>();
-            this.Products = new HashSet<ProductW>();
+            //this.Products = new HashSet<ProductW>();
         }
 
         public void CreateMappings(IMapperConfigurationExpression configuration)

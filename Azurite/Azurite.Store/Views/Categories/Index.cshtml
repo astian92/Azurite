@@ -1,33 +1,50 @@
-﻿
+﻿@model Azurite.Store.Wrappers.CategoryW
+
 @{
     ViewBag.Title = "Index";
 }
 
-<div class="row">
-    <div class="col-md-3 col-sm-4 col-xs-12 sideBar">
-        <div class="panel panel-default">
-            <div class="panel-heading">Product Categories</div>
-            <div class="panel-body subCategoriesContainer">
 
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="page-header">
+                <h3>@Model.Name</h3>
+                <input id="categoryId" name="categoryId" value="@Model.Id" type="hidden" />
+                <span class="devider"></span>
             </div>
-        </div>
-        <div class="panel panel-default">
-            <div class="panel-heading">Filter by Price</div>
-            <div class="panel-body priceFilter">
-
-            </div>
-        </div>
-        <div class="categoriesAttrContainer">
-
         </div>
     </div>
-    <div class="col-md-9 col-sm-8 col-xs-12">
-        <div class="row filterArea">
+    <div class="row">
+        <div class="col-md-3 col-sm-4 col-xs-12 sideBar">
+            <div class="panel panel-gold">
+                <div class="panel-heading">Product Categories</div>
+                <div id="subCategoriesContainer" class="panel-body">
 
+                </div>
+            </div>
+            <div class="panel panel-gold">
+                <div class="panel-heading">Filter by Price</div>
+                <div id="priceFilter" class="panel-body">
+
+                </div>
+            </div>
+            <div id="categoriesAttrContainer">
+
+            </div>
         </div>
-        <div class="row productsContainer">
+        <div class="col-md-9 col-sm-8 col-xs-12">
+            <div class="row filterArea">
 
+            </div>
+            <div id="productsContainer" class="row">
+
+            </div>
         </div>
     </div>
 </div>
-<script src="~/Scripts/App/Categories/categories.js"></script>
+
+@section scripts {
+    <script src="~/Scripts/App/Categories/category_products.js"></script>
+
+}

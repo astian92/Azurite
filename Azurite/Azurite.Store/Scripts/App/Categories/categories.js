@@ -5,7 +5,7 @@
 function loadBaseCategories() {
     $('#categoriesContainer').html('');
     $.ajax({
-        url: MVC.Categories.GetBaseCategories + '?categoryId' + categoryId,
+        url: MVC.Categories.GetBaseCategoriesFull, // + '?categoryId' + categoryId,
         dataType: 'html',
         success: function (data) {
             $('#categoriesContainer').html(data);

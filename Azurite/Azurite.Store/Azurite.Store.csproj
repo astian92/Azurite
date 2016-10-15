@@ -248,18 +248,14 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\azurite-theme.css" />
-    <Content Include="Resources\diamond-1186139_1920.jpg" />
-    <Content Include="Resources\dimon-background.jpg" />
     <Content Include="Resources\radianna-gold-logo-md.png" />
     <Content Include="Resources\radianna-gold-logo-sm.png" />
     <Content Include="Resources\radianna-gold-logo-xs-white.png" />
     <Content Include="Resources\radianna-gold-logo-xxs-white.png" />
     <Content Include="Resources\radianna-gold-logo.png" />
-    <Content Include="Resources\RG-store-slide1.png" />
-    <Content Include="Resources\RG-store-slide2.png" />
-    <Content Include="Resources\RG-store-slide3.png" />
-    <Content Include="Resources\slide1-img.jpg" />
-    <Content Include="Resources\slide2-img.jpg" />
+    <Content Include="Resources\rg-slide1.jpg" />
+    <Content Include="Resources\rg-slide2.jpg" />
+    <Content Include="Resources\rg-slide3.jpg" />
     <Content Include="Scripts\App\Categories\categories.js" />
     <Content Include="Scripts\App\Categories\category_products.js" />
     <Content Include="Scripts\App\Helpers\MVC.js" />
@@ -318,13 +314,15 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Categories\GetCategories.cshtml" />
+    <Content Include="Views\Categories\GetBaseCategories.cshtml" />
     <Content Include="Views\Categories\GetSubCategories.cshtml" />
     <Content Include="Views\Categories\Index.cshtml" />
+    <Content Include="Views\Categories\GetCategoryAttr.cshtml" />
+    <Content Include="Views\Products\GetCategoryProducts.cshtml" />
+    <Content Include="Views\Products\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Products\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

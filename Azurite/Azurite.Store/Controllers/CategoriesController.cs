@@ -19,8 +19,8 @@ namespace Azurite.Store.Controllers
 
         public ActionResult Index(Guid id)
         {
-            ViewBag.categoryId = id;
-            return View();
+            var category = worker.GetCategory(id);
+            return View(category);
         }
 
         public ActionResult GetBaseCategories()
