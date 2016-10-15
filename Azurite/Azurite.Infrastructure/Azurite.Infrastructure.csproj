@@ -65,6 +65,9 @@
     <Compile Include="Mapping\Contracts\IMap.cs" />
     <Compile Include="Mapping\Contracts\IMapFrom.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ResponseHandling\ErrorCodes.cs" />
+    <Compile Include="ResponseHandling\ITicket.cs" />
+    <Compile Include="ResponseHandling\Ticket.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

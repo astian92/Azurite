@@ -46,6 +46,7 @@ namespace Azurite.Storehouse.App_Start
                 kernel.Bind<IHttpModule>().To<HttpApplicationInitializationHttpModule>();
 
                 RegisterServices(kernel);
+                ServiceFactory.InitializeKernel(kernel);
                 return kernel;
             }
             catch

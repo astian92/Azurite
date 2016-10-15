@@ -1,4 +1,5 @@
-﻿using Azurite.Storehouse.Controllers;
+﻿using Azurite.Infrastructure.ResponseHandling;
+using Azurite.Storehouse.Controllers;
 using Azurite.Storehouse.Models.Helpers.Datatables;
 using Azurite.Storehouse.Workers.Contracts;
 using Azurite.Storehouse.Wrappers;
@@ -164,7 +165,7 @@ namespace Azurite.Storehouse.Tests.Controllers
             var id = Guid.NewGuid();
             var actual = this.controller.Delete(id);
             Assert.IsNotNull(actual);
-            Assert.IsTrue(actual);
+            Assert.IsInstanceOfType(actual, typeof(JsonResult));
 
             workerMock.Verify(m => m.Delete(id));
         }

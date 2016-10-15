@@ -1,5 +1,6 @@
 ﻿using Azurite.Infrastructure.Config;
 using Azurite.Infrastructure.Data.Contracts;
+using Azurite.Infrastructure.ResponseHandling;
 using Azurite.Storehouse.Data;
 using Azurite.Storehouse.Workers.Implementations;
 using Azurite.Storehouse.Wrappers;
@@ -59,6 +60,7 @@ namespace Azurite.Storehouse.Tests.Workers
         {
             var actual = this.worker.GetAll();
 
+            repMock.Verify(m => m.GetAll());
             Assert.IsNotNull(actual);
             Assert.AreEqual(3, actual.Count());
         }
@@ -100,7 +102,11 @@ namespace Azurite.Storehouse.Tests.Workers
         [TestMethod]
         public void DeleteTest()
         {
-            this.worker.Delete(Guid.NewGuid());
+            var actual = this.worker.Delete(Guid.NewGuid());
+            Assert.IsNotNull(actual);
+            Assert.IsInstanceOfType(actual, typeof(ITicket));
+            Assert.IsTrue(actual.IsOK);
+
             this.repMock.Verify(m => m.Remove(It.IsAny<Guid>()));
             this.repMock.Verify(m => m.Save());
         }

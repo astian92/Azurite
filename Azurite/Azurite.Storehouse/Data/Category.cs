@@ -17,8 +17,9 @@ namespace Azurite.Storehouse.Data
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Category()
         {
-            this.Products = new HashSet<Product>();
+            this.Categories1 = new HashSet<Category>();
             this.CategoryAttributes = new HashSet<CategoryAttribute>();
+            this.Products = new HashSet<Product>();
         }
     
         public System.Guid Id { get; set; }
@@ -30,8 +31,11 @@ namespace Azurite.Storehouse.Data
         public string DescriptionEN { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Product> Products { get; set; }
+        public virtual ICollection<Category> Categories1 { get; set; }
+        public virtual Category Category1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CategoryAttribute> CategoryAttributes { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Product> Products { get; set; }
     }
 }

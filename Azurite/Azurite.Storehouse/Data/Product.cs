@@ -32,7 +32,7 @@ namespace Azurite.Storehouse.Data
         public double Price { get; set; }
         public double Discount { get; set; }
         public int Quantity { get; set; }
-        public int Active { get; set; }
+        public bool Active { get; set; }
     
         public virtual Category Category { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

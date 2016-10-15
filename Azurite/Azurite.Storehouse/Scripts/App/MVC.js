@@ -13,10 +13,24 @@ var MagicStrings = (function () {
     users.CreateAction("Edit");
     users.CreateAction("Delete");
 
+    var customers = CreateController("Customers");
+    customers.CreateAction("GetCustomers");
+    customers.CreateAction("Details");
+
     var categories = CreateController("Categories");
     categories.CreateAction("GetCategories");
     categories.CreateAction("Edit");
     categories.CreateAction("Delete");
+
+    var products = CreateController("Products");
+    products.CreateAction("GetProducts");
+    products.CreateAction("Edit");
+    products.CreateAction("Delete");
+    products.CreateAction("GetCategoryAttributes");
+
+    var orders = CreateController("Orders");
+    orders.CreateAction("GetOrders");
+    orders.CreateAction("Details");
   
     return {
         CreateController: CreateController,

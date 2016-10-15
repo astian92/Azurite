@@ -121,12 +121,15 @@
             }, function () {
                 var promise = Ajax.post(MVC.Users.DeleteFull, { Id: id });
 
-                promise.done(function (result) {
-                    if (result == true || result == "True") {
+                promise.done(function (ticket) {
+                    if (ticket.IsOK) {
                         var usersTable = Tables.get("#UsersTable");
                         usersTable.reload(false);
 
                         swal("Изтрито!", "Потребителят беше изтрит!", "success");
+                    }
+                    else {
+                        swal("Грешка!", ticket.Message, "error");
                     }
                 });
             });

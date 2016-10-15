@@ -1,5 +1,6 @@
 ﻿using Azurite.Infrastructure.Data.Contracts;
 using Azurite.Storehouse.Models;
+using Azurite.Storehouse.Models.Helpers;
 using Azurite.Storehouse.Models.Helpers.Datatables;
 using Azurite.Storehouse.Workers.Contracts;
 using Azurite.Storehouse.Wrappers;
@@ -14,9 +15,9 @@ namespace Azurite.Storehouse.Controllers
 {
     public class CategoriesController : Controller
     {
-        private ICategoryWorker worker;
+        private ICategoriesWorker worker;
 
-        public CategoriesController(ICategoryWorker worker)
+        public CategoriesController(ICategoriesWorker worker)
         {
             this.worker = worker;
         }
@@ -28,8 +29,8 @@ namespace Azurite.Storehouse.Controllers
 
         public ActionResult GetCategories()
         {
-            var categories = worker.GetAll();
-            var result = new JqueryListResult<CategoryW>(data: categories);
+            var categories = worker.GetAllWithoutParents();
+            var result = new JqueryListResult<CategoryIndexViewModel>(data: categories);
 
             return Json(result, JsonRequestBehavior.AllowGet);
         }
@@ -37,6 +38,7 @@ namespace Azurite.Storehouse.Controllers
         [HttpGet]
         public ActionResult Add()
         {
+            ViewBag.ParentId = new SelectList(GetCategoriesDropDownItems(), "Value", "Text");
             return View();
         }
 
@@ -47,17 +49,67 @@ namespace Azurite.Storehouse.Controllers
             if (!ModelState.IsValid)
             {
                 ModelState.AddModelError("Invalid Sate!", "Липсват данни!");
+                ViewBag.ParentId = new SelectList(GetCategoriesDropDownItems(), "Value", "Text");
                 return View(categoryW);
             }
 
-            if (categoryW.CategoryAttributes == null || categoryW.CategoryAttributes.Count() == 0)
-            {
-                ModelState.AddModelError("Missing attributes!", "Категорията задължително трябва да има атрибути!");
-                return View(categoryW);
-            }
+            //if (categoryW.CategoryAttributes == null || categoryW.CategoryAttributes.Count() == 0)
+            //{
+            //    ModelState.AddModelError("Missing attributes!", "Категорията задължително трябва да има атрибути!");
+            //    ViewBag.ParentId = new SelectList(GetCategoriesDropDownItems(), "Value", "Text");
+            //    return View(categoryW);
+            //}
 
             worker.Add(categoryW);
             return Redirect(Url.Action<CategoriesController>(c => c.Index()));
+        }
+
+        [HttpGet]
+        public ActionResult Edit(Guid Id)
+        {
+            var categoryW = worker.Get(Id);
+            ViewBag.ParentId = new SelectList(GetCategoriesDropDownItems(), "Value", "Text", categoryW.ParentId);
+
+            return View(categoryW);
+        }
+        
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(CategoryW categoryW)
+        {
+            if (!ModelState.IsValid)
+            {
+                ModelState.AddModelError("Invalid Sate!", "Липсват данни!");
+                ViewBag.ParentId = new SelectList(GetCategoriesDropDownItems(), "Value", "Text");
+                return View(categoryW);
+            }
+
+            //if (categoryW.CategoryAttributes == null || categoryW.CategoryAttributes.Count() == 0)
+            //{
+            //    ModelState.AddModelError("Missing attributes!", "Категорията задължително трябва да има атрибути!");
+            //    ViewBag.ParentId = new SelectList(GetCategoriesDropDownItems(), "Value", "Text");
+            //    return View(categoryW);
+            //}
+
+            worker.Edit(categoryW);
+            return Redirect(Url.Action<CategoriesController>(c => c.Index()));
+        }
+
+        public ActionResult Delete(Guid Id)
+        {
+            var ticket = worker.Delete(Id);
+            return Json(ticket);
+        }
+
+        private List<DropDownItem> GetCategoriesDropDownItems()
+        {
+            var items = worker.GetAll()
+                .Select(c => new DropDownItem(c.Id.ToString(), c.Name))
+                .ToList();
+
+            items.Insert(0, new DropDownItem(Guid.Empty.ToString(), "Няма"));
+
+            return items;
         }
     }
 }
