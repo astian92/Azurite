@@ -58,3 +58,38 @@
 .form-horizontal .control-label {
     margin-bottom: 5px;
 }
+
+.images-holder {
+    padding-top: 10px;
+}
+
+.image-container {
+    height: 120px;
+    overflow: hidden;
+}
+
+.image-container img {
+    width: 100%;
+    height: 120px;
+}
+
+.image-btn-holder {
+    height: 120px; 
+    text-align: center;
+}
+
+.image-btn-holder label {
+    font-size: 40px;
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(232, 232, 232);
+    padding-top: 30px;
+    cursor: pointer;
+    color: rgb(186, 186, 186);
+}
+
+.image-btn-holder label:hover {
+    color: gray;
+}
+

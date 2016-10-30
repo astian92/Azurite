@@ -105,7 +105,7 @@ namespace Azurite.Storehouse.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(ProductW productW)
+        public ActionResult Edit(ProductW productW, IEnumerable<HttpPostedFileBase> photos, IEnumerable<Guid> imageIds)
         {
             if (!ModelState.IsValid)
             {
@@ -114,7 +114,7 @@ namespace Azurite.Storehouse.Controllers
                 return View(productW);
             }
 
-            worker.Edit(productW);
+            worker.Edit(productW, photos, imageIds);
             return Redirect(Url.Action<ProductsController>(c => c.Index()));
         }
 

@@ -16,7 +16,7 @@ namespace Azurite.CDN
 
             config.Routes.MapHttpRoute(
                 name: "Files with Id",
-                routeTemplate: "cdn/files/{productId:guid}",
+                routeTemplate: "cdn/files/{productId}",
                 defaults: new { controller = "Files" }
             );
 

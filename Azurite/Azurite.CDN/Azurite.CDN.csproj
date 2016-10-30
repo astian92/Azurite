@@ -195,8 +195,10 @@
     <Compile Include="Config\Streamline\IServiceRegistrator.cs" />
     <Compile Include="Config\Streamline\ServiceRegistrator.cs" />
     <Compile Include="Config\WorkersDependencyConfig.cs" />
+    <Compile Include="Controllers\RemoveController.cs" />
     <Compile Include="Controllers\FilesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\SaveController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Data\DataModel.Context.cs">
       <AutoGen>True</AutoGen>
@@ -222,18 +224,22 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Http\HttpFile.cs" />
+    <Compile Include="Models\Http\MultipleIds.cs" />
+    <Compile Include="Models\Http\SimpleId.cs" />
     <Compile Include="Models\Infrastructure\ICdnDbFactory.cs" />
     <Compile Include="Models\Infrastructure\CdnDbFactory.cs" />
     <Compile Include="Models\RequestFile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Workers\Contracts\IRemoveWorker.cs" />
     <Compile Include="Workers\Contracts\IFilesWorker.cs" />
+    <Compile Include="Workers\Implementations\RemoveWorker.cs" />
     <Compile Include="Workers\Implementations\FilesWorker.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\HelpPage\HelpPage.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\product\Conlsusions.txt" />
     <Content Include="Content\product\rvs.jpg" />
     <Content Include="Content\Site.css" />
     <Content Include="Data\DataModel.Context.tt">

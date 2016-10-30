@@ -4,6 +4,7 @@ using Azurite.Storehouse.Wrappers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 
 namespace Azurite.Storehouse.Workers.Contracts
@@ -15,7 +16,7 @@ namespace Azurite.Storehouse.Workers.Contracts
         List<CategoryAttributeW> GetCategoryAttributes(Guid categoryId);
         ProductW Get(Guid productId);
         void Add(ProductW productW);
-        void Edit(ProductW productW);
+        Task Edit(ProductW productW, IEnumerable<HttpPostedFileBase> photos, IEnumerable<Guid> imageIds);
         ITicket Delete(Guid Id);
     }
 }

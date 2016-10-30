@@ -12,6 +12,8 @@ using AutoMapper;
 using Azurite.Infrastructure.ResponseHandling;
 using System.Data.Entity.Infrastructure;
 using System.Data.SqlClient;
+using Azurite.Storehouse.Services.Contracts;
+using System.Threading.Tasks;
 
 namespace Azurite.Storehouse.Workers.Implementations
 {
@@ -21,14 +23,19 @@ namespace Azurite.Storehouse.Workers.Implementations
         private readonly IRepository<Category> catRep;
         private readonly IRepository<CategoryAttribute> catAttrRep;
         private readonly IRepository<ProductAttribute> prodAttrRep;
+        private readonly IRepository<ProductImage> prodImgRep;
+        private readonly IHttpService httpService;
 
         public ProductsWorker(IRepository<Product> rep, IRepository<Category> catRep, 
-            IRepository<CategoryAttribute> catAttrRep, IRepository<ProductAttribute> prodAttrRep)
+            IRepository<CategoryAttribute> catAttrRep, IRepository<ProductAttribute> prodAttrRep,
+             IRepository<ProductImage> prodImgRep, IHttpService service)
         {
             this.rep = rep;
             this.catRep = catRep;
             this.catAttrRep = catAttrRep;
             this.prodAttrRep = prodAttrRep;
+            this.prodImgRep = prodImgRep;
+            this.httpService = service;
         }
 
         public IQueryable<ProductIndexViewModel> GetAll()
@@ -105,7 +112,7 @@ namespace Azurite.Storehouse.Workers.Implementations
             rep.Save();
         }
 
-        public void Edit(ProductW productW)
+        public async Task Edit(ProductW productW, IEnumerable<HttpPostedFileBase> photos, IEnumerable<Guid> imageIds)
         {
             var product = rep.Get(productW.Id);
 
@@ -143,6 +150,12 @@ namespace Azurite.Storehouse.Workers.Implementations
             var productAttributes = product.ProductAttributes.ToList();
             var oldAttributes = productAttributes.Where(pa => !productW.ProductAttributes.Any(pwa => pwa.AttributeId == pa.AttributeId));
             prodAttrRep.RemoveRange(oldAttributes);
+
+            //now handle files ..
+            var removedFiles = product.ProductImages.Where(i => !imageIds.Any(imd => imd == i.Id));
+            prodImgRep.RemoveRange(removedFiles);
+            //bool success = await httpService.PostAsync()
+
 
             rep.Save();
         }
