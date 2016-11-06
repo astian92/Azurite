@@ -270,7 +270,7 @@
     <Compile Include="Wrappers\CategoryW.cs" />
     <Compile Include="Wrappers\CustomerIndexViewModel.cs" />
     <Compile Include="Wrappers\CustomerW.cs" />
-    <Compile Include="Wrappers\OrderedProduct.cs" />
+    <Compile Include="Wrappers\OrderedProductW.cs" />
     <Compile Include="Wrappers\OrderStatusW.cs" />
     <Compile Include="Wrappers\OrderViewModel.cs" />
     <Compile Include="Wrappers\OrderW.cs" />

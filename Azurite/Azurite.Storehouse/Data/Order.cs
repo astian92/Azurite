@@ -28,8 +28,8 @@ namespace Azurite.Storehouse.Data
         public System.DateTime Date { get; set; }
     
         public virtual Customer Customer { get; set; }
+        public virtual OrderStatus OrderStatus { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrderedProduct> OrderedProducts { get; set; }
-        public virtual OrderStatus OrderStatus { get; set; }
     }
 }
