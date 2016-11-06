@@ -5,6 +5,7 @@ using Azurite.Storehouse.Wrappers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Mvc.Expressions;
@@ -81,7 +82,7 @@ namespace Azurite.Storehouse.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Add(ProductW productW)
+        public async Task<ActionResult> Add(ProductW productW, IEnumerable<HttpPostedFileBase> photos)
         {
             if (!ModelState.IsValid)
             {
@@ -90,7 +91,15 @@ namespace Azurite.Storehouse.Controllers
                 return View(productW);
             }
 
-            worker.Add(productW);
+            var ticket = await worker.Add(productW, photos);
+
+            if (ticket.IsOK == false)
+            {
+                ModelState.AddModelError("Add Error!", ticket.Message);
+                ViewBag.CategoryId = new SelectList(worker.GetCategoriesDropDownItems(), "Value", "Text");
+                return View(productW);
+            }
+
             return Redirect(Url.Action<ProductsController>(c => c.Index()));
         }
 
@@ -105,7 +114,7 @@ namespace Azurite.Storehouse.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(ProductW productW)
+        public async Task<ActionResult> Edit(ProductW productW, IEnumerable<HttpPostedFileBase> photos, IEnumerable<Guid> imageIds)
         {
             if (!ModelState.IsValid)
             {
@@ -114,7 +123,15 @@ namespace Azurite.Storehouse.Controllers
                 return View(productW);
             }
 
-            worker.Edit(productW);
+            var ticket = await worker.Edit(productW, photos, imageIds);
+
+            if (ticket.IsOK == false)
+            {
+                ModelState.AddModelError("Edit Error!", ticket.Message);
+                ViewBag.CategoryId = new SelectList(worker.GetCategoriesDropDownItems(), "Value", "Text");
+                return View(productW);
+            }
+
             return Redirect(Url.Action<ProductsController>(c => c.Index()));
         }
 

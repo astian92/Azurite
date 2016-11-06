@@ -67,3 +67,41 @@ function generateAttributesUI(attributes) {
         .unobtrusive
         .parse("#addProductForm");
 }
+
+function imageSelected(finput) {
+    if (finput.files[0]) {
+        var adder = $('<div class="col-md-55">\
+                            <div class="image-btn-holder">\
+                                <label class="image-btn" title="Добави снимка">\
+                                    <input type="file" name="photos" class="hidden" accept=".jpg, .png, .jpeg" onchange="imageSelected(this)" />\
+                                    <i class="fa fa-plus plusIcon"></i>\
+                                    <img class="newImage" src="" />\
+                                </label>\
+                            </div>\
+                        </div>');
+
+        var holder = $(finput).parent().parent();
+        holder.removeClass('image-btn-holder');
+        holder.addClass('image-container');
+        var img = holder.find('img');
+        var label = holder.find('.plusIcon');
+        label.remove();
+        holder.append($('<span class="remove-file" title="Премахни" onclick="removeFile(this)">\
+                                    <i class="fa fa-times"></i>\
+                                </span>'));
+
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            $(img).attr('src', e.target.result);
+        };
+
+        reader.readAsDataURL(finput.files[0]);
+
+        $('.images-holder').append(adder);
+    }
+}
+
+function removeFile(span) {
+    $(span).parent().parent().remove();
+}

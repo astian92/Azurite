@@ -1,4 +1,0 @@
-Description(s) and Attributes MAY NOT NEED BE REQUIRED - FIXED
-Attributes are not OK. 
-Child Category should have all Parent category attributes PLUS its own
-What if we add a new attribute to an existing category ?? What happens to products then? - FIXED

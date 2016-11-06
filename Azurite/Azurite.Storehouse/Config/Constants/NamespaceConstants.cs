@@ -9,5 +9,6 @@ namespace Azurite.Storehouse.Config.Constants
     {
         public static string Config = "Azurite.Storehouse.Config";
         public static string Workers = "Azurite.Storehouse.Workers";
+        public static string Services = "Azurite.Storehouse.Services";
     }
 }

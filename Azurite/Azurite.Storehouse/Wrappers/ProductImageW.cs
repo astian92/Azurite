@@ -13,6 +13,6 @@ namespace Azurite.Storehouse.Wrappers
         public Guid ProductId { get; set; }
         public string ImagePath { get; set; }
 
-        public virtual ProductW Product { get; set; }
+        //public virtual ProductW Product { get; set; }
     }
 }

@@ -58,3 +58,58 @@
 .form-horizontal .control-label {
     margin-bottom: 5px;
 }
+
+.images-holder {
+    padding-top: 10px;
+}
+
+.image-container {
+    height: 120px;
+    overflow: hidden;
+    position: relative;
+}
+
+.image-container img {
+    width: 100%;
+    height: 120px;
+}
+
+.image-btn-holder {
+    height: 120px; 
+    text-align: center;
+}
+
+.image-btn-holder label {
+    font-size: 40px;
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(232, 232, 232);
+    padding-top: 30px;
+    cursor: pointer;
+    color: rgb(186, 186, 186);
+}
+
+.image-btn-holder label:hover {
+    color: gray;
+}
+
+.image-container:hover .remove-file { 
+    display: inline-block;
+}
+
+.remove-file {
+    display: none;
+    position: absolute;
+    width: 100%;
+    height: 120px;
+    background-color: rgba(146, 146, 146, 0.28);
+    top: 0px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.remove-file i.fa { 
+    font-size: 40px;
+    padding-top: 40px;
+}

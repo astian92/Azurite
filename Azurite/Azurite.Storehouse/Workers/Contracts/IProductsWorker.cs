@@ -4,6 +4,7 @@ using Azurite.Storehouse.Wrappers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 
 namespace Azurite.Storehouse.Workers.Contracts
@@ -14,8 +15,8 @@ namespace Azurite.Storehouse.Workers.Contracts
         List<DropDownItem> GetCategoriesDropDownItems();
         List<CategoryAttributeW> GetCategoryAttributes(Guid categoryId);
         ProductW Get(Guid productId);
-        void Add(ProductW productW);
-        void Edit(ProductW productW);
+        Task<ITicket> Add(ProductW productW, IEnumerable<HttpPostedFileBase> photos);
+        Task<ITicket> Edit(ProductW productW, IEnumerable<HttpPostedFileBase> photos, IEnumerable<Guid> imageIds);
         ITicket Delete(Guid Id);
     }
 }
