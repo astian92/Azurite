@@ -28,9 +28,9 @@ namespace Azurite.Store.Controllers
             return PartialView(products);
         }
 
-        public JsonResult AddProduct(Guid id)
+        public JsonResult AddProduct(Guid id, int quantity)
         {
-            worker.AddProduct(id);
+            worker.AddProduct(id, quantity);
             return Json("ok", JsonRequestBehavior.AllowGet);
         }
     }

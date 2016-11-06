@@ -5,10 +5,10 @@
     <div class="col-xs-12 products-list">
         @foreach (var item in Model)
         {
-            var imagePath = "";
+            var imagePath = "http://localhost:8696/cdn/files/";
             if (item.ProductImages.Count() > 0)
             {
-                imagePath = item.ProductImages.First().ImagePath;
+                imagePath += item.ProductImages.First().ImagePath;
             }
 
             <div class="col-md-4 col-sm-6">
@@ -37,7 +37,9 @@
                             }
                             else
                             {
-                                <span class="price-new">@item.Price</span>
+                                <span class="price-new">
+                                    <i class="fa fa-euro"></i>@item.Price
+                                </span>
                             }
                         </div>
                         <div class="cart-button">

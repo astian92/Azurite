@@ -31,6 +31,9 @@ namespace Azurite.Store.Wrappers
         public void CreateMappings(IMapperConfigurationExpression configuration)
         {
             configuration.CreateMap<Category, CategoryW>()
+                .ForMember(d => d.ImagePath, 
+                            conf => conf.MapFrom(s => s.Products.OrderBy(x => Guid.NewGuid())
+                                                    .FirstOrDefault().ProductImages.OrderBy(x => Guid.NewGuid()).FirstOrDefault().ImagePath))
                 .MaxDepth(2)
                 .ReverseMap();
         }
