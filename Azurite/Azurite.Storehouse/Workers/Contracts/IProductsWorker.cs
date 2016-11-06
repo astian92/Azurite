@@ -15,8 +15,8 @@ namespace Azurite.Storehouse.Workers.Contracts
         List<DropDownItem> GetCategoriesDropDownItems();
         List<CategoryAttributeW> GetCategoryAttributes(Guid categoryId);
         ProductW Get(Guid productId);
-        void Add(ProductW productW);
-        Task Edit(ProductW productW, IEnumerable<HttpPostedFileBase> photos, IEnumerable<Guid> imageIds);
+        Task<ITicket> Add(ProductW productW, IEnumerable<HttpPostedFileBase> photos);
+        Task<ITicket> Edit(ProductW productW, IEnumerable<HttpPostedFileBase> photos, IEnumerable<Guid> imageIds);
         ITicket Delete(Guid Id);
     }
 }

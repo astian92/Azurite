@@ -21,26 +21,13 @@ namespace Azurite.CDN.Workers.Implementations
             this.rep = repository;
         }
 
-        public void DeleteFile(Guid id)
-        {
-            var fileRecord = rep.Get(id);
-            File.Delete(ContentPath + @"\" + fileRecord.ImagePath);
-
-            rep.Remove(fileRecord.Id);
-            rep.Save();
-        }
-
         public void DeleteFiles(IEnumerable<Guid> ids)
         {
             foreach (var id in ids)
             {
                 var fileRecord = rep.Get(id);
                 File.Delete(ContentPath + @"\" + fileRecord.ImagePath);
-
-                rep.Remove(fileRecord.Id);
             }
-
-            rep.Save();
         }
     }
 }

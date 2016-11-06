@@ -21,21 +21,9 @@ namespace Azurite.Storehouse.Services.Implementations
             CdnAddress = WebConfigurationManager.AppSettings["CdnAddress"];
         }
 
-        public async Task<bool> SaveFile(Guid productId, HttpFile file)
+        public async Task<bool> SaveFiles(IEnumerable<HttpFile> files)
         {
-            var result = await httpService.PostAsync(new Uri(CdnAddress + "save"), new { productId = productId, file = file });
-            return result.IsSuccessStatusCode;
-        }
-
-        public async Task<bool> SaveFiles(Guid productId, IEnumerable<HttpFile> files)
-        {
-            var result = await httpService.PostAsync(new Uri(CdnAddress + "save"), new { productId = productId, files = files });
-            return result.IsSuccessStatusCode;
-        }
-
-        public async Task<bool> DeleteFile(Guid fileId)
-        {
-            var result = await httpService.PostAsync(new Uri(CdnAddress + "remove"), new SimpleId() { Id = fileId });
+            var result = await httpService.PostAsync(new Uri(CdnAddress + "save"), new { files = files });
             return result.IsSuccessStatusCode;
         }
 

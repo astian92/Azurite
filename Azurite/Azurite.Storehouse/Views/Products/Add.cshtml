@@ -17,7 +17,7 @@
                     <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
-                    @using (Html.BeginForm<ProductsController>(c => c.Add(), FormMethod.Post, null, new { Id = "addProductForm" }))
+                    @using (Html.BeginForm<ProductsController>(c => c.Add(), FormMethod.Post, null, new { Id = "addProductForm", enctype = "multipart/form-data" }))
                     {
                         @Html.AntiForgeryToken()
 
@@ -108,37 +108,30 @@
                             <div class="form-group">
                                 @Html.LabelFor(model => model.CategoryId, htmlAttributes: new { @class = "control-label col-md-2 col-sm-2 col-xs-12" })
                                 <div class="col-md-10 col-sm-10 col-xs-12">
-                                    @Html.DropDownList("CategoryId", null, htmlAttributes: new { @class = "form-control" })
+                                    @Html.DropDownListFor(m => m.CategoryId, null, new { @class = "form-control" })
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="control-label col-md-2 col-sm-2 col-xs-12">Атрибути:</label>
                                 <div class="col-md-10 col-sm-10 col-xs-12 attributes-holder">
+                                   
+                                </div>
+                            </div>
 
-                                    @*<div>
-                                        <div class="form-group">
-                                            <label class="control-label">Attribute Name</label>
+                            <div class="form-group images-formgroup">
+                                <label class="control-label col-md-2 col-sm-2 col-xs-12">Снимки:</label>
+                                <div class="col-md-10 col-sm-10 col-xs-12 images-holder">
+
+                                    <div class="col-md-55">
+                                        <div class="image-btn-holder">
+                                            <label class="image-btn" title="Добави снимка">
+                                                <input type="file" class="hidden" name="photos" accept=".jpg, .png, .jpeg" onchange="imageSelected(this)" />
+                                                <i class="fa fa-plus plusIcon"></i>
+                                                <img class="newImage" src="" />
+                                            </label>
                                         </div>
-                                        <input name="f1" type="text" class="form-control" placeholder="BG" 
-                                            data-val="true" data-val-required="Полето е задължително!" />
-                                        <span class="field-validation-valid text-danger" data-valmsg-for="f1" data-valmsg-replace="true"></span>
-                                        <input name="f2" type="text" class="form-control m-t-10" placeholder="EN" 
-                                            data-val="true" data-val-required="Полето е задължително!" />
-                                        <span class="field-validation-valid text-danger" data-valmsg-for="f2" data-valmsg-replace="true"></span>
                                     </div>
-                                    <div>
-                                        <div class="form-group">
-                                            <label class="control-label">Attribute Name</label>
-                                        </div>
-                                        <input name="f3" type="text" class="form-control" placeholder="BG"
-                                               data-val="true" data-val-required="Полето е задължително!" />
-                                        <span class="field-validation-valid text-danger" data-valmsg-for="f3" data-valmsg-replace="true"></span>
-                                        <input name="f4" type="text" class="form-control m-t-10" placeholder="EN"
-                                               data-val="true" data-val-required="Полето е задължително!" />
-                                        <span class="field-validation-valid text-danger" data-valmsg-for="f4" data-valmsg-replace="true"></span>
-                                    </div>*@
-
                                 </div>
                             </div>
 
@@ -159,7 +152,7 @@
                             <div class="form-group">
                                 <div class="col-md-offset-2 col-sm-offset-2 col-md-10">
                                     <a class="btn btn-default" href="@(Url.Action<ProductsController>(c => c.Index()))">Откажи</a>
-                                    <input type="submit" value="Създай" class="btn btn-success" />
+                                    <input type="submit" value="Запиши" class="btn btn-success" />
                                 </div>
                             </div>
                         </div>
@@ -179,7 +172,10 @@
 
     <script>
         initAdd();
+
     </script>
 }
+
+
 
 

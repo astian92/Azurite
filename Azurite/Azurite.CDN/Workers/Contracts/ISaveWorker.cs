@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using Azurite.CDN.Models.Http;
 
 namespace Azurite.CDN.Workers.Contracts
 {
-    public interface IRemoveWorker
+    public interface ISaveWorker
     {
-        void DeleteFiles(IEnumerable<Guid> ids);
+        void SaveFiles(IEnumerable<HttpFile> files);
     }
 }

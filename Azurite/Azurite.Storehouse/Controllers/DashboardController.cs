@@ -38,16 +38,16 @@ namespace Azurite.Storehouse.Controllers
             return Json("so?", JsonRequestBehavior.AllowGet);
         }
 
-        public async Task<ActionResult> TestDeleteFile()
-        {
-            var result = await cdnService.DeleteFile(Guid.Parse("30BE0B2B-E502-4575-AA44-FA679E342A5E"));
-            return Json(result, JsonRequestBehavior.AllowGet);
-        }
+        //public async Task<ActionResult> TestDeleteFile()
+        //{
+        //    //var result = await cdnService.DeleteFile(Guid.Parse("30BE0B2B-E502-4575-AA44-FA679E342A5E"));
+        //    //return Json(result, JsonRequestBehavior.AllowGet);
+        //}
 
-        public async Task<ActionResult> TestDeleteFiles()
-        {
-            var result = await cdnService.DeleteFiles(new Guid[] { Guid.NewGuid(), Guid.NewGuid() });
-            return Json(result, JsonRequestBehavior.AllowGet);
-        }
+        //public async Task<ActionResult> TestDeleteFiles()
+        //{
+        //    //var result = await cdnService.DeleteFiles(new Guid[] { Guid.NewGuid(), Guid.NewGuid() });
+        //    //return Json(result, JsonRequestBehavior.AllowGet);
+        //}
     }
 }

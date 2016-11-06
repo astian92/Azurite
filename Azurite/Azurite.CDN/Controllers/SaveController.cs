@@ -1,4 +1,6 @@
-﻿using Azurite.CDN.Models.Http;
+﻿using Azurite.CDN.Models;
+using Azurite.CDN.Models.Http;
+using Azurite.CDN.Workers.Contracts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,24 +13,19 @@ namespace Azurite.CDN.Controllers
 {
     public class SaveController : ApiController
     {
-        public async Task<HttpResponseMessage> Post(HttpFile file)
+        private readonly ISaveWorker worker;
+
+        public SaveController(ISaveWorker worker)
         {
-            //Response.AppendHeader("Access-Control-Allow-Origin", "*");
+            this.worker = worker;
+        }
+
+        [HttpPost]
+        public async Task<HttpResponseMessage> Post(ProductFiles data)
+        {
+            worker.SaveFiles(data.Files);
             HttpResponseMessage result = new HttpResponseMessage(HttpStatusCode.OK);
-            result.Content = new StringContent("asd");
-            result.Content.Headers.Add("Access-Control-Allow-Origin", "*");
-
             return result;
-        }
-
-        public async Task<HttpResponseMessage> Post(IEnumerable<HttpFile> files)
-        {
-            return null;
-        }
-
-        public string Get()
-        {
-            return "save controller";
         }
     }
 }

@@ -21,23 +21,11 @@ namespace Azurite.CDN.Controllers
             this.worker = worker;
         }
 
-        public string Get()
-        {
-            return "delete controller";
-        }
-
         [HttpPost]
-        public HttpResponseMessage Post([FromBody]SimpleId simpleId)
+        public HttpResponseMessage Post([FromBody]MultipleIds multipleIds)
         {
-            worker.DeleteFile(simpleId.Id);
+            worker.DeleteFiles(multipleIds.Ids);
             return new HttpResponseMessage(HttpStatusCode.OK);
         }
-
-        //[HttpPost]
-        //public HttpResponseMessage Post([FromBody]MultipleIds multipleIds)
-        //{
-        //    worker.DeleteFiles(multipleIds.Ids);
-        //    return new HttpResponseMessage(HttpStatusCode.OK);
-        //}
     }
 }
