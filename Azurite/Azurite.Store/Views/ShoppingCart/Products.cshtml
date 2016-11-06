@@ -1,0 +1,26 @@
+﻿@model IEnumerable<Azurite.Store.Wrappers.ProductW>
+
+
+<div class="col-md-8">
+    <h2 class="title">PRODUCTS</h2>
+    @foreach (var item in Model) {
+        <div class="cart-item">
+            <div class="col-sm-6">
+                <p>
+                    <img src="" alt="@item.Name" class="img-responsive thumbnail" />
+                </p>
+            </div>
+            <div class="col-sm-6">
+                <a href="/Products/Details/@item.Id"><p>@item.Name</p></a>
+                @Html.DisplayFor(modelItem => item.Price)
+                @Html.DisplayFor(modelItem => item.Discount)
+                @Html.DisplayFor(modelItem => item.Quantity)
+                <a class="btn btn-default">Remove</a>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    }
+</div>
+<div class="col-md-4">
+    <h2 class="title">SUBTOTAL</h2>
+</div>

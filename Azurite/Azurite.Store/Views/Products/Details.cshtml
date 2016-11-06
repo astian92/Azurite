@@ -1,4 +1,5 @@
 ﻿@model Azurite.Store.Wrappers.ProductW
+@using Azurite.Store.Common
 
 @{
     ViewBag.Title = "Details";
@@ -8,14 +9,14 @@
     <div class="row">
         <div class="col-xs-12">
             <div class="page-header">
-                <h3>@Model.Name</h3>
-                <input id="productId" name="productId" value="@Model.Id" type="hidden" />
-                <span class="devider"></span>
+                <!-- #region Breadcrumb -->
+                @Html.Raw(Html.BuildBreadcrumbNavigation())
+                <!-- #endregion -->
             </div>
         </div>
     </div>
-    <div class="row product-info">
-        <div class="col-sm-5 images-block">
+    <div class="product-info">
+        <div class="col-sm-6 images-block">
             <p>
                 <img src="" alt="@Model.Name" class="img-responsive thumbnail" />
             </p>
@@ -28,9 +29,12 @@
                 }
             </ul>
         </div>
-        <div class="col-sm-7 product-details">
-            <h2>@Model.Name</h2>
-            <hr />
+        <div class="col-sm-6 product-details">
+            <h2 class="product-name">@Model.Name</h2>
+            <div class="product-price">
+                <span class="fa fa-euro"></span>
+                <span class="price">@Model.Price</span>
+            </div>
             <ul class="list-unstyled">
                 <li>
                     <span>Model:</span>
@@ -52,13 +56,8 @@
                     }
                 </li>
             </ul>
-            <hr />
-            <div class="price">
-                <span class="price-head">Price:</span>
-                <span class="price-new">@Model.Price</span>
-            </div>
             <div class="cart-button">
-                <button type="button" class="btn btn-cart">
+                <button type="button" class="btn btn-cart" onclick="AddToCart('@Model.Id');">
                     Add to cart
                     <i class="fa fa-shopping-cart"></i>
                 </button>
@@ -73,5 +72,5 @@
         </div>
     </div>
 </div>
-
+<script src="~/Scripts/App/Products/products.js"></script>
     

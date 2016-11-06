@@ -16,6 +16,10 @@ var MagicStrings = (function () {
     var products = CreateController("Products");
     products.CreateAction("GetCategoryProducts");
 
+    var shoppingCart = CreateController("ShoppingCart");
+    shoppingCart.CreateAction("Products");
+    shoppingCart.CreateAction("AddProduct");
+
     return {
         CreateController: CreateController,
     }

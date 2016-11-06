@@ -159,6 +159,8 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Common\ApplicationHelpers.cs" />
+    <Compile Include="Common\StringExtensions.cs" />
     <Compile Include="Config\Constants\NamespaceConstants.cs" />
     <Compile Include="Config\InfrastructureDependencyConfig.cs" />
     <Compile Include="Config\NinjectConfig\NinjectDependencyResolver.cs" />
@@ -168,6 +170,7 @@
     <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
+    <Compile Include="Controllers\ShoppingCartController.cs" />
     <Compile Include="Data\Category.cs">
       <DependentUpon>StoreModel.tt</DependentUpon>
     </Compile>
@@ -218,8 +221,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Workers\Contracts\ICategoryWorker.cs" />
     <Compile Include="Workers\Contracts\IProductWorker.cs" />
+    <Compile Include="Workers\Contracts\IShoppingCartWorker.cs" />
     <Compile Include="Workers\Implementations\CategoryWorker.cs" />
     <Compile Include="Workers\Implementations\ProductWorker.cs" />
+    <Compile Include="Workers\Implementations\ShoppingCartWorker.cs" />
     <Compile Include="Wrappers\CategoryAttributeW.cs" />
     <Compile Include="Wrappers\CategoryW.cs" />
     <Compile Include="Wrappers\ProductAttributeW.cs" />
@@ -251,6 +256,7 @@
     <Content Include="Resources\radianna-gold-logo-md.png" />
     <Content Include="Resources\radianna-gold-logo-sm.png" />
     <Content Include="Resources\radianna-gold-logo-xs-white.png" />
+    <Content Include="Resources\radianna-gold-logo-xxs-black.png" />
     <Content Include="Resources\radianna-gold-logo-xxs-white.png" />
     <Content Include="Resources\radianna-gold-logo.png" />
     <Content Include="Resources\rg-slide1.jpg" />
@@ -259,6 +265,8 @@
     <Content Include="Scripts\App\Categories\categories.js" />
     <Content Include="Scripts\App\Categories\category_products.js" />
     <Content Include="Scripts\App\Helpers\MVC.js" />
+    <Content Include="Scripts\App\Products\products.js" />
+    <Content Include="Scripts\App\ShoppingCart\shopping_cart.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <EntityDeploy Include="Data\StoreModel.edmx">
@@ -320,6 +328,8 @@
     <Content Include="Views\Categories\GetCategoryAttr.cshtml" />
     <Content Include="Views\Products\GetCategoryProducts.cshtml" />
     <Content Include="Views\Products\Details.cshtml" />
+    <Content Include="Views\ShoppingCart\Index.cshtml" />
+    <Content Include="Views\ShoppingCart\Products.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
