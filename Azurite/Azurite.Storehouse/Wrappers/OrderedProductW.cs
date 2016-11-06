@@ -11,6 +11,7 @@ namespace Azurite.Storehouse.Wrappers
     {
         public Guid Id { get; set; }
         public Guid OrderId { get; set; }
+        public Guid ActualProductId { get; set; }
         public string ProductNumber { get; set; }
         public string ProductName { get; set; }
         public string ProductNameEN { get; set; }

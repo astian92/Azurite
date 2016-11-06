@@ -26,7 +26,6 @@ namespace Azurite.Storehouse.Data
         }
     
         public virtual DbSet<Customer> Customers { get; set; }
-        public virtual DbSet<OrderedProduct> OrderedProducts { get; set; }
         public virtual DbSet<ProductAttribute> ProductAttributes { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<OrderStatus> OrderStatuses { get; set; }
@@ -36,5 +35,6 @@ namespace Azurite.Storehouse.Data
         public virtual DbSet<Order> Orders { get; set; }
         public virtual DbSet<SecurityKey> SecurityKeys { get; set; }
         public virtual DbSet<ProductImage> ProductImages { get; set; }
+        public virtual DbSet<OrderedProduct> OrderedProducts { get; set; }
     }
 }

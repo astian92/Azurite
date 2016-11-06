@@ -1,4 +1,5 @@
-﻿using Azurite.Storehouse.Wrappers;
+﻿using Azurite.Infrastructure.ResponseHandling;
+using Azurite.Storehouse.Wrappers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,6 @@ namespace Azurite.Storehouse.Workers.Contracts
         IQueryable<OrderW> GetAll();
         IQueryable<OrderViewModel> GetAllVm();
         IList<OrderStatusW> GetOrderStatuses();
-        void ChangeStatus(Guid orderid, int statusId);
+        ITicket ChangeStatus(Guid orderid, int statusId);
     }
 }

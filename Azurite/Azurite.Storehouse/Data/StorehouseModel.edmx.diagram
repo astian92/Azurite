@@ -6,7 +6,6 @@
     <edmx:Diagrams>
       <Diagram DiagramId="61241de037e34a7fad47ad1c39f11f80" Name="Diagram1">
         <EntityTypeShape EntityType="MarketPlaceModel.Customer" Width="1.5" PointX="7.75" PointY="4.75" />
-        <EntityTypeShape EntityType="MarketPlaceModel.OrderedProduct" Width="1.5" PointX="12.25" PointY="1" />
         <EntityTypeShape EntityType="MarketPlaceModel.ProductAttribute" Width="1.5" PointX="5.25" PointY="5.5" />
         <EntityTypeShape EntityType="MarketPlaceModel.User" Width="1.5" PointX="0.75" PointY="9.75" />
         <EntityTypeShape EntityType="MarketPlaceModel.OrderStatus" Width="1.5" PointX="3.375" PointY="9.875" />
@@ -20,11 +19,12 @@
         <AssociationConnector Association="MarketPlaceModel.FK_ProductAttributes_Product" />
         <EntityTypeShape EntityType="MarketPlaceModel.Order" Width="1.5" PointX="9.625" PointY="1.125" />
         <AssociationConnector Association="MarketPlaceModel.FK_Orders_Customer" />
-        <AssociationConnector Association="MarketPlaceModel.FK_OrderedProducts_Orders" />
         <AssociationConnector Association="MarketPlaceModel.FK_Orders_OrderStatuses" />
         <EntityTypeShape EntityType="MarketPlaceModel.SecurityKey" Width="1.5" PointX="5.5" PointY="8.875" />
         <EntityTypeShape EntityType="MarketPlaceModel.ProductImage" Width="1.5" PointX="5.25" PointY="2" />
         <AssociationConnector Association="MarketPlaceModel.FK_ProductImages_Product" />
+        <EntityTypeShape EntityType="MarketPlaceModel.OrderedProduct" Width="1.5" PointX="11.875" PointY="0.875" />
+        <AssociationConnector Association="MarketPlaceModel.FK_OrderedProducts_Orders" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

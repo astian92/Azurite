@@ -87,7 +87,19 @@ namespace Azurite.Storehouse.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult ChangeStatus(Guid orderId, int statusId)
         {
-            worker.ChangeStatus(orderId, statusId);
+            var ticket = worker.ChangeStatus(orderId, statusId);
+
+            if (ticket.IsOK == false)
+            {
+                ModelState.AddModelError("QuantityError", ticket.Message);
+                //return Redirect(Url.Action<OrdersController>(c => c.Details(orderId)));
+
+                ViewBag.StatusId = new SelectList(GetOrderStatusesDropDownItems(), "Value", "Text");
+                var orderW = worker.Get(orderId);
+
+                return View("Details", orderW);
+            }
+
             return Redirect(Url.Action<OrdersController>(c => c.Index()));
         }
 
