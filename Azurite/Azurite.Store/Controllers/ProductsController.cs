@@ -10,10 +10,12 @@ namespace Azurite.Store.Controllers
     public class ProductsController : Controller
     {
         private IProductWorker worker;
+        private IShoppingCartWorker cartWorker;
 
-        public ProductsController(IProductWorker worker)
+        public ProductsController(IProductWorker worker, IShoppingCartWorker cartWorker)
         {
             this.worker = worker;
+            this.cartWorker = cartWorker;
         }
 
         public ActionResult Index()

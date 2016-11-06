@@ -8,6 +8,16 @@
     background:#fff;
 }
 
+a {
+    color:rgba(199, 181, 111, 1);
+    transition: color 0.4s ease 0s, background-color 0.4s ease 0s;
+}
+
+a:hover {
+    color:#2a2a2a;
+    text-decoration:none;
+}
+
 hr {
     margin:10px 0;
 }
@@ -73,8 +83,8 @@ hr {
 		}
 
 .header-top {
-    background:#2a2a2a;
-    color:#fff;
+    background:transparent;
+    color:#2a2a2a;
     padding-top:10px;
     /*margin-bottom:10px;*/
 }
@@ -82,7 +92,7 @@ hr {
 .header-top .btn-group .btn-link {
     padding-bottom:15px;
     padding-top:15px;
-    color:#fff;
+    color:#2a2a2a;
 }
 
     .header-top .btn-group .btn-link:hover,
@@ -96,13 +106,13 @@ hr {
     }
 
 .header-top a {
-    color:#fff;
+    color:#2a2a2a;
 }
 
 .header-top .nav li a:hover,
 .header-top .nav li a:focus,
 .header-top .nav li.open a {
-    background-color:#2a2a2a;
+    background-color:transparent;
     color:rgba(199, 181, 111, 1);
 }
 
@@ -169,6 +179,14 @@ hr {
     /*background:#1a7eb8;*/
 }
 
+.title {
+    font-size:22px;
+    font-weight:200;
+    line-height:1.25em;
+    margin:0 auto 15px;
+    letter-spacing:4px;
+}
+
 .btn {
     color:#fff;
     border-radius:0;
@@ -190,13 +208,17 @@ hr {
 }
 
 .panel-gold {
-  border-color: #eee;
+  border-color: transparent;
   border-radius:0;
 }
 .panel-gold > .panel-heading {
-  color: #fff;
-  background-color: rgba(199, 181, 111, 1);
-  border-color: rgba(199, 181, 111, 1);
+  color: #2a2a2a;
+  line-height:32px;
+  font-size:18px;
+  font-weight:200;
+  text-transform:uppercase;
+  /*background-color: rgba(199, 181, 111, 1);
+  border-color: rgba(199, 181, 111, 1);*/
   border-radius:0;
 }
 .panel-gold > .panel-heading + .panel-collapse > .panel-body {
@@ -337,7 +359,7 @@ hr {
     letter-spacing:0.1em;
     line-height:2em;
     font-size:28px;
-    font-weight:400;
+    font-weight:200;
 }
 
 .page-header .devider {
@@ -502,4 +524,39 @@ hr {
 	color:#fff;
 	background:rgba(199, 181, 111, 1);
 }
+
+/* -------------------  breadcrumb ---------------------*/
+
+.breadcrumb {
+    background-color:transparent;
+}
+
+.breadcrumb a {
+    color:rgba(199, 181, 111, 1);
+}
+
+.breadcrumb li:last-child a {
+    color:#2a2a2a;
+}
 				
+/* -------------------  breadcrumb ---------------------*/
+
+.product-name {
+    font-size:22px;
+    font-weight:200;
+    line-height:1.25em;
+    margin:0 auto 15px;
+    letter-spacing:4px;
+}
+
+.product-price {
+    margin-bottom:10px;
+}
+
+.product-price .price {
+    font-size:22px;
+}
+
+.product-price .fa {
+    font-size:18px;
+}
