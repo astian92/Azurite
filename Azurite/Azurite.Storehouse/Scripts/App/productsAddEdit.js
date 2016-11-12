@@ -84,9 +84,10 @@ function imageSelected(finput) {
         holder.removeClass('image-btn-holder');
         holder.addClass('image-container');
         var img = holder.find('img');
-        var label = holder.find('.plusIcon');
-        label.remove();
-        holder.append($('<span class="remove-file" title="Премахни" onclick="removeFile(this)">\
+        var icon = holder.find('.plusIcon');
+        icon.remove();
+        var label = holder.find('label.image-btn')[0].style.pointerEvents = 'none';
+        holder.prepend($('<span class="remove-file" title="Премахни" onclick="removeFile(this)">\
                                     <i class="fa fa-times"></i>\
                                 </span>'));
 

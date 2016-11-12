@@ -7,11 +7,6 @@ $(document).ready(function () {
         width: "100%"
     });
 
-    $('#cat-img').on('change', function () {
-        var fileName = this.files[0].name
-        $('.selected-file-name').text(fileName);
-    });
-
     $('#attribute-name-bg').on('input', function () {
         hideAttrValidationError();
     });
@@ -20,6 +15,25 @@ $(document).ready(function () {
         hideAttrValidationError();
     });
 
+    $('#ParentId').on('change', function () {
+        var val = $(this).val();
+        
+        if (val == '00000000-0000-0000-0000-000000000000') {
+            $('.images-formgroup').css('display', 'block');
+        }
+        else {
+            $('.images-formgroup').css('display', 'none');
+            clearSelection();
+        }
+    });
+
+    var parentVal = $('#ParentId').val();
+    if (parentVal != '00000000-0000-0000-0000-000000000000') {
+        $('.images-formgroup').css('display', 'none');
+        clearSelection();
+    }
+
+    
 });
 
 function createCategoryAttribute() {
@@ -98,4 +112,57 @@ function updateAttributeIndexes() {
         li.find('.attrNameBg').attr('name', 'CategoryAttributes[' + i + '].AttributeName');
         li.find('.attrNameEn').attr('name', 'CategoryAttributes[' + i + '].AttributeNameEN');
     }
+}
+
+function imageSelected(finput, event) {
+    if (finput.files[0]) {
+        var label = $(finput).parent();
+
+        var img = label.find('.cat-img');
+        var reader = new FileReader();
+        reader.onload = function (e) {
+            $(img).attr('src', e.target.result);
+        };
+        reader.readAsDataURL(finput.files[0]);
+
+        var icon = label.find('.plusIcon');
+        if (icon) {
+            icon.removeClass('plusIcon');
+            icon.removeClass('fa-plus');
+            icon.addClass('remIcon');
+            icon.addClass('fa-times');
+            icon.prop('title', 'Премахни снимка');
+
+            icon.on('click', function () {
+                clearSelection();
+                event.preventDefault();
+                $('input[name=deleted]').val('true');
+                return false;
+            })
+        }
+    }
+}
+
+function clearSelection() {
+    var finput = $('.cat-photo');
+    var img = $('.cat-img');
+    var icon = $('.editSpan i.fa');
+
+    $(img).attr('src', '');
+    $(finput).val('');
+
+    icon.addClass('plusIcon');
+    icon.addClass('fa-plus');
+    icon.removeClass('remIcon');
+    icon.removeClass('fa-times');
+    icon.prop('title', 'Добави снимка');
+
+    icon.off('click');
+}
+
+function onInitialEditX(event) {
+    clearSelection();
+    event.preventDefault();
+    $('input[name=deleted]').val('true');
+    return false;
 }

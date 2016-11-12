@@ -17,7 +17,7 @@
                     <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
-                    @using (Html.BeginForm<CategoriesController>(c => c.Edit(Guid.NewGuid()), FormMethod.Post))
+                    @using (Html.BeginForm<CategoriesController>(c => c.Edit(Guid.NewGuid()), FormMethod.Post, null, new { Id = "editCategoryForm", enctype = "multipart/form-data" }))
                     {
                         @Html.AntiForgeryToken()
                         @Html.HiddenFor(m => m.Id)
@@ -139,6 +139,38 @@
                                 </div>
                             </div>
 
+                            
+                            <div class="form-group images-formgroup">
+                                <label class="control-label col-md-2 col-sm-2 col-xs-12">Снимки:</label>
+                                <div class="col-md-10 col-sm-10 col-xs-12 images-holder">
+
+                                    <div class="col-md-55">
+                                        <div class="image-btn-holder image-container">
+                                            <label class="image-btn">
+                                                <input type="file" class="hidden cat-photo" name="photo" accept=".jpg, .png, .jpeg" onchange="imageSelected(this, event)" />
+                                                <input type="hidden" name="deleted" value="false" />
+                                                <span class="editSpan">
+                                                    @{ 
+                                                        string source = "";
+                                                    }
+                                                    @if (string.IsNullOrEmpty(Model.ImagePath))
+                                                    {
+                                                        <i class="fa fa-plus plusIcon" title="Добави снимка"></i>
+                                                    }
+                                                    else
+                                                    {
+                                                        <i class="fa fa-times remIcon" title="Премахни снимка"></i>
+                                                        source = @ServicePaths.Files + Model.ImagePath;
+                                                    }
+                                                </span>
+                                                <img class="cat-img new-image" src="@source" />
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
                             <div class="ln_solid"></div>
 
                             <div class="form-group">
@@ -173,6 +205,14 @@
     <script src="~/Content/iCheck/icheck.min.js"></script>
     <script src="~/Content/select2/dist/js/select2.full.min.js"></script>
     <script src="~/Scripts/App/categoryAddEdit.js"></script>
+
+    @if (!string.IsNullOrEmpty(Model.ImagePath))
+    {
+        <script>
+            var icon = $('.editSpan i.fa');
+            icon.on('click', function (e) {
+                onInitialEditX(e);
+            });
+        </script>
+    }
 }
-
-
