@@ -4,6 +4,7 @@ using Azurite.Storehouse.Wrappers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 
 namespace Azurite.Storehouse.Workers.Contracts
@@ -13,8 +14,8 @@ namespace Azurite.Storehouse.Workers.Contracts
         CategoryW Get(Guid Id);
         IQueryable<CategoryW> GetAll();
         IQueryable<CategoryIndexViewModel> GetAllWithoutParents();
-        void Add(CategoryW categoryW);
-        void Edit(CategoryW categoryW);
+        Task<ITicket> Add(CategoryW categoryW, HttpPostedFileBase photo);
+        Task<ITicket> Edit(CategoryW categoryW, HttpPostedFileBase photo, bool deleted);
         ITicket Delete(Guid Id);
     }
 }

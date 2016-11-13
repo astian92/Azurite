@@ -16,6 +16,10 @@ using System.Data.SqlClient;
 using System.Data.Entity.Infrastructure;
 using System.Data.Entity.Validation;
 using Azurite.Storehouse.Models.Helpers;
+using Azurite.Storehouse.Services.Contracts;
+using System.Threading.Tasks;
+using Azurite.Storehouse.Config.Constants;
+using Azurite.Storehouse.Models.Http;
 
 namespace Azurite.Storehouse.Workers.Implementations
 {
@@ -23,11 +27,13 @@ namespace Azurite.Storehouse.Workers.Implementations
     {
         private readonly IRepository<Category> rep;
         private readonly IRepository<CategoryAttribute> attrRep;
+        private readonly ICdnService cdnService;
 
-        public CategoriesWorker(IRepository<Category> rep, IRepository<CategoryAttribute> attrRep)
+        public CategoriesWorker(IRepository<Category> rep, IRepository<CategoryAttribute> attrRep, ICdnService cdnService)
         {
             this.rep = rep;
             this.attrRep = attrRep;
+            this.cdnService = cdnService;
         }
 
         public CategoryW Get(Guid Id)
@@ -68,7 +74,7 @@ namespace Azurite.Storehouse.Workers.Implementations
             return wrapped.AsQueryable();
         }
 
-        public void Add(CategoryW categoryW)
+        public async Task<ITicket> Add(CategoryW categoryW, HttpPostedFileBase photo)
         {
             var category = Mapper.Map<Category>(categoryW);
             category.Id = Guid.NewGuid();
@@ -78,11 +84,42 @@ namespace Azurite.Storehouse.Workers.Implementations
                 category.ParentId = null;
             }
 
+            ITicket ticket = null;
+            if (photo != null)
+            {
+                category.ImagePath = ImportantVariables.CategoriesPrefix + photo.FileName;
+
+                List<HttpFile> files = new List<HttpFile>();
+                HttpFile file = new HttpFile();
+                file.Filename = category.ImagePath;
+                file.Content = new byte[photo.ContentLength];
+                await photo.InputStream.ReadAsync(file.Content, 0, photo.ContentLength);
+
+                files.Add(file);
+
+                if (files.Count > 0)
+                {
+                    bool success = await cdnService.SaveFiles(files);
+
+                    if (success == false)
+                    {
+                        ticket = new Ticket(false, "Записването на изображения се провали!");
+                    }
+                }
+            }
+
             rep.Add(category);
             rep.Save();
+
+            if (ticket == null)
+            {
+                ticket = new Ticket(true);
+            }
+
+            return ticket;
         }
 
-        public void Edit(CategoryW categoryW)
+        public async Task<ITicket> Edit(CategoryW categoryW, HttpPostedFileBase photo, bool deleted)
         {
             var category = rep.Get(categoryW.Id);
             
@@ -99,7 +136,6 @@ namespace Azurite.Storehouse.Workers.Implementations
             {
                 category.ParentId = null;
             }
-            //!! REMEMBER - when we decide how to proceed with files, remember to update the file as well!
 
             //attrRep.Save();
             //2.remove deleted items
@@ -122,7 +158,41 @@ namespace Azurite.Storehouse.Workers.Implementations
                 category.CategoryAttributes.Add(catAttr);
             }
 
+            if (deleted == true)
+            {
+                //implement a way to delete the existing file
+                //cdnService.DeleteFiles()
+
+                category.ImagePath = null;
+            }
+
+            ITicket ticket = null;
+            if (photo != null)
+            {
+                category.ImagePath = ImportantVariables.CategoriesPrefix + photo.FileName;
+
+                List<HttpFile> files = new List<HttpFile>();
+                HttpFile file = new HttpFile();
+                file.Filename = category.ImagePath;
+                file.Content = new byte[photo.ContentLength];
+                await photo.InputStream.ReadAsync(file.Content, 0, photo.ContentLength);
+
+                files.Add(file);
+
+                if (files.Count > 0)
+                {
+                    bool success = await cdnService.SaveFiles(files);
+
+                    if (success == false)
+                    {
+                        ticket = new Ticket(false, "Записването на изображения се провали!");
+                    }
+                }
+            }
+
             rep.Save();
+
+            return new Ticket(true);
         }
 
         public ITicket Delete(Guid Id)

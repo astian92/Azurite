@@ -12,6 +12,7 @@ using System.Web.Http;
 
 namespace Azurite.CDN.Controllers
 {
+    [System.Web.Mvc.SessionState(System.Web.SessionState.SessionStateBehavior.ReadOnly)]
     public class RemoveController : ApiController
     {
         private readonly IRemoveWorker worker;

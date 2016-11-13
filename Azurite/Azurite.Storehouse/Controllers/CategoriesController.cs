@@ -7,6 +7,7 @@ using Azurite.Storehouse.Wrappers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Mvc.Expressions;
@@ -44,7 +45,7 @@ namespace Azurite.Storehouse.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Add(CategoryW categoryW)
+        public async Task<ActionResult> Add(CategoryW categoryW, HttpPostedFileBase photo)
         {
             if (!ModelState.IsValid)
             {
@@ -60,7 +61,15 @@ namespace Azurite.Storehouse.Controllers
             //    return View(categoryW);
             //}
 
-            worker.Add(categoryW);
+            var ticket = await worker.Add(categoryW, photo);
+
+            if (ticket.IsOK == false)
+            {
+                ModelState.AddModelError("Add Error!", ticket.Message);
+                ViewBag.ParentId = new SelectList(GetCategoriesDropDownItems(), "Value", "Text");
+                return View(categoryW);
+            }
+
             return Redirect(Url.Action<CategoriesController>(c => c.Index()));
         }
 
@@ -75,7 +84,7 @@ namespace Azurite.Storehouse.Controllers
         
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(CategoryW categoryW)
+        public async Task<ActionResult> Edit(CategoryW categoryW, HttpPostedFileBase photo, bool deleted)
         {
             if (!ModelState.IsValid)
             {
@@ -91,7 +100,15 @@ namespace Azurite.Storehouse.Controllers
             //    return View(categoryW);
             //}
 
-            worker.Edit(categoryW);
+            var ticket = await worker.Edit(categoryW, photo, deleted);
+
+            if (ticket.IsOK == false)
+            {
+                ModelState.AddModelError("Add Error!", ticket.Message);
+                ViewBag.ParentId = new SelectList(GetCategoriesDropDownItems(), "Value", "Text");
+                return View(categoryW);
+            }
+
             return Redirect(Url.Action<CategoriesController>(c => c.Index()));
         }
 

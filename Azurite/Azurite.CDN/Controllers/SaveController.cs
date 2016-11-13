@@ -11,6 +11,7 @@ using System.Web.Http;
 
 namespace Azurite.CDN.Controllers
 {
+    [System.Web.Mvc.SessionState(System.Web.SessionState.SessionStateBehavior.ReadOnly)]
     public class SaveController : ApiController
     {
         private readonly ISaveWorker worker;
