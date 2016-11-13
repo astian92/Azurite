@@ -330,6 +330,8 @@
     <Content Include="Views\Products\Details.cshtml" />
     <Content Include="Views\ShoppingCart\Index.cshtml" />
     <Content Include="Views\ShoppingCart\Products.cshtml" />
+    <Content Include="Views\Categories\GetCategoryTree.cshtml" />
+    <Content Include="Views\Products\GetPromoProducts.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

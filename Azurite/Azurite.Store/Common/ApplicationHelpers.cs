@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Azurite.Store.Wrappers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -38,6 +39,42 @@ namespace Azurite.Store.Common
             }
 
             return breadcrumb.Append("</div>").ToString();
+        }
+         
+        public static MvcHtmlString CategoryTree(this HtmlHelper html, Guid activeCategory, IEnumerable<CategoryW> allCategories, IEnumerable<CategoryW> categories)
+        {
+            string htmlOutput = string.Empty;
+
+            if (categories.Count() > 0)
+            {
+                if(categories.Any(x => x.ParentId != null) && !categories.Any(x => x.Id == activeCategory))
+                {
+                    htmlOutput += "<ul class=\"sub-nav collapse\">";
+                }
+                else
+                {
+                    htmlOutput += "<ul>";
+                }
+
+                foreach (var category in categories)
+                {
+                    if(category.Id == activeCategory)
+                    {
+                        htmlOutput += "<li class=\"active\">";
+                    }
+                    else
+                    {
+                        htmlOutput += "<li>";
+                    }
+
+                    htmlOutput += "<a href=\"/Categories/Index/" + category.Id + "\">" + category.Name + "</a>";
+                    htmlOutput += html.CategoryTree(activeCategory, allCategories, allCategories.Where(x => x.ParentId == category.Id));
+                    htmlOutput += "</li>";
+                }
+                htmlOutput += "</ul>";
+            }
+
+            return MvcHtmlString.Create(htmlOutput);
         }
     }
 }

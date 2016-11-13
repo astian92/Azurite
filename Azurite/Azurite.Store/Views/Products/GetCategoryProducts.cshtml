@@ -10,8 +10,12 @@
             {
                 imagePath += item.ProductImages.First().ImagePath;
             }
+            else
+            {
+                imagePath = "";
+            }
 
-            <div class="col-md-4 col-sm-6">
+            <div class="col-md-3 col-sm-6">
                 <div class="product-col">
                     <div class="image">
                         <a href="/Products/Details/@item.Id">

@@ -9,10 +9,12 @@
 function loadSubCategories(categoryId) {
     $('#subCategoriesContainer').html('');
     $.ajax({
-        url: MVC.Categories.GetSubCategoriesFull + '?categoryId=' + categoryId,
+        url: MVC.Categories.GetCategoryTreeFull + '?categoryId=' + categoryId,
         dataType: 'html',
         success: function (data) {
             $('#subCategoriesContainer').html(data);
+            $('.active').parents('ul').removeClass('collapse');
+            $('.active').parents('li').addClass('parent');
         }
     });
 }

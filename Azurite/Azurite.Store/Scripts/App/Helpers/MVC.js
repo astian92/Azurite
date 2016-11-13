@@ -12,9 +12,11 @@ var MagicStrings = (function () {
     categories.CreateAction("GetBaseCategories");
     categories.CreateAction("GetSubCategories");
     categories.CreateAction("GetCategoryAttr");
+    categories.CreateAction("GetCategoryTree");
 
     var products = CreateController("Products");
     products.CreateAction("GetCategoryProducts");
+    products.CreateAction("GetPromoProducts");
 
     var shoppingCart = CreateController("ShoppingCart");
     shoppingCart.CreateAction("Products");

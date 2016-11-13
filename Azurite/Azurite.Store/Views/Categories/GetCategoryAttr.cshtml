@@ -2,15 +2,17 @@
 
 @foreach (var attr in Model)
 {
-    <div class="panel panel-gold">
+    <div class="panel-gold">
         <div class="panel-heading">@attr.AttributeName</div>
-        <div class="panel-body">
-            @foreach (var productAttr in attr.ProductAttributes)
-            {
-                <div>
-                    <a href="#@productAttr.Id">@productAttr.Value</a>
-                </div>
-            }
+        <div class="side-nav">
+            <ul>
+                @foreach (var productAttr in attr.ProductAttributes)
+                {
+                    <li>
+                        <a href="#@productAttr.Id">@productAttr.Value</a>
+                    </li>
+                }
+            </ul>
         </div>
     </div>
 }

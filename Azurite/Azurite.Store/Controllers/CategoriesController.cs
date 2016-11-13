@@ -35,6 +35,14 @@ namespace Azurite.Store.Controllers
             return PartialView(categories);
         }
 
+        public ActionResult GetCategoryTree(Guid categoryId)
+        {
+            var categories = worker.GetAll();
+
+            ViewBag.categoryId = categoryId;
+            return PartialView(categories);
+        }
+
         public ActionResult GetCategoryAttr(Guid categoryId)
         {
             var categoryAttr = worker.GetCategoryAttr(categoryId);

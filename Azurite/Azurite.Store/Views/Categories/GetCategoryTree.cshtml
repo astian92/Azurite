@@ -1,0 +1,8 @@
+﻿@model IEnumerable<Azurite.Store.Wrappers.CategoryW>
+@using Azurite.Store.Common;
+
+@{ 
+    ViewBag.Title = "Category Tree";
+}
+
+@Html.CategoryTree((Guid)ViewBag.categoryId, Model, Model.Where(x => x.ParentId == null))

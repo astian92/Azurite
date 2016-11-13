@@ -26,7 +26,7 @@ namespace Azurite.Store.Workers.Implementations
             var products = rep.GetAll();
             var wrapped = new List<ProductW>();
 
-            foreach (var product in products.Where(x => x.CategoryId == categoryId))
+            foreach (var product in products.Where(x => x.Active && x.CategoryId == categoryId))
             {
                 var mapped = Mapper.Map<ProductW>(product);
                 wrapped.Add(mapped);
@@ -51,7 +51,7 @@ namespace Azurite.Store.Workers.Implementations
             foreach (var subCategory in subCategories)
             {
                 var products = rep.GetAll();
-                foreach (var product in products.Where(x => x.CategoryId == subCategory.Id))
+                foreach (var product in products.Where(x => x.Active && x.CategoryId == subCategory.Id))
                 {
                     var mapped = Mapper.Map<ProductW>(product);
                     wrapped.Add(mapped);
@@ -84,6 +84,20 @@ namespace Azurite.Store.Workers.Implementations
             var product = rep.Get(productId);
             var productW = Mapper.Map<ProductW>(product);
             return productW;
+        }
+
+        public IQueryable<ProductW> GetPromoProducts()
+        {
+            var products = rep.GetAll();
+
+            var wrapped = new List<ProductW>();
+            foreach (var product in products.Where(x => x.Active && x.Discount > 0).OrderBy(x => Guid.NewGuid()).Take(4))
+            {
+                var mapped = Mapper.Map<ProductW>(product);
+                wrapped.Add(mapped);
+            }
+
+            return wrapped.AsQueryable();
         }
     }
 }
