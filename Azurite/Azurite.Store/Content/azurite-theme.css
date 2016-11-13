@@ -248,6 +248,10 @@ hr {
     max-height:580px;
 }
 
+.main-slide .carousel-inner>.item img {
+    min-height:280px;
+}
+
 .main-slide .carousel-control .fa {
   position: absolute;
   top: 50%;
@@ -307,7 +311,7 @@ hr {
 }
 
 .main-slide .carousel-caption {
-    top:5%;
+    top:2%;
 }
 
 @media screen and (min-width: 992px) {
@@ -316,15 +320,15 @@ hr {
     }
 }
 
-@media screen and (min-width: 992px) {
+/*@media screen and (min-width: 992px) {
     .main-slide .carousel-caption {
         top:30%;
     }
-}
+}*/
 
 @media screen and (min-width: 1200px) {
     .main-slide .carousel-caption {
-        top:35%;
+        top:28%;
     }
 }
 
@@ -460,10 +464,37 @@ hr {
     color: #47bac1;
 }
 
+.thumbnail {
+    border:none;
+}
+
+.thumbnail .caption > h4 {
+    text-align:center;
+    font-weight:100;
+    line-height:1.1em;
+    letter-spacing:2px;
+}
+
+.thumbnail .caption > h4:hover {
+    color:rgba(199, 181, 111, 1);
+    text-decoration:none;
+}
+
 .thumbnail img {
     max-width:100%;
     display:block;
     margin:auto;
+    height:300px;
+    padding:0px 10px;
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -ms-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+}
+
+.thumbnail img:hover {
+    opacity:0.4;
 }
 
 /* ---------------- Product List ------------------ */

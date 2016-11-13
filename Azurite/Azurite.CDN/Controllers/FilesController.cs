@@ -47,8 +47,5 @@ namespace Azurite.CDN.Controllers
 
             return result;
         }
-
-        
-
     }
 }
