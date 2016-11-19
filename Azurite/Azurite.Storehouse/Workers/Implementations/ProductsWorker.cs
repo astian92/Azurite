@@ -28,7 +28,7 @@ namespace Azurite.Storehouse.Workers.Implementations
         private readonly IRepository<ProductImage> prodImgRep;
         private readonly ICdnService cdnService;
 
-        public ProductsWorker(IRepository<Product> rep, IRepository<Category> catRep, 
+        public ProductsWorker(IRepository<Product> rep, IRepository<Category> catRep,
             IRepository<CategoryAttribute> catAttrRep, IRepository<ProductAttribute> prodAttrRep,
              IRepository<ProductImage> prodImgRep, ICdnService service)
         {
@@ -85,8 +85,8 @@ namespace Azurite.Storehouse.Workers.Implementations
             var category = catRep.Get(categoryId);
 
             var attributes = new List<CategoryAttributeW>();
-            
-            while(category != null)
+
+            while (category != null)
             {
                 foreach (var categoryAttribute in category.CategoryAttributes)
                 {
@@ -96,10 +96,10 @@ namespace Azurite.Storehouse.Workers.Implementations
 
                 category = category.Category1;
             }
-            
+
             return attributes;
         }
-        
+
         public async Task<ITicket> Add(ProductW productW, IEnumerable<HttpPostedFileBase> photos)
         {
             var product = Mapper.Map<Product>(productW);
@@ -152,107 +152,135 @@ namespace Azurite.Storehouse.Workers.Implementations
 
         public async Task<ITicket> Edit(ProductW productW, IEnumerable<HttpPostedFileBase> photos, IEnumerable<Guid> imageIds)
         {
-            var product = rep.Get(productW.Id);
-
-            //1 Update all properties
-            product.CategoryId = productW.CategoryId;
-            product.Number = productW.Number;
-            product.Name = productW.Name;
-            product.NameEN = productW.NameEN;
-            product.Model = productW.Model;
-            product.Description = productW.Description;
-            product.DescriptionEN = productW.DescriptionEN;
-            product.Price = productW.Price;
-            product.Discount = productW.Discount;
-            product.Quantity = productW.Quantity;
-            product.Active = productW.Active;
-
-            foreach (var attribute in productW.ProductAttributes)
+            try
             {
-                if (product.ProductAttributes.Any(pa => pa.Id == attribute.Id))
+                var product = rep.Get(productW.Id);
+
+                //1 Update all properties
+                product.CategoryId = productW.CategoryId;
+                product.Number = productW.Number;
+                product.Name = productW.Name;
+                product.NameEN = productW.NameEN;
+                product.Model = productW.Model;
+                product.Description = productW.Description;
+                product.DescriptionEN = productW.DescriptionEN;
+                product.Price = productW.Price;
+                product.Discount = productW.Discount;
+                product.Quantity = productW.Quantity;
+                product.Active = productW.Active;
+
+                foreach (var attribute in productW.ProductAttributes)
                 {
-                    var existing = product.ProductAttributes.Single(pa => pa.Id == attribute.Id);
-                    existing.Value = attribute.Value;
-                    existing.ValueEN = attribute.ValueEN;
+                    if (product.ProductAttributes.Any(pa => pa.Id == attribute.Id))
+                    {
+                        var existing = product.ProductAttributes.Single(pa => pa.Id == attribute.Id);
+                        existing.Value = attribute.Value;
+                        existing.ValueEN = attribute.ValueEN;
+                    }
+                    else
+                    {
+                        var mapped = Mapper.Map<ProductAttribute>(attribute);
+                        mapped.Id = Guid.NewGuid();
+                        mapped.ProductId = product.Id;
+                        product.ProductAttributes.Add(mapped);
+                    }
                 }
-                else
+
+                //then delete all that are not in new product
+                var productAttributes = product.ProductAttributes.ToList();
+                var oldAttributes = productAttributes.Where(pa => !productW.ProductAttributes.Any(pwa => pwa.AttributeId == pa.AttributeId));
+                prodAttrRep.RemoveRange(oldAttributes);
+
+                //now handle files ..
+                ITicket ticket = null;
+                //first get the ids of the files that remain and delete those that are no longer in the list
+                if (imageIds == null) //when there are NONE left we need an empty list
                 {
-                    var mapped = Mapper.Map<ProductAttribute>(attribute);
-                    mapped.Id = Guid.NewGuid();
-                    mapped.ProductId = product.Id;
-                    product.ProductAttributes.Add(mapped);
+                    imageIds = new List<Guid>();
                 }
-            }
+                var removedFiles = product.ProductImages.Where(i => !imageIds.Any(imd => imd == i.Id)).ToList();
+                prodImgRep.RemoveRange(removedFiles);
 
-            //then delete all that are not in new product
-            var productAttributes = product.ProductAttributes.ToList();
-            var oldAttributes = productAttributes.Where(pa => !productW.ProductAttributes.Any(pwa => pwa.AttributeId == pa.AttributeId));
-            prodAttrRep.RemoveRange(oldAttributes);
-
-            //now handle files ..
-            ITicket ticket = null;
-            //first get the ids of the files that remain and delete those that are no longer in the list
-            if (imageIds == null) //when there are NONE left we need an empty list
-            {
-                imageIds = new List<Guid>();
-            }
-            var removedFiles = product.ProductImages.Where(i => !imageIds.Any(imd => imd == i.Id)).ToList();
-            prodImgRep.RemoveRange(removedFiles);
-
-            //if there were files that were removed then send their ids to the CDN for removal
-            if (removedFiles.Count() > 0)
-            {
-                bool success = await cdnService.DeleteFiles(removedFiles.Select(f => f.Id));
-
-                if (success == false)
+                //if there were files that were removed then send their ids to the CDN for removal
+                if (removedFiles.Count() > 0)
                 {
-                    ticket = new Ticket(false, "Изтриването на изображения се провали!");
+                    bool success = await cdnService.DeleteFiles(removedFiles.Select(f => f.Id));
+
+                    if (success == false)
+                    {
+                        ticket = new Ticket(false, "Изтриването на изображения се провали!");
+                    }
                 }
-            }
 
-            //now, lets save the new files. First we need to prepare them
-            List<HttpFile> files = new List<HttpFile>();
-            foreach (var photo in photos.Where(p => p != null))
-            {
-                var productImage = new ProductImage();
-                productImage.Id = Guid.NewGuid();
-                productImage.ImagePath = ImportantVariables.ProductsPrefix + photo.FileName;
-
-                product.ProductImages.Add(productImage);
-
-                HttpFile file = new HttpFile();
-                file.Filename = productImage.ImagePath;
-                file.Content = new byte[photo.ContentLength];
-                await photo.InputStream.ReadAsync(file.Content, 0, photo.ContentLength);
-
-                files.Add(file);
-            }
-
-            //then send them to the service:
-            if (files.Count > 0)
-            {
-                bool success = await cdnService.SaveFiles(files);
-
-                if (success == false)
+                //now, lets save the new files. First we need to prepare them
+                List<HttpFile> files = new List<HttpFile>();
+                foreach (var photo in photos.Where(p => p != null))
                 {
-                    ticket = new Ticket(false, "Записването на изображения се провали!");
+                    var productImage = new ProductImage();
+                    productImage.Id = Guid.NewGuid();
+                    productImage.ImagePath = ImportantVariables.ProductsPrefix + photo.FileName;
+
+                    product.ProductImages.Add(productImage);
+
+                    HttpFile file = new HttpFile();
+                    file.Filename = productImage.ImagePath;
+                    file.Content = new byte[photo.ContentLength];
+                    await photo.InputStream.ReadAsync(file.Content, 0, photo.ContentLength);
+
+                    files.Add(file);
                 }
+
+                //then send them to the service:
+                if (files.Count > 0)
+                {
+                    bool success = await cdnService.SaveFiles(files);
+
+                    if (success == false)
+                    {
+                        ticket = new Ticket(false, "Записването на изображения се провали!");
+                    }
+                }
+
+                rep.Save();
+
+                if (ticket == null)
+                {
+                    ticket = new Ticket(true);
+                }
+
+                return ticket;
             }
-
-            rep.Save();
-
-            if (ticket == null)
+            catch (DbUpdateException sqlExc)
             {
-                ticket = new Ticket(true);
+                ElmahHelper.Handle(sqlExc);
+                return new Ticket(false, "Има продукти с данни за изтрития атрибут(и)");
             }
-
-            return ticket;
+            catch (Exception e)
+            {
+                string type = e.GetType().Name;
+                ElmahHelper.Handle(e);
+                return new Ticket(false, "Възникна неочаквана грешка!");
+            }
         }
 
-        public ITicket Delete(Guid Id)
+        public async Task<ITicket> Delete(Guid Id)
         {
             try
             {
+                var product = rep.Get(Id);
+                var imageIds = product.ProductImages.Select(p => p.Id).ToList();
+                prodImgRep.RemoveRange(product.ProductImages);
+
+                //send images for deletion
+                var result = await cdnService.DeleteFiles(imageIds);
+
+                if (result == false)
+                {
+                    //silent fail
+                    var exc = new Exception("The images for product: product: " + product.Number + "were not deleted correctly!");
+                    ElmahHelper.Handle(exc);
+                }
+
                 rep.Remove(Id);
                 rep.Save();
             }

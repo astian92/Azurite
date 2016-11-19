@@ -106,8 +106,12 @@ function updateAttributeIndexes() {
 
     for (var i = 0; i < attributes.length; i++) {
         var li = $(attributes[i]);
-        li.find('.iCheck_cb').attr('name', 'CategoryAttributes[' + i + '].ActiveFilter')
-        li.find('.attr-id').attr('name', 'CategoryAttributes[' + i + '].ActiveFilter')
+        var cb = li.find('.iCheck_cb');
+        cb.attr('name', 'CategoryAttributes[' + i + '].ActiveFilter');
+        var htmlGeneratedInput = cb.parent().parent().find('input[type=hidden]');
+        htmlGeneratedInput.attr('name', 'CategoryAttributes[' + i + '].ActiveFilter');
+
+        li.find('.attr-id').attr('name', 'CategoryAttributes[' + i + '].ActiveFilter');
         li.find('.attrId').attr('name', 'CategoryAttributes[' + i + '].Id');
         li.find('.attrNameBg').attr('name', 'CategoryAttributes[' + i + '].AttributeName');
         li.find('.attrNameEn').attr('name', 'CategoryAttributes[' + i + '].AttributeNameEN');
