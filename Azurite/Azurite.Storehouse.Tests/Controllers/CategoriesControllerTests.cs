@@ -92,11 +92,11 @@ namespace Azurite.Storehouse.Tests.Controllers
         }
 
         [TestMethod]
-        public void AddPostTestNoModel()
+        public async Task AddPostTestNoModel()
         {
             //force the model state to have an error
             this.controller.ModelState.AddModelError("ErrorOld", "EmptyModel");
-            var actual = this.controller.Add(null);
+            var actual = await this.controller.Add(null, null);
 
             //assert model state has an additional error
             int errors = 0;
@@ -116,10 +116,10 @@ namespace Azurite.Storehouse.Tests.Controllers
         }
 
         [TestMethod]
-        public void AddPostTestWithNoCategoryAttributes()
+        public async Task AddPostTestWithNoCategoryAttributes()
         {
             var model = new CategoryW() { Name = "NameN" };
-            var actual = this.controller.Add(model);
+            var actual = this.controller.Add(model, null);
 
             int errors = 0;
             foreach (var state in this.controller.ModelState.Values)
@@ -133,20 +133,20 @@ namespace Azurite.Storehouse.Tests.Controllers
             Assert.IsNotNull(actual);
             Assert.IsInstanceOfType(actual, typeof(ViewResult));
 
-            var view = actual as ViewResult;
+            var view = await actual as ViewResult;
             AssertViewHasCategoryNames(view);
         }
 
         [TestMethod]
-        public void AddPostTestWithValidModel()
+        public async Task AddPostTestWithValidModel()
         {
             var model = new CategoryW() { Name = "NameN", CategoryAttributes = new List<CategoryAttributeW>()
             {
                 new CategoryAttributeW() { AttributeName = "AN" }
             }};
-            var actual = this.controller.Add(model);
+            var actual = await this.controller.Add(model, null);
 
-            workerMock.Verify(m => m.Add(model));
+            workerMock.Verify(m => m.Add(model, null));
 
             Assert.IsNotNull(actual);
             Assert.IsInstanceOfType(actual, typeof(RedirectResult));
@@ -167,11 +167,11 @@ namespace Azurite.Storehouse.Tests.Controllers
         }
 
         [TestMethod]
-        public void EditPostTestNoModel()
+        public async Task EditPostTestNoModel()
         {
             //force the model state to have an error
             this.controller.ModelState.AddModelError("ErrorOld", "EmptyModel");
-            var actual = this.controller.Edit(null);
+            var actual = await this.controller.Edit(null, null, false);
 
             //assert model state has an additional error
             int errors = 0;
@@ -190,10 +190,10 @@ namespace Azurite.Storehouse.Tests.Controllers
         }
 
         [TestMethod]
-        public void EditPostTestNoCategoryAttributes()
+        public async Task EditPostTestNoCategoryAttributes()
         {
             var model = new CategoryW() { Name = "Name" };
-            var actual = this.controller.Edit(model);
+            var actual = await this.controller.Edit(model, null, false);
 
             int errors = 0;
             foreach (var state in this.controller.ModelState.Values)
@@ -211,15 +211,15 @@ namespace Azurite.Storehouse.Tests.Controllers
         }
 
         [TestMethod]
-        public void EditPostTestWithValidModel()
+        public async Task EditPostTestWithValidModel()
         {
             var model = new CategoryW() { Name = "NameN", CategoryAttributes = new List<CategoryAttributeW>()
             {
                 new CategoryAttributeW() { AttributeName = "AN" }
             }};
-            var actual = this.controller.Edit(model);
+            var actual = await this.controller.Edit(model, null, false);
 
-            workerMock.Verify(m => m.Edit(model));
+            workerMock.Verify(m => m.Edit(model, null, false));
 
             Assert.IsNotNull(actual);
             Assert.IsInstanceOfType(actual, typeof(RedirectResult));

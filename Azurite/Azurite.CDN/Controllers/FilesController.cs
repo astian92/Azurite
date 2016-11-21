@@ -22,7 +22,6 @@ namespace Azurite.CDN.Controllers
         public FilesController(IFilesWorker worker)
         {
             this.worker = worker;
-
         }
 
         public async Task<HttpResponseMessage> Get(Guid productId)

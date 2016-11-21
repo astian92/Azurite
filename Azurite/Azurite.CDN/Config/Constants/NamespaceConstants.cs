@@ -6,5 +6,6 @@ namespace Azurite.CDN.Config.Constants
     {
         public static string Config = "Azurite.CDN.Config";
         public static string Workers = "Azurite.CDN.Workers";
+        public static string Services = "Azurite.CDN.Services";
     }
 }
