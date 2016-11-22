@@ -139,3 +139,16 @@ img[src=''] {
     display: none;
     margin-top: 40px;
 }
+
+.tile_stats_count.borderless-before:before {
+    border: 0px;
+}
+
+.table-striped.top-borderless tr:first-child td {
+    border-top: none;
+}
+
+.fixed_height_content {
+    overflow-y: auto;
+    max-height: calc(100% - 60px);
+}
