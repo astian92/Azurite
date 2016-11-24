@@ -1,1 +1,113 @@
-﻿Dashboard ...
+﻿@model Azurite.Storehouse.Models.ViewModels.DashboardViewModel
+
+<div class="row tile_count">
+    <div class="animated flipInY col-md-2 col-sm-4 col-xs-4 tile_stats_count">
+        <div class="left"></div>
+        <div class="right">
+            <span class="count_top"><i class="fa fa-clipboard"></i> Всичко поръчки</span>
+            <div class="count">@Model.OrdersCounts.All</div>
+        </div>
+    </div>
+    <div class="animated flipInY col-md-2 col-sm-4 col-xs-4 tile_stats_count">
+        <div class="left"></div>
+        <div class="right">
+            <span class="count_top">Подадени</span>
+            <div class="count">@Model.OrdersCounts.Issued</div>
+        </div>
+    </div>
+    <div class="animated flipInY col-md-2 col-sm-4 col-xs-4 tile_stats_count">
+        <div class="left"></div>
+        <div class="right">
+            <span class="count_top">В обработка</span>
+            <div class="count">@Model.OrdersCounts.InProcessing</div>
+        </div>
+    </div>
+    <div class="animated flipInY col-md-2 col-sm-4 col-xs-4 tile_stats_count">
+        <div class="left"></div>
+        <div class="right">
+            <span class="count_top">Обработени</span>
+            <div class="count green">@Model.OrdersCounts.Completed</div>
+        </div>
+    </div>
+    <div class="animated flipInY col-md-2 col-sm-4 col-xs-4 tile_stats_count">
+        <div class="left"></div>
+        <div class="right">
+            <span class="count_top">Архивирани</span>
+            <div class="count">@Model.OrdersCounts.Archived</div>
+        </div>
+    </div>
+    <div class="animated flipInY col-md-2 col-sm-4 col-xs-4 tile_stats_count">
+        <div class="left"></div>
+        <div class="right">
+            <span class="count_top">Отказани</span>
+            <div class="count red">@Model.OrdersCounts.Archived</div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-4 col-sm-4 col-xs-12">
+        <div class="x_panel tile fixed_height_320">
+            <div class="x_title">
+                <h2>Подадени поръчки</h2>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content fixed_height_content">
+                <table class="table table-striped">
+                    @foreach (var order in Model.IssuedOrders)
+                    {
+                        <tr>
+                            <td>
+                                <a href="@(Url.Action<OrdersController>(c => c.Details(order.Id)))">@order.CustomerName</a>
+                            </td>
+                            <td>@order.Total</td>
+                            <td>@order.DateStr</td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 col-sm-4 col-xs-12">
+        <div class="x_panel tile fixed_height_320">
+            <div class="x_title">
+                <h2>Поръчки в обработка</h2>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content fixed_height_content">
+                <table class="table table-striped">
+                    @foreach (var order in Model.InProgressOrders)
+                    {
+                        <tr>
+                            <td>
+                                <a href="@(Url.Action<OrdersController>(c => c.Details(order.Id)))">@order.CustomerName</a>
+                            </td>
+                            <td>@order.Total</td>
+                            <td>@order.DateStr</td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 col-sm-4 col-xs-12">
+        <div class="x_panel tile fixed_height_320">
+            <div class="x_title">
+                <h2>Намаляващи количества</h2>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content fixed_height_content">
+                <table class="table table-striped top-borderless">
+                    @foreach (var product in Model.DecreasingQuantityProducts)
+                    {
+                        <tr>
+                            <td>
+                                <a href="@(Url.Action<ProductsController>(c => c.Edit(product.Id)))">@product.Number</a>
+                            </td>
+                            <td>@product.Name</td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

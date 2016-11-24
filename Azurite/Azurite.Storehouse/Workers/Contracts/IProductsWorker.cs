@@ -17,6 +17,6 @@ namespace Azurite.Storehouse.Workers.Contracts
         ProductW Get(Guid productId);
         Task<ITicket> Add(ProductW productW, IEnumerable<HttpPostedFileBase> photos);
         Task<ITicket> Edit(ProductW productW, IEnumerable<HttpPostedFileBase> photos, IEnumerable<Guid> imageIds);
-        ITicket Delete(Guid Id);
+        Task<ITicket> Delete(Guid Id);
     }
 }

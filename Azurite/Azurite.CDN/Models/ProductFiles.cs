@@ -8,6 +8,7 @@ namespace Azurite.CDN.Models
 {
     public class ProductFiles
     {
+        public Guid Key { get; set; }
         public IEnumerable<HttpFile> Files { get; set; }
     }
 }

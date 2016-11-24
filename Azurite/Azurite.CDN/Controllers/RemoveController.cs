@@ -1,5 +1,6 @@
 ﻿using Azurite.CDN.Data;
 using Azurite.CDN.Models.Http;
+using Azurite.CDN.Services.Contracts;
 using Azurite.CDN.Workers.Contracts;
 using Azurite.Infrastructure.Data.Contracts;
 using System;
@@ -16,15 +17,19 @@ namespace Azurite.CDN.Controllers
     public class RemoveController : ApiController
     {
         private readonly IRemoveWorker worker;
+        private readonly IKeyValidatorService keyValidator;
 
-        public RemoveController(IRemoveWorker worker)
+        public RemoveController(IRemoveWorker worker, IKeyValidatorService keyValidator)
         {
             this.worker = worker;
+            this.keyValidator = keyValidator;
         }
 
         [HttpPost]
         public HttpResponseMessage Post([FromBody]MultipleIds multipleIds)
         {
+            keyValidator.Validate(multipleIds.Key);
+
             worker.DeleteFiles(multipleIds.Ids);
             return new HttpResponseMessage(HttpStatusCode.OK);
         }

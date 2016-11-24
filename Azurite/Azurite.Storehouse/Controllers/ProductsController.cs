@@ -37,6 +37,7 @@ namespace Azurite.Storehouse.Controllers
             if (dtParams.IsBeingSearched)
             {
                 entities = entities.Where(e => e.Number.ToLower().Contains(dtParams.SearchValue) ||
+                                               e.CategoryName.ToLower().Contains(dtParams.SearchValue) ||
                                                e.Name.ToLower().Contains(dtParams.SearchValue) ||
                                                e.Price.ToString().Contains(dtParams.SearchValue));
             }
@@ -135,9 +136,9 @@ namespace Azurite.Storehouse.Controllers
             return Redirect(Url.Action<ProductsController>(c => c.Index()));
         }
 
-        public ActionResult Delete(Guid Id)
+        public async Task<ActionResult> Delete(Guid Id)
         {
-            var ticket = worker.Delete(Id);
+            var ticket = await worker.Delete(Id);
             return Json(ticket);
         }
 
@@ -158,6 +159,16 @@ namespace Azurite.Storehouse.Controllers
                 case 1:
                     if (asc == true)
                     {
+                        entities = entities.OrderBy(e => e.CategoryName);
+                    }
+                    else
+                    {
+                        entities = entities.OrderByDescending(e => e.CategoryName);
+                    }
+                    break;
+                case 2:
+                    if (asc == true)
+                    {
                         entities = entities.OrderBy(e => e.Name);
                     }
                     else
@@ -165,7 +176,7 @@ namespace Azurite.Storehouse.Controllers
                         entities = entities.OrderByDescending(e => e.Name);
                     }
                     break;
-                case 2:
+                case 3:
                     if (asc == true)
                     {
                         entities = entities.OrderBy(e => e.Price);
@@ -175,7 +186,7 @@ namespace Azurite.Storehouse.Controllers
                         entities = entities.OrderByDescending(e => e.Price);
                     }
                     break;
-                case 3:
+                case 4:
                     if (asc == true)
                     {
                         entities = entities.OrderBy(e => e.Quantity);
