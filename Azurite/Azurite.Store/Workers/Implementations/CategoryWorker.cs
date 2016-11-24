@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Azurite.Infrastructure.Data.Contracts;
 using Azurite.Store.Data;
+using Azurite.Store.Models.Helpers;
 using Azurite.Store.Workers.Contracts;
 using Azurite.Store.Wrappers;
 using System;

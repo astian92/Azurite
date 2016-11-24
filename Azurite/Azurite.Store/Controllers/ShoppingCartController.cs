@@ -28,10 +28,22 @@ namespace Azurite.Store.Controllers
             return PartialView(products);
         }
 
+        public ActionResult CartSummary()
+        {
+            return PartialView();
+        }
+
         public JsonResult AddProduct(Guid id, int quantity)
         {
             worker.AddProduct(id, quantity);
             return Json("ok", JsonRequestBehavior.AllowGet);
         }
+
+        public JsonResult RemoveProduct(Guid id)
+        {
+            worker.RemoveProduct(id);
+            return Json("ok", JsonRequestBehavior.AllowGet);
+        }
+
     }
 }

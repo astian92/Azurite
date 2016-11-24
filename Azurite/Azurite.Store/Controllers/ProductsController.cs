@@ -40,5 +40,11 @@ namespace Azurite.Store.Controllers
             var products = worker.GetPromoProducts();
             return PartialView(products);
         }
+
+        public ActionResult GetRelatedProducts(Guid categoryId)
+        {
+            var products = worker.GetRelatedProducts(categoryId);
+            return PartialView(products);
+        }
     }
 }

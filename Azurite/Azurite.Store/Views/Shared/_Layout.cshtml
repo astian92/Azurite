@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Radianna Gold - @ViewBag.Title</title>
+    <title>@ViewRes.SharedStrings.CompanyName - @ViewBag.Title</title>
 
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
     <link href="~/Content/font-awesome.min.css" rel="stylesheet" />
@@ -16,56 +16,37 @@
 </head>
 <body>
     <header class="header-wrap">
-        <div class="header-top">
+        <div class="header-top navbar navbar-gold">
             <div class="container">
-                <div class="row">
-                    <div class="col-sm-4">
-                        <div class="logo">
-                            <a href="~/Home">
-                                <img src="~/Resources/radianna-gold-logo-xxs-black.png" alt="Radianna Gold" />
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-sm-7 col-xs-12">
-                        <div class="header-links">
-                            <ul class="nav navbar-nav pull-right">
-                                <li>
-                                    <a href="/Home">
-                                        <i class="fa fa-home"></i>
-                                        Home
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <i class="fa fa-group"></i>
-                                        About Us
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="/ShoppingCart">
-                                        <i class="fa fa-shopping-cart"></i>
-                                        Shopping Cart
-                                    </a>
-                                </li>
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a href="~/Home" class="navbar-brand">
+                        <img src="~/Resources/radianna-gold-logo-xxs-black.png" alt="Radianna Gold" class="img-responsive" />
+                    </a>
+                </div>
+                <div id="navbar" class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="active"><a href="/Home"><i class="fa fa-home"></i> @ViewRes.SharedStrings.Home</a></li>
+                        <li><a href="/Home/Contact"><i class="fa fa-map-marker"></i> @ViewRes.SharedStrings.Contact</a></li>
+                        <li><a href="/ShoppingCart"><i class="fa fa-shopping-cart"></i> @ViewRes.SharedStrings.ShoppingCart</a></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">@ViewRes.SharedStrings.LanguageAbbr (BGN) <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li class="dropdown-header">@ViewRes.SharedStrings.Currency</li>
+                                <li><a href="#">BGN</a></li>
+                                <li><a href="#">EUR</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li class="dropdown-header">@ViewRes.SharedStrings.Language</li>
+                                <li>@Html.ActionLink(ViewRes.SharedStrings.LanguageOptionBG, "Language", "Home", new { LanguageAbbr = "bg" }, null)</li>
+                                <li>@Html.ActionLink(ViewRes.SharedStrings.LanguageOptionEN, "Language", "Home", new { LanguageAbbr = "en" }, null)</li>
                             </ul>
-                        </div>
-                    </div>
-                    <div class="col-sm-1 col-xs-12">
-                        <div class="btn-group">
-                            <button class="btn btn-link dropdown-toggle" data-toggle="dropdown">
-                                ENG
-                                <i class="fa fa-caret-down"></i>
-                            </button>
-                            <ul class="pull-left dropdown-menu">
-                                <li>
-                                    <a tabindex="-1" href="#">English</a>
-                                </li>
-                                <li>
-                                    <a tabindex="-1" href="#">Bulgarian</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
@@ -76,47 +57,39 @@
     <footer>
         <div class="footer-container">
             <div class="container">
-                <div class="col-md-3 col-sm-3 col-xs-12">
-                    <h5>Information</h5>
-                    <ul>
-                        <li><a href="about.html">About Us</a></li>
-                        <li><a href="#">Delivery Information</a></li>
-                        <li><a href="#">Privacy Policy</a></li>
-                        <li><a href="#">Terms &amp; Conditions</a></li>
-                    </ul>
-                </div>
-                <div class="col-md-3 col-sm-3 col-xs-12">
-                    <h5>Service</h5>
-                    <ul>
-                        <li><a href="contact.html">Contact Us</a></li>
-                        <li><a href="#">Returns</a></li>
-                        <li><a href="#">Site Map</a></li>
-                        <li><a href="#">Affiliates</a></li>
-                        <li><a href="#">Specials</a></li>
-                    </ul>
-                </div>
-                <div class="col-md-3 col-sm-3 col-xs-12">
-                    <h5>Follow Us</h5>
-                    <ul>
-                        <li><a href="#">Facebook</a></li>
-                        <li><a href="#">Twitter</a></li>
-                        <li><a href="#">YouTube</a></li>
-                    </ul>
-                </div>
-                <div class="col-md-3 col-sm-3 col-xs-12 last">
-                    <h5>Contact Us</h5>
-                    <ul>
-                        <li>Radianna Gold</li>
-                        <li>
-                            1247 LB Nagar Road, Hyderabad, Telangana - 35
-                        </li>
-                        <li>
-                            Email: <a href="#">info@demolink.com</a>
-                        </li>
-                    </ul>
-                    <h4 class="lead">
-                        Tel: <span>1(234) 567-9842</span>
-                    </h4>
+                <div class="container">
+                    <div class="col-md-5">
+                        <h5>@ViewRes.SharedStrings.Follow</h5>
+                        <a href="http://twitter.com/outofthesandbox" target="_blank">
+                            <i class="fa fa-twitter-square fa-3x"></i>
+                        </a>
+                        <a href="http://facebook.com/shopify" target="_blank">
+                            <i class="fa fa-facebook-square fa-3x"></i>
+                        </a>
+                        <a href="mailto:support@outofthesandbox.com" target="_blank">
+                            <i class="fa fa-envelope-square fa-3x"></i>
+                        </a>
+                    </div>
+                    <div class="col-md-7">
+                        <ul class="footer_menu">
+                            <li><a href="/Home">@ViewRes.SharedStrings.Home</a></li>
+                            <li><a href="/Home/Contact">@ViewRes.SharedStrings.Contact</a></li>
+                            <li><a href="/ShoppingCart">@ViewRes.SharedStrings.ShoppingCart</a></li>
+                        </ul>
+                        <p>@ViewRes.SharedStrings.SubscribeTxt</p>
+                        <div class="newsletter">
+                            <p class="message"></p>
+                            <form method="post" action="/contact#contact_form" id="contact_form" class="contact-form" accept-charset="UTF-8">
+                                <div class="input-group">
+                                    <input type="text" class="form-control form-control-lg" placeholder="@ViewRes.SharedStrings.SubscribePlaceholder" aria-describedby="subscribe">
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-secondary btn-gold" type="button">@ViewRes.SharedStrings.Subscribe</button>
+                                    </span>
+                                </div>
+                            </form>
+                        </div>
+                        <p class="credits">@ViewRes.SharedStrings.CompanyDescription</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -128,7 +101,7 @@
             </div>
         </div>
     </footer>
-    
+
     @RenderSection("scripts", false)
 </body>
 </html>

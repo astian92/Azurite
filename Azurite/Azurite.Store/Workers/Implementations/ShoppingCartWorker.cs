@@ -47,7 +47,7 @@ namespace Azurite.Store.Workers.Implementations
             var cartProducts = GetShoppingCart();
             if(cartProducts.Any(p => p.Id == productId))
             {
-                cartProducts.Single(p => p.Id == productId).Quantity += 1;
+                cartProducts.Single(p => p.Id == productId).Quantity += quantity;
             }
             else
             {
@@ -64,6 +64,11 @@ namespace Azurite.Store.Workers.Implementations
             {
                 cartProducts.Remove(product);
             }
+        }
+
+        public ShoppingCart GetCartSummary()
+        {
+            throw new NotImplementedException();
         }
     }
 }

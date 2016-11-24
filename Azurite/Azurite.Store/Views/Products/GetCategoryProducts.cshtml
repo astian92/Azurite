@@ -1,5 +1,5 @@
 ﻿@model IEnumerable<Azurite.Store.Wrappers.ProductW>
-
+@using Azurite.Store.Common;
 
 <div class="row">
     <div class="col-xs-12 products-list">
@@ -15,7 +15,7 @@
                 imagePath = "";
             }
 
-            <div class="col-md-3 col-sm-6">
+            <div class="col-md-3 col-sm-4 col-xs-6">
                 <div class="product-col">
                     <div class="image">
                         <a href="/Products/Details/@item.Id">
@@ -29,25 +29,11 @@
                             </a>
                         </h4>
                         <div class="price">
-                            @if(item.Discount > 0)
-                            {
-                                double newPrice = item.Price - (item.Price * item.Discount / 100);
-                                <span class="price-new">
-                                    <i class="fa fa-euro"></i>@newPrice
-                                </span>
-                                <span class="price-old">
-                                    <i class="fa fa-euro"></i>@item.Price
-                                </span>
-                            }
-                            else
-                            {
-                                <span class="price-new">
-                                    <i class="fa fa-euro"></i>@item.Price
-                                </span>
-                            }
+                            @Html.Price(item.Price, item.Discount)
                         </div>
                         <div class="cart-button">
-                            <button type="button" class="btn btn-cart">
+                            <input id="qty_@item.Id" class="qty" type="hidden" value="1" />
+                            <button type="button" class="btn btn-cart" productId="@item.Id">
                                 Add to cart
                                 <i class="fa fa-shopping-cart"></i>
                             </button>
@@ -58,3 +44,5 @@
         }
     </div>
 </div>
+
+<script src="~/Scripts/App/Products/products.js"></script>

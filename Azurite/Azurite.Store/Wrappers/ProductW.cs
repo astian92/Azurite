@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using AutoMapper;
+using Azurite.Store.Models.Helpers;
 
 namespace Azurite.Store.Wrappers
 {
@@ -20,8 +21,6 @@ namespace Azurite.Store.Wrappers
         public double Discount { get; set; }
         public int Quantity { get; set; }
         public int Active { get; set; }
-        public string NameEN { get; set; }
-        public string DescriptionEN { get; set; }
 
         public virtual CategoryW Category { get; set; }
         public virtual ICollection<ProductAttributeW> ProductAttributes { get; set; }
@@ -31,6 +30,14 @@ namespace Azurite.Store.Wrappers
         {
             this.ProductAttributes = new HashSet<ProductAttributeW>();
             this.ProductImages = new HashSet<ProductImageW>();
+        }
+
+        public void CreateMappings(IMapperConfigurationExpression configuration)
+        {
+            configuration.CreateMap<Product, ProductW>()
+                .ForMember(d => d.Name, conf => conf.MapFrom(s => LanguageHelper.GetCurrentLanguage() == Language.BG ? s.Name : s.NameEN))
+                .ForMember(d => d.Description, conf => conf.MapFrom(s => LanguageHelper.GetCurrentLanguage() == Language.BG ? s.Description : s.DescriptionEN))
+                .ReverseMap();
         }
     }
 }
