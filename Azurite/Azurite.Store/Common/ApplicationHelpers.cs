@@ -76,5 +76,49 @@ namespace Azurite.Store.Common
 
             return MvcHtmlString.Create(htmlOutput);
         }
+
+        public static MvcHtmlString Price(this HtmlHelper html, double price, double discount = 0)
+        {
+            //calculate the price with the discount
+            double priceOff = price * discount / 100;
+            //round the discount
+            double rounded = Math.Round(priceOff, 2, MidpointRounding.AwayFromZero);
+            double total = price - rounded;
+
+            //calculate hole part and coins
+            double hole = Math.Truncate(total);
+            double coins = Math.Truncate((total - hole) * 100); 
+
+            //build the html
+            string htmlOutput = String.Empty;
+            htmlOutput = "<span class=\"price-new\"><i class=\"fa fa-euro\"></i>" + hole + ".<sup>" + (coins == 0 ? "00" : coins < 10 ? "0" + coins.ToString() : coins.ToString()) + "</sup></span>";
+            if(discount > 0)
+            {
+                //calculate hole part and coins of the old price
+                double holeOld = Math.Truncate(price);
+                double coinsOld = Math.Truncate((price - holeOld) * 100);
+                htmlOutput += "<span class=\"price-old\"><i class=\"fa fa-euro\"></i>" + holeOld + ".<sup>" + (coinsOld == 0 ? "00" : coinsOld < 10 ? "0" + coinsOld.ToString() : coinsOld.ToString()) + "</sup></span>";
+            }
+
+            return MvcHtmlString.Create(htmlOutput);
+        }
+
+        public static MvcHtmlString TotalPrice(this HtmlHelper html, double price, double discount = 0)
+        {
+            //calculate the price with the discount
+            double priceOff = price * discount / 100;
+            //round the discount
+            double rounded = Math.Round(priceOff, 2, MidpointRounding.AwayFromZero);
+            double total = price - rounded;
+
+            //calculate hole part and coins
+            double hole = Math.Truncate(total);
+            double coins = Math.Truncate((total - hole) * 100);
+
+            //build the html
+            string htmlOutput = String.Empty;
+            htmlOutput = "<span class=\"price-new\"><i class=\"fa fa-euro\"></i>" + hole + ".<sup>" + (coins == 0 ? "00" : coins < 10 ? "0" + coins.ToString() : coins.ToString()) + "</sup></span>";
+            return MvcHtmlString.Create(htmlOutput);
+        }
     }
 }

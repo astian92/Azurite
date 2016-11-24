@@ -1,8 +1,8 @@
 ﻿@model IEnumerable<Azurite.Store.Wrappers.ProductW>
 @using Azurite.Store.Common
 
-@{ 
-    ViewBag.Title = "Promotions";
+@{
+    ViewBag.Title = "Related Products";
 }
 
 <div class="products-list">
@@ -34,17 +34,8 @@
                     <div class="price">
                         @Html.Price(item.Price, item.Discount)
                     </div>
-                    <div class="cart-button">
-                        <input id="qty_@item.Id" class="qty" type="hidden" value="1" />
-                        <button type="button" class="btn btn-cart" productId="@item.Id">
-                            Add to cart
-                            <i class="fa fa-shopping-cart"></i>
-                        </button>
-                    </div>
                 </div>
             </div>
         </div>
     }
 </div>
-
-<script src="~/Scripts/App/Products/products.js"></script>

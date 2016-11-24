@@ -1,5 +1,6 @@
 ﻿using Azurite.Infrastructure.Config;
 using Azurite.Store.Config.NinjectConfig;
+using Azurite.Store.Models.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -24,7 +25,21 @@ namespace Azurite.Store
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
             AutoMapperConfig.RegisterMappings();
-            Thread.CurrentThread.CurrentCulture = CultureInfo.CreateSpecificCulture("en-GB");
+        }
+
+        protected void Application_BeginRequest(object sender, EventArgs e)
+        {
+            var cookie = HttpContext.Current.Request.Cookies["Language"];
+            if(cookie != null && cookie.Value != null)
+            {
+                Thread.CurrentThread.CurrentCulture = new CultureInfo(cookie.Value);
+                Thread.CurrentThread.CurrentUICulture = new CultureInfo(cookie.Value);
+            } 
+            else
+            {
+                Thread.CurrentThread.CurrentCulture = new CultureInfo("bg");
+                Thread.CurrentThread.CurrentUICulture = new CultureInfo("bg");
+            }
         }
     }
 }

@@ -99,5 +99,19 @@ namespace Azurite.Store.Workers.Implementations
 
             return wrapped.AsQueryable();
         }
+
+        public IQueryable<ProductW> GetRelatedProducts(Guid categoryId)
+        {
+            var products = rep.GetAll();
+
+            var wrapped = new List<ProductW>();
+            foreach (var product in products.Where(x => x.Active && x.CategoryId == categoryId).OrderBy(x => Guid.NewGuid()).Take(4))
+            {
+                var mapped = Mapper.Map<ProductW>(product);
+                wrapped.Add(mapped);
+            }
+
+            return wrapped.AsQueryable();
+        }
     }
 }
