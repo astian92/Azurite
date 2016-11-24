@@ -31,6 +31,11 @@ var MagicStrings = (function () {
     var orders = CreateController("Orders");
     orders.CreateAction("GetOrders");
     orders.CreateAction("Details");
+
+    var dashboard = CreateController("Dashboard");
+    dashboard.CreateAction("YearIncome");
+    dashboard.CreateAction("MonthIncome");
+    dashboard.CreateAction("WeeklyIncome");
   
     return {
         CreateController: CreateController,

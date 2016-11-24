@@ -1,49 +1,43 @@
 ﻿@model Azurite.Storehouse.Models.ViewModels.DashboardViewModel
 
-<div class="row tile_count">
-    <div class="animated flipInY col-md-2 col-sm-4 col-xs-4 tile_stats_count">
-        <div class="left"></div>
-        <div class="right">
-            <span class="count_top"><i class="fa fa-clipboard"></i> Всичко поръчки</span>
-            <div class="count">@Model.OrdersCounts.All</div>
-        </div>
+<style>
+    .jqstooltip {
+        width: auto !important;
+        height: auto !important;
+    }
+</style>
+
+<div class="row top_tiles" style="margin: 10px 0;">
+    <div class="col-md-3 col-sm-3 col-xs-6 tile">
+        <span>Годишни приходи</span>
+        <h2>$ <span id="year_income"></span></h2>
+        <span class="year_income" style="height: 160px;">
+            <canvas width="200" height="60" style="display: inline-block; vertical-align: top; width: 94px; height: 30px;"></canvas>
+        </span>
     </div>
-    <div class="animated flipInY col-md-2 col-sm-4 col-xs-4 tile_stats_count">
-        <div class="left"></div>
-        <div class="right">
-            <span class="count_top">Подадени</span>
-            <div class="count">@Model.OrdersCounts.Issued</div>
-        </div>
+    <div class="col-md-3 col-sm-3 col-xs-6 tile">
+        <span>Приходи последните 30 дни</span>
+        <h2>$ <span id="month_income"></span></h2>
+        <span class="month_income" style="height: 160px;">
+            <canvas width="200" height="60" style="display: inline-block; vertical-align: top; width: 94px; height: 30px;"></canvas>
+        </span>
     </div>
-    <div class="animated flipInY col-md-2 col-sm-4 col-xs-4 tile_stats_count">
-        <div class="left"></div>
-        <div class="right">
-            <span class="count_top">В обработка</span>
-            <div class="count">@Model.OrdersCounts.InProcessing</div>
-        </div>
+    <div class="col-md-3 col-sm-3 col-xs-6 tile">
+        <span>Седмични приходи</span>
+        <h2>$ <span id="week_income"></span></h2>
+        <span class="week_income" style="height: 160px;">
+            <canvas width="200" height="60" style="display: inline-block; vertical-align: top; width: 94px; height: 30px;"></canvas>
+        </span>
     </div>
-    <div class="animated flipInY col-md-2 col-sm-4 col-xs-4 tile_stats_count">
-        <div class="left"></div>
-        <div class="right">
-            <span class="count_top">Обработени</span>
-            <div class="count green">@Model.OrdersCounts.Completed</div>
-        </div>
-    </div>
-    <div class="animated flipInY col-md-2 col-sm-4 col-xs-4 tile_stats_count">
-        <div class="left"></div>
-        <div class="right">
-            <span class="count_top">Архивирани</span>
-            <div class="count">@Model.OrdersCounts.Archived</div>
-        </div>
-    </div>
-    <div class="animated flipInY col-md-2 col-sm-4 col-xs-4 tile_stats_count">
-        <div class="left"></div>
-        <div class="right">
-            <span class="count_top">Отказани</span>
-            <div class="count red">@Model.OrdersCounts.Archived</div>
-        </div>
+    <div class="col-md-3 col-sm-3 col-xs-6 tile">
+        <span>Нови клиенти</span>
+        <h2>231,809</h2>
+        <span class="sparkline_one" style="height: 160px;">
+            <canvas width="200" height="60" style="display: inline-block; vertical-align: top; width: 94px; height: 30px;"></canvas>
+        </span>
     </div>
 </div>
+
 <div class="row">
     <div class="col-md-4 col-sm-4 col-xs-12">
         <div class="x_panel tile fixed_height_320">
@@ -111,3 +105,221 @@
         </div>
     </div>
 </div>
+
+<div class="row tile_count">
+    <div class="animated flipInY col-md-2 col-sm-4 col-xs-4 tile_stats_count">
+        <div class="left"></div>
+        <div class="right">
+            <span class="count_top"><i class="fa fa-clipboard"></i> Всичко поръчки</span>
+            <div class="count">@Model.OrdersCounts.All</div>
+        </div>
+    </div>
+    <div class="animated flipInY col-md-2 col-sm-4 col-xs-4 tile_stats_count">
+        <div class="left"></div>
+        <div class="right">
+            <span class="count_top">Подадени</span>
+            <div class="count">@Model.OrdersCounts.Issued</div>
+        </div>
+    </div>
+    <div class="animated flipInY col-md-2 col-sm-4 col-xs-4 tile_stats_count">
+        <div class="left"></div>
+        <div class="right">
+            <span class="count_top">В обработка</span>
+            <div class="count">@Model.OrdersCounts.InProcessing</div>
+        </div>
+    </div>
+    <div class="animated flipInY col-md-2 col-sm-4 col-xs-4 tile_stats_count">
+        <div class="left"></div>
+        <div class="right">
+            <span class="count_top">Обработени</span>
+            <div class="count green">@Model.OrdersCounts.Completed</div>
+        </div>
+    </div>
+    <div class="animated flipInY col-md-2 col-sm-4 col-xs-4 tile_stats_count">
+        <div class="left"></div>
+        <div class="right">
+            <span class="count_top">Архивирани</span>
+            <div class="count">@Model.OrdersCounts.Archived</div>
+        </div>
+    </div>
+    <div class="animated flipInY col-md-2 col-sm-4 col-xs-4 tile_stats_count">
+        <div class="left"></div>
+        <div class="right">
+            <span class="count_top">Отказани</span>
+            <div class="count red">@Model.OrdersCounts.Cancelled</div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-4 col-sm-4 col-xs-12">
+        <div class="x_panel tile fixed_height_320">
+            <div class="x_title">
+                <h2>Най-продавани (за годината)</h2>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content fixed_height_content">
+                <table class="table table-striped">
+                    @foreach (var order in Model.IssuedOrders)
+                    {
+                        <tr>
+                            <td>
+                                <a href="@(Url.Action<OrdersController>(c => c.Details(order.Id)))">@order.CustomerName</a>
+                            </td>
+                            <td>@order.Total</td>
+                            <td>@order.DateStr</td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 col-sm-4 col-xs-12">
+        <div class="x_panel tile fixed_height_320">
+            <div class="x_title">
+                <h2>Най-продавани (за месеца)</h2>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content fixed_height_content">
+                <table class="table table-striped">
+                    @foreach (var order in Model.IssuedOrders)
+                    {
+                        <tr>
+                            <td>
+                                <a href="@(Url.Action<OrdersController>(c => c.Details(order.Id)))">@order.CustomerName</a>
+                            </td>
+                            <td>@order.Total</td>
+                            <td>@order.DateStr</td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 col-sm-4 col-xs-12">
+        <div class="x_panel tile fixed_height_320">
+            <div class="x_title">
+                <h2>Най-продавани (за седмицата)</h2>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content fixed_height_content">
+                <table class="table table-striped">
+                    @foreach (var order in Model.IssuedOrders)
+                    {
+                        <tr>
+                            <td>
+                                <a href="@(Url.Action<OrdersController>(c => c.Details(order.Id)))">@order.CustomerName</a>
+                            </td>
+                            <td>@order.Total</td>
+                            <td>@order.DateStr</td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section scripts {
+    <script src="~/Scripts/sparkline/jquery.sparkline.min.js"></script>
+
+    <script>
+        $('document').ready(function () {
+
+            var yearPromise = Ajax.get(MVC.Dashboard.YearIncomeFull);
+            yearPromise.done(function (model) {
+                $('#year_income').text(model.Number);
+
+                $(".year_income").sparkline(model.Report, {
+                    type: 'bar',
+                    height: '40',
+                    barWidth: 15,
+                    //colorMap: {
+                    //    '7': '#a1a1a1'
+                    //},
+                    barSpacing: 2,
+                    barColor: '#26B99A',
+                    tooltipFormat: '{{offset:offset}} {{value}}',
+                    tooltipValueLookups: {
+                        'offset': {
+                            0: 'Jan',
+                            1: 'Feb',
+                            2: 'Mar',
+                            3: 'Apr',
+                            4: 'May',
+                            5: 'Jun',
+                            6: 'Jul',
+                            7: 'Aug',
+                            8: 'Sep',
+                            9: 'Oct',
+                            10: 'Nov',
+                            11: 'Dec'
+                        }
+                    },
+                });
+            });
+
+            var monthPromise = Ajax.get(MVC.Dashboard.MonthIncomeFull);
+            monthPromise.done(function (model) {
+                $('#month_income').text(model.Number);
+
+                $(".month_income").sparkline(model.Report, {
+                    type: 'bar',
+                    height: '40',
+                    barWidth: 5,
+                    barSpacing: 2,
+                    barColor: '#26B99A',
+                });
+            });
+
+            var weekPromise = Ajax.get(MVC.Dashboard.WeeklyIncomeFull);
+            weekPromise.done(function (model) {
+                $('#week_income').text(model.Number);
+
+                $(".week_income").sparkline(model.Report, {
+                    type: 'bar',
+                    height: '40',
+                    barWidth: 27,
+                    barSpacing: 2,
+                    barColor: '#26B99A',
+                    tooltipFormat: '{{offset:offset}} {{value}}',
+                    tooltipValueLookups: {
+                        'offset': {
+                            0: 'Mon',
+                            1: 'Tue',
+                            2: 'Wed',
+                            3: 'Thu',
+                            4: 'Fri',
+                            5: 'Sat',
+                            6: 'Sun',
+                        }
+                    },
+                });
+            });
+
+
+            $(".sparkline_one").sparkline([2, 445684, 3, 4, 5, 4, 5, 4, 3, 4, 5, 6, 7, 5, 4, 3, 5, 6], {
+                type: 'bar',
+                height: '40',
+                barWidth: 9,
+                colorMap: {
+                    '7': '#a1a1a1'
+                },
+                barSpacing: 2,
+                barColor: '#26B99A'
+            });
+
+            $(".sparkline_two").sparkline([2, 4, 3, 4, 5, 4, 5, 4, 3, 4, 5, 6, 7, 5, 4, 3, 5, 6], {
+                type: 'line',
+                width: '200',
+                height: '40',
+                lineColor: '#26B99A',
+                fillColor: 'rgba(223, 223, 223, 0.57)',
+                lineWidth: 2,
+                spotColor: '#26B99A',
+                minSpotColor: '#26B99A'
+            });
+        });
+    </script>
+}
