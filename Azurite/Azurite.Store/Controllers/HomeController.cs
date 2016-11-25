@@ -17,8 +17,6 @@ namespace Azurite.Store.Controllers
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
-
             return View();
         }
 
@@ -26,12 +24,12 @@ namespace Azurite.Store.Controllers
         {
             Thread.CurrentThread.CurrentCulture = CultureInfo.CreateSpecificCulture(LanguageAbbr);
             Thread.CurrentThread.CurrentUICulture = new CultureInfo(LanguageAbbr);
-
+            
             var cookie = new HttpCookie("Language");
             cookie.Value = LanguageAbbr;
             Response.Cookies.Add(cookie);
 
-            return View("Index");
+            return Redirect(Request.UrlReferrer != null ? Request.UrlReferrer.ToString() : "Index");
         }
     }
 }

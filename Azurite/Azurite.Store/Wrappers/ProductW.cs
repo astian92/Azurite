@@ -9,7 +9,7 @@ using Azurite.Store.Models.Helpers;
 
 namespace Azurite.Store.Wrappers
 {
-    public class ProductW : IMap, IMapFrom<Product>
+    public class ProductW : IMap, IMapFrom<Product>, IHaveCustomMappings
     {
         public Guid Id { get; set; }
         public Guid CategoryId { get; set; }

@@ -66,7 +66,7 @@ namespace Azurite.Store.Workers.Implementations
             }
         }
 
-        public ShoppingCart GetCartSummary()
+        public OrderW GetCartSummary()
         {
             throw new NotImplementedException();
         }

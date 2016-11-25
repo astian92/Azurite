@@ -160,6 +160,7 @@
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Common\ApplicationHelpers.cs" />
+    <Compile Include="Common\LocalizedDisplayNameAttribute.cs" />
     <Compile Include="Common\StringExtensions.cs" />
     <Compile Include="Config\Constants\NamespaceConstants.cs" />
     <Compile Include="Config\InfrastructureDependencyConfig.cs" />
@@ -220,6 +221,36 @@
     <Compile Include="Models\Infrastructure\IStoreDbFactory.cs" />
     <Compile Include="Models\Infrastructure\StoreDbFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resources\Models\Customer.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Customer.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Models\Customer.en.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Customer.en.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Models\Order.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Order.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Models\Order.en.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Order.en.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Views\Categories\CategoriesIndex.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CategoriesIndex.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Views\Categories\CategoriesIndex.en.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CategoriesIndex.en.resx</DependentUpon>
+    </Compile>
     <Compile Include="Resources\Views\Home\Contact.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -240,6 +271,16 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Index.en.resx</DependentUpon>
     </Compile>
+    <Compile Include="Resources\Views\Products\ProductDetails.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ProductDetails.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Views\Products\ProductDetails.en.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ProductDetails.en.resx</DependentUpon>
+    </Compile>
     <Compile Include="Resources\Views\Shared\SharedStrings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -250,6 +291,26 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SharedStrings.en.resx</DependentUpon>
     </Compile>
+    <Compile Include="Resources\Views\ShoppingCart\SCIndex.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SCIndex.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Views\ShoppingCart\SCIndex.en.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SCIndex.en.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Views\ShoppingCart\SCProducts.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SCProducts.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Views\ShoppingCart\SCProducts.en.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SCProducts.en.resx</DependentUpon>
+    </Compile>
     <Compile Include="Workers\Contracts\ICategoryWorker.cs" />
     <Compile Include="Workers\Contracts\IProductWorker.cs" />
     <Compile Include="Workers\Contracts\IShoppingCartWorker.cs" />
@@ -258,10 +319,12 @@
     <Compile Include="Workers\Implementations\ShoppingCartWorker.cs" />
     <Compile Include="Wrappers\CategoryAttributeW.cs" />
     <Compile Include="Wrappers\CategoryW.cs" />
+    <Compile Include="Wrappers\CustomerW.cs" />
+    <Compile Include="Wrappers\OrderedProductW.cs" />
+    <Compile Include="Wrappers\OrderW.cs" />
     <Compile Include="Wrappers\ProductAttributeW.cs" />
     <Compile Include="Wrappers\ProductImageW.cs" />
     <Compile Include="Wrappers\ProductW.cs" />
-    <Compile Include="Wrappers\ShoppingCart.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -303,6 +366,7 @@
     <Content Include="Scripts\App\Categories\category_products.js" />
     <Content Include="Scripts\App\Helpers\MVC.js" />
     <Content Include="Scripts\App\Products\products.js" />
+    <Content Include="Scripts\App\shared.js" />
     <Content Include="Scripts\App\ShoppingCart\shopping_cart.js" />
     <Content Include="Scripts\App\ShoppingCart\shopping_cart_products.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -374,9 +438,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Resources\Views\Categories\" />
-    <Folder Include="Resources\Views\Products\" />
-    <Folder Include="Resources\Views\ShoppingCart\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -391,6 +452,32 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Resources\Models\Customer.en.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Customer.en.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Models\Customer.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Customer.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Models\Order.en.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Order.en.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Models\Order.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Order.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\Categories\CategoriesIndex.en.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>CategoriesIndex.en.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>ViewRes</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\Categories\CategoriesIndex.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>CategoriesIndex.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>ViewRes</CustomToolNamespace>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\Views\Home\Contact.en.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Contact.en.Designer.cs</LastGenOutput>
@@ -411,6 +498,16 @@
       <LastGenOutput>Index.Designer.cs</LastGenOutput>
       <CustomToolNamespace>ViewRes</CustomToolNamespace>
     </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\Products\ProductDetails.en.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ProductDetails.en.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>ViewRes</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\Products\ProductDetails.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ProductDetails.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>ViewRes</CustomToolNamespace>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\Views\Shared\SharedStrings.en.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>SharedStrings.en.Designer.cs</LastGenOutput>
@@ -419,6 +516,26 @@
     <EmbeddedResource Include="Resources\Views\Shared\SharedStrings.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>SharedStrings.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>ViewRes</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\ShoppingCart\SCIndex.en.resx">
+      <CustomToolNamespace>ViewRes</CustomToolNamespace>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>SCIndex.en.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\ShoppingCart\SCIndex.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>SCIndex.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>ViewRes</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\ShoppingCart\SCProducts.en.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>SCProducts.en.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>ViewRes</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\ShoppingCart\SCProducts.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>SCProducts.Designer.cs</LastGenOutput>
       <CustomToolNamespace>ViewRes</CustomToolNamespace>
     </EmbeddedResource>
   </ItemGroup>

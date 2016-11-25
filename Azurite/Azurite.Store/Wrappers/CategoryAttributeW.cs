@@ -9,7 +9,7 @@ using System.Web;
 
 namespace Azurite.Store.Wrappers
 {
-    public class CategoryAttributeW : IMap, IMapFrom<CategoryAttribute>
+    public class CategoryAttributeW : IMap, IMapFrom<CategoryAttribute>, IHaveCustomMappings
     {
         public Guid Id { get; set; }
         public Guid CategoryId { get; set; }

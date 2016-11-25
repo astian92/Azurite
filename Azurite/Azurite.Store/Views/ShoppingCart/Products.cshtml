@@ -4,17 +4,17 @@
 @if(Model.Count() > 0)
 {
     <div class="col-md-8">
-        <h2 class="title">PRODUCTS</h2>
+        <h2 class="title">@ViewRes.SCProducts.LeftPaneTitle</h2>
         <div class="">
             <div class="row cart-header">
                 <div class="col-sm-8">
-                    <p class="text-center">Product Details</p>
+                    <p class="text-center">@ViewRes.SCProducts.TableHeaderColumn1</p>
                 </div>
                 <div class="col-sm-2">
-                    <p>Qty</p>
+                    <p>@ViewRes.SCProducts.TableHeaderColumn2</p>
                 </div>
                 <div class="col-sm-2">
-                    <p>Price</p>
+                    <p>@ViewRes.SCProducts.TableHeaderColumn3</p>
                 </div>
             </div>
             <hr />
@@ -40,14 +40,14 @@
                         <a href="/Products/Details/@item.Id"><h5>@item.Name</h5></a>
                         <a href="#" productId="@item.Id" class="btn-cart-remove">
                             <i class="fa fa-trash"></i>
-                            Remove
+                            @ViewRes.SharedStrings.RemoveBtn
                         </a>
                     </div>
                     <div class="col-xs-2 col-sm-2">
                         <input type="number" class="form-control" id="Quantity" name="Quantity" value="@item.Quantity" />
                     </div>
                     <div class="col-xs-offset-3 col-xs-9 col-sm-offset-0 col-sm-2">
-                        <strong class="price-header">Price</strong> @Html.TotalPrice(item.Price, item.Discount)
+                        <strong class="price-header">@ViewRes.SCProducts.TableHeaderColumn3</strong> @Html.TotalPrice(item.Price, item.Discount)
                     </div>
                     <div class="col-xs-12">
                         <hr />
@@ -58,7 +58,7 @@
         </div>
     </div>
     <div class="col-md-4">
-        <h2 class="title">SUBTOTAL</h2>
+        <h2 class="title">@ViewRes.SCProducts.RightPaneTitle</h2>
         <div class="panel">
 
         </div>
@@ -67,7 +67,7 @@
 else
 {
     <div class="col-xs-12">
-        <p class="page-message text-center">There are no items in your cart. <strong><a href="/Home">Continue Shopping <i class="fa fa-arrow-right"></i></a></strong></p>
+        <p class="page-message text-center">@ViewRes.SCProducts.EmptyCartDesc <strong><a href="/Home">@ViewRes.SharedStrings.ContinueShopBtn <i class="fa fa-arrow-right"></i></a></strong></p>
         <div id="promotionsContainer">
 
         </div>

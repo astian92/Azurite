@@ -4,8 +4,14 @@
         dataType: 'html',
         success: function (data) {
             var res = JSON.parse(data);
-            if (res == 'ok') {
-                $('button[productId=' + id + ']').text('ADDED');
+            if (res === 'ok') {
+                var txt = 'Добавен';
+                var cookieVal = window.cookieJar("Language");
+                if (cookieVal === 'en') {
+                    txt = 'ADDED';
+                }
+
+                $('button[productId=' + id + ']').text(txt);
             }
         }
     });

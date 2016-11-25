@@ -1,48 +1,46 @@
 ﻿@model IEnumerable<Azurite.Store.Wrappers.ProductW>
 @using Azurite.Store.Common;
 
-<div class="row">
-    <div class="col-xs-12 products-list">
-        @foreach (var item in Model)
+<div class="row products-list">
+    @foreach (var item in Model)
+    {
+        var imagePath = "http://localhost:8696/cdn/files/";
+        if (item.ProductImages.Count() > 0)
         {
-            var imagePath = "http://localhost:8696/cdn/files/";
-            if (item.ProductImages.Count() > 0)
-            {
-                imagePath += item.ProductImages.First().ImagePath;
-            }
-            else
-            {
-                imagePath = "";
-            }
+            imagePath += item.ProductImages.First().ImagePath;
+        }
+        else
+        {
+            imagePath = "";
+        }
 
-            <div class="col-md-3 col-sm-4 col-xs-6">
-                <div class="product-col">
-                    <div class="image">
+        <div class="col-md-3 col-sm-4 col-xs-6">
+            <div class="product-col">
+                <div class="image">
+                    <a href="/Products/Details/@item.Id">
+                        <img src="@imagePath" alt="@item.Name" />
+                    </a>
+                </div>
+                <div class="caption">
+                    <h4>
                         <a href="/Products/Details/@item.Id">
-                            <img src="@imagePath" alt="@item.Name" />
+                            @item.Name
                         </a>
+                    </h4>
+                    <div class="price">
+                        @Html.Price(item.Price, item.Discount)
                     </div>
-                    <div class="caption">
-                        <h4>
-                            <a href="/Products/Details/@item.Id">
-                                @item.Name
-                            </a>
-                        </h4>
-                        <div class="price">
-                            @Html.Price(item.Price, item.Discount)
-                        </div>
-                        <div class="cart-button">
-                            <input id="qty_@item.Id" class="qty" type="hidden" value="1" />
-                            <button type="button" class="btn btn-cart" productId="@item.Id">
-                                Add to cart
-                                <i class="fa fa-shopping-cart"></i>
-                            </button>
-                        </div>
+                    <div class="cart-button">
+                        <input id="qty_@item.Id" class="qty" type="hidden" value="1" />
+                        <button type="button" class="btn btn-cart" productId="@item.Id">
+                            @ViewRes.SharedStrings.AddBtn
+                            <i class="fa fa-shopping-cart"></i>
+                        </button>
                     </div>
                 </div>
             </div>
-        }
-    </div>
+        </div>
+    }
 </div>
 
 <script src="~/Scripts/App/Products/products.js"></script>

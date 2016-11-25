@@ -129,6 +129,9 @@
   <data name="Contact" xml:space="preserve">
     <value>Contact</value>
   </data>
+  <data name="ContinueShopBtn" xml:space="preserve">
+    <value>Continue Shopping</value>
+  </data>
   <data name="Currency" xml:space="preserve">
     <value>Currency</value>
   </data>
@@ -149,6 +152,9 @@
   </data>
   <data name="LanguageOptionEN" xml:space="preserve">
     <value>English</value>
+  </data>
+  <data name="RemoveBtn" xml:space="preserve">
+    <value>Remove</value>
   </data>
   <data name="ShoppingCart" xml:space="preserve">
     <value>Shopping Cart</value>

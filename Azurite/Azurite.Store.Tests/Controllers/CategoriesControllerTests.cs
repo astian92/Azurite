@@ -25,11 +25,11 @@ namespace Azurite.Store.Tests.Controllers
             mockWorker = new Mock<ICategoryWorker>();
             mockWorker.Setup(x => x.GetAll()).Returns(new List<CategoryW>()
             {
-                new CategoryW() { Id = Guid.NewGuid(), Name = "Обици", Description = "Златни обици", NameEN = "Earings", DescriptionEN = "Golden Earings" },
-                new CategoryW() { Id = Guid.NewGuid(), Name = "Пръстени", Description = "Сребърни пръстени", NameEN = "Rings", DescriptionEN = "Silver rings" }
+                new CategoryW() { Id = Guid.NewGuid(), Name = "Обици", Description = "Златни обици" },
+                new CategoryW() { Id = Guid.NewGuid(), Name = "Пръстени", Description = "Сребърни пръстени" }
             }.AsQueryable());
 
-            mockWorker.Setup(x => x.GetCategory(It.IsAny<Guid>())).Returns(new CategoryW() { Id = Guid.NewGuid(), Name = "Обици", Description = "Златни обици", NameEN = "Earings", DescriptionEN = "Golden Earings" });
+            mockWorker.Setup(x => x.GetCategory(It.IsAny<Guid>())).Returns(new CategoryW() { Id = Guid.NewGuid(), Name = "Обици", Description = "Златни обици" });
 
             controller = new CategoriesController(mockWorker.Object);
             var urlMock = new Mock<UrlHelper>();

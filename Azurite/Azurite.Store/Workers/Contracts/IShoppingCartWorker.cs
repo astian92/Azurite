@@ -11,6 +11,6 @@ namespace Azurite.Store.Workers.Contracts
         List<ProductW> GetShoppingCart();
         void AddProduct(Guid id, int quantity);
         void RemoveProduct(Guid id);
-        ShoppingCart GetCartSummary();
+        OrderW GetCartSummary();
     }
 }

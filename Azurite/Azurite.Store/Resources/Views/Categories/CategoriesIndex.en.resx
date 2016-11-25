@@ -117,55 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AddBtn" xml:space="preserve">
-    <value>Добави в количката</value>
+  <data name="Collections" xml:space="preserve">
+    <value>Collections</value>
   </data>
-  <data name="CompanyDescription" xml:space="preserve">
-    <value>Фирма Радианна Ювелир е създадена през 1999г. Дейността с която се занимава е изработка на златни изделия, както и търговия на дребно с изделия от злато. Фирмата продава и бижута от сребро, стомана, часовници, сребърни икони, сувенири, подаръци, керамика и порцелан на едро и дребно, които са внос от Италия и Гърция.</value>
-  </data>
-  <data name="CompanyName" xml:space="preserve">
-    <value>Радианна Голд</value>
-  </data>
-  <data name="Contact" xml:space="preserve">
-    <value>Контакти</value>
-  </data>
-  <data name="ContinueShopBtn" xml:space="preserve">
-    <value>Продължи да пазаруваш</value>
-  </data>
-  <data name="Currency" xml:space="preserve">
-    <value>Валута</value>
-  </data>
-  <data name="Follow" xml:space="preserve">
-    <value>Последвай ни</value>
-  </data>
-  <data name="Home" xml:space="preserve">
-    <value>Начало</value>
-  </data>
-  <data name="Language" xml:space="preserve">
-    <value>Език</value>
-  </data>
-  <data name="LanguageAbbr" xml:space="preserve">
-    <value>BG</value>
-  </data>
-  <data name="LanguageOptionBG" xml:space="preserve">
-    <value>Български</value>
-  </data>
-  <data name="LanguageOptionEN" xml:space="preserve">
-    <value>Английски</value>
-  </data>
-  <data name="RemoveBtn" xml:space="preserve">
-    <value>Изтрий</value>
-  </data>
-  <data name="ShoppingCart" xml:space="preserve">
-    <value>Моята количка</value>
-  </data>
-  <data name="Subscribe" xml:space="preserve">
-    <value>Абонирай се</value>
-  </data>
-  <data name="SubscribePlaceholder" xml:space="preserve">
-    <value>Въведи своя е-майл адрес...</value>
-  </data>
-  <data name="SubscribeTxt" xml:space="preserve">
-    <value>Абонирай се за да получиш най-новите оферти и още...</value>
+  <data name="PriceFilter" xml:space="preserve">
+    <value>Filter by price</value>
   </data>
 </root>

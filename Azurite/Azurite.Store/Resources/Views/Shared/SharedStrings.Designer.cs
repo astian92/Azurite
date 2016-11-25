@@ -97,6 +97,15 @@ namespace ViewRes {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Продължи да пазаруваш.
+        /// </summary>
+        public static string ContinueShopBtn {
+            get {
+                return ResourceManager.GetString("ContinueShopBtn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Валута.
         /// </summary>
         public static string Currency {
@@ -156,6 +165,15 @@ namespace ViewRes {
         public static string LanguageOptionEN {
             get {
                 return ResourceManager.GetString("LanguageOptionEN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Изтрий.
+        /// </summary>
+        public static string RemoveBtn {
+            get {
+                return ResourceManager.GetString("RemoveBtn", resourceCulture);
             }
         }
         

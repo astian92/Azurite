@@ -44,35 +44,35 @@
                     <p>@Model.Description</p>
                     <ul class="list-unstyled">
                         <li>
-                            <span>Model:</span>
+                            <span>@ViewRes.ProductDetails.Model:</span>
                             @Model.Model
                         </li>
                         <li>
-                            <span>Number:</span>
+                            <span>@ViewRes.ProductDetails.Number:</span>
                             @Model.Number
                         </li>
                         <li>
-                            <span>Availability:</span>
+                            <span>@ViewRes.ProductDetails.Availability:</span>
                             @if(Model.Quantity > 0)
                             {
-                                <strong class="label label-success">In Stock</strong>
+                                <strong class="label label-success">@ViewRes.ProductDetails.InStock</strong>
                             }
                             else
                             {
-                                <strong class="label label-default">Out of Stock</strong>
+                                <strong class="label label-default">@ViewRes.ProductDetails.OutOfStock</strong>
                             }
                         </li>
                     </ul>
                     <div class="row cart-button">
                         <div class="col-xs-12">
-                            <label for="quantity">Qty</label>
+                            <label for="quantity">@ViewRes.ProductDetails.Qty</label>
                         </div>
                         <div class="col-sm-2">
                             <input id="qty_@Model.Id" type="number" min="1" class="form-control qty" value="1" />
                         </div>
                         <div class="col-sm-10">
                             <button type="button" class="btn btn-cart" productId="@Model.Id">
-                                Add to cart
+                                @ViewRes.SharedStrings.AddBtn
                                 <i class="fa fa-shopping-cart"></i>
                             </button>
                         </div>
@@ -86,7 +86,7 @@
     <div class="row">
         <div class="col-xs-12">
             <div class="page-header">
-                <h3>Related Items</h3>
+                <h3>@ViewRes.ProductDetails.SubTitle</h3>
                 <span class="devider"></span>
             </div>
         </div>
