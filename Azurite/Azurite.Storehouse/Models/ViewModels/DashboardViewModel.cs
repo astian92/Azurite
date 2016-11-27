@@ -11,14 +11,16 @@ namespace Azurite.Storehouse.Models.ViewModels
         public OrdersCountList OrdersCounts { get; set; }
         public List<MiniOrder> IssuedOrders { get; set; }
         public List<MiniOrder> InProgressOrders { get; set; }
-        public List<MiniProduct> DecreasingQuantityProducts { get; set; }
+        public List<MiniOrder> CompletedOrders { get; set; }
+        //public List<MiniProduct> DecreasingQuantityProducts { get; set; }
 
         public DashboardViewModel()
         {
             this.OrdersCounts = new OrdersCountList();
             this.IssuedOrders = new List<MiniOrder>();
             this.InProgressOrders = new List<MiniOrder>();
-            this.DecreasingQuantityProducts = new List<MiniProduct>();
+            this.CompletedOrders = new List<MiniOrder>();
+            //this.DecreasingQuantityProducts = new List<MiniProduct>();
         }
     }
 }

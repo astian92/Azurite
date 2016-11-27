@@ -19,8 +19,9 @@ namespace Azurite.Store.Wrappers
         public string Description { get; set; }
         public double Price { get; set; }
         public double Discount { get; set; }
-        public int Quantity { get; set; }
         public int Active { get; set; }
+
+        public int Quantity { get; set; } //not mapping!
 
         public virtual CategoryW Category { get; set; }
         public virtual ICollection<ProductAttributeW> ProductAttributes { get; set; }

@@ -43,10 +43,12 @@ namespace Azurite.Storehouse.Controllers
                 .ProjectTo<MiniOrder>().ToList();
             model.IssuedOrders = db.Orders.Where(o => o.StatusId == (int)OrderStatuses.Issued)
                 .ProjectTo<MiniOrder>().ToList();
+            model.CompletedOrders = db.Orders.Where(o => o.StatusId == (int)OrderStatuses.Completed)
+                .ProjectTo<MiniOrder>().ToList();
 
             //products
-            model.DecreasingQuantityProducts = db.Products.Where(p => p.Quantity <= 5)
-                .ProjectTo<MiniProduct>().ToList();
+            //model.DecreasingQuantityProducts = db.Products.Where(p => p.Quantity <= 5)
+            //    .ProjectTo<MiniProduct>().ToList();
 
             return View(model);
         }
@@ -77,7 +79,9 @@ namespace Azurite.Storehouse.Controllers
 
         public ActionResult MonthIncome()
         {
-            var ordersThisMonth = Orders().Where(o => o.Date.Year == DateTime.Today.Year &&  o.Date.Month == DateTime.Today.Month)
+            var daysAgo30 = DateTime.Today.AddDays(-30);
+            var ordersThisMonth = Orders().Where(o => 
+                DbFunctions.TruncateTime(o.Date) >= daysAgo30 && DbFunctions.TruncateTime(o.Date) <= DateTime.Today)
                 .ToList();
 
             var nreport = new NumbersReport();
@@ -160,6 +164,33 @@ namespace Azurite.Storehouse.Controllers
 
                 nreport.Report.Add(day);
             }
+
+            return Json(nreport, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult SoldItems()
+        {
+            var daysAgo30 = DateTime.Today.AddDays(-30);
+            var ordersThisMonth = Orders().Where(o =>
+                DbFunctions.TruncateTime(o.Date) >= daysAgo30 && DbFunctions.TruncateTime(o.Date) <= DateTime.Today)
+                .ToList();
+
+            var nreport = new NumbersReport();
+            nreport.Number = ((decimal?)ordersThisMonth.Sum(o => o.OrderedProducts.Count)) ?? 0m;
+
+            for (int i = 0; i < 30; i++)
+            {
+                decimal day = 0;
+                var ordersThatDay = ordersThisMonth.Where(o => o.Date.Date == DateTime.Today.AddDays(-i));
+
+                if (ordersThatDay.Any())
+                {
+                    day = (decimal)ordersThatDay.Sum(o => o.OrderedProducts.Count);
+                }
+
+                nreport.Report.Add(day);
+            }
+            nreport.Report.Reverse(); //so today is the last day in the graph
 
             return Json(nreport, JsonRequestBehavior.AllowGet);
         }

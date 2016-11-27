@@ -23,6 +23,7 @@ namespace Azurite.Store.Data
         public double Discount { get; set; }
         public int Quantity { get; set; }
         public double Total { get; set; }
+        public System.Guid ActualProductId { get; set; }
     
         public virtual Order Order { get; set; }
     }

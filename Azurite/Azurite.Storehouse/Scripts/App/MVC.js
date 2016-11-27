@@ -36,6 +36,8 @@ var MagicStrings = (function () {
     dashboard.CreateAction("YearIncome");
     dashboard.CreateAction("MonthIncome");
     dashboard.CreateAction("WeeklyIncome");
+    dashboard.CreateAction("SoldItems");
+    
   
     return {
         CreateController: CreateController,

@@ -50,11 +50,6 @@ namespace Azurite.Storehouse.Wrappers
         [Display(Name = "% Отстъпка")]
         public double Discount { get; set; }
 
-        [Range(0, int.MaxValue, ErrorMessage = "Количеството може да е само положително число!")]
-        [Required(ErrorMessage = "Полето \"Количество\" е задължително!")]
-        [Display(Name = "Количество")]
-        public int Quantity { get; set; }
-
         [Required(ErrorMessage = "Полето \"Активен\" е задължително!")]
         [Display(Name = "Активен")]
         public bool Active { get; set; }

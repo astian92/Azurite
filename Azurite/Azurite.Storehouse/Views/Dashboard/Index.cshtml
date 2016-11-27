@@ -30,9 +30,9 @@
         </span>
     </div>
     <div class="col-md-3 col-sm-3 col-xs-6 tile">
-        <span>Нови клиенти</span>
-        <h2>231,809</h2>
-        <span class="sparkline_one" style="height: 160px;">
+        <span>Продадени продукти (30 дни)</span>
+        <h2> <span id="sold_items"></span></h2>
+        <span class="sold_items" style="height: 160px;">
             <canvas width="200" height="60" style="display: inline-block; vertical-align: top; width: 94px; height: 30px;"></canvas>
         </span>
     </div>
@@ -86,18 +86,19 @@
     <div class="col-md-4 col-sm-4 col-xs-12">
         <div class="x_panel tile fixed_height_320">
             <div class="x_title">
-                <h2>Намаляващи количества</h2>
+                <h2>Готови за архивиране</h2>
                 <div class="clearfix"></div>
             </div>
             <div class="x_content fixed_height_content">
-                <table class="table table-striped top-borderless">
-                    @foreach (var product in Model.DecreasingQuantityProducts)
+                <table class="table table-striped">
+                    @foreach (var order in Model.CompletedOrders)
                     {
                         <tr>
                             <td>
-                                <a href="@(Url.Action<ProductsController>(c => c.Edit(product.Id)))">@product.Number</a>
+                                <a href="@(Url.Action<OrdersController>(c => c.Details(order.Id)))">@order.CustomerName</a>
                             </td>
-                            <td>@product.Name</td>
+                            <td>@order.Total</td>
+                            <td>@order.DateStr</td>
                         </tr>
                     }
                 </table>
@@ -151,7 +152,7 @@
     </div>
 </div>
 
-<div class="row">
+@*<div class="row">
     <div class="col-md-4 col-sm-4 col-xs-12">
         <div class="x_panel tile fixed_height_320">
             <div class="x_title">
@@ -218,7 +219,7 @@
             </div>
         </div>
     </div>
-</div>
+</div>*@
 
 
 @section scripts {
@@ -298,28 +299,19 @@
                 });
             });
 
+            var soldPromise = Ajax.get(MVC.Dashboard.SoldItemsFull);
+            soldPromise.done(function (model) {
+                $('#sold_items').text(model.Number);
 
-            $(".sparkline_one").sparkline([2, 445684, 3, 4, 5, 4, 5, 4, 3, 4, 5, 6, 7, 5, 4, 3, 5, 6], {
-                type: 'bar',
-                height: '40',
-                barWidth: 9,
-                colorMap: {
-                    '7': '#a1a1a1'
-                },
-                barSpacing: 2,
-                barColor: '#26B99A'
+                $(".sold_items").sparkline(model.Report, {
+                    type: 'bar',
+                    height: '40',
+                    barWidth: 5,
+                    barSpacing: 2,
+                    barColor: '#26B99A',
+                });
             });
-
-            $(".sparkline_two").sparkline([2, 4, 3, 4, 5, 4, 5, 4, 3, 4, 5, 6, 7, 5, 4, 3, 5, 6], {
-                type: 'line',
-                width: '200',
-                height: '40',
-                lineColor: '#26B99A',
-                fillColor: 'rgba(223, 223, 223, 0.57)',
-                lineWidth: 2,
-                spotColor: '#26B99A',
-                minSpotColor: '#26B99A'
-            });
+            
         });
     </script>
 }

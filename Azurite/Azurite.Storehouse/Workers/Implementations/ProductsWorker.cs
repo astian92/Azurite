@@ -166,7 +166,7 @@ namespace Azurite.Storehouse.Workers.Implementations
                 product.DescriptionEN = productW.DescriptionEN;
                 product.Price = productW.Price;
                 product.Discount = productW.Discount;
-                product.Quantity = productW.Quantity;
+                //product.Quantity = productW.Quantity;
                 product.Active = productW.Active;
 
                 foreach (var attribute in productW.ProductAttributes)

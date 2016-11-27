@@ -186,16 +186,16 @@ namespace Azurite.Storehouse.Controllers
                         entities = entities.OrderByDescending(e => e.Price);
                     }
                     break;
-                case 4:
-                    if (asc == true)
-                    {
-                        entities = entities.OrderBy(e => e.Quantity);
-                    }
-                    else
-                    {
-                        entities = entities.OrderByDescending(e => e.Quantity);
-                    }
-                    break;
+                //case 4:
+                //    if (asc == true)
+                //    {
+                //        entities = entities.OrderBy(e => e.Quantity);
+                //    }
+                //    else
+                //    {
+                //        entities = entities.OrderByDescending(e => e.Quantity);
+                //    }
+                //    break;
                 default:
                     break;
             }

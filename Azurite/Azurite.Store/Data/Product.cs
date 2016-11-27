@@ -31,7 +31,6 @@ namespace Azurite.Store.Data
         public string DescriptionEN { get; set; }
         public double Price { get; set; }
         public double Discount { get; set; }
-        public int Quantity { get; set; }
         public bool Active { get; set; }
     
         public virtual Category Category { get; set; }
