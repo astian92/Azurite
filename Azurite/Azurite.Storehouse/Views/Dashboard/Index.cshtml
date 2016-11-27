@@ -265,12 +265,24 @@
             monthPromise.done(function (model) {
                 $('#month_income').text(model.Number);
 
+                var offsets = {};
+
+                for (var i = 0; i < 30; i++) {
+                    var date = Date();
+                    var propName = (30 - i) - 1;
+                    offsets[propName] = addDays(-i);
+                }
+
                 $(".month_income").sparkline(model.Report, {
                     type: 'bar',
                     height: '40',
                     barWidth: 5,
                     barSpacing: 2,
                     barColor: '#26B99A',
+                    tooltipFormat: '{{offset:offset}} {{value}}',
+                    tooltipValueLookups: {
+                        'offset': offsets
+                    }
                 });
             });
 
@@ -303,15 +315,35 @@
             soldPromise.done(function (model) {
                 $('#sold_items').text(model.Number);
 
+                var offsets = {};
+
+                for (var i = 0; i < 30; i++) {
+                    var date = Date();
+                    var propName = (30 - i) - 1;
+                    offsets[propName] = addDays(-i);
+                }
+
                 $(".sold_items").sparkline(model.Report, {
                     type: 'bar',
                     height: '40',
                     barWidth: 5,
                     barSpacing: 2,
                     barColor: '#26B99A',
+                    tooltipFormat: '{{offset:offset}} {{value}}',
+                    tooltipValueLookups: {
+                        'offset': offsets
+                    }
                 });
             });
             
         });
+
+        function addDays(n){
+            var t = new Date();
+            t.setDate(t.getDate() + n); 
+            var date = ((t.getDate() < 10) ? '0' + t.getDate() : t.getDate()) + "/" + (((t.getMonth() + 1) < 10) ? '0' + (t.getMonth() + 1) : (t.getMonth() + 1)) + "/" + t.getFullYear();
+
+            return date.toString();
+        }
     </script>
 }
