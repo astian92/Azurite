@@ -27,6 +27,15 @@
           <Property Name="AttributeNameEN" Type="nvarchar" MaxLength="200" Nullable="false" />
           <Property Name="ActiveFilter" Type="bit" Nullable="false" />
         </EntityType>
+        <EntityType Name="CurrencyCourses">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Code" Type="nvarchar" MaxLength="2" Nullable="false" />
+          <Property Name="Value" Type="float" Nullable="false" />
+          <Property Name="Sign" Type="nvarchar" MaxLength="2" Nullable="false" />
+        </EntityType>
         <EntityType Name="Customer">
           <Key>
             <PropertyRef Name="Id" />
@@ -50,7 +59,7 @@
           <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
           <Property Name="OrderId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="ActualProductId" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="ProductNumber" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="ProductModel" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="ProductName" Type="nvarchar" MaxLength="200" Nullable="false" />
           <Property Name="ProductNameEN" Type="nvarchar" MaxLength="200" Nullable="false" />
           <Property Name="Price" Type="float" Nullable="false" />
@@ -63,11 +72,13 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Number" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="CustomerId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="StatusId" Type="int" Nullable="false" />
           <Property Name="Total" Type="float" Nullable="false" />
           <Property Name="Comment" Type="ntext" />
           <Property Name="Date" Type="datetime" Nullable="false" />
+          <Property Name="Notes" Type="text" />
         </EntityType>
         <EntityType Name="OrderStatuses">
           <Key>
@@ -83,12 +94,12 @@
           </Key>
           <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
           <Property Name="CategoryId" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="Number" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Model" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="false" />
           <Property Name="NameEN" Type="nvarchar" MaxLength="200" Nullable="false" />
-          <Property Name="Model" Type="nvarchar" MaxLength="200" />
           <Property Name="Description" Type="ntext" />
           <Property Name="DescriptionEN" Type="ntext" />
+          <Property Name="Quantity" Type="int" Nullable="false" />
           <Property Name="Price" Type="float" Nullable="false" />
           <Property Name="Discount" Type="float" Nullable="false" />
           <Property Name="Active" Type="bit" Nullable="false" />
@@ -228,6 +239,7 @@
         <EntityContainer Name="MarketPlaceModelStoreContainer">
           <EntitySet Name="Categories" EntityType="Self.Categories" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CategoryAttributes" EntityType="Self.CategoryAttributes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CurrencyCourses" EntityType="Self.CurrencyCourses" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OrderedProducts" EntityType="Self.OrderedProducts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
@@ -280,8 +292,6 @@
           <EntitySet Name="Categories" EntityType="MarketPlaceModel.Category" />
           <EntitySet Name="CategoryAttributes" EntityType="MarketPlaceModel.CategoryAttribute" />
           <EntitySet Name="Customers" EntityType="MarketPlaceModel.Customer" />
-          <EntitySet Name="OrderedProducts" EntityType="MarketPlaceModel.OrderedProduct" />
-          <EntitySet Name="Orders" EntityType="MarketPlaceModel.Order" />
           <EntitySet Name="OrderStatuses" EntityType="MarketPlaceModel.OrderStatus" />
           <EntitySet Name="ProductAttributes" EntityType="MarketPlaceModel.ProductAttribute" />
           <EntitySet Name="ProductImages" EntityType="MarketPlaceModel.ProductImage" />
@@ -297,18 +307,7 @@
             <End Role="CategoryAttribute" EntitySet="CategoryAttributes" />
             <End Role="ProductAttribute" EntitySet="ProductAttributes" />
           </AssociationSet>
-          <AssociationSet Name="FK_Orders_Customer" Association="MarketPlaceModel.FK_Orders_Customer">
-            <End Role="Customer" EntitySet="Customers" />
-            <End Role="Order" EntitySet="Orders" />
-          </AssociationSet>
-          <AssociationSet Name="FK_OrderedProducts_Orders" Association="MarketPlaceModel.FK_OrderedProducts_Orders">
-            <End Role="Order" EntitySet="Orders" />
-            <End Role="OrderedProduct" EntitySet="OrderedProducts" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Orders_OrderStatuses" Association="MarketPlaceModel.FK_Orders_OrderStatuses">
-            <End Role="OrderStatus" EntitySet="OrderStatuses" />
-            <End Role="Order" EntitySet="Orders" />
-          </AssociationSet>
+          <EntitySet Name="CurrencyCourses" EntityType="MarketPlaceModel.CurrencyCours" />
           <EntitySet Name="Products" EntityType="MarketPlaceModel.Product" />
           <AssociationSet Name="FK_Product_Categories" Association="MarketPlaceModel.FK_Product_Categories">
             <End Role="Category" EntitySet="Categories" />
@@ -321,6 +320,20 @@
           <AssociationSet Name="FK_ProductImages_Product" Association="MarketPlaceModel.FK_ProductImages_Product">
             <End Role="Product" EntitySet="Products" />
             <End Role="ProductImage" EntitySet="ProductImages" />
+          </AssociationSet>
+          <EntitySet Name="OrderedProducts" EntityType="MarketPlaceModel.OrderedProduct" />
+          <EntitySet Name="Orders" EntityType="MarketPlaceModel.Order" />
+          <AssociationSet Name="FK_Orders_Customer" Association="MarketPlaceModel.FK_Orders_Customer">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="Order" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderedProducts_Orders" Association="MarketPlaceModel.FK_OrderedProducts_Orders">
+            <End Role="Order" EntitySet="Orders" />
+            <End Role="OrderedProduct" EntitySet="OrderedProducts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_OrderStatuses" Association="MarketPlaceModel.FK_Orders_OrderStatuses">
+            <End Role="OrderStatus" EntitySet="OrderStatuses" />
+            <End Role="Order" EntitySet="Orders" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="Category">
@@ -367,36 +380,6 @@
           <Property Name="Company" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="VatID" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Orders" Relationship="MarketPlaceModel.FK_Orders_Customer" FromRole="Customer" ToRole="Order" />
-        </EntityType>
-        <EntityType Name="OrderedProduct">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Guid" Nullable="false" />
-          <Property Name="OrderId" Type="Guid" Nullable="false" />
-          <Property Name="ProductNumber" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="ProductName" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="ProductNameEN" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="Price" Type="Double" Nullable="false" />
-          <Property Name="Discount" Type="Double" Nullable="false" />
-          <Property Name="Quantity" Type="Int32" Nullable="false" />
-          <Property Name="Total" Type="Double" Nullable="false" />
-          <NavigationProperty Name="Order" Relationship="MarketPlaceModel.FK_OrderedProducts_Orders" FromRole="OrderedProduct" ToRole="Order" />
-          <Property Name="ActualProductId" Type="Guid" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Order">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Guid" Nullable="false" />
-          <Property Name="CustomerId" Type="Guid" Nullable="false" />
-          <Property Name="StatusId" Type="Int32" Nullable="false" />
-          <Property Name="Total" Type="Double" Nullable="false" />
-          <Property Name="Comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="Customer" Relationship="MarketPlaceModel.FK_Orders_Customer" FromRole="Order" ToRole="Customer" />
-          <NavigationProperty Name="OrderedProducts" Relationship="MarketPlaceModel.FK_OrderedProducts_Orders" FromRole="Order" ToRole="OrderedProduct" />
-          <NavigationProperty Name="OrderStatus" Relationship="MarketPlaceModel.FK_Orders_OrderStatuses" FromRole="Order" ToRole="OrderStatus" />
         </EntityType>
         <EntityType Name="OrderStatus">
           <Key>
@@ -466,54 +449,27 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Orders_Customer">
-          <End Type="MarketPlaceModel.Customer" Role="Customer" Multiplicity="1" />
-          <End Type="MarketPlaceModel.Order" Role="Order" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Customer">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Order">
-              <PropertyRef Name="CustomerId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_OrderedProducts_Orders">
-          <End Type="MarketPlaceModel.Order" Role="Order" Multiplicity="1" />
-          <End Type="MarketPlaceModel.OrderedProduct" Role="OrderedProduct" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Order">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="OrderedProduct">
-              <PropertyRef Name="OrderId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Orders_OrderStatuses">
-          <End Type="MarketPlaceModel.OrderStatus" Role="OrderStatus" Multiplicity="1" />
-          <End Type="MarketPlaceModel.Order" Role="Order" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="OrderStatus">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Order">
-              <PropertyRef Name="StatusId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
+        <EntityType Name="CurrencyCours">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="true" />
+          <Property Name="Value" Type="Double" Nullable="false" />
+          <Property Name="Sign" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="true" />
+        </EntityType>
         <EntityType Name="Product">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Guid" Nullable="false" />
           <Property Name="CategoryId" Type="Guid" Nullable="false" />
-          <Property Name="Number" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Model" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="NameEN" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="Model" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="DescriptionEN" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
           <Property Name="Price" Type="Double" Nullable="false" />
           <Property Name="Discount" Type="Double" Nullable="false" />
           <Property Name="Active" Type="Boolean" Nullable="false" />
@@ -558,6 +514,74 @@
             </Principal>
             <Dependent Role="ProductImage">
               <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="OrderedProduct">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="OrderId" Type="Guid" Nullable="false" />
+          <Property Name="ActualProductId" Type="Guid" Nullable="false" />
+          <Property Name="ProductModel" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ProductName" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="ProductNameEN" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Price" Type="Double" Nullable="false" />
+          <Property Name="Discount" Type="Double" Nullable="false" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <Property Name="Total" Type="Double" Nullable="false" />
+          <NavigationProperty Name="Order" Relationship="MarketPlaceModel.FK_OrderedProducts_Orders" FromRole="OrderedProduct" ToRole="Order" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Number" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CustomerId" Type="Guid" Nullable="false" />
+          <Property Name="StatusId" Type="Int32" Nullable="false" />
+          <Property Name="Total" Type="Double" Nullable="false" />
+          <Property Name="Comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Customer" Relationship="MarketPlaceModel.FK_Orders_Customer" FromRole="Order" ToRole="Customer" />
+          <NavigationProperty Name="OrderedProducts" Relationship="MarketPlaceModel.FK_OrderedProducts_Orders" FromRole="Order" ToRole="OrderedProduct" />
+          <NavigationProperty Name="OrderStatus" Relationship="MarketPlaceModel.FK_Orders_OrderStatuses" FromRole="Order" ToRole="OrderStatus" />
+        </EntityType>
+        <Association Name="FK_Orders_Customer">
+          <End Type="MarketPlaceModel.Customer" Role="Customer" Multiplicity="1" />
+          <End Type="MarketPlaceModel.Order" Role="Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderedProducts_Orders">
+          <End Type="MarketPlaceModel.Order" Role="Order" Multiplicity="1" />
+          <End Type="MarketPlaceModel.OrderedProduct" Role="OrderedProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OrderedProduct">
+              <PropertyRef Name="OrderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_OrderStatuses">
+          <End Type="MarketPlaceModel.OrderStatus" Role="OrderStatus" Multiplicity="1" />
+          <End Type="MarketPlaceModel.Order" Role="Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderStatus">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="StatusId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -608,34 +632,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="OrderedProducts">
-            <EntityTypeMapping TypeName="MarketPlaceModel.OrderedProduct">
-              <MappingFragment StoreEntitySet="OrderedProducts">
-                <ScalarProperty Name="ActualProductId" ColumnName="ActualProductId" />
-                <ScalarProperty Name="Total" ColumnName="Total" />
-                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
-                <ScalarProperty Name="Discount" ColumnName="Discount" />
-                <ScalarProperty Name="Price" ColumnName="Price" />
-                <ScalarProperty Name="ProductNameEN" ColumnName="ProductNameEN" />
-                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
-                <ScalarProperty Name="ProductNumber" ColumnName="ProductNumber" />
-                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Orders">
-            <EntityTypeMapping TypeName="MarketPlaceModel.Order">
-              <MappingFragment StoreEntitySet="Orders">
-                <ScalarProperty Name="Date" ColumnName="Date" />
-                <ScalarProperty Name="Comment" ColumnName="Comment" />
-                <ScalarProperty Name="Total" ColumnName="Total" />
-                <ScalarProperty Name="StatusId" ColumnName="StatusId" />
-                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="OrderStatuses">
             <EntityTypeMapping TypeName="MarketPlaceModel.OrderStatus">
               <MappingFragment StoreEntitySet="OrderStatuses">
@@ -665,19 +661,59 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="CurrencyCourses">
+            <EntityTypeMapping TypeName="MarketPlaceModel.CurrencyCours">
+              <MappingFragment StoreEntitySet="CurrencyCourses">
+                <ScalarProperty Name="Sign" ColumnName="Sign" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Products">
             <EntityTypeMapping TypeName="MarketPlaceModel.Product">
               <MappingFragment StoreEntitySet="Product">
                 <ScalarProperty Name="Active" ColumnName="Active" />
                 <ScalarProperty Name="Discount" ColumnName="Discount" />
                 <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
                 <ScalarProperty Name="DescriptionEN" ColumnName="DescriptionEN" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="Model" ColumnName="Model" />
                 <ScalarProperty Name="NameEN" ColumnName="NameEN" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Number" ColumnName="Number" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
                 <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderedProducts">
+            <EntityTypeMapping TypeName="MarketPlaceModel.OrderedProduct">
+              <MappingFragment StoreEntitySet="OrderedProducts">
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Discount" ColumnName="Discount" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="ProductNameEN" ColumnName="ProductNameEN" />
+                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+                <ScalarProperty Name="ProductModel" ColumnName="ProductModel" />
+                <ScalarProperty Name="ActualProductId" ColumnName="ActualProductId" />
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Orders">
+            <EntityTypeMapping TypeName="MarketPlaceModel.Order">
+              <MappingFragment StoreEntitySet="Orders">
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="Number" ColumnName="Number" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

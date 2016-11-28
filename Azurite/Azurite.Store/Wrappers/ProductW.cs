@@ -13,15 +13,14 @@ namespace Azurite.Store.Wrappers
     {
         public Guid Id { get; set; }
         public Guid CategoryId { get; set; }
-        public string Number { get; set; }
-        public string Name { get; set; }
         public string Model { get; set; }
+        public string Name { get; set; }
         public string Description { get; set; }
         public double Price { get; set; }
         public double Discount { get; set; }
         public int Active { get; set; }
 
-        public int Quantity { get; set; } //not mapping!
+        public int Quantity { get; set; }
 
         public virtual CategoryW Category { get; set; }
         public virtual ICollection<ProductAttributeW> ProductAttributes { get; set; }

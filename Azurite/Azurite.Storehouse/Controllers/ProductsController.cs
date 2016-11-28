@@ -36,7 +36,7 @@ namespace Azurite.Storehouse.Controllers
 
             if (dtParams.IsBeingSearched)
             {
-                entities = entities.Where(e => e.Number.ToLower().Contains(dtParams.SearchValue) ||
+                entities = entities.Where(e => e.Model.ToLower().Contains(dtParams.SearchValue) ||
                                                e.CategoryName.ToLower().Contains(dtParams.SearchValue) ||
                                                e.Name.ToLower().Contains(dtParams.SearchValue) ||
                                                e.Price.ToString().Contains(dtParams.SearchValue));
@@ -50,7 +50,7 @@ namespace Azurite.Storehouse.Controllers
             }
             else //defaultOrder
             {
-                entities = entities.OrderBy(e => e.Number);
+                entities = entities.OrderBy(e => e.Model);
             }
 
             var data = entities
@@ -149,11 +149,11 @@ namespace Azurite.Storehouse.Controllers
                 case 0:
                     if (asc == true)
                     {
-                        entities = entities.OrderBy(e => e.Number);
+                        entities = entities.OrderBy(e => e.Model);
                     }
                     else
                     {
-                        entities = entities.OrderByDescending(e => e.Number);
+                        entities = entities.OrderByDescending(e => e.Model);
                     }
                     break;
                 case 1:

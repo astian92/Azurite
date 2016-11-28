@@ -12,7 +12,9 @@ namespace Azurite.Storehouse.Models.ViewModels
         public List<MiniOrder> IssuedOrders { get; set; }
         public List<MiniOrder> InProgressOrders { get; set; }
         public List<MiniOrder> CompletedOrders { get; set; }
-        //public List<MiniProduct> DecreasingQuantityProducts { get; set; }
+        public List<MiniProduct> DecreasingQuantityProducts { get; set; }
+        public List<MiniProduct> ZeroQuantityProducts { get; set; }
+        public List<MiniProduct> InactiveProducts { get; set; }
 
         public DashboardViewModel()
         {
@@ -20,7 +22,9 @@ namespace Azurite.Storehouse.Models.ViewModels
             this.IssuedOrders = new List<MiniOrder>();
             this.InProgressOrders = new List<MiniOrder>();
             this.CompletedOrders = new List<MiniOrder>();
-            //this.DecreasingQuantityProducts = new List<MiniProduct>();
+            this.DecreasingQuantityProducts = new List<MiniProduct>();
+            this.ZeroQuantityProducts = new List<MiniProduct>();
+            this.InactiveProducts = new List<MiniProduct>();
         }
     }
 }

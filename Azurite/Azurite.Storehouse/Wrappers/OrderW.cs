@@ -15,6 +15,9 @@ namespace Azurite.Storehouse.Wrappers
         public Guid CustomerId { get; set; }
         public int StatusId { get; set; }
 
+        [Display(Name = "Номер")]
+        public string Number { get; set; }
+
         [Display(Name = "Сума")]
         public double Total { get; set; }
 
@@ -23,6 +26,9 @@ namespace Azurite.Storehouse.Wrappers
 
         [Display(Name = "Дата и час")]
         public DateTime Date { get; set; }
+
+        [Display(Name = "Бележки")]
+        public string Notes { get; set; }
 
         public string DateStr
         {

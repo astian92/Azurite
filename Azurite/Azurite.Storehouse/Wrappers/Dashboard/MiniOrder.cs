@@ -8,12 +8,12 @@ using AutoMapper;
 
 namespace Azurite.Storehouse.Wrappers.Dashboard
 {
-    public class MiniOrder : IMap, IMapFrom<Order>, IHaveCustomMappings
+    public class MiniOrder : IMap, IMapFrom<Order>
     {
         public Guid Id { get; set; }
         public double Total { get; set; }
         public DateTime Date { get; set; }
-        public string CustomerName { get; set; }
+        public string Number { get; set; }
 
         public string DateStr
         {
@@ -21,12 +21,6 @@ namespace Azurite.Storehouse.Wrappers.Dashboard
             {
                 return this.Date.ToLocalTime().ToString("dd-MM-yyyy");
             }
-        }
-
-        public void CreateMappings(IMapperConfigurationExpression configuration)
-        {
-            configuration.CreateMap<Order, MiniOrder>()
-                .ForMember(d => d.CustomerName, conf => conf.MapFrom(s => s.Customer.FirstName + " " + s.Customer.LastName));
         }
     }
 }

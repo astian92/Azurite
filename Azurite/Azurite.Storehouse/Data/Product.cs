@@ -23,12 +23,12 @@ namespace Azurite.Storehouse.Data
     
         public System.Guid Id { get; set; }
         public System.Guid CategoryId { get; set; }
-        public string Number { get; set; }
+        public string Model { get; set; }
         public string Name { get; set; }
         public string NameEN { get; set; }
-        public string Model { get; set; }
         public string Description { get; set; }
         public string DescriptionEN { get; set; }
+        public int Quantity { get; set; }
         public double Price { get; set; }
         public double Discount { get; set; }
         public bool Active { get; set; }

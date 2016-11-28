@@ -11,6 +11,7 @@ namespace Azurite.Storehouse.Wrappers
     public class OrderViewModel : IMap, IMapFrom<Order>, IHaveCustomMappings
     {
         public Guid Id { get; set; }
+        public string Number { get; set; }
         public Guid CustomerId { get; set; }
         public int StatusId { get; set; }
         public double Total { get; set; }

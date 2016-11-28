@@ -152,3 +152,17 @@ img[src=''] {
     overflow-y: auto;
     max-height: calc(100% - 60px);
 }
+
+.maxW100 {
+    max-width: 100%;
+}
+
+.minW100 {
+    min-width: 100%;
+}
+
+.orderNotes { 
+    min-width: 100%;
+    max-width: 100%;
+    min-height: 75px;
+}

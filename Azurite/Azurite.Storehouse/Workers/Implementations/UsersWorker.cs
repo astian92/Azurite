@@ -39,25 +39,45 @@ namespace Azurite.Storehouse.Workers.Implementations
                 .ProjectTo<UserW>();
         }
 
-        public void Add(UserW userW)
+        public ITicket Add(UserW userW)
         {
-            var user = Mapper.Map<User>(userW);
-            user.Id = Guid.NewGuid();
-            rep.Add(user);
+            try
+            {
+                var user = Mapper.Map<User>(userW);
+                user.Id = Guid.NewGuid();
+                rep.Add(user);
 
-            rep.Save();
+                rep.Save();
+
+                return new Ticket(true);
+            }
+            catch (Exception exc)
+            {
+                ElmahHelper.Handle(exc);
+                return new Ticket(false, "Възникна проблем при добавянето на потребител!");
+            }
         }
 
-        public void Edit(UserW userW)
+        public ITicket Edit(UserW userW)
         {
-            var user = rep.Get(userW.Id);
+            try
+            {
+                var user = rep.Get(userW.Id);
 
-            user.Username = userW.Username;
-            user.Password = userW.Password;
-            user.FirstName = userW.FirstName;
-            user.LastName = userW.LastName;
+                user.Username = userW.Username;
+                user.Password = userW.Password;
+                user.FirstName = userW.FirstName;
+                user.LastName = userW.LastName;
 
-            rep.Save();
+                rep.Save();
+
+                return new Ticket(true);
+            }
+            catch (Exception exc)
+            {
+                ElmahHelper.Handle(exc);
+                return new Ticket(false, "Възникна проблем при промяната на потребител!");
+            }
         }
 
         public ITicket Delete(Guid Id)

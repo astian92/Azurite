@@ -13,6 +13,6 @@ namespace Azurite.Storehouse.Workers.Contracts
         IQueryable<OrderW> GetAll();
         IQueryable<OrderViewModel> GetAllVm();
         IList<OrderStatusW> GetOrderStatuses();
-        ITicket ChangeStatus(Guid orderid, int statusId);
+        ITicket Update(Guid orderid, int statusId, string notes);
     }
 }

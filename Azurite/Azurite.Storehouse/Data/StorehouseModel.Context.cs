@@ -31,10 +31,11 @@ namespace Azurite.Storehouse.Data
         public virtual DbSet<OrderStatus> OrderStatuses { get; set; }
         public virtual DbSet<CategoryAttribute> CategoryAttributes { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
-        public virtual DbSet<Order> Orders { get; set; }
         public virtual DbSet<SecurityKey> SecurityKeys { get; set; }
         public virtual DbSet<ProductImage> ProductImages { get; set; }
-        public virtual DbSet<OrderedProduct> OrderedProducts { get; set; }
+        public virtual DbSet<CurrencyCours> CurrencyCourses { get; set; }
         public virtual DbSet<Product> Products { get; set; }
+        public virtual DbSet<OrderedProduct> OrderedProducts { get; set; }
+        public virtual DbSet<Order> Orders { get; set; }
     }
 }

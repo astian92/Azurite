@@ -49,7 +49,14 @@ namespace Azurite.Storehouse.Controllers
                 return View(userW);
             }
 
-            worker.Add(userW);
+            var ticket = worker.Add(userW);
+
+            if (ticket.IsOK == false)
+            {
+                ModelState.AddModelError("Add Error", ticket.Message);
+                return View(userW);
+            }
+
             return Redirect(Url.Action<UsersController>(c => c.Index()));
         }
 
@@ -70,7 +77,14 @@ namespace Azurite.Storehouse.Controllers
                 return View(userW);
             }
 
-            worker.Edit(userW);
+            var ticket = worker.Edit(userW);
+
+            if (ticket.IsOK == false)
+            {
+                ModelState.AddModelError("Edit Error", ticket.Message);
+                return View(userW);
+            }
+
             return Redirect(Url.Action<UsersController>(c => c.Index()));
         }
 

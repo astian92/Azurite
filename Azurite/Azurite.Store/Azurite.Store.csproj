@@ -178,6 +178,9 @@
     <Compile Include="Data\CategoryAttribute.cs">
       <DependentUpon>StoreModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Data\CurrencyCours.cs">
+      <DependentUpon>StoreModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Data\Customer.cs">
       <DependentUpon>StoreModel.tt</DependentUpon>
     </Compile>

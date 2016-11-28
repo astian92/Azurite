@@ -12,6 +12,7 @@ namespace Azurite.Store.Wrappers
     public class OrderW : IMap, IMapFrom<Order>, IHaveCustomMappings
     {
         public Guid Id { get; set; }
+        public string Number { get; set; }
         public Guid CustomerId { get; set; }
         public int StatusId { get; set; }
 

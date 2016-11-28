@@ -11,8 +11,8 @@ namespace Azurite.Storehouse.Workers.Contracts
     {
         UserW Get(Guid Id);
         IQueryable<UserW> GetAll();
-        void Add(UserW userW);
-        void Edit(UserW userW);
+        ITicket Add(UserW userW);
+        ITicket Edit(UserW userW);
         ITicket Delete(Guid Id);
     }
 }

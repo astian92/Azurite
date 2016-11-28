@@ -158,15 +158,14 @@ namespace Azurite.Storehouse.Workers.Implementations
 
                 //1 Update all properties
                 product.CategoryId = productW.CategoryId;
-                product.Number = productW.Number;
+                product.Model = productW.Model;
                 product.Name = productW.Name;
                 product.NameEN = productW.NameEN;
-                product.Model = productW.Model;
                 product.Description = productW.Description;
                 product.DescriptionEN = productW.DescriptionEN;
                 product.Price = productW.Price;
                 product.Discount = productW.Discount;
-                //product.Quantity = productW.Quantity;
+                product.Quantity = productW.Quantity;
                 product.Active = productW.Active;
 
                 foreach (var attribute in productW.ProductAttributes)
@@ -277,7 +276,7 @@ namespace Azurite.Storehouse.Workers.Implementations
                 if (result == false)
                 {
                     //silent fail
-                    var exc = new Exception("The images for product: product: " + product.Number + "were not deleted correctly!");
+                    var exc = new Exception("The images for product: product: " + product.Model + " were not deleted correctly!");
                     ElmahHelper.Handle(exc);
                 }
 

@@ -10,21 +10,21 @@
 <div class="row top_tiles" style="margin: 10px 0;">
     <div class="col-md-3 col-sm-3 col-xs-6 tile">
         <span>Годишни приходи</span>
-        <h2>$ <span id="year_income"></span></h2>
+        <h2><span id="year_income"></span> лв</h2>
         <span class="year_income" style="height: 160px;">
             <canvas width="200" height="60" style="display: inline-block; vertical-align: top; width: 94px; height: 30px;"></canvas>
         </span>
     </div>
     <div class="col-md-3 col-sm-3 col-xs-6 tile">
         <span>Приходи последните 30 дни</span>
-        <h2>$ <span id="month_income"></span></h2>
+        <h2><span id="month_income"></span> лв</h2>
         <span class="month_income" style="height: 160px;">
             <canvas width="200" height="60" style="display: inline-block; vertical-align: top; width: 94px; height: 30px;"></canvas>
         </span>
     </div>
     <div class="col-md-3 col-sm-3 col-xs-6 tile">
         <span>Седмични приходи</span>
-        <h2>$ <span id="week_income"></span></h2>
+        <h2><span id="week_income"></span> лв</h2>
         <span class="week_income" style="height: 160px;">
             <canvas width="200" height="60" style="display: inline-block; vertical-align: top; width: 94px; height: 30px;"></canvas>
         </span>
@@ -51,7 +51,7 @@
                     {
                         <tr>
                             <td>
-                                <a href="@(Url.Action<OrdersController>(c => c.Details(order.Id)))">@order.CustomerName</a>
+                                <a href="@(Url.Action<OrdersController>(c => c.Details(order.Id)))">@order.Number</a>
                             </td>
                             <td>@order.Total</td>
                             <td>@order.DateStr</td>
@@ -73,7 +73,7 @@
                     {
                         <tr>
                             <td>
-                                <a href="@(Url.Action<OrdersController>(c => c.Details(order.Id)))">@order.CustomerName</a>
+                                <a href="@(Url.Action<OrdersController>(c => c.Details(order.Id)))">@order.Number</a>
                             </td>
                             <td>@order.Total</td>
                             <td>@order.DateStr</td>
@@ -95,7 +95,7 @@
                     {
                         <tr>
                             <td>
-                                <a href="@(Url.Action<OrdersController>(c => c.Details(order.Id)))">@order.CustomerName</a>
+                                <a href="@(Url.Action<OrdersController>(c => c.Details(order.Id)))">@order.Number</a>
                             </td>
                             <td>@order.Total</td>
                             <td>@order.DateStr</td>
@@ -152,23 +152,22 @@
     </div>
 </div>
 
-@*<div class="row">
+<div class="row">
     <div class="col-md-4 col-sm-4 col-xs-12">
         <div class="x_panel tile fixed_height_320">
             <div class="x_title">
-                <h2>Най-продавани (за годината)</h2>
+                <h2>Намаляващи количества</h2>
                 <div class="clearfix"></div>
             </div>
             <div class="x_content fixed_height_content">
                 <table class="table table-striped">
-                    @foreach (var order in Model.IssuedOrders)
+                    @foreach (var product in Model.DecreasingQuantityProducts)
                     {
                         <tr>
                             <td>
-                                <a href="@(Url.Action<OrdersController>(c => c.Details(order.Id)))">@order.CustomerName</a>
+                                <a href="@(Url.Action<ProductsController>(c => c.Edit(product.Id)))">@product.Model</a>
                             </td>
-                            <td>@order.Total</td>
-                            <td>@order.DateStr</td>
+                            <td>@product.Name</td>
                         </tr>
                     }
                 </table>
@@ -178,19 +177,18 @@
     <div class="col-md-4 col-sm-4 col-xs-12">
         <div class="x_panel tile fixed_height_320">
             <div class="x_title">
-                <h2>Най-продавани (за месеца)</h2>
+                <h2>Изчерпани</h2>
                 <div class="clearfix"></div>
             </div>
             <div class="x_content fixed_height_content">
                 <table class="table table-striped">
-                    @foreach (var order in Model.IssuedOrders)
+                    @foreach (var product in Model.ZeroQuantityProducts)
                     {
                         <tr>
                             <td>
-                                <a href="@(Url.Action<OrdersController>(c => c.Details(order.Id)))">@order.CustomerName</a>
+                                <a href="@(Url.Action<ProductsController>(c => c.Edit(product.Id)))">@product.Model</a>
                             </td>
-                            <td>@order.Total</td>
-                            <td>@order.DateStr</td>
+                            <td>@product.Name</td>
                         </tr>
                     }
                 </table>
@@ -200,26 +198,25 @@
     <div class="col-md-4 col-sm-4 col-xs-12">
         <div class="x_panel tile fixed_height_320">
             <div class="x_title">
-                <h2>Най-продавани (за седмицата)</h2>
+                <h2>Неактивни</h2>
                 <div class="clearfix"></div>
             </div>
             <div class="x_content fixed_height_content">
                 <table class="table table-striped">
-                    @foreach (var order in Model.IssuedOrders)
+                    @foreach (var product in Model.InactiveProducts)
                     {
                         <tr>
                             <td>
-                                <a href="@(Url.Action<OrdersController>(c => c.Details(order.Id)))">@order.CustomerName</a>
+                                <a href="@(Url.Action<ProductsController>(c => c.Edit(product.Id)))">@product.Model</a>
                             </td>
-                            <td>@order.Total</td>
-                            <td>@order.DateStr</td>
+                            <td>@product.Name</td>
                         </tr>
                     }
                 </table>
             </div>
         </div>
     </div>
-</div>*@
+</div>
 
 
 @section scripts {

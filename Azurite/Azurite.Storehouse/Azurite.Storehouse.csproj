@@ -177,6 +177,7 @@
     <Compile Include="Config\WorkersDependencyConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
+    <Compile Include="Controllers\CurrencyController.cs" />
     <Compile Include="Controllers\CustomersController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\OrdersController.cs" />
@@ -186,6 +187,9 @@
       <DependentUpon>StorehouseModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Data\CategoryAttribute.cs">
+      <DependentUpon>StorehouseModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\CurrencyCours.cs">
       <DependentUpon>StorehouseModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Data\Customer.cs">
@@ -257,12 +261,14 @@
     <Compile Include="Services\Implementations\HttpService.cs" />
     <Compile Include="Workers\Contracts\IAccountWorker.cs" />
     <Compile Include="Workers\Contracts\ICategoriesWorker.cs" />
+    <Compile Include="Workers\Contracts\ICurrencyWorker.cs" />
     <Compile Include="Workers\Contracts\ICustomersWorker.cs" />
     <Compile Include="Workers\Contracts\IOrdersWorker.cs" />
     <Compile Include="Workers\Contracts\IProductsWorker.cs" />
     <Compile Include="Workers\Contracts\IUsersWorker.cs" />
     <Compile Include="Workers\Implementations\AccountWorker.cs" />
     <Compile Include="Workers\Implementations\CategoriesWorker.cs" />
+    <Compile Include="Workers\Implementations\CurrencyWorker.cs" />
     <Compile Include="Workers\Implementations\CustomersWorker.cs" />
     <Compile Include="Workers\Implementations\OrdersWorker.cs" />
     <Compile Include="Workers\Implementations\ProductsWorker.cs" />
@@ -271,6 +277,7 @@
     <Compile Include="Wrappers\CategoryAttributeW.cs" />
     <Compile Include="Wrappers\CategoryNoParent.cs" />
     <Compile Include="Wrappers\CategoryW.cs" />
+    <Compile Include="Wrappers\CurrencyCoursW.cs" />
     <Compile Include="Wrappers\CustomerIndexViewModel.cs" />
     <Compile Include="Wrappers\CustomerW.cs" />
     <Compile Include="Wrappers\Dashboard\MiniOrder.cs" />
@@ -1022,6 +1029,8 @@
     <Content Include="Views\Orders\Index.cshtml" />
     <Content Include="Views\Orders\Details.cshtml" />
     <Content Include="Views\Products\Add.cshtml" />
+    <Content Include="Views\Currency\Index.cshtml" />
+    <Content Include="Views\Currency\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

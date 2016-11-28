@@ -16,9 +16,9 @@ namespace Azurite.Storehouse.Wrappers
         [Display(Name = "Категория")]
         public Guid CategoryId { get; set; }
 
-        [Required(ErrorMessage = "Полето \"Номер\" е задължително!")]
-        [Display(Name = "Номер")]
-        public string Number { get; set; }
+        [Required(ErrorMessage = "Полето \"Модел\" е задължително!")]
+        [Display(Name = "Модел")]
+        public string Model { get; set; }
 
         [Required(ErrorMessage = "Полето \"Име\" е задължително!")]
         [Display(Name = "Име")]
@@ -28,10 +28,6 @@ namespace Azurite.Storehouse.Wrappers
         [Display(Name = "Име-EN")]
         public string NameEN { get; set; }
 
-        //[Required(ErrorMessage = "Полето \"Модел\" е задължително!")]
-        [Display(Name = "Модел")]
-        public string Model { get; set; }
-
         //[Required(ErrorMessage = "Полето \"Описание\" е задължително!")]
         [Display(Name = "Описание")]
         public string Description { get; set; }
@@ -39,6 +35,11 @@ namespace Azurite.Storehouse.Wrappers
         //[Required(ErrorMessage = "Полето \"Описание-EN\" е задължително!")]
         [Display(Name = "Описание-EN")]
         public string DescriptionEN { get; set; }
+
+        [Range(0, int.MaxValue, ErrorMessage = "Количеството може да е само положително число!")]
+        [Required(ErrorMessage = "Полето \"Количество\" е задължително!")]
+        [Display(Name = "Количество")]
+        public int Quantity { get; set; }
 
         //, ErrorMessageResourceName = "Полето \"Цена\" трябва да е число!"
         [Required(ErrorMessage = "Полето \"Цена\" е задължително!")]

@@ -38,6 +38,11 @@ var MagicStrings = (function () {
     dashboard.CreateAction("WeeklyIncome");
     dashboard.CreateAction("SoldItems");
     
+    var currency = CreateController("Currency");
+    currency.CreateAction("GetCurrencies");
+    currency.CreateAction("Add");
+    currency.CreateAction("Edit");
+    currency.CreateAction("Delete");
   
     return {
         CreateController: CreateController,

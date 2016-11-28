@@ -21,11 +21,13 @@ namespace Azurite.Store.Data
         }
     
         public System.Guid Id { get; set; }
+        public string Number { get; set; }
         public System.Guid CustomerId { get; set; }
         public int StatusId { get; set; }
         public double Total { get; set; }
         public string Comment { get; set; }
         public System.DateTime Date { get; set; }
+        public string Notes { get; set; }
     
         public virtual Customer Customer { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

@@ -85,9 +85,9 @@ namespace Azurite.Storehouse.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult ChangeStatus(Guid orderId, int statusId)
+        public ActionResult Update(Guid orderId, int statusId, string notes)
         {
-            var ticket = worker.ChangeStatus(orderId, statusId);
+            var ticket = worker.Update(orderId, statusId, notes);
 
             if (ticket.IsOK == false)
             {

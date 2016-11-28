@@ -25,6 +25,7 @@
                         <table id="OrdersTable" class="table table-striped table-bordered table-hover dataTables-example">
                             <thead>
                                 <tr>
+                                    <th>Номер</th>
                                     <th>Състояние</th>
                                     <th>Клиент</th>
                                     <th>Сума</th>
@@ -62,6 +63,7 @@
                     orderStatusId: 0 //by default - All
                 },
                 columns: [
+                    { "data": "Number" },
                     { "data": "OrderStatus.DisplayName" },
                     { "data": "CustomerName" },
                     { "data": "Total" },

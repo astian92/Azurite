@@ -17,7 +17,7 @@ namespace Azurite.Storehouse.Data
         public System.Guid Id { get; set; }
         public System.Guid OrderId { get; set; }
         public System.Guid ActualProductId { get; set; }
-        public string ProductNumber { get; set; }
+        public string ProductModel { get; set; }
         public string ProductName { get; set; }
         public string ProductNameEN { get; set; }
         public double Price { get; set; }

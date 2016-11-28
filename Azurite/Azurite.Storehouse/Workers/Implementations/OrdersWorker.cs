@@ -53,65 +53,70 @@ namespace Azurite.Storehouse.Workers.Implementations
                 .ProjectTo<OrderStatusW>().ToList();
         }
 
-        public ITicket ChangeStatus(Guid orderId, int statusId)
+        public ITicket Update(Guid orderId, int statusId, string notes)
         {
             var order = rep.Get(orderId);
 
-            //if (order.StatusId != statusId)
-            //{
-            //    var ticket = HandleProductQuantities(order, statusId);
+            if (order.StatusId != statusId)
+            {
+                var ticket = HandleProductQuantities(order, statusId);
 
-                //if (ticket.IsOK)
-                //{
+                if (ticket.IsOK)
+                {
                     order.StatusId = statusId;
                     rep.Save();
-                //}
+                }
 
-            //    return ticket;
-            //}
+                return ticket;
+            }
+            else if (order.Notes != notes)
+            {
+                order.Notes = notes;
+                rep.Save();
+            }
 
             return new Ticket(true);
         }
 
-        //private ITicket HandleProductQuantities(Order order, int statusId)
-        //{
-        //    //if it was cancelled but then it got un-cancelled
-        //    if (statusId != (int)OrderStatuses.Cancelled)
-        //    {
-        //        if (order.StatusId == (int)OrderStatuses.Cancelled)
-        //        {
-        //            var products = productsRep.GetAll();
-        //            foreach (var orderedProduct in order.OrderedProducts)
-        //            {
-        //                if (products.Any(p => p.Id == orderedProduct.ActualProductId))
-        //                {
-        //                    //remove the ordered quantity from the actual product
-        //                    var product = products.Single(p => p.Id == orderedProduct.ActualProductId);
-        //                    product.Quantity -= orderedProduct.Quantity;
+        private ITicket HandleProductQuantities(Order order, int statusId)
+        {
+            //if it was cancelled but then it got un-cancelled
+            if (statusId != (int)OrderStatuses.Cancelled)
+            {
+                if (order.StatusId == (int)OrderStatuses.Cancelled)
+                {
+                    var products = productsRep.GetAll();
+                    foreach (var orderedProduct in order.OrderedProducts)
+                    {
+                        if (products.Any(p => p.Id == orderedProduct.ActualProductId))
+                        {
+                            //remove the ordered quantity from the actual product
+                            var product = products.Single(p => p.Id == orderedProduct.ActualProductId);
+                            product.Quantity -= orderedProduct.Quantity;
 
-        //                    if (product.Quantity < 0)
-        //                    {
-        //                        return new Ticket(false, "Не е налично достатъчно количество за обработване на тази поръчка от продукт: " + product.Number);
-        //                    }
-        //                }
-        //            }
-        //        }
-        //    }
-        //    else //was just cancelled
-        //    {
-        //        var products = productsRep.GetAll();
-        //        foreach (var orderedProduct in order.OrderedProducts)
-        //        {
-        //            if (products.Any(p => p.Id == orderedProduct.ActualProductId))
-        //            {
-        //                //add the ordered quantity back to the actual product
-        //                var product = products.Single(p => p.Id == orderedProduct.ActualProductId);
-        //                product.Quantity += orderedProduct.Quantity;
-        //            }
-        //        }
-        //    }
+                            if (product.Quantity < 0)
+                            {
+                                return new Ticket(false, "Не е налично достатъчно количество за обработване на тази поръчка от продукт: " + product.Model);
+                            }
+                        }
+                    }
+                }
+            }
+            else //was just cancelled
+            {
+                var products = productsRep.GetAll();
+                foreach (var orderedProduct in order.OrderedProducts)
+                {
+                    if (products.Any(p => p.Id == orderedProduct.ActualProductId))
+                    {
+                        //add the ordered quantity back to the actual product
+                        var product = products.Single(p => p.Id == orderedProduct.ActualProductId);
+                        product.Quantity += orderedProduct.Quantity;
+                    }
+                }
+            }
 
-        //    return new Ticket(true);
-        //}
+            return new Ticket(true);
+        }
     }
 }

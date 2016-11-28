@@ -47,8 +47,12 @@ namespace Azurite.Storehouse.Controllers
                 .ProjectTo<MiniOrder>().ToList();
 
             //products
-            //model.DecreasingQuantityProducts = db.Products.Where(p => p.Quantity <= 5)
-            //    .ProjectTo<MiniProduct>().ToList();
+            model.DecreasingQuantityProducts = db.Products.Where(p => p.Quantity <= 5 && p.Quantity > 0)
+                .ProjectTo<MiniProduct>().ToList();
+            model.ZeroQuantityProducts = db.Products.Where(p => p.Quantity == 0)
+                .ProjectTo<MiniProduct>().ToList();
+            model.InactiveProducts = db.Products.Where(p => p.Active == false)
+                .ProjectTo<MiniProduct>().ToList();
 
             return View(model);
         }
