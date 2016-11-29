@@ -117,8 +117,28 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="CompanyDescription" xml:space="preserve">
+    <value>&lt;p&gt;
+                Raddiana Gold company was established in 1999 in city Ruse.
+            &lt;/p&gt;
+            &lt;p&gt;
+                Beginning with the sale of gold jewelry today the company has expanded its product range to jewelry of silver and steel, silver icons and paintings, souvenirs and gifts, watches and clocks, dinner sets, decorations for the home and more.
+            &lt;/p&gt;
+            &lt;p&gt;
+                17 years Radianna Gold is able to satisfy the desires of every taste, bringing a huge variety of products of proven producers from Italy, Spain, Greece, Turkey and Poland.
+            &lt;/p&gt;
+            &lt;p&gt;
+                Besides retail, the company offers products wholesale working with colleagues across the country.
+            &lt;/p&gt;
+            &lt;p&gt;
+                Radianna Gold mission is to bring style, glamor and beauty to each client, offering high quality products and services at the best possible prices.
+            &lt;/p&gt;</value>
+  </data>
   <data name="PageHeader" xml:space="preserve">
     <value>Stores</value>
+  </data>
+  <data name="PageHeader1" xml:space="preserve">
+    <value>About us</value>
   </data>
   <data name="StoreAddress" xml:space="preserve">
     <value>Sofia, Costa Lulchev 52 Street, Sky City Mall</value>
@@ -181,49 +201,49 @@
     <value>radiannagold@abv.bg</value>
   </data>
   <data name="StorePhone" xml:space="preserve">
-    <value>0896780278 / 0896780288</value>
+    <value>0892 21 01 72</value>
   </data>
   <data name="StorePhone1" xml:space="preserve">
-    <value>0896780278 / 0896780288</value>
+    <value>0896 78 02 79</value>
   </data>
   <data name="StorePhone2" xml:space="preserve">
-    <value>0896780278 / 0896780288</value>
+    <value>0896 78 02 82</value>
   </data>
   <data name="StorePhone3" xml:space="preserve">
-    <value>0896780278 / 0896780288</value>
+    <value>0896 78 02 83</value>
   </data>
   <data name="StorePhone4" xml:space="preserve">
-    <value>0896780278 / 0896780288</value>
+    <value>0893 35 39 63</value>
   </data>
   <data name="StoreWeekendHours" xml:space="preserve">
-    <value>saturday – sunday: 10.00 – 19.00 h.</value>
+    <value />
   </data>
   <data name="StoreWeekendHours1" xml:space="preserve">
-    <value>saturday – sunday: 10.00 – 19.00 h.</value>
+    <value />
   </data>
   <data name="StoreWeekendHours2" xml:space="preserve">
-    <value>saturday – sunday: 10.00 – 19.00 h.</value>
+    <value>saturday: 10.00 – 18.00 h.</value>
   </data>
   <data name="StoreWeekendHours3" xml:space="preserve">
-    <value>saturday – sunday: 10.00 – 19.00 h.</value>
+    <value>saturday: 10.00 – 18.00 h.</value>
   </data>
   <data name="StoreWeekendHours4" xml:space="preserve">
-    <value>saturday – sunday: 10.00 – 19.00 h.</value>
+    <value />
   </data>
   <data name="StoreWorkWeekHours" xml:space="preserve">
-    <value>monday – friday: 10.00 – 20.00 h.</value>
+    <value>monday - sunday: 10.00 – 21.00 h.</value>
   </data>
   <data name="StoreWorkWeekHours1" xml:space="preserve">
-    <value>monday – friday: 10.00 – 20.00 h.</value>
+    <value>monday - saturday: 10.00 – 19.00 h.</value>
   </data>
   <data name="StoreWorkWeekHours2" xml:space="preserve">
-    <value>monday – friday: 10.00 – 20.00 h.</value>
+    <value>monday - friday: 10.00 – 19.00 h.</value>
   </data>
   <data name="StoreWorkWeekHours3" xml:space="preserve">
-    <value>monday – friday: 10.00 – 20.00 h.</value>
+    <value>monday - friday: 10.00 – 19.00 h.</value>
   </data>
   <data name="StoreWorkWeekHours4" xml:space="preserve">
-    <value>monday – friday: 10.00 – 20.00 h.</value>
+    <value>monday - sunday: 10.00 – 21.00 h.</value>
   </data>
   <data name="Title" xml:space="preserve">
     <value>Get in touch</value>

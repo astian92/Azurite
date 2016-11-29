@@ -117,8 +117,33 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="CompanyDescription" xml:space="preserve">
+    <value>&lt;p&gt;
+                Фирма Радианна Ювелир ООД е създадена през 1999 година в град Русе.
+            &lt;/p&gt;
+            &lt;p&gt;
+                Започвайки с продажба на златни бижута днес компанията е разширила своята продуктова
+                гама до бижута от сребро и стомана, сребърни икони и картини, сувенири и подаръци,
+                ръчни и стенни часовници, сервизи за хранене, декорации за дома и др.
+            &lt;/p&gt;
+            &lt;p&gt;
+                Вече 17 години Радианна Ювелир успява да задоволи желанията на всеки вкус, внасяйки
+                огромно разнообразие от продукти на доказани производители от Италия, Испания, Гърция,
+                Турция и Полша.
+            &lt;/p&gt;
+            &lt;p&gt;
+                Освен на дребно, фирмата предлага и стоки на едро като работи с колеги от цялата страна.
+            &lt;/p&gt;
+            &lt;p&gt;
+                Мисията на Радианна Ювелир е да донесе стил, блясък и красота до всеки един клиент,
+                предлагайки висококачествени продукти и услуги на максимално добри цени.
+            &lt;/p&gt;</value>
+  </data>
   <data name="PageHeader" xml:space="preserve">
     <value>Магазини</value>
+  </data>
+  <data name="PageHeader1" xml:space="preserve">
+    <value>За нас</value>
   </data>
   <data name="StoreAddress" xml:space="preserve">
     <value>гр. София, Коста Лулчев 52, Скай Сити Мол</value>
@@ -139,7 +164,7 @@
     <value>Радианна Голд София</value>
   </data>
   <data name="StoreCaption1" xml:space="preserve">
-    <value>Радианна Голд Бургас</value>
+    <value>Радианна Голд Габрово</value>
   </data>
   <data name="StoreCaption2" xml:space="preserve">
     <value>Радианна Голд Русе 1</value>
@@ -181,49 +206,49 @@
     <value>radiannagold@abv.bg</value>
   </data>
   <data name="StorePhone" xml:space="preserve">
-    <value>0896780278 / 0896780288</value>
+    <value>0892 21 01 72</value>
   </data>
   <data name="StorePhone1" xml:space="preserve">
-    <value>0896780278 / 0896780288</value>
+    <value>0896 78 02 79</value>
   </data>
   <data name="StorePhone2" xml:space="preserve">
-    <value>0896780278 / 0896780288</value>
+    <value>0896 78 02 82</value>
   </data>
   <data name="StorePhone3" xml:space="preserve">
-    <value>0896780278 / 0896780288</value>
+    <value>0896 78 02 83</value>
   </data>
   <data name="StorePhone4" xml:space="preserve">
-    <value>0896780278 / 0896780288</value>
+    <value>0893 35 39 63</value>
   </data>
   <data name="StoreWeekendHours" xml:space="preserve">
-    <value>събота – неделя: 10.00 – 19.00ч.</value>
+    <value />
   </data>
   <data name="StoreWeekendHours1" xml:space="preserve">
-    <value>събота – неделя: 10.00 – 19.00ч.</value>
+    <value />
   </data>
   <data name="StoreWeekendHours2" xml:space="preserve">
-    <value>събота – неделя: 10.00 – 19.00ч.</value>
+    <value>събота: 10.00 – 18.00ч.</value>
   </data>
   <data name="StoreWeekendHours3" xml:space="preserve">
-    <value>събота – неделя: 10.00 – 19.00ч.</value>
+    <value>събота: 10.00 – 18.00ч.</value>
   </data>
   <data name="StoreWeekendHours4" xml:space="preserve">
-    <value>събота – неделя: 10.00 – 19.00ч.</value>
+    <value />
   </data>
   <data name="StoreWorkWeekHours" xml:space="preserve">
-    <value>понеделник – петък: 10.00 – 20.00 ч.</value>
+    <value>понеделник – неделя: 10.00 – 21.00 ч.</value>
   </data>
   <data name="StoreWorkWeekHours1" xml:space="preserve">
-    <value>понеделник – петък: 10.00 – 20.00 ч.</value>
+    <value>понеделник – събота: 10.00 – 19.00 ч.</value>
   </data>
   <data name="StoreWorkWeekHours2" xml:space="preserve">
-    <value>понеделник – петък: 10.00 – 20.00 ч.</value>
+    <value>понеделник – петък: 10.00 – 19.00 ч.</value>
   </data>
   <data name="StoreWorkWeekHours3" xml:space="preserve">
-    <value>понеделник – петък: 10.00 – 20.00 ч.</value>
+    <value>понеделник – петък: 10.00 – 19.00 ч.</value>
   </data>
   <data name="StoreWorkWeekHours4" xml:space="preserve">
-    <value>понеделник – петък: 10.00 – 20.00 ч.</value>
+    <value>понеделник – неделя: 10.00 – 21.00 ч.</value>
   </data>
   <data name="Title" xml:space="preserve">
     <value>Свържете се с нас</value>

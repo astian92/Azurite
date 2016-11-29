@@ -117,61 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AddBtn" xml:space="preserve">
-    <value>ADD TO CART</value>
-  </data>
-  <data name="Collections" xml:space="preserve">
-    <value>Collections</value>
-  </data>
-  <data name="CompanyDescription" xml:space="preserve">
-    <value>Raddiana Gold company was established in 1999. The activity which is involved is construction of gold products and retail products of gold. The company sells silver jewelry, steel watches, silver icons, souvenirs, gifts, ceramics and porcelain wholesale and retail, which are imported from Italy and Greece.</value>
-  </data>
-  <data name="CompanyName" xml:space="preserve">
-    <value>Radianna Gold</value>
-  </data>
-  <data name="Contact" xml:space="preserve">
-    <value>Contact</value>
-  </data>
-  <data name="ContinueShopBtn" xml:space="preserve">
-    <value>Continue Shopping</value>
-  </data>
-  <data name="Currency" xml:space="preserve">
-    <value>Currency</value>
-  </data>
-  <data name="Follow" xml:space="preserve">
-    <value>Follow</value>
-  </data>
-  <data name="Home" xml:space="preserve">
-    <value>Home</value>
-  </data>
-  <data name="Language" xml:space="preserve">
-    <value>Language</value>
-  </data>
-  <data name="LanguageAbbr" xml:space="preserve">
-    <value>EN</value>
-  </data>
-  <data name="LanguageOptionBG" xml:space="preserve">
-    <value>Bulgarian</value>
-  </data>
-  <data name="LanguageOptionEN" xml:space="preserve">
-    <value>English</value>
-  </data>
-  <data name="Promotions" xml:space="preserve">
-    <value>Special offers</value>
-  </data>
-  <data name="RemoveBtn" xml:space="preserve">
-    <value>Remove</value>
-  </data>
-  <data name="ShoppingCart" xml:space="preserve">
-    <value>Shopping Cart</value>
-  </data>
-  <data name="Subscribe" xml:space="preserve">
-    <value>Subscribe</value>
-  </data>
-  <data name="SubscribePlaceholder" xml:space="preserve">
-    <value>Enter your email address....</value>
-  </data>
-  <data name="SubscribeTxt" xml:space="preserve">
-    <value>Sign up to get the latest on sales, new releases and more …</value>
+  <data name="PageHeader" xml:space="preserve">
+    <value>Special Offers</value>
   </data>
 </root>

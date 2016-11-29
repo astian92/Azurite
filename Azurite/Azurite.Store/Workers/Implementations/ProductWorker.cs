@@ -99,6 +99,19 @@ namespace Azurite.Store.Workers.Implementations
 
             return wrapped.AsQueryable();
         }
+        public IQueryable<ProductW> GetAllPromoProducts()
+        {
+            var products = rep.GetAll();
+
+            var wrapped = new List<ProductW>();
+            foreach (var product in products.Where(x => x.Active && x.Discount > 0))
+            {
+                var mapped = Mapper.Map<ProductW>(product);
+                wrapped.Add(mapped);
+            }
+
+            return wrapped.AsQueryable();
+        }
 
         public IQueryable<ProductW> GetRelatedProducts(Guid categoryId)
         {
@@ -113,5 +126,6 @@ namespace Azurite.Store.Workers.Implementations
 
             return wrapped.AsQueryable();
         }
+
     }
 }

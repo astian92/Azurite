@@ -70,6 +70,15 @@ namespace ViewRes {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Продукти.
+        /// </summary>
+        public static string Collections {
+            get {
+                return ResourceManager.GetString("Collections", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Фирма Радианна Ювелир е създадена през 1999г. Дейността с която се занимава е изработка на златни изделия, както и търговия на дребно с изделия от злато. Фирмата продава и бижута от сребро, стомана, часовници, сребърни икони, сувенири, подаръци, керамика и порцелан на едро и дребно, които са внос от Италия и Гърция..
         /// </summary>
         public static string CompanyDescription {
@@ -165,6 +174,15 @@ namespace ViewRes {
         public static string LanguageOptionEN {
             get {
                 return ResourceManager.GetString("LanguageOptionEN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Специални оферти.
+        /// </summary>
+        public static string Promotions {
+            get {
+                return ResourceManager.GetString("Promotions", resourceCulture);
             }
         }
         

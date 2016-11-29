@@ -1,23 +1,4 @@
-﻿function AddToCart(id, quantity) {
-    $.ajax({
-        url: MVC.ShoppingCart.AddProductFull + '?id=' + id + '&quantity=' + quantity,
-        dataType: 'html',
-        success: function (data) {
-            var res = JSON.parse(data);
-            if (res === 'ok') {
-                var txt = 'Добавен';
-                var cookieVal = window.cookieJar("Language");
-                if (cookieVal === 'en') {
-                    txt = 'ADDED';
-                }
-
-                $('button[productId=' + id + ']').text(txt);
-            }
-        }
-    });
-}
-
-function GetRelatedProducts() {
+﻿function GetRelatedProducts() {
     var categoryId = $('#categoryId').val();
     $.ajax({
         url: MVC.Products.GetRelatedProductsFull + '?categoryId=' + categoryId,
@@ -29,13 +10,6 @@ function GetRelatedProducts() {
 }
 
 $(document).ready(function () {
-    $('.btn-cart').click(function () {
-        var id = $(this).attr('productId');
-        var quantity = $('#qty_' + id).val();
-
-        AddToCart(id, quantity);
-    });
-
     $(".img-preview").elevateZoom({
         tint: true, tintColour: '#C7B56F', tintOpacity: 0.5,
         zoomWindowFadeIn: 500,

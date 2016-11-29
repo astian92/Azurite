@@ -12,6 +12,7 @@ namespace Azurite.Store.Workers.Contracts
         ProductW GetProduct(Guid productId);
         IQueryable<CategoryW> GetSubCategories(Guid categoryId);
         IQueryable<ProductW> GetPromoProducts();
+        IQueryable<ProductW> GetAllPromoProducts();
         IQueryable<ProductW> GetRelatedProducts(Guid categoryId);
     }
 }

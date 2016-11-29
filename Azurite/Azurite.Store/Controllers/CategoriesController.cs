@@ -23,6 +23,11 @@ namespace Azurite.Store.Controllers
             return View(category);
         }
 
+        public ActionResult Promotions()
+        {
+            return View();
+        }
+
         public ActionResult GetBaseCategories()
         {
             var categories = worker.GetBaseCategories();
@@ -35,11 +40,11 @@ namespace Azurite.Store.Controllers
             return PartialView(categories);
         }
 
-        public ActionResult GetCategoryTree(Guid categoryId)
+        public ActionResult GetCategoryTree(Guid? categoryId)
         {
             var categories = worker.GetAll();
 
-            ViewBag.categoryId = categoryId;
+            ViewBag.categoryId = categoryId ?? Guid.Empty;
             return PartialView(categories);
         }
 

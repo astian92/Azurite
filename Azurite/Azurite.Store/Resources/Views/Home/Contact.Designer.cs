@@ -61,11 +61,38 @@ namespace ViewRes {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &lt;p&gt;
+        ///                Фирма Радианна Ювелир ООД е създадена през 1999 година в град Русе.
+        ///            &lt;/p&gt;
+        ///            &lt;p&gt;
+        ///                Започвайки с продажба на златни бижута днес компанията е разширила своята продуктова
+        ///                гама до бижута от сребро и стомана, сребърни икони и картини, сувенири и подаръци,
+        ///                ръчни и стенни часовници, сервизи за хранене, декорации за дома и др.
+        ///            &lt;/p&gt;
+        ///            &lt;p&gt;
+        ///                Вече 17 години Радианна Ювелир успява да задово [rest of string was truncated]&quot;;.
+        /// </summary>
+        public static string CompanyDescription {
+            get {
+                return ResourceManager.GetString("CompanyDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Магазини.
         /// </summary>
         public static string PageHeader {
             get {
                 return ResourceManager.GetString("PageHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to За нас.
+        /// </summary>
+        public static string PageHeader1 {
+            get {
+                return ResourceManager.GetString("PageHeader1", resourceCulture);
             }
         }
         
@@ -124,7 +151,7 @@ namespace ViewRes {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Радианна Голд Бургас.
+        ///   Looks up a localized string similar to Радианна Голд Габрово.
         /// </summary>
         public static string StoreCaption1 {
             get {
@@ -250,7 +277,7 @@ namespace ViewRes {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 0896780278 / 0896780288.
+        ///   Looks up a localized string similar to 0892 21 01 72.
         /// </summary>
         public static string StorePhone {
             get {
@@ -259,7 +286,7 @@ namespace ViewRes {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 0896780278 / 0896780288.
+        ///   Looks up a localized string similar to 0896 78 02 79.
         /// </summary>
         public static string StorePhone1 {
             get {
@@ -268,7 +295,7 @@ namespace ViewRes {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 0896780278 / 0896780288.
+        ///   Looks up a localized string similar to 0896 78 02 82.
         /// </summary>
         public static string StorePhone2 {
             get {
@@ -277,7 +304,7 @@ namespace ViewRes {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 0896780278 / 0896780288.
+        ///   Looks up a localized string similar to 0896 78 02 83.
         /// </summary>
         public static string StorePhone3 {
             get {
@@ -286,7 +313,7 @@ namespace ViewRes {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 0896780278 / 0896780288.
+        ///   Looks up a localized string similar to 0893 35 39 63.
         /// </summary>
         public static string StorePhone4 {
             get {
@@ -295,7 +322,7 @@ namespace ViewRes {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to събота – неделя: 10.00 – 19.00ч..
+        ///   Looks up a localized string similar to .
         /// </summary>
         public static string StoreWeekendHours {
             get {
@@ -304,7 +331,7 @@ namespace ViewRes {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to събота – неделя: 10.00 – 19.00ч..
+        ///   Looks up a localized string similar to .
         /// </summary>
         public static string StoreWeekendHours1 {
             get {
@@ -313,7 +340,7 @@ namespace ViewRes {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to събота – неделя: 10.00 – 19.00ч..
+        ///   Looks up a localized string similar to събота: 10.00 – 18.00ч..
         /// </summary>
         public static string StoreWeekendHours2 {
             get {
@@ -322,7 +349,7 @@ namespace ViewRes {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to събота – неделя: 10.00 – 19.00ч..
+        ///   Looks up a localized string similar to събота: 10.00 – 18.00ч..
         /// </summary>
         public static string StoreWeekendHours3 {
             get {
@@ -331,7 +358,7 @@ namespace ViewRes {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to събота – неделя: 10.00 – 19.00ч..
+        ///   Looks up a localized string similar to .
         /// </summary>
         public static string StoreWeekendHours4 {
             get {
@@ -340,7 +367,7 @@ namespace ViewRes {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to понеделник – петък: 10.00 – 20.00 ч..
+        ///   Looks up a localized string similar to понеделник – неделя: 10.00 – 21.00 ч..
         /// </summary>
         public static string StoreWorkWeekHours {
             get {
@@ -349,7 +376,7 @@ namespace ViewRes {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to понеделник – петък: 10.00 – 20.00 ч..
+        ///   Looks up a localized string similar to понеделник – събота: 10.00 – 19.00 ч..
         /// </summary>
         public static string StoreWorkWeekHours1 {
             get {
@@ -358,7 +385,7 @@ namespace ViewRes {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to понеделник – петък: 10.00 – 20.00 ч..
+        ///   Looks up a localized string similar to понеделник – петък: 10.00 – 19.00 ч..
         /// </summary>
         public static string StoreWorkWeekHours2 {
             get {
@@ -367,7 +394,7 @@ namespace ViewRes {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to понеделник – петък: 10.00 – 20.00 ч..
+        ///   Looks up a localized string similar to понеделник – петък: 10.00 – 19.00 ч..
         /// </summary>
         public static string StoreWorkWeekHours3 {
             get {
@@ -376,7 +403,7 @@ namespace ViewRes {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to понеделник – петък: 10.00 – 20.00 ч..
+        ///   Looks up a localized string similar to понеделник – неделя: 10.00 – 21.00 ч..
         /// </summary>
         public static string StoreWorkWeekHours4 {
             get {

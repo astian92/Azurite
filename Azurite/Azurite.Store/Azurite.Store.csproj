@@ -254,6 +254,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>CategoriesIndex.en.resx</DependentUpon>
     </Compile>
+    <Compile Include="Resources\Views\Categories\CategoriesPromotions.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CategoriesPromotions.resx</DependentUpon>
+    </Compile>
     <Compile Include="Resources\Views\Home\Contact.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -367,8 +372,10 @@
     <Content Include="Resources\rg-slide3.jpg" />
     <Content Include="Scripts\App\Categories\categories.js" />
     <Content Include="Scripts\App\Categories\category_products.js" />
+    <Content Include="Scripts\App\Categories\promotions_products.js" />
     <Content Include="Scripts\App\Helpers\MVC.js" />
     <Content Include="Scripts\App\Products\products.js" />
+    <Content Include="Scripts\App\Products\products_shared.js" />
     <Content Include="Scripts\App\shared.js" />
     <Content Include="Scripts\App\ShoppingCart\shopping_cart.js" />
     <Content Include="Scripts\App\ShoppingCart\shopping_cart_products.js" />
@@ -438,6 +445,8 @@
     <Content Include="Views\Categories\GetCategoryTree.cshtml" />
     <Content Include="Views\Products\GetPromoProducts.cshtml" />
     <Content Include="Views\Products\GetRelatedProducts.cshtml" />
+    <Content Include="Views\Categories\Promotions.cshtml" />
+    <Content Include="Views\Products\GetAllPromoProducts.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -479,6 +488,14 @@
     <EmbeddedResource Include="Resources\Views\Categories\CategoriesIndex.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>CategoriesIndex.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>ViewRes</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\Categories\CategoriesPromotions.en.resx">
+      <CustomToolNamespace>ViewRes</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\Categories\CategoriesPromotions.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>CategoriesPromotions.Designer.cs</LastGenOutput>
       <CustomToolNamespace>ViewRes</CustomToolNamespace>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Views\Home\Contact.en.resx">

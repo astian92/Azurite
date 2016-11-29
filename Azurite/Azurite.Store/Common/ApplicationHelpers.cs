@@ -77,6 +77,13 @@ namespace Azurite.Store.Common
             return MvcHtmlString.Create(htmlOutput);
         }
 
+        public static MvcHtmlString CategoryTreeMenu(this HtmlHelper html, IEnumerable<CategoryW> allCategories)
+        {
+            string htmlOutput = string.Empty;
+
+            return MvcHtmlString.Create(htmlOutput);
+        }
+
         public static MvcHtmlString Price(this HtmlHelper html, double price, double discount = 0)
         {
             //calculate the price with the discount

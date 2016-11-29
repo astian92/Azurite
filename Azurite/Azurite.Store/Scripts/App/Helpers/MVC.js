@@ -17,6 +17,7 @@ var MagicStrings = (function () {
     var products = CreateController("Products");
     products.CreateAction("GetCategoryProducts");
     products.CreateAction("GetPromoProducts");
+    products.CreateAction("GetAllPromoProducts");
     products.CreateAction("GetRelatedProducts");
 
     var shoppingCart = CreateController("ShoppingCart");

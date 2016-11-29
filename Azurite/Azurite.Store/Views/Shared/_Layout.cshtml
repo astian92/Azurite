@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using Azurite.Store.Common
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -33,6 +35,10 @@
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav navbar-right">
                         <li class="active"><a href="/Home"><i class="fa fa-home"></i> @ViewRes.SharedStrings.Home</a></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-th-list"></i> @ViewRes.SharedStrings.Collections</a>
+                        </li>
+                        <li><a href="/Categories/Promotions"><i class="fa fa-tags"></i> @ViewRes.SharedStrings.Promotions</a></li>
                         <li><a href="/Home/Contact"><i class="fa fa-map-marker"></i> @ViewRes.SharedStrings.Contact</a></li>
                         <li><a href="/ShoppingCart"><i class="fa fa-shopping-cart"></i> @ViewRes.SharedStrings.ShoppingCart</a></li>
                         <li class="dropdown">
@@ -74,6 +80,7 @@
                     <div class="col-md-7">
                         <ul class="footer_menu">
                             <li><a href="/Home">@ViewRes.SharedStrings.Home</a></li>
+                            <li><a href="/Categories/Promotions">@ViewRes.SharedStrings.Promotions</a></li>
                             <li><a href="/Home/Contact">@ViewRes.SharedStrings.Contact</a></li>
                             <li><a href="/ShoppingCart">@ViewRes.SharedStrings.ShoppingCart</a></li>
                         </ul>
@@ -97,7 +104,7 @@
         <div class="copyright">
             <div class="container">
                 <p class="pull-left">
-                    © @DateTime.Now.Year Radianna Gold. Designed By <a href="http://gemsolutions.eu" target="_blank">Gem Solutions</a>
+                    © @DateTime.Now.Year Radianna Gold. Designed and Developed By <a href="http://gemsolutions.eu" target="_blank">Gem Solutions</a>
                 </p>
             </div>
         </div>

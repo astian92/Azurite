@@ -120,6 +120,9 @@
   <data name="AddBtn" xml:space="preserve">
     <value>Добави в количката</value>
   </data>
+  <data name="Collections" xml:space="preserve">
+    <value>Продукти</value>
+  </data>
   <data name="CompanyDescription" xml:space="preserve">
     <value>Фирма Радианна Ювелир е създадена през 1999г. Дейността с която се занимава е изработка на златни изделия, както и търговия на дребно с изделия от злато. Фирмата продава и бижута от сребро, стомана, часовници, сребърни икони, сувенири, подаръци, керамика и порцелан на едро и дребно, които са внос от Италия и Гърция.</value>
   </data>
@@ -152,6 +155,9 @@
   </data>
   <data name="LanguageOptionEN" xml:space="preserve">
     <value>Английски</value>
+  </data>
+  <data name="Promotions" xml:space="preserve">
+    <value>Специални оферти</value>
   </data>
   <data name="RemoveBtn" xml:space="preserve">
     <value>Изтрий</value>

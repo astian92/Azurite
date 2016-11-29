@@ -1,16 +1,13 @@
-﻿@model Azurite.Store.Wrappers.CategoryW
-
-@{
-    ViewBag.Title = "Collections";
+﻿@{
+    ViewBag.Title = "Special Offers";
 }
-
 
 <div class="container">
     <div class="row">
         <div class="col-xs-12">
             <div class="page-header">
-                <h3>@Model.Name</h3>
-                <input id="categoryId" name="categoryId" value="@Model.Id" type="hidden" />
+                <h3>@ViewRes.CategoriesPromotions.PageHeader</h3>
+                <input id="categoryId" name="categoryId" value="" type="hidden" />
                 <span class="devider"></span>
             </div>
         </div>
@@ -29,9 +26,6 @@
 
                 </div>
             </div>
-            <div id="categoriesAttrContainer">
-
-            </div>
         </div>
         <div class="col-md-9 col-sm-8 col-xs-12">
             <div class="filterArea">
@@ -45,6 +39,6 @@
 </div>
 
 @section scripts {
-    <script src="~/Scripts/App/Categories/category_products.js"></script>
-
+    <script src="~/Scripts/App/Categories/promotions_products.js"></script>
 }
+
