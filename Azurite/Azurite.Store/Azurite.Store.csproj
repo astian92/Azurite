@@ -335,6 +335,8 @@
     <Compile Include="Wrappers\ProductW.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\animate.css" />
+    <Content Include="Content\animate.min.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -447,6 +449,7 @@
     <Content Include="Views\Products\GetRelatedProducts.cshtml" />
     <Content Include="Views\Categories\Promotions.cshtml" />
     <Content Include="Views\Products\GetAllPromoProducts.cshtml" />
+    <Content Include="Views\Categories\GetCategoryMenu.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

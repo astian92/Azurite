@@ -81,6 +81,8 @@ namespace Azurite.Store.Common
         {
             string htmlOutput = string.Empty;
 
+            
+
             return MvcHtmlString.Create(htmlOutput);
         }
 

@@ -9,6 +9,7 @@
 
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
     <link href="~/Content/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/Content/animate.min.css" rel="stylesheet" />
     <link href="~/Content/azurite-theme.css" rel="stylesheet" />
 
     @RenderSection("styles", false)
@@ -55,6 +56,7 @@
                         </li>
                     </ul>
                 </div>
+                @{ Html.RenderAction("GetCategoryMenu", "Categories", null); }
             </div>
         </div>
     </header>
