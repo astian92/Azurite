@@ -1,4 +1,7 @@
-﻿@model IEnumerable<Azurite.Store.Wrappers.ProductW>
+﻿@model IPagedList<Azurite.Store.Wrappers.ProductW>
+
+@using PagedList.Mvc;
+@using PagedList;
 @using Azurite.Store.Common;
 
 <div class="row products-list">
@@ -42,5 +45,26 @@
         </div>
     }
 </div>
+<div class="pull-right">
+    @Html.PagedListPager(Model, page => Url.Action("GetCategoryProducts", new { @categoryId = ViewBag.categoryId, @page = page }), PagedListRenderOptions.ClassicPlusFirstAndLast)
+</div>
 
 <script src="~/Scripts/App/Products/products_shared.js"></script>
+<script>
+    $(document).ready(function () {
+        $(".pagination li a").click(function (e) {
+            e.preventDefault();
+
+            var href = $(this).attr('href');
+            if (href != undefined && href != '') {
+                $.ajax({
+                    url: href,
+                    dataType: 'html',
+                    success: function (data) {
+                        $('#productsContainer').html(data);
+                    }
+                });
+            }
+        });
+    });
+</script>

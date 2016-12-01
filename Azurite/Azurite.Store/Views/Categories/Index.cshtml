@@ -20,7 +20,7 @@
             <div class="panel-gold">
                 <div class="panel-heading">@ViewRes.CategoriesIndex.Collections</div>
                 <div id="subCategoriesContainer" class="side-nav">
-
+                    
                 </div>
             </div>
             <div class="panel-gold">
@@ -35,7 +35,28 @@
         </div>
         <div class="col-md-9 col-sm-8 col-xs-12">
             <div class="filterArea">
-
+                <div class="col-xs-6">
+                    <div class="dropdown">
+                        <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
+                            Най-продавани
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Най-продавани</a></li>
+                            <li><a href="#">Цена възх.</a></li>
+                            <li><a href="#">Цена низх.</a></li>
+                            <li><a href="#">Отстъпка.</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-xs-6">
+                    <div class="input-group">
+                        <input id="search" type="text" class="form-control form-control-lg" placeholder="Search for...">
+                        <span class="input-group-btn">
+                            <button id="search-products" class="btn btn-gold" type="button"><i class="fa fa-search"></i></button>
+                        </span>
+                    </div>
+                </div>
             </div>
             <div id="productsContainer">
 

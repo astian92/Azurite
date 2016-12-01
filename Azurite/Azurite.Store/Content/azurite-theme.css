@@ -121,6 +121,15 @@ hr {
 			padding-top:6px;
 		}
 
+.pagination>li>a {
+    color:#2a2a2a;
+}
+
+.pagination>.active>a {
+    background-color:rgba(199, 181, 111, 1);
+    border-color:rgba(199, 181, 111, 1);
+}
+
 .header-top {
     background:transparent;
     color:#2a2a2a;
@@ -164,10 +173,20 @@ hr {
     font-size:1.65rem;
 }
 
+.header-top .nav>li>a i {
+    display:inline-block;
+    width:20px;
+}
+
 @media (min-width:768px) {
     .header-top .nav>li>a {
         padding:15px 10px;
         font-size:1.33rem;
+    }
+
+    .header-top .nav>li>a i {
+        display:none;
+        width:auto;
     }
 }
 
@@ -176,6 +195,14 @@ hr {
         padding:15px;
         font-size:1.65rem;
     }
+
+    .header-top .nav>li>a i {
+        display:inline-block;
+    }
+}
+
+.header-top .dropdown-menu > li > a {
+    padding:6px 20px;
 }
 
 .navbar {
@@ -411,23 +438,21 @@ hr {
 }
 
 .btn {
-    color:#fff;
     border-radius:0;
     padding:10px 25px;
     transition: color 0.4s ease 0s, background-color 0.4s ease 0s;
 }
 
-.btn:hover {
+.btn-gold {
+    background-color:rgba(199, 181, 111, 1);
     color:#fff;
 }
 
-.btn-gold {
-    background-color:rgba(199, 181, 111, 1);
-}
-
-.btn-gold:hover {
+.btn-gold:hover,
+.btn-gold:focus {
     background-color:rgba(227, 217, 177, 1);
     border-color:rgba(227, 217, 177, 1);
+    color:#fff;
 }
 
 .panel-gold {
@@ -1017,3 +1042,8 @@ hr {
     }
 
 /*<-------------------- end contact ------------------->*/
+
+
+.filterArea {
+    margin:0 -5px;
+}

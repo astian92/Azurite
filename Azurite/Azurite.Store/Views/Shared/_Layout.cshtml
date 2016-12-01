@@ -37,7 +37,8 @@
                     <ul class="nav navbar-nav navbar-right">
                         <li class="active"><a href="/Home"><i class="fa fa-home"></i> @ViewRes.SharedStrings.Home</a></li>
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-th-list"></i> @ViewRes.SharedStrings.Collections</a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-th-list"></i> @ViewRes.SharedStrings.Collections <span class="caret"></span></a>
+                            @{ Html.RenderAction("GetCategoryMenu", "Categories", null); }
                         </li>
                         <li><a href="/Categories/Promotions"><i class="fa fa-tags"></i> @ViewRes.SharedStrings.Promotions</a></li>
                         <li><a href="/Home/Contact"><i class="fa fa-map-marker"></i> @ViewRes.SharedStrings.Contact</a></li>

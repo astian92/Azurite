@@ -1,8 +1,8 @@
 ﻿using Azurite.Store.Workers.Contracts;
+using Azurite.Store.Wrappers;
+using PagedList;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace Azurite.Store.Controllers
@@ -27,10 +27,17 @@ namespace Azurite.Store.Controllers
             return View(product);
         }
 
-        public ActionResult GetCategoryProducts(Guid categoryId)
+        public ActionResult GetCategoryProducts(Guid categoryId, string search = "", int page = 1, int pageSize = 12)
         {
+            page--;
             var products = worker.GetProducts(categoryId);
-            return PartialView(products);
+
+            var filteredByModel = products.Where(x => x.Model.IndexOf(search) != -1);
+            var pagedProducts = new StaticPagedList<ProductW>(filteredByModel.OrderBy(x => x.Model).Skip(page * pageSize).Take(pageSize), page + 1, pageSize, filteredByModel.Count());
+
+            ViewBag.categoryId = categoryId;
+
+            return PartialView(pagedProducts);
         }
 
         public ActionResult GetPromoProducts()

@@ -50,7 +50,8 @@ namespace Azurite.Store.Controllers
 
         public ActionResult GetCategoryMenu()
         {
-            return PartialView();
+            var categories = worker.GetBaseCategories();
+            return PartialView(categories);
         }
 
         public ActionResult GetCategoryAttr(Guid categoryId)

@@ -4,6 +4,20 @@
     loadSubCategories(categoryId);
     loadCategoryAttr(categoryId);
     loadProducts(categoryId);
+
+    $('#search-products').click(function () {
+        var value = $('#search').val();
+
+        if (value != '') {
+            $.ajax({
+                url: MVC.Products.GetCategoryProductsFull + '?categoryId=' + categoryId + '&search=' + value,
+                dataType: 'html',
+                success: function (data) {
+                    $('#productsContainer').html(data);
+                }
+            });
+        }
+    });
 });
 
 function loadSubCategories(categoryId) {
@@ -36,7 +50,7 @@ function loadProducts(categoryId) {
         url: MVC.Products.GetCategoryProductsFull + '?categoryId=' + categoryId,
         dataType: 'html',
         success: function (data) {
-            $('#productsContainer').html(data);
+            $('#productsContainer').append(data);
         }
     });
 }

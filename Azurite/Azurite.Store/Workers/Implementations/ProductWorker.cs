@@ -64,7 +64,7 @@ namespace Azurite.Store.Workers.Implementations
 
             return wrapped.AsQueryable();
         }
-
+        
         public IQueryable<CategoryW> GetSubCategories(Guid categoryId)
         {
             var categories = catRep.GetAll();
@@ -126,6 +126,5 @@ namespace Azurite.Store.Workers.Implementations
 
             return wrapped.AsQueryable();
         }
-
     }
 }
