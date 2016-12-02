@@ -5,8 +5,7 @@ namespace Azurite.Store.Workers.Contracts
 {
     public interface ICurrencyWorker
     {
-        IQueryable<CurrencyCoursW> GetAll();
-        CurrencyCoursW GetCurrent();
-        void ChangeCurrent();
+        IQueryable<CurrencyCoursW> GetAllCurrencies();
+        CurrencyCoursW GetCurrency(int currencyId);
     }
 }

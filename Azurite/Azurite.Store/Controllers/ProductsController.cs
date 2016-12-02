@@ -27,15 +27,35 @@ namespace Azurite.Store.Controllers
             return View(product);
         }
 
-        public ActionResult GetCategoryProducts(Guid categoryId, string search = "", int page = 1, int pageSize = 12)
+        public ActionResult GetCategoryProducts(Guid categoryId, string search = "", int orderBy = 1, int page = 1, int pageSize = 12)
         {
             page--;
             var products = worker.GetProducts(categoryId);
 
-            var filteredByModel = products.Where(x => x.Model.IndexOf(search) != -1);
-            var pagedProducts = new StaticPagedList<ProductW>(filteredByModel.OrderBy(x => x.Model).Skip(page * pageSize).Take(pageSize), page + 1, pageSize, filteredByModel.Count());
+            var filteredByModel = products.Where(x => x.Model.ToLower().IndexOf(search.ToLower()) != -1);
+
+            var orderedProducts = Enumerable.Empty<ProductW>();
+            switch (orderBy)
+            {
+                case 1:
+                    orderedProducts = filteredByModel.OrderBy(x => x.Price);
+                    break;
+                case 2:
+                    orderedProducts = filteredByModel.OrderByDescending(x => x.Price);
+                    break;
+                case 3:
+                    orderedProducts = filteredByModel.OrderByDescending(x => x.Discount);
+                    break;
+                default:
+                    orderedProducts = filteredByModel.OrderBy(x => x.Price);
+                    break;
+            }
+
+            var pagedProducts = new StaticPagedList<ProductW>(orderedProducts.Skip(page * pageSize).Take(pageSize), page + 1, pageSize, filteredByModel.Count());
 
             ViewBag.categoryId = categoryId;
+            ViewBag.search = search;
+            ViewBag.orderBy = orderBy;
 
             return PartialView(pagedProducts);
         }
@@ -46,10 +66,36 @@ namespace Azurite.Store.Controllers
             return PartialView(products);
         }
 
-        public ActionResult GetAllPromoProducts()
+        public ActionResult GetAllPromoProducts(string search = "", int orderBy = 1, int page = 1, int pageSize = 12)
         {
+            page--;
             var products = worker.GetAllPromoProducts();
-            return PartialView(products);
+
+            var filteredByModel = products.Where(x => x.Model.ToLower().IndexOf(search.ToLower()) != -1);
+
+            var orderedProducts = Enumerable.Empty<ProductW>();
+            switch (orderBy)
+            {
+                case 1:
+                    orderedProducts = filteredByModel.OrderBy(x => x.Price);
+                    break;
+                case 2:
+                    orderedProducts = filteredByModel.OrderByDescending(x => x.Price);
+                    break;
+                case 3:
+                    orderedProducts = filteredByModel.OrderByDescending(x => x.Discount);
+                    break;
+                default:
+                    orderedProducts = filteredByModel.OrderBy(x => x.Price);
+                    break;
+            }
+
+            var pagedProducts = new StaticPagedList<ProductW>(orderedProducts.Skip(page * pageSize).Take(pageSize), page + 1, pageSize, filteredByModel.Count());
+
+            ViewBag.search = search;
+            ViewBag.orderBy = orderBy;
+
+            return PartialView(pagedProducts);
         }
 
         public ActionResult GetRelatedProducts(Guid categoryId)

@@ -3,5 +3,5 @@
 
 @foreach (var currency in Model)
 {
-    <li><a href="">@currency.Code</a></li>
+    <li>@Html.ActionLink(currency.Code, "ChangeCurrency", "Home", new { currencyId = currency.Id }, null)</li>
 }

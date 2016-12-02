@@ -156,6 +156,18 @@
   <data name="LanguageOptionEN" xml:space="preserve">
     <value>Английски</value>
   </data>
+  <data name="ProductsOrderOption1" xml:space="preserve">
+    <value>Цена възх.</value>
+  </data>
+  <data name="ProductsOrderOption2" xml:space="preserve">
+    <value>Цена низх.</value>
+  </data>
+  <data name="ProductsOrderOption3" xml:space="preserve">
+    <value>Отстъпка</value>
+  </data>
+  <data name="ProductsSearch" xml:space="preserve">
+    <value>Търси по модел...</value>
+  </data>
   <data name="Promotions" xml:space="preserve">
     <value>Специални оферти</value>
   </data>

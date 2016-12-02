@@ -130,6 +130,17 @@ hr {
     border-color:rgba(199, 181, 111, 1);
 }
 
+.pagination > .active > a:hover,
+.pagination > .active > span:hover,
+.pagination > .active > a:focus,
+.pagination > .active > span:focus {
+  z-index: 3;
+  color: #fff;
+  cursor: default;
+  background-color: rgba(227, 217, 177, 1);
+  border-color: rgba(227, 217, 177, 1);
+}
+
 .header-top {
     background:transparent;
     color:#2a2a2a;
@@ -288,7 +299,7 @@ hr {
     color:#fff;
 }
 
-.megamenu {
+/*.megamenu {
     z-index:1001;
     position:absolute;
     list-style-type:none;
@@ -427,7 +438,7 @@ hr {
     padding: 3px;
     display: inline-block;
     border-radius: 3px
-}
+}*/
 
 .title {
     font-size:22px;
@@ -441,6 +452,27 @@ hr {
     border-radius:0;
     padding:10px 25px;
     transition: color 0.4s ease 0s, background-color 0.4s ease 0s;
+}
+
+@media (min-width:768px) {
+    .btn {
+        padding:10px 10px;
+    }
+}
+
+@media (min-width:1200px) {
+    .btn {
+        padding:10px 25px;
+    }
+}
+
+.btn.focus, .btn:focus, .btn:hover {
+    color:#fff
+}
+
+.btn.active.focus, .btn.active:focus, .btn.focus,
+.btn:active.focus, .btn:active:focus, .btn:focus {
+    outline:5px auto rgba(199, 181, 111, 1);
 }
 
 .btn-gold {
@@ -746,9 +778,15 @@ hr {
 
 /* Products Box Styles Starts */
 
-.products-list{
+.products-list {
     margin-bottom:15px;
+    box-sizing:border-box;
 }
+
+.product-list > div {
+    box-sizing:border-box;
+}
+
 .product-head{
 	padding: 14px 20px;
 	margin:0 0 20px;
@@ -837,14 +875,39 @@ hr {
 			border-radius:0;
 }
 
+.btn-default {
+    font-size:12px;
+	color:#2a2a2a;
+	background:#fff;
+    border:1px solid rgba(199, 181, 111, 1);
+}
+
+.btn-default:hover,
+.btn-default:focus,
+.btn-default:active,
+.open>.dropdown-toggle.btn-default:hover {
+    color:#fff;
+    background:rgba(199, 181, 111, 1);
+    border-color:rgba(199, 181, 111, 1);
+}
+
+.open>.dropdown-toggle.btn-default,
+.open>.dropdown-toggle.btn-default:focus {
+    border-color:rgba(227, 217, 177, 1);
+    background-color:rgba(227, 217, 177, 1);
+    color:#fff;
+}
+
 .btn-cart{
-	font-size:12px;
+	font-size:11px;
 	color:#2a2a2a;
 	background:#fff;
 	text-transform:uppercase;
 	border:1px solid rgba(199, 181, 111, 1);
 }
-.btn-cart:hover{
+
+.btn-cart:hover,
+.btn-cart:focus {
 	color:#fff;
 	background:rgba(199, 181, 111, 1);
 }
@@ -1045,5 +1108,5 @@ hr {
 
 
 .filterArea {
-    margin:0 -5px;
+    margin:0 10px;
 }

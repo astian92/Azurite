@@ -178,6 +178,42 @@ namespace ViewRes {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Цена възх..
+        /// </summary>
+        public static string ProductsOrderOption1 {
+            get {
+                return ResourceManager.GetString("ProductsOrderOption1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Цена низх..
+        /// </summary>
+        public static string ProductsOrderOption2 {
+            get {
+                return ResourceManager.GetString("ProductsOrderOption2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Отстъпка.
+        /// </summary>
+        public static string ProductsOrderOption3 {
+            get {
+                return ResourceManager.GetString("ProductsOrderOption3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Търси по модел....
+        /// </summary>
+        public static string ProductsSearch {
+            get {
+                return ResourceManager.GetString("ProductsSearch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Специални оферти.
         /// </summary>
         public static string Promotions {

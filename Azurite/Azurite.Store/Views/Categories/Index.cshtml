@@ -23,43 +23,45 @@
                     
                 </div>
             </div>
-            <div class="panel-gold">
+            @*<div class="panel-gold">
                 <div class="panel-heading">@ViewRes.CategoriesIndex.PriceFilter</div>
                 <div id="priceFilter">
 
                 </div>
-            </div>
+            </div>*@
             <div id="categoriesAttrContainer">
 
             </div>
         </div>
         <div class="col-md-9 col-sm-8 col-xs-12">
-            <div class="filterArea">
-                <div class="col-xs-6">
-                    <div class="dropdown">
-                        <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
-                            Най-продавани
-                            <span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu">
-                            <li><a href="#">Най-продавани</a></li>
-                            <li><a href="#">Цена възх.</a></li>
-                            <li><a href="#">Цена низх.</a></li>
-                            <li><a href="#">Отстъпка.</a></li>
-                        </ul>
+            <div class="row">
+                <div class="filterArea">
+                    <div class="col-xs-4">
+                        <div class="dropdown">
+                            <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
+                                <span id="selected-order">Цена възх.</span>
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a href="#" class="orderBy" data-order="1">Цена възх.</a></li>
+                                <li><a href="#" class="orderBy" data-order="2">Цена низх.</a></li>
+                                <li><a href="#" class="orderBy" data-order="3">Отстъпка.</a></li>
+                            </ul>
+                        </div>
                     </div>
-                </div>
-                <div class="col-xs-6">
-                    <div class="input-group">
-                        <input id="search" type="text" class="form-control form-control-lg" placeholder="Search for...">
-                        <span class="input-group-btn">
-                            <button id="search-products" class="btn btn-gold" type="button"><i class="fa fa-search"></i></button>
-                        </span>
+                    <div class="col-xs-8">
+                        <div class="input-group">
+                            <input id="search" type="text" class="form-control form-control-lg" placeholder="Search for model">
+                            <span class="input-group-btn">
+                                <button id="search-products" class="btn btn-gold" type="button"><i class="fa fa-search"></i></button>
+                            </span>
+                        </div>
                     </div>
+                    <div class="clearfix"></div>
                 </div>
-            </div>
-            <div id="productsContainer">
+                <div id="productsContainer">
 
+                </div>
             </div>
         </div>
     </div>

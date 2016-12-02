@@ -328,13 +328,16 @@
       <DependentUpon>SCProducts.en.resx</DependentUpon>
     </Compile>
     <Compile Include="Workers\Contracts\ICategoryWorker.cs" />
+    <Compile Include="Workers\Contracts\ICurrencyWorker.cs" />
     <Compile Include="Workers\Contracts\IProductWorker.cs" />
     <Compile Include="Workers\Contracts\IShoppingCartWorker.cs" />
     <Compile Include="Workers\Implementations\CategoryWorker.cs" />
+    <Compile Include="Workers\Implementations\CurrencyWorker.cs" />
     <Compile Include="Workers\Implementations\ProductWorker.cs" />
     <Compile Include="Workers\Implementations\ShoppingCartWorker.cs" />
     <Compile Include="Wrappers\CategoryAttributeW.cs" />
     <Compile Include="Wrappers\CategoryW.cs" />
+    <Compile Include="Wrappers\CurrencyCoursW.cs" />
     <Compile Include="Wrappers\CustomerW.cs" />
     <Compile Include="Wrappers\OrderedProductW.cs" />
     <Compile Include="Wrappers\OrderW.cs" />
@@ -461,6 +464,7 @@
     <Content Include="Views\Categories\GetCategoryMenu.cshtml" />
     <Content Include="Views\ShoppingCart\Billing.cshtml" />
     <Content Include="Views\ShoppingCart\CartSummary.cshtml" />
+    <Content Include="Views\Shared\Currency.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

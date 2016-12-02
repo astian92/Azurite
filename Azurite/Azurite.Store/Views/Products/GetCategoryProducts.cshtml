@@ -4,7 +4,7 @@
 @using PagedList;
 @using Azurite.Store.Common;
 
-<div class="row products-list">
+<div class="products-list">
     @foreach (var item in Model)
     {
         var imagePath = "http://localhost:8696/cdn/files/";
@@ -17,7 +17,7 @@
             imagePath = "";
         }
 
-        <div class="col-md-3 col-sm-4 col-xs-6">
+        <div class="col-xs-6 col-sm-4 col-md-3">
             <div class="product-col">
                 <div class="image">
                     <a href="/Products/Details/@item.Id">
@@ -45,8 +45,11 @@
         </div>
     }
 </div>
-<div class="pull-right">
-    @Html.PagedListPager(Model, page => Url.Action("GetCategoryProducts", new { @categoryId = ViewBag.categoryId, @page = page }), PagedListRenderOptions.ClassicPlusFirstAndLast)
+<div class="clearfix"></div>
+<div class="col-xs-12">
+    <div class="pull-right">
+        @Html.PagedListPager(Model, page => Url.Action("GetCategoryProducts", new { @categoryId = ViewBag.categoryId, @search = ViewBag.search, @orderBy = ViewBag.orderBy, @page = page }), PagedListRenderOptions.ClassicPlusFirstAndLast)
+    </div>
 </div>
 
 <script src="~/Scripts/App/Products/products_shared.js"></script>

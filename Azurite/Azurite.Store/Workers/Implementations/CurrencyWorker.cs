@@ -7,6 +7,7 @@ using Azurite.Store.Wrappers;
 using Azurite.Infrastructure.Data.Contracts;
 using Azurite.Store.Data;
 using AutoMapper;
+using System.Text;
 
 namespace Azurite.Store.Workers.Implementations
 {
@@ -19,7 +20,7 @@ namespace Azurite.Store.Workers.Implementations
             this.rep = rep;
         }
 
-        public IQueryable<CurrencyCoursW> GetAll()
+        public IQueryable<CurrencyCoursW> GetAllCurrencies()
         {
             var currencies = rep.GetAll();
 
@@ -33,14 +34,12 @@ namespace Azurite.Store.Workers.Implementations
             return wrapped.AsQueryable();
         }
 
-        public void ChangeCurrent()
+        public CurrencyCoursW GetCurrency(int currencyId)
         {
-            throw new NotImplementedException();
-        }
+            var currency = rep.Get(currencyId);
+            var currencyW = Mapper.Map<CurrencyCoursW>(currency);
 
-        public CurrencyCoursW GetCurrent()
-        {
-            throw new NotImplementedException();
+            return currencyW;
         }
     }
 }

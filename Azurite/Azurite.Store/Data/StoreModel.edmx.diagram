@@ -4,26 +4,26 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="8172ae4288e34af6b5e79884891b1b66" Name="Diagram1" ZoomLevel="68">
-        <EntityTypeShape EntityType="MarketPlaceModel.Category" Width="1.5" PointX="0.75" PointY="3.125" />
+      <Diagram DiagramId="8172ae4288e34af6b5e79884891b1b66" Name="Diagram1" ZoomLevel="56">
+        <EntityTypeShape EntityType="MarketPlaceModel.Category" Width="1.5" PointX="0.75" PointY="3" />
         <EntityTypeShape EntityType="MarketPlaceModel.CategoryAttribute" Width="1.5" PointX="3" PointY="1.125" />
-        <EntityTypeShape EntityType="MarketPlaceModel.Customer" Width="1.5" PointX="7.75" PointY="4.75" />
-        <EntityTypeShape EntityType="MarketPlaceModel.OrderStatus" Width="1.5" PointX="7.75" PointY="1.5" />
-        <EntityTypeShape EntityType="MarketPlaceModel.ProductAttribute" Width="1.5" PointX="5.25" PointY="1.5" />
-        <EntityTypeShape EntityType="MarketPlaceModel.ProductImage" Width="1.5" PointX="5.25" PointY="5.375" />
+        <EntityTypeShape EntityType="MarketPlaceModel.CurrencyCours" Width="1.5" PointX="0.75" PointY="8.75" />
+        <EntityTypeShape EntityType="MarketPlaceModel.Customer" Width="1.5" PointX="7.75" PointY="4.875" />
+        <EntityTypeShape EntityType="MarketPlaceModel.OrderedProduct" Width="1.5" PointX="12.25" PointY="1" />
+        <EntityTypeShape EntityType="MarketPlaceModel.Order" Width="1.5" PointX="10" PointY="1" />
+        <EntityTypeShape EntityType="MarketPlaceModel.OrderStatus" Width="1.5" PointX="7.75" PointY="1.625" />
+        <EntityTypeShape EntityType="MarketPlaceModel.Product" Width="1.5" PointX="3" PointY="4.25" />
+        <EntityTypeShape EntityType="MarketPlaceModel.ProductAttribute" Width="1.5" PointX="5.25" PointY="1.375" />
+        <EntityTypeShape EntityType="MarketPlaceModel.ProductImage" Width="1.5" PointX="5.25" PointY="5.25" />
         <AssociationConnector Association="MarketPlaceModel.FK_Categories_Categories" />
         <AssociationConnector Association="MarketPlaceModel.FK_CategoryAttributes_Categories" />
-        <AssociationConnector Association="MarketPlaceModel.FK_ProductAttributes_CategoryAttributes" />
-        <EntityTypeShape EntityType="MarketPlaceModel.CurrencyCours" Width="1.5" PointX="0.75" PointY="6.875" />
-        <EntityTypeShape EntityType="MarketPlaceModel.Product" Width="1.5" PointX="3" PointY="4.875" />
         <AssociationConnector Association="MarketPlaceModel.FK_Product_Categories" />
-        <AssociationConnector Association="MarketPlaceModel.FK_ProductAttributes_Product" />
-        <AssociationConnector Association="MarketPlaceModel.FK_ProductImages_Product" />
-        <EntityTypeShape EntityType="MarketPlaceModel.OrderedProduct" Width="1.5" PointX="12.25" PointY="0.875" />
-        <EntityTypeShape EntityType="MarketPlaceModel.Order" Width="1.5" PointX="10" PointY="3.25" />
+        <AssociationConnector Association="MarketPlaceModel.FK_ProductAttributes_CategoryAttributes" />
         <AssociationConnector Association="MarketPlaceModel.FK_Orders_Customer" />
         <AssociationConnector Association="MarketPlaceModel.FK_OrderedProducts_Orders" />
         <AssociationConnector Association="MarketPlaceModel.FK_Orders_OrderStatuses" />
+        <AssociationConnector Association="MarketPlaceModel.FK_ProductAttributes_Product" />
+        <AssociationConnector Association="MarketPlaceModel.FK_ProductImages_Product" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

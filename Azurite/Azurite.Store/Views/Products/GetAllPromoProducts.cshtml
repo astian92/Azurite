@@ -1,7 +1,10 @@
-﻿@model IEnumerable<Azurite.Store.Wrappers.ProductW>
+﻿@model IPagedList<Azurite.Store.Wrappers.ProductW>
+
+@using PagedList.Mvc;
+@using PagedList;
 @using Azurite.Store.Common;
 
-<div class="row products-list">
+<div class="products-list">
     @foreach (var item in Model)
     {
         var imagePath = "http://localhost:8696/cdn/files/";
@@ -14,7 +17,7 @@
             imagePath = "";
         }
 
-        <div class="col-md-3 col-sm-4 col-xs-6">
+        <div class="col-xs-6 col-sm-4 col-md-3">
             <div class="product-col">
                 <div class="image">
                     <a href="/Products/Details/@item.Id">
@@ -42,5 +45,29 @@
         </div>
     }
 </div>
+<div class="clearfix"></div>
+<div class="col-xs-12">
+    <div class="pull-right">
+        @Html.PagedListPager(Model, page => Url.Action("GetAllPromoProducts", new { @search = ViewBag.search, @orderBy = ViewBag.orderBy, @page = page }), PagedListRenderOptions.ClassicPlusFirstAndLast)
+    </div>
+</div>
 
 <script src="~/Scripts/App/Products/products_shared.js"></script>
+<script>
+    $(document).ready(function () {
+        $(".pagination li a").click(function (e) {
+            e.preventDefault();
+
+            var href = $(this).attr('href');
+            if (href != undefined && href != '') {
+                $.ajax({
+                    url: href,
+                    dataType: 'html',
+                    success: function (data) {
+                        $('#productsContainer').html(data);
+                    }
+                });
+            }
+        });
+    });
+</script>

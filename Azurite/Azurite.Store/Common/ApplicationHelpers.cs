@@ -77,17 +77,11 @@ namespace Azurite.Store.Common
             return MvcHtmlString.Create(htmlOutput);
         }
 
-        public static MvcHtmlString CategoryTreeMenu(this HtmlHelper html, IEnumerable<CategoryW> allCategories)
+        public static MvcHtmlString Price(this HtmlHelper html, double itemPrice, double discount = 0)
         {
-            string htmlOutput = string.Empty;
+            var currency = GetCurrentCurrency();
+            double price = itemPrice / currency.Value;
 
-            
-
-            return MvcHtmlString.Create(htmlOutput);
-        }
-
-        public static MvcHtmlString Price(this HtmlHelper html, double price, double discount = 0)
-        {
             //calculate the price with the discount
             double priceOff = price * discount / 100;
             //round the discount
@@ -100,20 +94,23 @@ namespace Azurite.Store.Common
 
             //build the html
             string htmlOutput = String.Empty;
-            htmlOutput = "<span class=\"price-new\"><i class=\"fa fa-euro\"></i>" + hole + ".<sup>" + (coins == 0 ? "00" : coins < 10 ? "0" + coins.ToString() : coins.ToString()) + "</sup></span>";
+            htmlOutput = "<span class=\"price-new\">" + hole + ".<sup>" + (coins == 0 ? "00" : coins < 10 ? "0" + coins.ToString() : coins.ToString()) + "</sup><span>" + currency.Sign + "</span></span>";
             if(discount > 0)
             {
                 //calculate hole part and coins of the old price
                 double holeOld = Math.Truncate(price);
                 double coinsOld = Math.Truncate((price - holeOld) * 100);
-                htmlOutput += "<span class=\"price-old\"><i class=\"fa fa-euro\"></i>" + holeOld + ".<sup>" + (coinsOld == 0 ? "00" : coinsOld < 10 ? "0" + coinsOld.ToString() : coinsOld.ToString()) + "</sup></span>";
+                htmlOutput += "<span class=\"price-old\">" + holeOld + ".<sup>" + (coinsOld == 0 ? "00" : coinsOld < 10 ? "0" + coinsOld.ToString() : coinsOld.ToString()) + "</sup><span>" + currency.Sign + "</span></span>";
             }
 
             return MvcHtmlString.Create(htmlOutput);
         }
 
-        public static MvcHtmlString TotalPrice(this HtmlHelper html, double price, double discount = 0)
+        public static MvcHtmlString TotalPrice(this HtmlHelper html, double itemPrice, double discount = 0)
         {
+            var currency = GetCurrentCurrency();
+            double price = itemPrice / currency.Value;
+
             //calculate the price with the discount
             double priceOff = price * discount / 100;
             //round the discount
@@ -126,8 +123,37 @@ namespace Azurite.Store.Common
 
             //build the html
             string htmlOutput = String.Empty;
-            htmlOutput = "<span class=\"price-new\"><i class=\"fa fa-euro\"></i>" + hole + ".<sup>" + (coins == 0 ? "00" : coins < 10 ? "0" + coins.ToString() : coins.ToString()) + "</sup></span>";
+            htmlOutput = "<span class=\"price-new\">" + hole + ".<sup>" + (coins == 0 ? "00" : coins < 10 ? "0" + coins.ToString() : coins.ToString()) + "</sup><span>" + currency.Sign + "</span></span>";
             return MvcHtmlString.Create(htmlOutput);
+        }
+
+        public static string CurrentCurrency(this HtmlHelper html)
+        {
+            var currency = GetCurrentCurrency();
+            return currency.Code;
+        }
+
+        private static CurrencyCoursW GetCurrentCurrency()
+        {
+            var currency = new CurrencyCoursW();
+            var cookie = HttpContext.Current.Request.Cookies["Currency"];
+            if (cookie != null && !String.IsNullOrEmpty(cookie.Value))
+            {
+                var currencyParts = cookie.Value.Split('|');
+                currency.Id = int.Parse(currencyParts[0]);
+                currency.Code = currencyParts[1];
+                currency.Value = double.Parse(currencyParts[2]);
+                currency.Sign = currencyParts[3];
+            }
+            else
+            {
+                currency.Id = 0;
+                currency.Code = "BG";
+                currency.Value = 1;
+                currency.Sign = "лв";
+            }
+
+            return currency;
         }
     }
 }
