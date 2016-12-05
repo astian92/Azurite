@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Azurite.Store.Wrappers.ProductW>
+﻿@model IEnumerable<Azurite.Store.Wrappers.OrderedProductW>
 @using Azurite.Store.Common
 
 @if (Model.Count() > 0)
@@ -33,11 +33,11 @@
                 <div class="row cart-item" productId="@item.Id">
                     <div class="col-xs-3 col-sm-2">
                         <a href="/Products/Details/@item.Id">
-                            <img src="@imagePath" alt="@item.Name" class="img-responsive img-thumbnail" />
+                            <img src="@imagePath" alt="@item.CurrentLangName" class="img-responsive img-thumbnail" />
                         </a>
                     </div>
                     <div class="col-xs-7 col-sm-6">
-                        <a href="/Products/Details/@item.Id"><h5>@item.Name</h5></a>
+                        <a href="/Products/Details/@item.Id"><h5>@item.CurrentLangName</h5></a>
                         <a href="#" productId="@item.Id" class="btn-cart-remove">
                             <i class="fa fa-trash"></i>
                             @ViewRes.SharedStrings.RemoveBtn
@@ -59,10 +59,22 @@
     </div>
     <div class="col-md-4">
         <h2 class="title">@ViewRes.SCProducts.RightPaneTitle</h2>
-        <div class="panel">
+        <div id="cart-summary">
 
         </div>
     </div>
+    <script>
+        $(document).ready(function () {
+            $('#cart-summary').html('');
+            $.ajax({
+                url: MVC.ShoppingCart.CartSummaryFull,
+                dataType: 'html',
+                success: function (data) {
+                    $('#cart-summary').html(data);
+                }
+            });
+        });
+    </script>
 }
 else
 {

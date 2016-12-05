@@ -1,0 +1,54 @@
+﻿@model Azurite.Store.Wrappers.OrderW
+
+@{
+    ViewBag.Title = "CheckOut";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="page-header">
+                <h3>Check out</h3>
+                <span class="devider"></span>
+            </div>
+        </div>
+    </div>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(Id => Model.Id)
+        @Html.HiddenFor(CustomerId => Model.CustomerId)
+
+        <div class="row">
+            @foreach (var product in Model.OrderedProducts)
+            {
+                @Html.HiddenFor(OrderedProducts => product.Id)
+            }
+
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                @Html.DisplayFor(FirstName => Model.Customer.FirstName)
+                @Html.DisplayFor(LastName => Model.Customer.LastName)
+                @Html.DisplayFor(Email => Model.Customer.Email)
+                @Html.DisplayFor(Company => Model.Customer.Company)
+                @Html.DisplayFor(VatID => Model.Customer.VatID)
+            </div>
+            <div class="col-md-6">
+                @Html.DisplayFor(Street => Model.Customer.Street)
+                @Html.DisplayFor(City => Model.Customer.City)
+                @Html.DisplayFor(Country => Model.Customer.Country)
+                @Html.DisplayFor(ZipCode => Model.Customer.ZipCode)
+                @Html.DisplayFor(Phone => Model.Customer.Phone)
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                @Html.TextAreaFor(Comment => Model.Comment)
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-default">Check Out</button>
+    }
+</div>
+

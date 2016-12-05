@@ -1,6 +1,7 @@
 ﻿using Azurite.Store.Wrappers;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Web;
@@ -80,46 +81,40 @@ namespace Azurite.Store.Common
         public static MvcHtmlString Price(this HtmlHelper html, double itemPrice, double discount = 0)
         {
             var currency = GetCurrentCurrency();
-            double price = itemPrice / currency.Value;
-
-            //calculate the price with the discount
-            double priceOff = price * discount / 100;
-            //round the discount
-            double rounded = Math.Round(priceOff, 2, MidpointRounding.AwayFromZero);
-            double total = price - rounded;
+            double total = RoundPrice(itemPrice, discount);
 
             //calculate hole part and coins
             double hole = Math.Truncate(total);
-            double coins = Math.Truncate((total - hole) * 100); 
+            double rounded = Math.Round((total - hole), 2, MidpointRounding.AwayFromZero) * 100;
+            double coins = Math.Truncate(rounded);
 
             //build the html
             string htmlOutput = String.Empty;
             htmlOutput = "<span class=\"price-new\">" + hole + ".<sup>" + (coins == 0 ? "00" : coins < 10 ? "0" + coins.ToString() : coins.ToString()) + "</sup><span>" + currency.Sign + "</span></span>";
             if(discount > 0)
             {
+                double totalOld = RoundPrice(itemPrice, 0);
                 //calculate hole part and coins of the old price
-                double holeOld = Math.Truncate(price);
-                double coinsOld = Math.Truncate((price - holeOld) * 100);
+                double holeOld = Math.Truncate(totalOld);
+                double roundedOld = Math.Round((totalOld - holeOld), 2, MidpointRounding.AwayFromZero) * 100;
+                double coinsOld = Math.Truncate(roundedOld);
                 htmlOutput += "<span class=\"price-old\">" + holeOld + ".<sup>" + (coinsOld == 0 ? "00" : coinsOld < 10 ? "0" + coinsOld.ToString() : coinsOld.ToString()) + "</sup><span>" + currency.Sign + "</span></span>";
             }
 
             return MvcHtmlString.Create(htmlOutput);
         }
 
-        public static MvcHtmlString TotalPrice(this HtmlHelper html, double itemPrice, double discount = 0)
+        public static MvcHtmlString TotalPrice(this HtmlHelper html, double itemPrice, double discount = 0, bool isRounded = false)
         {
             var currency = GetCurrentCurrency();
-            double price = itemPrice / currency.Value;
-
-            //calculate the price with the discount
-            double priceOff = price * discount / 100;
-            //round the discount
-            double rounded = Math.Round(priceOff, 2, MidpointRounding.AwayFromZero);
-            double total = price - rounded;
+            double total = itemPrice;
+            if(!isRounded)
+                total = RoundPrice(itemPrice, discount);
 
             //calculate hole part and coins
             double hole = Math.Truncate(total);
-            double coins = Math.Truncate((total - hole) * 100);
+            double rounded = Math.Round((total - hole), 2, MidpointRounding.AwayFromZero) * 100;
+            double coins = Math.Truncate(rounded);
 
             //build the html
             string htmlOutput = String.Empty;
@@ -133,21 +128,47 @@ namespace Azurite.Store.Common
             return currency.Code;
         }
 
-        private static CurrencyCoursW GetCurrentCurrency()
+        public static double RoundPrice(double itemPrice, double discount)
+        {
+            var currency = GetCurrentCurrency();
+            double price = itemPrice / currency.Value;
+
+            //calculate the price with the discount
+            double priceOff = price * discount / 100;
+
+            double total = price - priceOff;
+
+            double rounded = 0;
+            //round the total
+            if(currency.Id != 1)
+            {
+                total += 0.5;
+                rounded = Math.Round(total, 0, MidpointRounding.AwayFromZero);
+            }
+            else
+            {
+                rounded = Math.Round(total, 2, MidpointRounding.AwayFromZero);
+            }
+
+            return rounded;
+        }
+
+        public static CurrencyCoursW GetCurrentCurrency()
         {
             var currency = new CurrencyCoursW();
             var cookie = HttpContext.Current.Request.Cookies["Currency"];
             if (cookie != null && !String.IsNullOrEmpty(cookie.Value))
             {
-                var currencyParts = cookie.Value.Split('|');
+                var cookieValue = HttpUtility.UrlDecode(cookie.Value);
+                var currencyParts = cookieValue.Split('|');
                 currency.Id = int.Parse(currencyParts[0]);
                 currency.Code = currencyParts[1];
-                currency.Value = double.Parse(currencyParts[2]);
+                currency.Value = double.Parse(currencyParts[2], CultureInfo.InvariantCulture);
                 currency.Sign = currencyParts[3];
             }
             else
             {
-                currency.Id = 0;
+                currency.Id = 1;
                 currency.Code = "BG";
                 currency.Value = 1;
                 currency.Sign = "лв";

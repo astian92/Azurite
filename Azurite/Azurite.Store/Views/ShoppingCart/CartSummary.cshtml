@@ -1,1 +1,21 @@
-﻿
+﻿@model Azurite.Store.Wrappers.OrderW
+
+@using Azurite.Store.Common;
+
+@foreach (var product in Model.OrderedProducts)
+{
+    <h5>@product.CurrentLangName <span class="pull-right">@Html.TotalPrice(product.Total, 0, true)</span></h5>
+    <input type="hidden" name="OrderedProducts[].Id" value="@product.Id" />
+    <div class="clearfix"></div>
+}
+
+<hr />
+<h5 class="text-right">Total: @Html.TotalPrice(Model.Total, 0, true)</h5>
+
+<div style="margin-bottom:10px;">
+        <a class="btn btn-default pull-right" href="/ShoppingCart/Billing">Continue</a>
+    <div class="clearfix"></div>
+</div>
+
+<small class="pull-right">@ViewRes.SCProducts.EmptyCartDesc <strong><a href="/Categories/Promotions">@ViewRes.SharedStrings.ContinueShopBtn <i class="fa fa-arrow-right"></i></a></strong></small>
+<div class="clearfix"></div>

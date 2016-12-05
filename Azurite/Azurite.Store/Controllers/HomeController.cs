@@ -53,10 +53,10 @@ namespace Azurite.Store.Controllers
             if (currencyW != null)
             {
                 var builder = new StringBuilder();
-                builder.Append(currencyW.Id + "|" + currencyW.Code + "|" + currencyW.Value + "|" + currencyW.Sign);
+                builder.Append(currencyW.Id + "|" + currencyW.Code + "|" + currencyW.Value.ToString("0.######", CultureInfo.InvariantCulture) + "|" + currencyW.Sign);
 
                 var cookie = new HttpCookie("Currency");
-                cookie.Value = builder.ToString();
+                cookie.Value = HttpUtility.UrlEncode(builder.ToString());
                 Response.Cookies.Add(cookie);
             }
 

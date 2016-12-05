@@ -774,6 +774,10 @@ hr {
     opacity:0.4;
 }
 
+.img-thumbnail { 
+    min-width:100%;
+}
+
 /* ---------------- Product List ------------------ */
 
 /* Products Box Styles Starts */

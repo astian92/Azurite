@@ -17,7 +17,17 @@ namespace Azurite.Store.Wrappers
         public int StatusId { get; set; }
 
         [LocalizedDisplayName("Total", NameResourceType = typeof(Customer))]
-        public double Total { get; set; }
+        public double Total
+        {
+            get
+            {
+                double total = 0;
+                if (OrderedProducts != null && OrderedProducts.Count() > 0)
+                    total = OrderedProducts.Sum(x => x.Total);
+
+                return total;
+            }
+        }
 
         [LocalizedDisplayName("Comment", NameResourceType = typeof(Customer))]
         public string Comment { get; set; }

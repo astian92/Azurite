@@ -462,9 +462,12 @@
     <Content Include="Views\Categories\Promotions.cshtml" />
     <Content Include="Views\Products\GetAllPromoProducts.cshtml" />
     <Content Include="Views\Categories\GetCategoryMenu.cshtml" />
-    <Content Include="Views\ShoppingCart\Billing.cshtml" />
     <Content Include="Views\ShoppingCart\CartSummary.cshtml" />
     <Content Include="Views\Shared\Currency.cshtml" />
+    <Content Include="Views\ShoppingCart\Billing.cshtml" />
+    <Content Include="Views\ShoppingCart\CheckOut.cshtml" />
+    <Content Include="Views\ShoppingCart\OrderSuccess.cshtml" />
+    <Content Include="Views\ShoppingCart\OrderFail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
