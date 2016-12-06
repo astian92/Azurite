@@ -16,10 +16,14 @@ namespace Azurite.Store.Workers.Implementations
         private const string CART_ORDER_SESSION_NAME = "Order";
 
         private readonly IRepository<Product> rep;
+        private readonly IRepository<Order> orderRep;
+        private readonly IRepository<OrderStatus> orderStatusRep;
 
-        public ShoppingCartWorker(IRepository<Product> rep)
+        public ShoppingCartWorker(IRepository<Product> rep, IRepository<Order> orderRep, IRepository<OrderStatus> orderStatusRep)
         {
             this.rep = rep;
+            this.orderRep = orderRep;
+            this.orderStatusRep = orderStatusRep;
         }
 
         public OrderedProductW GetProduct(Guid productId)
@@ -103,7 +107,6 @@ namespace Azurite.Store.Workers.Implementations
             {
                 order.Id = Guid.NewGuid();
                 order.Number = "SomeOrderNumber";
-                order.Date = DateTime.UtcNow;
                 order.Customer = customer;
                 order.CustomerId = customer.Id;
 
@@ -116,13 +119,35 @@ namespace Azurite.Store.Workers.Implementations
 
         public OrderW GetOrder()
         {
-            var order = HttpContext.Current.Session[CART_ORDER_SESSION_NAME] as OrderW;
+            var order = GetCartSummary();
+            order.Id = Guid.NewGuid();
+            order.Number = "SomeOrderNumber";
+
             return order;
         }
 
-        public bool SaveOrder(OrderW order)
+        public bool SaveOrder(OrderW orderW)
         {
-            return true;
+            if(orderW != null)
+            {
+                var order = Mapper.Map<Order>(orderW);
+                order.Date = DateTime.UtcNow;
+
+                var orderStatuses = orderStatusRep.GetAll();
+                order.StatusId = orderStatuses.OrderBy(x => x.Id).FirstOrDefault().Id;
+
+                try
+                {
+                    //orderRep.Add(order);
+                    //orderRep.Save();
+                    return true;
+                }
+                catch(Exception)
+                {
+                }
+            }
+
+            return false;
         }
     }
 }
