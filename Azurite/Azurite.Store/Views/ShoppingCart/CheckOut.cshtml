@@ -228,7 +228,7 @@
                         @foreach (var product in Model.OrderedProducts)
                         {
                             @Html.HiddenFor(model => product.Id)
-                            var imagePath = "http://localhost:8696/cdn/files/";
+                            var imagePath = "http://cdn.radiannagold.eu/cdn/files/";
                             if (product.ProductImages.Count() > 0)
                             {
                                 imagePath += product.ProductImages.First().ImagePath;
