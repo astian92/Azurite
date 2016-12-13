@@ -90,6 +90,16 @@ namespace Azurite.Store.Workers.Implementations
             }
         }
 
+        public void ModifyProductQty(Guid productId, int quantity)
+        {
+            var cartProducts = GetShoppingCart();
+            var product = cartProducts.FirstOrDefault(p => p.Id == productId);
+            if (product != null)
+            {
+                product.Quantity = quantity;
+            }
+        }
+
         public OrderW GetCartSummary()
         {
             var cartProducts = GetShoppingCart();

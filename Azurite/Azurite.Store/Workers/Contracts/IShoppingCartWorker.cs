@@ -11,6 +11,7 @@ namespace Azurite.Store.Workers.Contracts
         List<OrderedProductW> GetShoppingCart();
         void AddProduct(Guid id, int quantity);
         void RemoveProduct(Guid id);
+        void ModifyProductQty(Guid productId, int quantity);
         OrderW GetCartSummary();
         OrderW GetOrder();
         bool CheckOutOrder(CustomerW customer);

@@ -1116,5 +1116,46 @@ hr {
 }
 
 .cart-table {
+    margin-bottom:30px;
+    border-bottom: 1px solid rgba(199, 181, 111, 1);
+}
 
+
+.cart-table tbody tr td,
+.cart-table thead tr th {
+    padding: 8px 15px;
+    border-top:1px solid #f3f3f3;
+}
+
+.cart-table thead tr {
+    background-color:rgba(199, 181, 111, 1);
+    color:#fff;
+    border: none;
+}
+
+.cart-table thead tr th {
+    border: none;
+}
+
+.cart-table tbody tr:hover {
+    background-color:#f3f3f3;
+}
+
+.cart-table tbody tr:last-child td {
+    padding: 15px;
+    font-size:16px;
+    font-weight:600;
+}
+
+.cart-remove {
+    padding:4px 12px;
+}
+
+.cart-nav-container {
+    margin-bottom: 10px;
+}
+
+.cart-nav-container .btn {
+    margin: 15px;
+    margin-right:0;
 }

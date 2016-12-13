@@ -99,5 +99,11 @@ namespace Azurite.Store.Controllers
             worker.RemoveProduct(id);
             return Json("ok", JsonRequestBehavior.AllowGet);
         }
+
+        public JsonResult ModifyProductQty(Guid id, int quantity)
+        {
+            worker.ModifyProductQty(id, quantity);
+            return Json("ok", JsonRequestBehavior.AllowGet);
+        }
     }
 }
