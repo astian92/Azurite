@@ -13,7 +13,6 @@ namespace Azurite.Store.Workers.Implementations
     public class ShoppingCartWorker : IShoppingCartWorker
     {
         private const string CART_PRODUCTS_SESSION_NAME = "CartProducts";
-        private const string CART_ORDER_SESSION_NAME = "Order";
 
         private readonly IRepository<Product> rep;
         private readonly IRepository<Order> orderRep;
@@ -110,23 +109,6 @@ namespace Azurite.Store.Workers.Implementations
             return orderW;
         }
 
-        public bool CheckOutOrder(CustomerW customer)
-        {
-            var order = GetCartSummary();
-            if(order.OrderedProducts != null && order.OrderedProducts.Count() > 0)
-            {
-                order.Id = Guid.NewGuid();
-                order.Number = "SomeOrderNumber";
-                order.Customer = customer;
-                order.CustomerId = customer.Id;
-
-                HttpContext.Current.Session[CART_ORDER_SESSION_NAME] = order;
-                return true;
-            }
-
-            return false;
-        }
-
         public OrderW GetOrder()
         {
             var order = GetCartSummary();
@@ -138,18 +120,23 @@ namespace Azurite.Store.Workers.Implementations
 
         public bool SaveOrder(OrderW orderW)
         {
-            if(orderW != null)
+            var orderedProducts = GetShoppingCart();
+            if (orderW != null && orderedProducts.Count() > 0)
             {
-                var order = Mapper.Map<Order>(orderW);
-                order.Date = DateTime.UtcNow;
-
+                orderW.Customer.Id = Guid.NewGuid();
+                orderW.CustomerId = orderW.Customer.Id;
+                orderW.OrderedProducts = orderedProducts;
+                orderW.Date = DateTime.UtcNow;
                 var orderStatuses = orderStatusRep.GetAll();
-                order.StatusId = orderStatuses.OrderBy(x => x.Id).FirstOrDefault().Id;
+                orderW.StatusId = orderStatuses.OrderBy(x => x.Id).FirstOrDefault().Id;
+
+                var order = Mapper.Map<Order>(orderW);
 
                 try
                 {
-                    //orderRep.Add(order);
-                    //orderRep.Save();
+                    orderRep.Add(order);
+                    orderRep.Save();
+                    DisplaceOrder();
                     return true;
                 }
                 catch(Exception)
@@ -158,6 +145,11 @@ namespace Azurite.Store.Workers.Implementations
             }
 
             return false;
+        }
+
+        public void DisplaceOrder()
+        {
+            HttpContext.Current.Session[CART_PRODUCTS_SESSION_NAME] = null;
         }
     }
 }

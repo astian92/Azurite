@@ -12,8 +12,8 @@
                     <th class="col-md-5">@ViewRes.SCProducts.TableHeaderColumn1</th>
                     <th class="col-md-2">@ViewRes.SCProducts.TableHeaderColumn3</th>
                     <th class="text-center col-md-1">@ViewRes.SCProducts.TableHeaderColumn2</th>
-                    <th class="col-md-2">Remove</th>
-                    <th class="text-right col-md-2">Total</th>
+                    <th class="col-md-2">@ViewRes.SCProducts.TableHeaderColumn4</th>
+                    <th class="text-right col-md-2">@ViewRes.SCProducts.TableHeaderColumn5</th>
                 </tr>
             </thead>
             <tbody>
@@ -58,7 +58,7 @@
                     </tr>
                 }
                 <tr>
-                    <td colspan="4">Total @Model.OrderedProducts.Count Items</td>
+                    <td colspan="4">@ViewRes.SCProducts.TableHeaderColumn5 @Model.OrderedProducts.Count @ViewRes.SharedStrings.Item</td>
                     <td class="text-right">@Html.TotalPrice(Model.Total, 0, true)</td>
                 </tr>
             </tbody>
@@ -66,8 +66,8 @@
     </div>
 
     <div class="cart-nav-container">
-        <a class="btn btn-default pull-right" href="/ShoppingCart/CheckOut">Proceed to Checkout</a>
-        <a class="btn btn-default pull-right" href="#" onclick="loadShoppingCart()">Update Cart</a>
+        <a class="btn btn-default pull-right" href="/ShoppingCart/CheckOut">@ViewRes.SharedStrings.OrderNavBtn2</a>
+        <a class="btn btn-default pull-right" href="#" onclick="loadShoppingCart()">@ViewRes.SharedStrings.OrderNavBtn1</a>
         <div class="clearfix"></div>
     </div>
 }

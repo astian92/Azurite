@@ -14,7 +14,7 @@ namespace Azurite.Store.Workers.Contracts
         void ModifyProductQty(Guid productId, int quantity);
         OrderW GetCartSummary();
         OrderW GetOrder();
-        bool CheckOutOrder(CustomerW customer);
         bool SaveOrder(OrderW order);
+        void DisplaceOrder();
     }
 }

@@ -113,5 +113,23 @@ namespace ViewRes {
                 return ResourceManager.GetString("TableHeaderColumn3", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Премахни.
+        /// </summary>
+        public static string TableHeaderColumn4 {
+            get {
+                return ResourceManager.GetString("TableHeaderColumn4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Общо.
+        /// </summary>
+        public static string TableHeaderColumn5 {
+            get {
+                return ResourceManager.GetString("TableHeaderColumn5", resourceCulture);
+            }
+        }
     }
 }
