@@ -3,6 +3,7 @@ using Azurite.Store.Common;
 using Azurite.Store.Data;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -12,34 +13,42 @@ namespace Azurite.Store.Wrappers
     {
         public Guid Id { get; set; }
 
-        [LocalizedDisplayName("Email", NameResourceType = typeof(Customer))]
+        [Required]
+        [LocalizedDisplayName("Email", NameResourceType = typeof(ViewRes.Customer))]
         public string Email { get; set; }
 
-        [LocalizedDisplayName("FirstName", NameResourceType = typeof(Customer))]
+        [Required]
+        [LocalizedDisplayName("FirstName", NameResourceType = typeof(ViewRes.Customer))]
         public string FirstName { get; set; }
 
-        [LocalizedDisplayName("LastName", NameResourceType = typeof(Customer))]
+        [Required]
+        [LocalizedDisplayName("LastName", NameResourceType = typeof(ViewRes.Customer))]
         public string LastName { get; set; }
 
-        [LocalizedDisplayName("Street", NameResourceType = typeof(Customer))]
+        [Required]
+        [LocalizedDisplayName("Street", NameResourceType = typeof(ViewRes.Customer))]
         public string Street { get; set; }
 
-        [LocalizedDisplayName("City", NameResourceType = typeof(Customer))]
+        [Required]
+        [LocalizedDisplayName("City", NameResourceType = typeof(ViewRes.Customer))]
         public string City { get; set; }
 
-        [LocalizedDisplayName("Country", NameResourceType = typeof(Customer))]
+        [Required]
+        [LocalizedDisplayName("Country", NameResourceType = typeof(ViewRes.Customer))]
         public string Country { get; set; }
 
-        [LocalizedDisplayName("Phone", NameResourceType = typeof(Customer))]
+        [Required]
+        [LocalizedDisplayName("Phone", NameResourceType = typeof(ViewRes.Customer))]
         public string Phone { get; set; }
 
-        [LocalizedDisplayName("ZipCode", NameResourceType = typeof(Customer))]
+        [Required]
+        [LocalizedDisplayName("ZipCode", NameResourceType = typeof(ViewRes.Customer))]
         public string ZipCode { get; set; }
 
-        [LocalizedDisplayName("Company", NameResourceType = typeof(Customer))]
+        [LocalizedDisplayName("Company", NameResourceType = typeof(ViewRes.Customer))]
         public string Company { get; set; }
 
-        [LocalizedDisplayName("VatID", NameResourceType = typeof(Customer))]
+        [LocalizedDisplayName("VatID", NameResourceType = typeof(ViewRes.Customer))]
         public string VatID { get; set; }
     }
 }

@@ -16,7 +16,7 @@ namespace Azurite.Store.Wrappers
         public Guid CustomerId { get; set; }
         public int StatusId { get; set; }
 
-        [LocalizedDisplayName("Total", NameResourceType = typeof(Customer))]
+        [LocalizedDisplayName("Total", NameResourceType = typeof(ViewRes.Customer))]
         public double Total
         {
             get
@@ -29,7 +29,7 @@ namespace Azurite.Store.Wrappers
             }
         }
 
-        [LocalizedDisplayName("Comment", NameResourceType = typeof(Customer))]
+        [LocalizedDisplayName("Comment", NameResourceType = typeof(ViewRes.Customer))]
         public string Comment { get; set; }
 
         public DateTime Date { get; set; }

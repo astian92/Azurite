@@ -61,6 +61,29 @@ hr {
   }  
 }
 
+.well {
+    background-color:#fafafa;
+    border-color:#dddddd;
+}
+
+fieldset {
+    background-color:#fafafa;
+    border:1px solid #dddddd;
+    margin-bottom:30px;
+}
+
+fieldset legend {
+    display:block;
+    width:auto;
+    padding:3px 10px;
+    margin-bottom: 0;
+    font-size:15px;
+    line-height:inherit;
+    color:#2a2a2a;
+    border:1px solid #dddddd;
+    background:#ffffff;
+}
+
 .footer-container {
     padding:35px 0 40px;
     border-top:1px solid #eee;
@@ -1158,4 +1181,45 @@ hr {
 .cart-nav-container .btn {
     margin: 15px;
     margin-right:0;
+}
+
+.cart-disable {
+    border-bottom: 1px solid #dddddd;
+    border-top:1px solid #dddddd;
+}
+
+    
+.cart-disable thead tr {
+    background-color: #fafafa;
+    color:#2a2a2a;
+}
+
+.customer-details {
+    border-radius:0;
+    padding:50px 15px 20px 15px;
+}
+
+.customer-details h3 {
+    font-weight:400;
+    letter-spacing:0.1em;
+    font-size:22px;
+    margin-top:0;
+}
+
+.customer-details .form-group label {
+    font-weight:300;
+    font-size:15px;
+    padding-top:5px;
+    text-align:right;
+}
+
+.customer-details .form-group textarea {
+    min-width:100%;
+    max-width:100%;
+    height:100px;
+    resize:none;
+}
+
+.customer-details .details-container {
+    margin-bottom:30px;
 }

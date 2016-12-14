@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Azurite.Store.Resources.Models {
+namespace ViewRes {
     using System;
     
     
