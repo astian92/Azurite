@@ -307,6 +307,16 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SharedStrings.en.resx</DependentUpon>
     </Compile>
+    <Compile Include="Resources\Views\ShoppingCart\SCCheckout.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SCCheckout.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Views\ShoppingCart\SCCheckout.en.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SCCheckout.en.resx</DependentUpon>
+    </Compile>
     <Compile Include="Resources\Views\ShoppingCart\SCIndex.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -316,6 +326,16 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>SCIndex.en.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Views\ShoppingCart\SCOrderSuccess.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SCOrderSuccess.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Views\ShoppingCart\SCOrderSuccess.en.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SCOrderSuccess.en.resx</DependentUpon>
     </Compile>
     <Compile Include="Resources\Views\ShoppingCart\SCProducts.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -561,6 +581,16 @@
       <LastGenOutput>SharedStrings.Designer.cs</LastGenOutput>
       <CustomToolNamespace>ViewRes</CustomToolNamespace>
     </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\ShoppingCart\SCCheckout.en.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>SCCheckout.en.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>ViewRes</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\ShoppingCart\SCCheckout.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>SCCheckout.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>ViewRes</CustomToolNamespace>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\Views\ShoppingCart\SCIndex.en.resx">
       <CustomToolNamespace>ViewRes</CustomToolNamespace>
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -569,6 +599,16 @@
     <EmbeddedResource Include="Resources\Views\ShoppingCart\SCIndex.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>SCIndex.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>ViewRes</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\ShoppingCart\SCOrderSuccess.en.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>SCOrderSuccess.en.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>ViewRes</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\ShoppingCart\SCOrderSuccess.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>SCOrderSuccess.Designer.cs</LastGenOutput>
       <CustomToolNamespace>ViewRes</CustomToolNamespace>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Views\ShoppingCart\SCProducts.en.resx">

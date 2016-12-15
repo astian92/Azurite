@@ -45,6 +45,5 @@ namespace Azurite.Store.Common
                return (string)_nameProperty.GetValue(_nameProperty.DeclaringType, null);
            }
         }
-    
     }
 }

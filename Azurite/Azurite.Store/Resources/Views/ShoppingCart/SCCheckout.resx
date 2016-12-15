@@ -117,58 +117,31 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="City" xml:space="preserve">
-    <value>Град</value>
+  <data name="FeildsetFieldNote" xml:space="preserve">
+    <value>Ще заплатиш на куриера, при доставката на поръчката. За вземане от офис на куриер ще заплатиш в избрания от теб офис.</value>
   </data>
-  <data name="CityValidation" xml:space="preserve">
-    <value>Полето Град е задължително</value>
+  <data name="FieldsetFieldLabel" xml:space="preserve">
+    <value>Наложен платеж</value>
   </data>
-  <data name="Company" xml:space="preserve">
-    <value>Компания</value>
+  <data name="FieldsetHeader1" xml:space="preserve">
+    <value>Лични данни</value>
   </data>
-  <data name="Country" xml:space="preserve">
-    <value>Държава</value>
-  </data>
-  <data name="CountryValidation" xml:space="preserve">
-    <value>Полето Държава е задължително</value>
-  </data>
-  <data name="Email" xml:space="preserve">
-    <value>Е-майл</value>
-  </data>
-  <data name="EmailValidation" xml:space="preserve">
-    <value>Полето Е-майл е задължително</value>
-  </data>
-  <data name="FirstName" xml:space="preserve">
-    <value>Име</value>
-  </data>
-  <data name="FirstNameValidation" xml:space="preserve">
-    <value>Полето Име е задължително</value>
-  </data>
-  <data name="LastName" xml:space="preserve">
-    <value>Фамилия</value>
-  </data>
-  <data name="LastNameValidation" xml:space="preserve">
-    <value>Полето Фамилия е задължително</value>
-  </data>
-  <data name="Phone" xml:space="preserve">
-    <value>Телефон</value>
-  </data>
-  <data name="PhoneValidation" xml:space="preserve">
-    <value>Полето Телефон е задължително</value>
-  </data>
-  <data name="Street" xml:space="preserve">
+  <data name="FieldsetHeader2" xml:space="preserve">
     <value>Адрес</value>
   </data>
-  <data name="StreetValidation" xml:space="preserve">
-    <value>Полето Адрес е задължително</value>
+  <data name="FieldsetHeader3" xml:space="preserve">
+    <value>Фирмени данни</value>
   </data>
-  <data name="VatID" xml:space="preserve">
-    <value>Булстат</value>
+  <data name="FieldsetHeader4" xml:space="preserve">
+    <value>Допълнителна информация</value>
   </data>
-  <data name="ZipCode" xml:space="preserve">
-    <value>Пощенски код</value>
+  <data name="FieldsetLegend1" xml:space="preserve">
+    <value>Клиентски данни</value>
   </data>
-  <data name="ZipCodeValidation" xml:space="preserve">
-    <value>Полето Пощенски код е задължително</value>
+  <data name="FieldsetLegend2" xml:space="preserve">
+    <value>Доставка &amp;amp; Плащане</value>
+  </data>
+  <data name="Title" xml:space="preserve">
+    <value>Информация за поръчката</value>
   </data>
 </root>
