@@ -984,6 +984,7 @@
     <Content Include="Content\select2\src\scss\_dropdown.scss" />
     <Content Include="Content\select2\src\scss\_multiple.scss" />
     <Content Include="Content\select2\src\scss\_single.scss" />
+    <None Include="Properties\PublishProfiles\astian.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\datatables\datatables.min.js" />
