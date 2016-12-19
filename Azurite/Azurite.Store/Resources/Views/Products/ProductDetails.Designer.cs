@@ -115,6 +115,15 @@ namespace ViewRes {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Характеристики.
+        /// </summary>
+        public static string SpecTitle {
+            get {
+                return ResourceManager.GetString("SpecTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Подобни продукти.
         /// </summary>
         public static string SubTitle {

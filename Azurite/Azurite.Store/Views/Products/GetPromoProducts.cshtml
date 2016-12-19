@@ -5,24 +5,19 @@
     ViewBag.Title = "Promotions";
 }
 
+@{ 
+    var cdnUri = ApplicationHelpers.GetAppSetting("cdnUri");
+}
+
 <div class="products-list">
     @foreach (var item in Model)
     {
-        var imagePath = "http://cdn.radiannagold.eu/cdn/files/";
-        if (item.ProductImages.Count() > 0)
-        {
-            imagePath += item.ProductImages.First().ImagePath;
-        }
-        else
-        {
-            imagePath = "";
-        }
-
         <div class="col-xs-6 col-sm-6 col-md-3">
             <div class="product-col">
                 <div class="thumbnail image">
+                    <div class="cover"></div>
                     <a href="/Products/Details/@item.Id">
-                        <img src="@imagePath" alt="@item.Name" />
+                        <img src="@(cdnUri + item.ProductImages?.FirstOrDefault()?.ImagePath)" alt="@item.Name" />
                     </a>
                 </div>
                 <div class="caption">

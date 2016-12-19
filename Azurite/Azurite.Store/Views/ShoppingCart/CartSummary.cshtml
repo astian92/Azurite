@@ -4,6 +4,7 @@
 
 @if (Model.OrderedProducts.Count() > 0)
 {
+    var cdnUri = ApplicationHelpers.GetAppSetting("cdnUri");
 
     <div class="table-responsive">
         <table class="table cart-table">
@@ -19,21 +20,11 @@
             <tbody>
                 @foreach (var product in Model.OrderedProducts)
                 {
-                    var imagePath = "http://cdn.radiannagold.eu/cdn/files/";
-                    if (product.ProductImages.Count() > 0)
-                    {
-                        imagePath += product.ProductImages.First().ImagePath;
-                    }
-                    else
-                    {
-                        imagePath = "";
-                    }
-
                     <tr id="cart-item-@product.Id">
                         <td>
                             <div class="col-xs-2">
                                 <a href="/Products/Details/@product.ActualProductId">
-                                    <img src="@imagePath" alt="@product.CurrentLangName" class="img-responsive img-thumbnail" />
+                                    <img src="@(cdnUri + product.ProductImages?.FirstOrDefault()?.ImagePath)" alt="@product.CurrentLangName" class="img-responsive img-thumbnail" />
                                 </a>
                             </div>
                             <div class="col-xs-10">

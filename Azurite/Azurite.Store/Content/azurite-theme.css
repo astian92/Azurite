@@ -95,9 +95,49 @@ hr {
   }  
 }
 
+.section {
+    padding:20px 0;
+}
+
+.middle-section {
+    background:url("../Resources/Images/bg-ruse-aleksandrovksa.jpg") 50% 0px no-repeat;
+    background-position: 50% 76%;
+    background-repeat: no-repeat;
+    background-size:cover;
+    z-index: 1;
+    position: relative;
+    overflow: hidden;
+    color:#ffffff;
+}
+
+.middle-section:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden;
+    -webkit-transform: translateZ(0) scale(1, 1);
+}
+
+.bg-gray {
+    background-color:#fafafa;
+}
+
+.space-top {
+  padding-top: 20px;
+}
+
+.space-bottom {
+  padding-bottom: 20px;
+}
+
 .well {
     background-color:#fafafa;
     border-color:#dddddd;
+    border-radius:0;
 }
 
 fieldset {
@@ -877,6 +917,7 @@ fieldset legend {
     position:absolute;
     display:block; 
     margin:auto;
+    padding-top:30px;
     top:0;
     right:0;
     left:0;

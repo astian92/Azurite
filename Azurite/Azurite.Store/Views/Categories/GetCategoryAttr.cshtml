@@ -9,7 +9,12 @@
                 @foreach (var productAttr in attr.ProductAttributes)
                 {
                     <li>
-                        <a href="#@productAttr.Id">@productAttr.Value</a>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" name="ProductAttributes" value="" />
+                                @productAttr.Value
+                            </label>
+                        </div>
                     </li>
                 }
             </ul>

@@ -392,6 +392,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\azurite-theme.css" />
+    <Content Include="Resources\Images\bg-ruse-aleksandrovksa.jpg" />
     <Content Include="Resources\Images\get-in-touch-wide.jpg" />
     <Content Include="Resources\Images\radianna-gold-ruse-2.jpg" />
     <Content Include="Resources\Images\radianna-gold-sofia.jpg" />
