@@ -1,9 +1,10 @@
 ﻿function loadShoppingCart() {
+    $('#cart-summary').html('');
     $.ajax({
-        url: MVC.ShoppingCart.ProductsFull,
+        url: MVC.ShoppingCart.CartSummaryFull,
         dataType: 'html',
         success: function (data) {
-            $('#cart-products').html(data);
+            $('#cart-summary').html(data);
         }
     });
 }

@@ -22,14 +22,14 @@ namespace ViewRes {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class SCProducts {
+    public class SCOrderSuccess {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal SCProducts() {
+        internal SCOrderSuccess() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace ViewRes {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Azurite.Store.Resources.Views.ShoppingCart.SCProducts", typeof(SCProducts).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Azurite.Store.Resources.Views.ShoppingCart.SCOrderSuccess", typeof(SCOrderSuccess).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,74 +61,20 @@ namespace ViewRes {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Количката е празна..
+        ///   Looks up a localized string similar to Вашата поръчка беше направена успешно и ще бъде обработена съвсем скоро! Наш сътрудник ще се свърже с вас за потвърждение. Благодарим Ви!.
         /// </summary>
-        public static string EmptyCartDesc {
+        public static string Note {
             get {
-                return ResourceManager.GetString("EmptyCartDesc", resourceCulture);
+                return ResourceManager.GetString("Note", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Продукти.
+        ///   Looks up a localized string similar to Благодарим Ви.
         /// </summary>
-        public static string LeftPaneTitle {
+        public static string Title {
             get {
-                return ResourceManager.GetString("LeftPaneTitle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Информация за поръчката.
-        /// </summary>
-        public static string RightPaneTitle {
-            get {
-                return ResourceManager.GetString("RightPaneTitle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Детайли на продукта.
-        /// </summary>
-        public static string TableHeaderColumn1 {
-            get {
-                return ResourceManager.GetString("TableHeaderColumn1", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Кол.
-        /// </summary>
-        public static string TableHeaderColumn2 {
-            get {
-                return ResourceManager.GetString("TableHeaderColumn2", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Цена.
-        /// </summary>
-        public static string TableHeaderColumn3 {
-            get {
-                return ResourceManager.GetString("TableHeaderColumn3", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Премахни.
-        /// </summary>
-        public static string TableHeaderColumn4 {
-            get {
-                return ResourceManager.GetString("TableHeaderColumn4", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Общо.
-        /// </summary>
-        public static string TableHeaderColumn5 {
-            get {
-                return ResourceManager.GetString("TableHeaderColumn5", resourceCulture);
+                return ResourceManager.GetString("Title", resourceCulture);
             }
         }
     }

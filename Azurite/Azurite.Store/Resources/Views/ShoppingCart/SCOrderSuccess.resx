@@ -117,28 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="EmptyCartDesc" xml:space="preserve">
-    <value>There are no items in your cart.</value>
+  <data name="Note" xml:space="preserve">
+    <value>Вашата поръчка беше направена успешно и ще бъде обработена съвсем скоро! Наш сътрудник ще се свърже с вас за потвърждение. Благодарим Ви!</value>
   </data>
-  <data name="LeftPaneTitle" xml:space="preserve">
-    <value>Products</value>
-  </data>
-  <data name="RightPaneTitle" xml:space="preserve">
-    <value>Subtotal</value>
-  </data>
-  <data name="TableHeaderColumn1" xml:space="preserve">
-    <value>Product Details</value>
-  </data>
-  <data name="TableHeaderColumn2" xml:space="preserve">
-    <value>Qty</value>
-  </data>
-  <data name="TableHeaderColumn3" xml:space="preserve">
-    <value>Price</value>
-  </data>
-  <data name="TableHeaderColumn4" xml:space="preserve">
-    <value>Remove</value>
-  </data>
-  <data name="TableHeaderColumn5" xml:space="preserve">
-    <value>Total</value>
+  <data name="Title" xml:space="preserve">
+    <value>Благодарим Ви</value>
   </data>
 </root>

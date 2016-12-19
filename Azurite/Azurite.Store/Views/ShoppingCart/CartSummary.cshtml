@@ -2,20 +2,95 @@
 
 @using Azurite.Store.Common;
 
-@foreach (var product in Model.OrderedProducts)
+@if (Model.OrderedProducts.Count() > 0)
 {
-    <h5>@product.CurrentLangName <span class="pull-right">@Html.TotalPrice(product.Total, 0, true)</span></h5>
-    <input type="hidden" name="OrderedProducts[].Id" value="@product.Id" />
-    <div class="clearfix"></div>
+
+    <div class="table-responsive">
+        <table class="table cart-table">
+            <thead>
+                <tr>
+                    <th class="col-md-5">@ViewRes.SCProducts.TableHeaderColumn1</th>
+                    <th class="col-md-2">@ViewRes.SCProducts.TableHeaderColumn3</th>
+                    <th class="text-center col-md-1">@ViewRes.SCProducts.TableHeaderColumn2</th>
+                    <th class="col-md-2">@ViewRes.SCProducts.TableHeaderColumn4</th>
+                    <th class="text-right col-md-2">@ViewRes.SCProducts.TableHeaderColumn5</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var product in Model.OrderedProducts)
+                {
+                    var imagePath = "http://cdn.radiannagold.eu/cdn/files/";
+                    if (product.ProductImages.Count() > 0)
+                    {
+                        imagePath += product.ProductImages.First().ImagePath;
+                    }
+                    else
+                    {
+                        imagePath = "";
+                    }
+
+                    <tr id="cart-item-@product.Id">
+                        <td>
+                            <div class="col-xs-2">
+                                <a href="/Products/Details/@product.ActualProductId">
+                                    <img src="@imagePath" alt="@product.CurrentLangName" class="img-responsive img-thumbnail" />
+                                </a>
+                            </div>
+                            <div class="col-xs-10">
+                                @product.CurrentLangName
+                            </div>
+                        </td>
+                        <td>
+                            @Html.TotalPrice(product.Price, product.Discount)
+                        </td>
+                        <td>
+                            <input type="number" class="form-control" id="Quantity-@product.Id" name="Quantity" value="@product.Quantity" productId="@product.Id" />
+                        </td>
+                        <td>
+                            <a href="#" productid="@product.Id" class="label label-default cart-remove">
+                                <i class="fa fa-trash"></i>
+                                @ViewRes.SharedStrings.RemoveBtn
+                            </a>
+                        </td>
+                        <td class="text-right">
+                            @Html.TotalPrice(product.Total, 0, true)
+                        </td>
+                    </tr>
+                }
+                <tr>
+                    <td colspan="4">@ViewRes.SCProducts.TableHeaderColumn5 @Model.OrderedProducts.Count @ViewRes.SharedStrings.Item</td>
+                    <td class="text-right">@Html.TotalPrice(Model.Total, 0, true)</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="cart-nav-container">
+        <a class="btn btn-default pull-right" href="/ShoppingCart/CheckOut">@ViewRes.SharedStrings.OrderNavBtn2</a>
+        <a class="btn btn-default pull-right" href="#" onclick="loadShoppingCart()">@ViewRes.SharedStrings.OrderNavBtn1</a>
+        <div class="clearfix"></div>
+    </div>
+}
+else
+{
+    <div class="col-xs-12">
+        <p class="page-message text-center">@ViewRes.SCProducts.EmptyCartDesc <strong><a href="/Categories/Promotions">@ViewRes.SharedStrings.ContinueShopBtn <i class="fa fa-arrow-right"></i></a></strong></p>
+        <div id="promotionsContainer">
+
+        </div>
+    </div>
+    <script>
+        $(document).ready(function () {
+            $('#promotionsContainer').html('');
+            $.ajax({
+                url: MVC.Products.GetPromoProductsFull,
+                dataType: 'html',
+                success: function (data) {
+                    $('#promotionsContainer').html(data);
+                }
+            });
+        });
+    </script>
 }
 
-<hr />
-<h5 class="text-right">Total: @Html.TotalPrice(Model.Total, 0, true)</h5>
-
-<div style="margin-bottom:10px;">
-        <a class="btn btn-default pull-right" href="/ShoppingCart/CheckOut">Proceed to Checkout</a>
-    <div class="clearfix"></div>
-</div>
-
-<small class="pull-right">@ViewRes.SCProducts.EmptyCartDesc <strong><a href="/Categories/Promotions">@ViewRes.SharedStrings.ContinueShopBtn <i class="fa fa-arrow-right"></i></a></strong></small>
-<div class="clearfix"></div>
+<script src="~/Scripts/App/ShoppingCart/shopping_cart_products.js"></script>

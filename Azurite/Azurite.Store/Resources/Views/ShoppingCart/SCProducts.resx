@@ -135,4 +135,10 @@
   <data name="TableHeaderColumn3" xml:space="preserve">
     <value>Цена</value>
   </data>
+  <data name="TableHeaderColumn4" xml:space="preserve">
+    <value>Премахни</value>
+  </data>
+  <data name="TableHeaderColumn5" xml:space="preserve">
+    <value>Общо</value>
+  </data>
 </root>

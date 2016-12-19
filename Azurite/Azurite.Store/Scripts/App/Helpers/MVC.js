@@ -25,6 +25,7 @@ var MagicStrings = (function () {
     shoppingCart.CreateAction("AddProduct");
     shoppingCart.CreateAction("RemoveProduct");
     shoppingCart.CreateAction("CartSummary");
+    shoppingCart.CreateAction("ModifyProductQty");
 
     return {
         CreateController: CreateController,

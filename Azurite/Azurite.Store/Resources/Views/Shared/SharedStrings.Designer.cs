@@ -142,6 +142,15 @@ namespace ViewRes {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Продукти.
+        /// </summary>
+        public static string Item {
+            get {
+                return ResourceManager.GetString("Item", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Език.
         /// </summary>
         public static string Language {
@@ -174,6 +183,42 @@ namespace ViewRes {
         public static string LanguageOptionEN {
             get {
                 return ResourceManager.GetString("LanguageOptionEN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Обнови количката.
+        /// </summary>
+        public static string OrderNavBtn1 {
+            get {
+                return ResourceManager.GetString("OrderNavBtn1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Продължи с поръчката.
+        /// </summary>
+        public static string OrderNavBtn2 {
+            get {
+                return ResourceManager.GetString("OrderNavBtn2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Завършете поръчката.
+        /// </summary>
+        public static string OrderNavBtn3 {
+            get {
+                return ResourceManager.GetString("OrderNavBtn3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Обратно към количката.
+        /// </summary>
+        public static string OrderNavBtn4 {
+            get {
+                return ResourceManager.GetString("OrderNavBtn4", resourceCulture);
             }
         }
         

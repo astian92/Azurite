@@ -22,14 +22,14 @@ namespace ViewRes {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class SCProducts {
+    public class SCCheckout {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal SCProducts() {
+        internal SCCheckout() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace ViewRes {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Azurite.Store.Resources.Views.ShoppingCart.SCProducts", typeof(SCProducts).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Azurite.Store.Resources.Views.ShoppingCart.SCCheckout", typeof(SCCheckout).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,74 +61,83 @@ namespace ViewRes {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Количката е празна..
+        ///   Looks up a localized string similar to Ще заплатиш на куриера, при доставката на поръчката. За вземане от офис на куриер ще заплатиш в избрания от теб офис..
         /// </summary>
-        public static string EmptyCartDesc {
+        public static string FeildsetFieldNote {
             get {
-                return ResourceManager.GetString("EmptyCartDesc", resourceCulture);
+                return ResourceManager.GetString("FeildsetFieldNote", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Продукти.
+        ///   Looks up a localized string similar to Наложен платеж.
         /// </summary>
-        public static string LeftPaneTitle {
+        public static string FieldsetFieldLabel {
             get {
-                return ResourceManager.GetString("LeftPaneTitle", resourceCulture);
+                return ResourceManager.GetString("FieldsetFieldLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Лични данни.
+        /// </summary>
+        public static string FieldsetHeader1 {
+            get {
+                return ResourceManager.GetString("FieldsetHeader1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Адрес.
+        /// </summary>
+        public static string FieldsetHeader2 {
+            get {
+                return ResourceManager.GetString("FieldsetHeader2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Фирмени данни.
+        /// </summary>
+        public static string FieldsetHeader3 {
+            get {
+                return ResourceManager.GetString("FieldsetHeader3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Допълнителна информация.
+        /// </summary>
+        public static string FieldsetHeader4 {
+            get {
+                return ResourceManager.GetString("FieldsetHeader4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Клиентски данни.
+        /// </summary>
+        public static string FieldsetLegend1 {
+            get {
+                return ResourceManager.GetString("FieldsetLegend1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Доставка &amp;amp; Плащане.
+        /// </summary>
+        public static string FieldsetLegend2 {
+            get {
+                return ResourceManager.GetString("FieldsetLegend2", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Информация за поръчката.
         /// </summary>
-        public static string RightPaneTitle {
+        public static string Title {
             get {
-                return ResourceManager.GetString("RightPaneTitle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Детайли на продукта.
-        /// </summary>
-        public static string TableHeaderColumn1 {
-            get {
-                return ResourceManager.GetString("TableHeaderColumn1", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Кол.
-        /// </summary>
-        public static string TableHeaderColumn2 {
-            get {
-                return ResourceManager.GetString("TableHeaderColumn2", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Цена.
-        /// </summary>
-        public static string TableHeaderColumn3 {
-            get {
-                return ResourceManager.GetString("TableHeaderColumn3", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Премахни.
-        /// </summary>
-        public static string TableHeaderColumn4 {
-            get {
-                return ResourceManager.GetString("TableHeaderColumn4", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Общо.
-        /// </summary>
-        public static string TableHeaderColumn5 {
-            get {
-                return ResourceManager.GetString("TableHeaderColumn5", resourceCulture);
+                return ResourceManager.GetString("Title", resourceCulture);
             }
         }
     }

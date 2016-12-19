@@ -24,13 +24,13 @@
                         @foreach (var image in Model.ProductImages)
                         {
                             <li>
-                                <img id="img_@image.Id" src="http://localhost:8696/cdn/files/@image.ImagePath" alt="" class="img-thumbnail" />
+                                <img id="img_@image.Id" src="http://cdn.radiannagold.eu/cdn/files/@image.ImagePath" alt="" class="img-thumbnail" />
                             </li>
                         }
                     </ul>
                 </div>
                 <div class="col-xs-9 col-sm-10">
-                    <img src="http://localhost:8696/cdn/files/@Model.ProductImages.FirstOrDefault().ImagePath" data-zoom-image="http://localhost:8696/cdn/files/@Model.ProductImages.FirstOrDefault().ImagePath" alt="@Model.Name" class="img-responsive img-preview" />
+                    <img src="http://cdn.radiannagold.eu/cdn/files/@Model.ProductImages.FirstOrDefault().ImagePath" data-zoom-image="http://cdn.radiannagold.eu/cdn/files/@Model.ProductImages.FirstOrDefault().ImagePath" alt="@Model.Name" class="img-responsive img-preview" />
                 </div>
             </div>
         </div>

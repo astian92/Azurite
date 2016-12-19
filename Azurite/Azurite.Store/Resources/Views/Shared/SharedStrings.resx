@@ -144,6 +144,9 @@
   <data name="Home" xml:space="preserve">
     <value>Начало</value>
   </data>
+  <data name="Item" xml:space="preserve">
+    <value>Продукти</value>
+  </data>
   <data name="Language" xml:space="preserve">
     <value>Език</value>
   </data>
@@ -155,6 +158,18 @@
   </data>
   <data name="LanguageOptionEN" xml:space="preserve">
     <value>Английски</value>
+  </data>
+  <data name="OrderNavBtn1" xml:space="preserve">
+    <value>Обнови количката</value>
+  </data>
+  <data name="OrderNavBtn2" xml:space="preserve">
+    <value>Продължи с поръчката</value>
+  </data>
+  <data name="OrderNavBtn3" xml:space="preserve">
+    <value>Завършете поръчката</value>
+  </data>
+  <data name="OrderNavBtn4" xml:space="preserve">
+    <value>Обратно към количката</value>
   </data>
   <data name="ProductsOrderOption1" xml:space="preserve">
     <value>Цена възх.</value>

@@ -117,28 +117,31 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="EmptyCartDesc" xml:space="preserve">
-    <value>There are no items in your cart.</value>
+  <data name="FeildsetFieldNote" xml:space="preserve">
+    <value>You will pay to the courier upon delivery of the order. For taking from a courier office you will pay in your chosen office.</value>
   </data>
-  <data name="LeftPaneTitle" xml:space="preserve">
-    <value>Products</value>
+  <data name="FieldsetFieldLabel" xml:space="preserve">
+    <value>Cash On Delivery</value>
   </data>
-  <data name="RightPaneTitle" xml:space="preserve">
-    <value>Subtotal</value>
+  <data name="FieldsetHeader1" xml:space="preserve">
+    <value>Personal Info</value>
   </data>
-  <data name="TableHeaderColumn1" xml:space="preserve">
-    <value>Product Details</value>
+  <data name="FieldsetHeader2" xml:space="preserve">
+    <value>Your Address</value>
   </data>
-  <data name="TableHeaderColumn2" xml:space="preserve">
-    <value>Qty</value>
+  <data name="FieldsetHeader3" xml:space="preserve">
+    <value>Company Info</value>
   </data>
-  <data name="TableHeaderColumn3" xml:space="preserve">
-    <value>Price</value>
+  <data name="FieldsetHeader4" xml:space="preserve">
+    <value>Additional Info</value>
   </data>
-  <data name="TableHeaderColumn4" xml:space="preserve">
-    <value>Remove</value>
+  <data name="FieldsetLegend1" xml:space="preserve">
+    <value>Billing information</value>
   </data>
-  <data name="TableHeaderColumn5" xml:space="preserve">
-    <value>Total</value>
+  <data name="FieldsetLegend2" xml:space="preserve">
+    <value>Shipping &amp;amp; Payment</value>
+  </data>
+  <data name="Title" xml:space="preserve">
+    <value>Order Checkout</value>
   </data>
 </root>

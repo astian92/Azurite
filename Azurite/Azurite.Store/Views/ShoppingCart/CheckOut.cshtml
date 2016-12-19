@@ -10,7 +10,7 @@
     <div class="row">
         <div class="col-xs-12">
             <div class="page-header">
-                <h3>Order Summary</h3>
+                <h3>@ViewRes.SCCheckout.Title</h3>
                 <span class="devider"></span>
             </div>
         </div>
@@ -22,213 +22,21 @@
         @Html.HiddenFor(model => Model.Number)
         @Html.HiddenFor(model => Model.CustomerId)
 
-        <div class="row well">
-            <div class="panel panel-gold">
-                <div class="panel-heading">
-                    <h4>Personal Info</h4>
-                </div>
-                <div class="panel-body">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                @Html.LabelFor(model => Model.Customer.FirstName, htmlAttributes: new { @class = "control-label col-md-12" })
-                                <div class="col-md-12">
-                                    @Html.EditorFor(model => Model.Customer.FirstName, new { htmlAttributes = new { @class = "form-control" } })
-                                    @Html.ValidationMessageFor(model => Model.Customer.FirstName, "", new { @class = "text-danger" })
-                                </div>
-                                <div class="clearfix"></div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                @Html.LabelFor(model => Model.Customer.LastName, htmlAttributes: new { @class = "control-label col-md-12" })
-                                <div class="col-md-12">
-                                    @Html.EditorFor(model => Model.Customer.LastName, new { htmlAttributes = new { @class = "form-control" } })
-                                    @Html.ValidationMessageFor(model => Model.Customer.LastName, "", new { @class = "text-danger" })
-                                </div>
-                                <div class="clearfix"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="clearfix"></div>
-
-            <div class="panel panel-gold">
-                <div class="panel-heading">
-                    <h4>Contact Info</h4>
-                </div>
-                <div class="panel-body">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                @Html.LabelFor(model => Model.Customer.Email, htmlAttributes: new { @class = "control-label col-md-12" })
-                                <div class="col-md-12">
-                                    @Html.EditorFor(model => Model.Customer.Email, new { htmlAttributes = new { @class = "form-control" } })
-                                    @Html.ValidationMessageFor(model => Model.Customer.Email, "", new { @class = "text-danger" })
-                                </div>
-                                <div class="clearfix"></div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                @Html.LabelFor(model => Model.Customer.Phone, htmlAttributes: new { @class = "control-label col-md-12" })
-                                <div class="col-md-12">
-                                    @Html.EditorFor(model => Model.Customer.Phone, new { htmlAttributes = new { @class = "form-control" } })
-                                    @Html.ValidationMessageFor(model => Model.Customer.Phone, "", new { @class = "text-danger" })
-                                </div>
-                                <div class="clearfix"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="clearfix"></div>
-        </div>
-
-
-        <div class="row well">
-            <div class="panel panel-gold">
-                <div class="panel-heading">
-                    <h4>Shipping address</h4>
-                </div>
-                <div class="panel-body">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                @Html.LabelFor(model => Model.Customer.Street, htmlAttributes: new { @class = "control-label col-md-12" })
-                                <div class="col-md-12">
-                                    @Html.EditorFor(model => Model.Customer.Street, new { htmlAttributes = new { @class = "form-control" } })
-                                    @Html.ValidationMessageFor(model => Model.Customer.Street, "", new { @class = "text-danger" })
-                                </div>
-                                <div class="clearfix"></div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                @Html.LabelFor(model => Model.Customer.City, htmlAttributes: new { @class = "control-label col-md-12" })
-                                <div class="col-md-12">
-                                    @Html.EditorFor(model => Model.Customer.City, new { htmlAttributes = new { @class = "form-control" } })
-                                    @Html.ValidationMessageFor(model => Model.Customer.City, "", new { @class = "text-danger" })
-                                </div>
-                                <div class="clearfix"></div>
-                            </div>
-                        </div>
-
-                        <div class="clearfix"></div>
-
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                @Html.LabelFor(model => Model.Customer.Country, htmlAttributes: new { @class = "control-label col-md-12" })
-                                <div class="col-md-12">
-                                    @Html.EditorFor(model => Model.Customer.Country, new { htmlAttributes = new { @class = "form-control" } })
-                                    @Html.ValidationMessageFor(model => Model.Customer.Country, "", new { @class = "text-danger" })
-                                </div>
-                                <div class="clearfix"></div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                @Html.LabelFor(model => Model.Customer.ZipCode, htmlAttributes: new { @class = "control-label col-md-12" })
-                                <div class="col-md-12">
-                                    @Html.EditorFor(model => Model.Customer.ZipCode, new { htmlAttributes = new { @class = "form-control" } })
-                                    @Html.ValidationMessageFor(model => Model.Customer.ZipCode, "", new { @class = "text-danger" })
-                                </div>
-                                <div class="clearfix"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="clearfix"></div>
-        </div>
-
-        <div class="row well">
-
-            <div class="panel panel-gold">
-                <div class="panel-heading">
-                    <h4>Company Info</h4>
-                </div>
-                <div class="panel-body">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                @Html.LabelFor(model => Model.Customer.Company, htmlAttributes: new { @class = "control-label col-md-12" })
-                                <div class="col-md-12">
-                                    @Html.EditorFor(model => Model.Customer.Company, new { htmlAttributes = new { @class = "form-control" } })
-                                    @Html.ValidationMessageFor(model => Model.Customer.Company, "", new { @class = "text-danger" })
-                                </div>
-                                <div class="clearfix"></div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                @Html.LabelFor(model => Model.Customer.VatID, htmlAttributes: new { @class = "control-label col-md-12" })
-                                <div class="col-md-12">
-                                    @Html.EditorFor(model => Model.Customer.VatID, new { htmlAttributes = new { @class = "form-control" } })
-                                    @Html.ValidationMessageFor(model => Model.Customer.VatID, "", new { @class = "text-danger" })
-                                </div>
-                                <div class="clearfix"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="clearfix"></div>
-
-        <div class="row well">
-
-            <div class="panel panel-gold">
-                <div class="panel-heading">
-                    <h4>Any Comments to us</h4>
-                </div>
-                <div class="panel-body">
-                    <div class="form-group">
-                        @Html.LabelFor(model => Model.Comment, htmlAttributes: new { @class = "control-label col-md-12" })
-                        <div class="col-md-12">
-                            @Html.TextAreaFor(model => Model.Comment, new { @class = "form-control" })
-                        </div>
-                        <div class="clearfix"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="clearfix"></div>
-
         <div class="row">
-
-            <div class="col-xs-12">
-                <h4>Order Summary</h4>
-                <hr />
-            </div>
-
-            <div class="col-xs-12">
-                <table>
+            <div class="table-responsive">
+                <table class="table cart-table cart-disable">
                     <thead>
                         <tr>
-                            <th>Product</th>
-                            <th>Description</th>
-                            <th>Quantity</th>
-                            <th>Unit price</th>
-                            <th>SubTotal</th>
+                            <th class="col-md-5">@ViewRes.SCProducts.TableHeaderColumn1</th>
+                            <th class="text-center col-md-3">@ViewRes.SCProducts.TableHeaderColumn3</th>
+                            <th class="text-center col-md-2">@ViewRes.SCProducts.TableHeaderColumn2</th>
+                            <th class="text-right col-md-2">@ViewRes.SCProducts.TableHeaderColumn5</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach (var product in Model.OrderedProducts)
                         {
-                            @Html.HiddenFor(model => product.Id)
-                            var imagePath = "http://localhost:8696/cdn/files/";
+                            var imagePath = "http://cdn.radiannagold.eu/cdn/files/";
                             if (product.ProductImages.Count() > 0)
                             {
                                 imagePath += product.ProductImages.First().ImagePath;
@@ -237,34 +45,189 @@
                             {
                                 imagePath = "";
                             }
-                            <tr>
-                                <td><img src="imagePath" /></td>
-                                <td>@product.CurrentLangName</td>
-                                <td>@product.Quantity</td>
-                                <td>@Html.TotalPrice(product.Price, product.Discount)</td>
-                                <td>@Html.TotalPrice(product.Total, 0, true)</td>
+                            <tr id="cart-item-@product.Id">
+                                <td>
+                                    <div class="col-xs-2">
+                                        <a href="/Products/Details/@product.ActualProductId">
+                                            <img src="@imagePath" alt="@product.CurrentLangName" class="img-responsive img-thumbnail" />
+                                        </a>
+                                    </div>
+                                    <div class="col-xs-10">
+                                        @product.CurrentLangName
+                                    </div>
+                                </td>
+                                <td class="text-center">
+                                    @Html.TotalPrice(product.Price, product.Discount)
+                                </td>
+                                <td class="text-center">
+                                    <span>@product.Quantity</span>
+                                </td>
+                                <td class="text-right">
+                                    @Html.TotalPrice(product.Total, 0, true)
+                                </td>
                             </tr>
                         }
                         <tr>
-                            <td colspan="4">Total</td>
-                            <td>@Model.Total</td>
+                            <td colspan="3">@ViewRes.SCProducts.TableHeaderColumn5 @Model.OrderedProducts.Count @ViewRes.SharedStrings.Item</td>
+                            <td class="text-right">@Html.TotalPrice(Model.Total, 0, true)</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
         </div>
 
-        <div class="row">
-            <div class="col-xs-12">
-                <div class="col-md-2">
-                    <a href="/ShoppingCart" class="btn btn-default btn-block">Back to Shopping Cart</a>
+
+        <fieldset class="row customer-details">
+            <legend>@ViewRes.SCCheckout.FieldsetLegend1</legend>
+            <div class="details-container">
+                <div class="col-md-5">
+                    <h3>@ViewRes.SCCheckout.FieldsetHeader1</h3>
                 </div>
-                <div class="col-md-8"></div>
-                <div class="col-md-2">
-                    <button type="submit" class="btn btn-gold btn-block">Confirm Order</button>
+                <div class="col-md-7">
+                    <div class="form-group">
+                        @Html.LabelFor(model => Model.Customer.FirstName, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => Model.Customer.FirstName, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => Model.Customer.FirstName, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => Model.Customer.LastName, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => Model.Customer.LastName, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => Model.Customer.LastName, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => Model.Customer.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => Model.Customer.Email, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => Model.Customer.Email, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => Model.Customer.Phone, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => Model.Customer.Phone, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => Model.Customer.Phone, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
                 </div>
                 <div class="clearfix"></div>
             </div>
+
+            <div class="details-container">
+                <div class="col-md-5">
+                    <h3>@ViewRes.SCCheckout.FieldsetHeader2</h3>
+                </div>
+                <div class="col-md-7">
+                    <div class="form-group">
+                        @Html.LabelFor(model => Model.Customer.Street, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => Model.Customer.Street, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => Model.Customer.Street, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => Model.Customer.City, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => Model.Customer.City, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => Model.Customer.City, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => Model.Customer.Country, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => Model.Customer.Country, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => Model.Customer.Country, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => Model.Customer.ZipCode, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => Model.Customer.ZipCode, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => Model.Customer.ZipCode, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+
+            <div class="details-container">
+                <div class="col-md-5">
+                    <h3>@ViewRes.SCCheckout.FieldsetHeader3</h3>
+                </div>
+                <div class="col-md-7">
+                    <div class="form-group">
+                        @Html.LabelFor(model => Model.Customer.Company, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => Model.Customer.Company, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => Model.Customer.Company, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => Model.Customer.VatID, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => Model.Customer.VatID, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => Model.Customer.VatID, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+
+            <div class="details-container">
+                <div class="col-md-5">
+                    <h3>@ViewRes.SCCheckout.FieldsetHeader4</h3>
+                </div>
+                <div class="col-md-7">
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            @Html.TextAreaFor(model => Model.Comment, new { @class = "form-control" })
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </fieldset>
+
+        <div class="clearfix"></div>
+
+        <fieldset class="row customer-details">
+            <legend>@ViewRes.SCCheckout.FieldsetLegend2</legend>
+            <div class="col-md-4 form-horizontal">
+                <div class="checkbox">
+                    <label>
+                        <input name="optionsRadios" id="optionsRadios3" value="option3" type="checkbox" disabled="disabled" checked="checked">
+                        @ViewRes.SCCheckout.FieldsetFieldLabel
+                    </label>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <p>
+                    @ViewRes.SCCheckout.FeildsetFieldNote
+                </p>
+            </div>
+        </fieldset>
+
+        <div class="row">
+            <div class="cart-nav-container">
+                <button type="submit" class="btn btn-default pull-right">@ViewRes.SharedStrings.OrderNavBtn3</button>
+                <a href="/ShoppingCart" class="btn btn-default pull-right">@ViewRes.SharedStrings.OrderNavBtn4</a>
+                <div class="clearfix"></div>
+            </div>
+            <div class="clearfix"></div>
         </div>
     }
 </div>

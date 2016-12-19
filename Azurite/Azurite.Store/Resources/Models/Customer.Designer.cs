@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Azurite.Store.Resources.Models {
+namespace ViewRes {
     using System;
     
     
@@ -70,6 +70,15 @@ namespace Azurite.Store.Resources.Models {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Полето Град е задължително.
+        /// </summary>
+        public static string CityValidation {
+            get {
+                return ResourceManager.GetString("CityValidation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Компания.
         /// </summary>
         public static string Company {
@@ -88,11 +97,29 @@ namespace Azurite.Store.Resources.Models {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Полето Държава е задължително.
+        /// </summary>
+        public static string CountryValidation {
+            get {
+                return ResourceManager.GetString("CountryValidation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Е-майл.
         /// </summary>
         public static string Email {
             get {
                 return ResourceManager.GetString("Email", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Полето Е-майл е задължително.
+        /// </summary>
+        public static string EmailValidation {
+            get {
+                return ResourceManager.GetString("EmailValidation", resourceCulture);
             }
         }
         
@@ -106,11 +133,29 @@ namespace Azurite.Store.Resources.Models {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Полето Име е задължително.
+        /// </summary>
+        public static string FirstNameValidation {
+            get {
+                return ResourceManager.GetString("FirstNameValidation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Фамилия.
         /// </summary>
         public static string LastName {
             get {
                 return ResourceManager.GetString("LastName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Полето Фамилия е задължително.
+        /// </summary>
+        public static string LastNameValidation {
+            get {
+                return ResourceManager.GetString("LastNameValidation", resourceCulture);
             }
         }
         
@@ -124,11 +169,29 @@ namespace Azurite.Store.Resources.Models {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Улица.
+        ///   Looks up a localized string similar to Полето Телефон е задължително.
+        /// </summary>
+        public static string PhoneValidation {
+            get {
+                return ResourceManager.GetString("PhoneValidation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Адрес.
         /// </summary>
         public static string Street {
             get {
                 return ResourceManager.GetString("Street", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Полето Адрес е задължително.
+        /// </summary>
+        public static string StreetValidation {
+            get {
+                return ResourceManager.GetString("StreetValidation", resourceCulture);
             }
         }
         
@@ -147,6 +210,15 @@ namespace Azurite.Store.Resources.Models {
         public static string ZipCode {
             get {
                 return ResourceManager.GetString("ZipCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Полето Пощенски код е задължително.
+        /// </summary>
+        public static string ZipCodeValidation {
+            get {
+                return ResourceManager.GetString("ZipCodeValidation", resourceCulture);
             }
         }
     }

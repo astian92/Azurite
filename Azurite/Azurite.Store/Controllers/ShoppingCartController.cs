@@ -34,29 +34,6 @@ namespace Azurite.Store.Controllers
             return PartialView(order);
         }
 
-        //public ActionResult Billing()
-        //{
-        //    var customerW = new CustomerW();
-        //    customerW.Id = Guid.NewGuid();
-
-        //    return View(customerW);
-        //}
-
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Billing(CustomerW customerW)
-        //{
-        //    if(ModelState.IsValid)
-        //    {
-        //        if(worker.CheckOutOrder(customerW))
-        //            return RedirectToAction("CheckOut");
-        //        else
-        //            return RedirectToAction("Index");
-        //    }
-
-        //    return View(customerW);
-        //}
-
         public ActionResult CheckOut()
         {
             var order = worker.GetOrder();
@@ -97,6 +74,12 @@ namespace Azurite.Store.Controllers
         public JsonResult RemoveProduct(Guid id)
         {
             worker.RemoveProduct(id);
+            return Json("ok", JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult ModifyProductQty(Guid id, int quantity)
+        {
+            worker.ModifyProductQty(id, quantity);
             return Json("ok", JsonRequestBehavior.AllowGet);
         }
     }
