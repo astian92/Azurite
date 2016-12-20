@@ -135,6 +135,9 @@
   <data name="Qty" xml:space="preserve">
     <value>Количество</value>
   </data>
+  <data name="SpecTitle" xml:space="preserve">
+    <value>Характеристики</value>
+  </data>
   <data name="SubTitle" xml:space="preserve">
     <value>Подобни продукти</value>
   </data>

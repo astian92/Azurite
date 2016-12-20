@@ -1,6 +1,7 @@
 ﻿using Azurite.Store.Wrappers;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Globalization;
 using System.Linq;
 using System.Text;
@@ -175,6 +176,36 @@ namespace Azurite.Store.Common
             }
 
             return currency;
+        }
+
+        public static string GetAppSetting(string key, string defaultValue = "")
+        {
+            string value = defaultValue;
+
+            try
+            {
+                if(ConfigurationManager.AppSettings.AllKeys.Any(k => k == key))
+                {
+                    value = ConfigurationManager.AppSettings[key];
+                }
+            }
+            catch(Exception)
+            {
+            }
+
+            return value;
+        }
+
+        public static IEnumerable<TSource> DistinctBy<TSource, TKey>(this IEnumerable<TSource> source, Func<TSource, TKey> keySelector)
+        {
+            HashSet<TKey> seenKeys = new HashSet<TKey>();
+            foreach (TSource element in source)
+            {
+                if (seenKeys.Add(keySelector(element)))
+                {
+                    yield return element;
+                }
+            }
         }
     }
 }

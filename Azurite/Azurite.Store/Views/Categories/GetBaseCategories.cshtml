@@ -1,7 +1,12 @@
 ﻿@model IEnumerable<Azurite.Store.Wrappers.CategoryW>
+@using Azurite.Store.Common;
 
 @{
     ViewBag.Title = "Collections";
+}
+
+@{ 
+    var cdnUri = ApplicationHelpers.GetAppSetting("cdnUri");
 }
 
 @foreach (var item in Model) {
@@ -9,7 +14,7 @@
         <div class="thumbnail">
             <a href="/Categories/Index/@item.Id" class="categoryThumb">
                 <div class="imageWrapper">
-                    <img src="http://cdn.radiannagold.eu/cdn/files/@item.ImagePath" alt="feature-collection-image">
+                    <img src="@(cdnUri + item.ImagePath)" alt="feature-collection-image">
                 </div>
                 <div class="caption">
                     <h4>@item.Name</h4>

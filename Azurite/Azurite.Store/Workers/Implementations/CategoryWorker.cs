@@ -74,15 +74,28 @@ namespace Azurite.Store.Workers.Implementations
         public IQueryable<CategoryAttributeW> GetCategoryAttr(Guid categoryId)
         {
             var category = rep.Get(categoryId);
-            var wrapped = new List<CategoryAttributeW>();
+            var wrapped = GetAllCategoryAttributes(category);
+            return wrapped.AsQueryable();
+        }
 
-            foreach (var attr in category.CategoryAttributes)
+        private List<CategoryAttributeW> GetAllCategoryAttributes(Category category)
+        {
+            var wrapped = new List<CategoryAttributeW>();
+            foreach (var attr in category.CategoryAttributes.Where(x => x.ActiveFilter))
             {
                 var mapped = Mapper.Map<CategoryAttributeW>(attr);
                 wrapped.Add(mapped);
             }
 
-            return wrapped.AsQueryable();
+            if (category.Categories1?.Count() == 0)
+                return wrapped;
+
+            foreach (var subCategory in category.Categories1)
+            {
+                wrapped.AddRange(GetAllCategoryAttributes(subCategory));
+            }
+
+            return wrapped;
         }
     }
 }

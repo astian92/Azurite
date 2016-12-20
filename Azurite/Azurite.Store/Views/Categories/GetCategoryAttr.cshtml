@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<Azurite.Store.Wrappers.CategoryAttributeW>
+@using Azurite.Store.Common;
 
 @foreach (var attr in Model)
 {
@@ -6,10 +7,15 @@
         <div class="panel-heading">@attr.AttributeName</div>
         <div class="side-nav">
             <ul>
-                @foreach (var productAttr in attr.ProductAttributes)
+                @foreach (var productAttr in attr.ProductAttributes.DistinctBy(x => x.Value))
                 {
                     <li>
-                        <a href="#@productAttr.Id">@productAttr.Value</a>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" name="ProductAttributes" value="@productAttr.Value" onchange="changeAttrFilters()" />
+                                @productAttr.Value
+                            </label>
+                        </div>
                     </li>
                 }
             </ul>

@@ -135,7 +135,10 @@
   <data name="Qty" xml:space="preserve">
     <value>Qty</value>
   </data>
+  <data name="SpecTitle" xml:space="preserve">
+    <value>Specifications</value>
+  </data>
   <data name="SubTitle" xml:space="preserve">
-    <value>Related Items</value>
+    <value>Related Products</value>
   </data>
 </root>
