@@ -14,11 +14,13 @@ namespace Azurite.Store.Workers.Implementations
     {
         private readonly IRepository<Product> rep;
         private readonly IRepository<Category> catRep;
+        private readonly IRepository<CategoryAttribute> catAttrRep;
 
-        public ProductWorker(IRepository<Product> rep, IRepository<Category> catRep)
+        public ProductWorker(IRepository<Product> rep, IRepository<Category> catRep, IRepository<CategoryAttribute> catAttrRep)
         {
             this.rep = rep;
             this.catRep = catRep;
+            this.catAttrRep = catAttrRep;
         }
 
         public IQueryable<ProductW> GetProducts(Guid categoryId)
@@ -86,6 +88,20 @@ namespace Azurite.Store.Workers.Implementations
             return productW;
         }
 
+        public IQueryable<CategoryAttributeW> GetProductAttrsCategoryAttr()
+        {
+            var categoryAttrs = catAttrRep.GetAll();
+
+            var wrapped = new List<CategoryAttributeW>();
+            foreach (var attr in categoryAttrs)
+            {
+                var mapped = Mapper.Map<CategoryAttributeW>(attr);
+                wrapped.Add(mapped);
+            }
+
+            return wrapped.AsQueryable();
+        }
+
         public IQueryable<ProductW> GetPromoProducts()
         {
             var products = rep.GetAll();
@@ -99,6 +115,7 @@ namespace Azurite.Store.Workers.Implementations
 
             return wrapped.AsQueryable();
         }
+
         public IQueryable<ProductW> GetAllPromoProducts()
         {
             var products = rep.GetAll();

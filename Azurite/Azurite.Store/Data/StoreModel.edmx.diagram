@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="8172ae4288e34af6b5e79884891b1b66" Name="Diagram1" ZoomLevel="56">
+      <Diagram DiagramId="8172ae4288e34af6b5e79884891b1b66" Name="Diagram1" ZoomLevel="95">
         <EntityTypeShape EntityType="MarketPlaceModel.Category" Width="1.5" PointX="0.75" PointY="3" />
         <EntityTypeShape EntityType="MarketPlaceModel.CategoryAttribute" Width="1.5" PointX="3" PointY="1.125" />
         <EntityTypeShape EntityType="MarketPlaceModel.CurrencyCours" Width="1.5" PointX="0.75" PointY="8.75" />

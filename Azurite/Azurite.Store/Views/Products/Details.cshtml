@@ -1,5 +1,6 @@
 ﻿@model Azurite.Store.Wrappers.ProductW
 @using Azurite.Store.Common
+@using Azurite.Store.Wrappers
 
 @{
     ViewBag.Title = "Details";
@@ -7,13 +8,14 @@
 
 @{ 
     var cdnUri = ApplicationHelpers.GetAppSetting("cdnUri");
+    var categoryAttrs = ViewBag.categoryAttrs as IQueryable<CategoryAttributeW>;
 }
 <div class="container">
     <div class="row">
         <div class="col-xs-12">
             <div class="page-header">
                 <!-- #region Breadcrumb -->
-                @Html.Raw(Html.BuildBreadcrumbNavigation())
+                @*@Html.Raw(Html.BuildBreadcrumbNavigation())*@
                 <!-- #endregion -->
             </div>
         </div>
@@ -90,12 +92,12 @@
     <div class="container">
         <div class="row">
             <div class="col-xs-12 push-bottom-lg">
-                <h4 class="space-top">@ViewRes.ProductDetails.SpecTitle</h4>
+                <h4 class="space-top push-bottom-md">@ViewRes.ProductDetails.SpecTitle</h4>
                 <hr>
                     <dl class="dl-horizontal">
                         @foreach (var item in Model.ProductAttributes)
                         {
-                            <dt>Consectetur</dt>
+                            <dt>@(categoryAttrs?.FirstOrDefault(x => x.Id == item.AttributeId)?.AttributeName ?? "")</dt>
                             <dd>@item.Value</dd>
                         }
                     </dl>
