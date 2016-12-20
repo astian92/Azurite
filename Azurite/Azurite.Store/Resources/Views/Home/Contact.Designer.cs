@@ -142,7 +142,7 @@ namespace ViewRes {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Радианна Голд София.
+        ///   Looks up a localized string similar to Радианна Ювелир София.
         /// </summary>
         public static string StoreCaption {
             get {
@@ -151,7 +151,7 @@ namespace ViewRes {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Радианна Голд Габрово.
+        ///   Looks up a localized string similar to Радианна Ювелир Габрово.
         /// </summary>
         public static string StoreCaption1 {
             get {
@@ -160,7 +160,7 @@ namespace ViewRes {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Радианна Голд Русе 1.
+        ///   Looks up a localized string similar to Радианна Ювелир Русе 1.
         /// </summary>
         public static string StoreCaption2 {
             get {
@@ -169,7 +169,7 @@ namespace ViewRes {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Радианна Голд Русе 2.
+        ///   Looks up a localized string similar to Радианна Ювелир Русе 2.
         /// </summary>
         public static string StoreCaption3 {
             get {
@@ -178,7 +178,7 @@ namespace ViewRes {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Радианна Голд Русе 3.
+        ///   Looks up a localized string similar to Радианна Ювелир Русе 3.
         /// </summary>
         public static string StoreCaption4 {
             get {

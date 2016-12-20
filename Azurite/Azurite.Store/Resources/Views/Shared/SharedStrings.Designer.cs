@@ -88,7 +88,7 @@ namespace ViewRes {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Радианна Голд.
+        ///   Looks up a localized string similar to Радианна Ювелир.
         /// </summary>
         public static string CompanyName {
             get {
