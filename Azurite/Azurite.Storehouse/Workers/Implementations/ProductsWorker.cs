@@ -305,15 +305,22 @@ namespace Azurite.Storehouse.Workers.Implementations
 
         public ITicket ValidateProduct(ProductW productW)
         {
+            List<CategoryAttribute> categoryAttributes = new List<CategoryAttribute>();
             var cat = catRep.Get(productW.CategoryId);
-            bool equal = cat.CategoryAttributes.Count() == productW.ProductAttributes.Count();
 
+            while (cat != null)
+            {
+                categoryAttributes.AddRange(cat.CategoryAttributes);
+                cat = cat.Category1;
+            }
+
+            bool equal = categoryAttributes.Count == productW.ProductAttributes.Count();
             if (!equal)
             {
                 return new Ticket(false, "The product doesn't have the same number of attributes as the category!");
             }
 
-            foreach (var attr in cat.CategoryAttributes)
+            foreach (var attr in categoryAttributes)
             {
                 bool hasIt = productW.ProductAttributes.Any(a => a.AttributeId == attr.Id);
                 if (!hasIt)
@@ -322,7 +329,7 @@ namespace Azurite.Storehouse.Workers.Implementations
                 }
 
                 var productAttr = productW.ProductAttributes.Single(a => a.AttributeId == attr.Id);
-                bool hasValues = !string.IsNullOrEmpty(productAttr.Value) && !string.IsNullOrEmpty(productAttr.ValueEN); 
+                bool hasValues = !string.IsNullOrEmpty(productAttr.Value) && !string.IsNullOrEmpty(productAttr.ValueEN);
                 if (!hasValues)
                 {
                     return new Ticket(false, "There is an attribute missing required values!");
