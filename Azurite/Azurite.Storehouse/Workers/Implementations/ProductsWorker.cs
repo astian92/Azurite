@@ -185,7 +185,7 @@ namespace Azurite.Storehouse.Workers.Implementations
                     }
                 }
 
-                //then delete all that are not in new product
+                //then delete all that are not in new product *for when category is changed!
                 var productAttributes = product.ProductAttributes.ToList();
                 var oldAttributes = productAttributes.Where(pa => !productW.ProductAttributes.Any(pwa => pwa.AttributeId == pa.AttributeId));
                 prodAttrRep.RemoveRange(oldAttributes);
@@ -298,6 +298,35 @@ namespace Azurite.Storehouse.Workers.Implementations
                 ElmahHelper.Handle(exc);
                 string excName = exc.GetType().Name;
                 return new Ticket(false, "Възникна неочаквана грешка!");
+            }
+
+            return new Ticket(true);
+        }
+
+        public ITicket ValidateProduct(ProductW productW)
+        {
+            var cat = catRep.Get(productW.CategoryId);
+            bool equal = cat.CategoryAttributes.Count() == productW.ProductAttributes.Count();
+
+            if (!equal)
+            {
+                return new Ticket(false, "The product doesn't have the same number of attributes as the category!");
+            }
+
+            foreach (var attr in cat.CategoryAttributes)
+            {
+                bool hasIt = productW.ProductAttributes.Any(a => a.AttributeId == attr.Id);
+                if (!hasIt)
+                {
+                    return new Ticket(false, "There is a category attribute missing from this product!");
+                }
+
+                var productAttr = productW.ProductAttributes.Single(a => a.AttributeId == attr.Id);
+                bool hasValues = !string.IsNullOrEmpty(productAttr.Value) && !string.IsNullOrEmpty(productAttr.ValueEN); 
+                if (!hasValues)
+                {
+                    return new Ticket(false, "There is an attribute missing required values!");
+                }
             }
 
             return new Ticket(true);

@@ -27,7 +27,7 @@ function prepare() {
 
 function getCategoryAttributes(categoryId) {
     $('.attributes-holder').empty();
-    var promise = Ajax.get(MVC.Products.GetCategoryAttributes + "?categoryId=" + categoryId);
+    var promise = Ajax.get(MVC.Products.GetCategoryAttributesFull + "?categoryId=" + categoryId);
     
     promise.done(function (attributes) {
         console.log(attributes);

@@ -85,7 +85,8 @@ namespace Azurite.Storehouse.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Add(ProductW productW, IEnumerable<HttpPostedFileBase> photos)
         {
-            if (!ModelState.IsValid)
+            var validationTicket = worker.ValidateProduct(productW);
+            if (!ModelState.IsValid || !validationTicket.IsOK)
             {
                 ModelState.AddModelError("Invalid Sate!", "Липсват данни!");
                 ViewBag.CategoryId = new SelectList(worker.GetCategoriesDropDownItems(), "Value", "Text");
@@ -117,7 +118,8 @@ namespace Azurite.Storehouse.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit(ProductW productW, IEnumerable<HttpPostedFileBase> photos, IEnumerable<Guid> imageIds)
         {
-            if (!ModelState.IsValid)
+            var validationTicket = worker.ValidateProduct(productW);
+            if (!ModelState.IsValid || !validationTicket.IsOK)
             {
                 ModelState.AddModelError("Invalid Sate!", "Липсват данни!");
                 ViewBag.CategoryId = new SelectList(worker.GetCategoriesDropDownItems(), "Value", "Text");

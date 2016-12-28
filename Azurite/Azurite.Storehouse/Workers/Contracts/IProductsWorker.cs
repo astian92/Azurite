@@ -18,5 +18,6 @@ namespace Azurite.Storehouse.Workers.Contracts
         Task<ITicket> Add(ProductW productW, IEnumerable<HttpPostedFileBase> photos);
         Task<ITicket> Edit(ProductW productW, IEnumerable<HttpPostedFileBase> photos, IEnumerable<Guid> imageIds);
         Task<ITicket> Delete(Guid Id);
+        ITicket ValidateProduct(ProductW productW);
     }
 }
