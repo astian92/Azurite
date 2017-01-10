@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Azurite.Infrastructure.Data.Contracts;
+using Azurite.Store.Common;
 using Azurite.Store.Data;
 using Azurite.Store.Workers.Contracts;
 using Azurite.Store.Wrappers;
@@ -13,6 +14,7 @@ namespace Azurite.Store.Workers.Implementations
     public class ShoppingCartWorker : IShoppingCartWorker
     {
         private const string CART_PRODUCTS_SESSION_NAME = "CartProducts";
+        private const int ORDER_NUMBER_LENGTH = 7;
 
         private readonly IRepository<Product> rep;
         private readonly IRepository<Order> orderRep;
@@ -67,15 +69,18 @@ namespace Azurite.Store.Workers.Implementations
         public void AddProduct(Guid productId, int quantity)
         {
             var product = GetProduct(productId);
-            var cartProducts = GetShoppingCart();
-            if(cartProducts.Any(p => p.ActualProductId == productId))
+            if(product.Quantity == 0)
             {
-                cartProducts.Single(p => p.ActualProductId == productId).Quantity += quantity;
-            }
-            else
-            {
-                product.Quantity = quantity;
-                cartProducts.Add(product);
+                var cartProducts = GetShoppingCart();
+                if(cartProducts.Any(p => p.ActualProductId == productId))
+                {
+                    cartProducts.Single(p => p.ActualProductId == productId).Quantity += quantity;
+                }
+                else
+                {
+                    product.Quantity = quantity;
+                    cartProducts.Add(product);
+                }
             }
         }
 
@@ -113,7 +118,7 @@ namespace Azurite.Store.Workers.Implementations
         {
             var order = GetCartSummary();
             order.Id = Guid.NewGuid();
-            order.Number = "SomeOrderNumber";
+            order.Number = ApplicationHelpers.GenerateRandomString(ORDER_NUMBER_LENGTH);
 
             return order;
         }
@@ -131,11 +136,11 @@ namespace Azurite.Store.Workers.Implementations
                 orderW.StatusId = orderStatuses.OrderBy(x => x.Id).FirstOrDefault().Id;
 
                 var order = Mapper.Map<Order>(orderW);
-
                 try
                 {
                     orderRep.Add(order);
                     orderRep.Save();
+                    ReduceProductQuantity(orderW);
                     DisplaceOrder();
                     return true;
                 }
@@ -145,6 +150,23 @@ namespace Azurite.Store.Workers.Implementations
             }
 
             return false;
+        }
+
+        private void ReduceProductQuantity(OrderW order)
+        {
+            try
+            {
+                foreach (var orderedProduct in order.OrderedProducts)
+                {
+                    var product = rep.Get(orderedProduct.ActualProductId);
+                    product.Quantity = product.Quantity - orderedProduct.Quantity;
+                }
+
+                rep.Save();
+            }
+            catch(Exception)
+            {
+            }
         }
 
         public void DisplaceOrder()

@@ -13,6 +13,9 @@ namespace Azurite.Store.Common
 {
     public static class ApplicationHelpers
     {
+        private static char[] _base62chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz".ToCharArray();
+        private static Random _random = new Random(Guid.NewGuid().GetHashCode());
+
         public static string BuildBreadcrumbNavigation(this HtmlHelper helper)
         {
             // optional condition: I didn't wanted it to show on home and account controller
@@ -206,6 +209,16 @@ namespace Azurite.Store.Common
                     yield return element;
                 }
             }
+        }
+
+        public static string GenerateRandomString(int length)
+        {
+            var sb = new StringBuilder(length);
+
+            for (int i = 0; i < length; i++)
+                sb.Append(_base62chars[_random.Next(62)]);
+
+            return sb.ToString();
         }
     }
 }

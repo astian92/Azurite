@@ -9,7 +9,7 @@
     var cdnUri = ApplicationHelpers.GetAppSetting("cdnUri");
 }
 
-<div class="products-list">
+<div class="products-list push-bottom-md">
     @foreach (var item in Model)
     {
         <div class="col-xs-6 col-sm-6 col-md-3">
@@ -40,6 +40,7 @@
             </div>
         </div>
     }
+    <div class="clearfix"></div>
 </div>
 
 <script src="~/Scripts/App/Products/products_shared.js"></script>

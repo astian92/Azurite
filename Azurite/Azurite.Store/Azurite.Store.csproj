@@ -387,12 +387,15 @@
       <DependentUpon>StoreModel.edmx</DependentUpon>
       <LastGenOutput>StoreModel.cs</LastGenOutput>
     </Content>
-    <Content Include="favicon.ico" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\azurite-theme.css" />
     <Content Include="Resources\Images\bg-ruse-aleksandrovksa.jpg" />
+    <Content Include="Resources\Images\Favicon\favicon-16x16.png" />
+    <Content Include="Resources\Images\Favicon\favicon-32x32.png" />
+    <Content Include="Resources\Images\Favicon\favicon-96x96.png" />
+    <Content Include="Resources\Images\Favicon\favicon.ico" />
     <Content Include="Resources\Images\get-in-touch-wide.jpg" />
     <Content Include="Resources\Images\radianna-gold-ruse-2.jpg" />
     <Content Include="Resources\Images\radianna-gold-sofia.jpg" />

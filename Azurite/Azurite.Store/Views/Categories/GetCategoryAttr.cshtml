@@ -4,8 +4,15 @@
 @foreach (var attr in Model)
 {
     <div class="panel-gold">
-        <div class="panel-heading">@attr.AttributeName</div>
-        <div class="side-nav">
+        <div class="panel-heading">
+            @attr.AttributeName
+
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#filterCategory-@attr.Id" aria-expanded="false" aria-controls="navbar">
+                <i class="fa fa-chevron-down"></i>
+                <i class="fa fa-chevron-up"></i>
+            </button>
+        </div>
+        <div id="filterCategory-@attr.Id" class="side-nav navbar-collapse collapse">
             <ul>
                 @foreach (var productAttr in attr.ProductAttributes.DistinctBy(x => x.Value))
                 {

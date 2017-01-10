@@ -16,19 +16,20 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-3 col-sm-4 col-xs-12 sideBar">
+        <div class="col-md-3 col-sm-4 col-xs-12 side-bar push-bottom-md">
             <div class="panel-gold">
-                <div class="panel-heading">@ViewRes.CategoriesIndex.Collections</div>
-                <div id="subCategoriesContainer" class="side-nav">
+                <div class="panel-heading">
+                    @ViewRes.CategoriesIndex.Collections
+
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#subCategoriesContainer" aria-expanded="false" aria-controls="navbar">
+                        <i class="fa fa-chevron-down"></i>
+                        <i class="fa fa-chevron-up"></i>
+                    </button>
+                </div>
+                <div id="subCategoriesContainer" class="side-nav navbar-collapse collapse">
                     
                 </div>
             </div>
-            @*<div class="panel-gold">
-                <div class="panel-heading">@ViewRes.CategoriesIndex.PriceFilter</div>
-                <div id="priceFilter">
-
-                </div>
-            </div>*@
             <div id="categoriesAttrContainer">
 
             </div>

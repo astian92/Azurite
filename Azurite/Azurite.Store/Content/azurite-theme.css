@@ -229,6 +229,10 @@ hr {
     -webkit-transform: translateZ(0) scale(1, 1);
 }
 
+.category-section {
+     background-color:#d79d23;
+}
+
 .bg-gray {
     background-color:#fafafa;
 }
@@ -874,6 +878,16 @@ fieldset legend {
     display:block;
 }
 
+.page-header.header-white h2, 
+.page-header.header-white h3, 
+.page-header.header-white h4 {
+    color:white;
+}
+
+.page-header.header-white .devider {
+    border-color:#ffffff;
+}
+
 .page-message {
     margin:30px 10px;
     font-size:16px;
@@ -1020,15 +1034,30 @@ fieldset legend {
 	text-transform:uppercase;
 	text-align: center;
 }
-.product-col{
+.product-col {
 	padding:15px 10px 10px;
-	margin-bottom:20px;
+	margin-bottom:10px;
 	background:#fff;
-	/*border:1px solid #e8e8e8;*/
+	border:1px solid transparent;
+    transition: all 0.5s ease 0s;
+    -moz-transition: all 0.5s ease 0s;
+    -webkit-transition: all 0.5s ease 0s;
+    -ms-transition: all 0.5s ease 0s;
+    -o-transition: all 0.5s ease 0s;
 }
+
+.product-col:hover {
+    border-color:rgba(199, 181, 111, 1);
+}
+
 .product-col.list .image{
 	padding:20px 30px 10px 0;
 	float:left;
+     transition: all 0.5s ease 0s;
+    -moz-transition: all 0.5s ease 0s;
+    -webkit-transition: all 0.5s ease 0s;
+    -ms-transition: all 0.5s ease 0s;
+    -o-transition: all 0.5s ease 0s;
 }
 
 .product-col .cover {
@@ -1048,9 +1077,14 @@ fieldset legend {
 
 .product-col .image {
     width:100%;
+     transition: all 0.5s ease 0s;
+    -moz-transition: all 0.5s ease 0s;
+    -webkit-transition: all 0.5s ease 0s;
+    -ms-transition: all 0.5s ease 0s;
+    -o-transition: all 0.5s ease 0s;
 }
 
-.product-col .image:hover {
+.product-col:hover .image {
      opacity:0.4;
 }
 
@@ -1063,7 +1097,7 @@ fieldset legend {
 .product-col .caption {
     flex-grow:1;
     flex-flow:column wrap;
-	padding: 20px 0;
+	padding: 20px 0 0 0;
     text-align:center;
 }
 .product-col .caption h4{
@@ -1076,9 +1110,9 @@ fieldset legend {
 .product-col h4, .product-col h4 a{
 	color:#2a2a2a;
 }
-.price{
+/*.price{
 	padding:10px 0;
-}
+}*/
 .price .price-tax{
 	font-size:14px;
 	color:#2a2a2a;
@@ -1225,6 +1259,32 @@ fieldset legend {
 }
 
 /*<-------------------- side nav ------------------->*/
+
+.side-bar .navbar-toggle {
+    padding:0;
+    margin:0;
+    line-height:1.5;
+}
+
+.side-bar .navbar-toggle .fa {
+    color:rgba(199, 181, 111, 1);
+}
+
+.side-bar .navbar-toggle .fa-chevron-down {
+    display:none;
+}
+
+.side-bar .navbar-toggle .fa-chevron-up {
+    display:inline-block;
+}
+
+.side-bar .navbar-toggle.collapsed .fa-chevron-down {
+    display:inline-block;
+}
+
+.side-bar .navbar-toggle.collapsed .fa-chevron-up {
+    display:none;
+}
 
 .side-nav ul {
     padding:0 10px;
