@@ -1,12 +1,10 @@
-﻿using AutoMapper;
-using AutoMapper.Configuration;
-using Azurite.Infrastructure.Mapping.Contracts;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
+using AutoMapper;
+using AutoMapper.Configuration;
+using Azurite.Infrastructure.Mapping.Contracts;
 
 namespace Azurite.Infrastructure.Config
 {

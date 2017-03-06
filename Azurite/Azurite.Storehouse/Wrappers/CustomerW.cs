@@ -1,15 +1,18 @@
-﻿using Azurite.Infrastructure.Mapping.Contracts;
-using Azurite.Storehouse.Data;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
+using Azurite.Infrastructure.Mapping.Contracts;
+using Azurite.Storehouse.Data;
 
 namespace Azurite.Storehouse.Wrappers
 {
     public class CustomerW : IMap, IMapFrom<Customer>
     {
+        public CustomerW()
+        {
+            this.Orders = new HashSet<OrderViewModel>();
+        }
+
         public Guid Id { get; set; }
 
         [Display(Name = "Е-mail")]
@@ -43,10 +46,5 @@ namespace Azurite.Storehouse.Wrappers
         public string VatID { get; set; }
 
         public virtual ICollection<OrderViewModel> Orders { get; set; }
-
-        public CustomerW()
-        {
-            this.Orders = new HashSet<OrderViewModel>();
-        }
     }
 }

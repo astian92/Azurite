@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Web;
 
 namespace Azurite.Infrastructure.Cache
@@ -19,6 +15,7 @@ namespace Azurite.Infrastructure.Cache
                 HttpContext.Current.Cache.Insert(cacheKey, item);
                 return item;
             }
+
             return item;
         }
     }

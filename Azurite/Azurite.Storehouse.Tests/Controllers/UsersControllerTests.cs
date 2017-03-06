@@ -1,57 +1,54 @@
-﻿using Azurite.Infrastructure.ResponseHandling;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web.Mvc;
+using System.Web.Routing;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
 using Azurite.Storehouse.Controllers;
 using Azurite.Storehouse.Models.Helpers.Datatables;
 using Azurite.Storehouse.Workers.Contracts;
 using Azurite.Storehouse.Wrappers;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Web.Mvc;
-using System.Web.Routing;
 
 namespace Azurite.Storehouse.Tests.Controllers
 {
     [TestClass]
     public class UsersControllerTests
     {
-        private Mock<IUsersWorker> workerMock;
+        private UsersController _controller;
 
-        private IUsersWorker worker
-        {
-            get
-            {
-                return this.workerMock.Object;
-            }
-        }
-
-        private UsersController controller;
+        private Mock<IUsersWorker> _workerMock;
 
         public UsersControllerTests()
         {
-            this.workerMock = new Mock<IUsersWorker>();
-            this.workerMock.Setup(m => m.GetAll()).Returns(new List<UserW>()
+            this._workerMock = new Mock<IUsersWorker>();
+            this._workerMock.Setup(m => m.GetAll()).Returns(new List<UserW>()
             {
                 new UserW() { Id = Guid.NewGuid(), FirstName = "FN", LastName = "LN", Password = "PS", Username = "UN" },
                 new UserW() { Id = Guid.NewGuid(), FirstName = "FN2", LastName = "LN2", Password = "PS2", Username = "UN2" }
             }.AsQueryable());
-            this.workerMock.Setup(m => m.Get(It.IsAny<Guid>())).Returns(new UserW() { Username = "Usn" });
+            this._workerMock.Setup(m => m.Get(It.IsAny<Guid>())).Returns(new UserW() { Username = "Usn" });
 
-            this.controller = new UsersController(this.worker);
+            this._controller = new UsersController(this.Worker);
             var urlMock = new Mock<UrlHelper>();
             urlMock.Setup(m => m.Action(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<RouteValueDictionary>()))
                 .Returns<string, string, RouteValueDictionary>((a, c, r) => c + "/" + a);
 
-            this.controller.Url = urlMock.Object;
+            this._controller.Url = urlMock.Object;
+        }
+
+        private IUsersWorker Worker
+        {
+            get
+            {
+                return this._workerMock.Object;
+            }
         }
 
         [TestMethod]
         public void IndexTest()
         {
-            var actual = this.controller.Index();
+            var actual = this._controller.Index();
 
             Assert.IsNotNull(actual);
             Assert.IsInstanceOfType(actual, typeof(ViewResult));
@@ -60,7 +57,7 @@ namespace Azurite.Storehouse.Tests.Controllers
         [TestMethod]
         public void GetUsersTest()
         {
-            var actual = this.controller.GetUsers();
+            var actual = this._controller.GetUsers();
             Assert.IsNotNull(actual);
             Assert.IsInstanceOfType(actual, typeof(JsonResult));
 
@@ -68,13 +65,13 @@ namespace Azurite.Storehouse.Tests.Controllers
             var jqueryList = result.Data as JqueryListResult<UserW>;
 
             Assert.IsNotNull(jqueryList);
-            Assert.AreEqual(2, jqueryList.data.Count());
+            Assert.AreEqual(2, jqueryList.Data.Count());
         }
 
         [TestMethod]
         public void AddGetTest()
         {
-            var actual = this.controller.Add();
+            var actual = this._controller.Add();
 
             Assert.IsNotNull(actual);
             Assert.IsInstanceOfType(actual, typeof(ViewResult));
@@ -84,12 +81,12 @@ namespace Azurite.Storehouse.Tests.Controllers
         public void AddPostTestNoModel()
         {
             //force the model state to have an error
-            this.controller.ModelState.AddModelError("ErrorOld", "EmptyModel");
-            var actual = this.controller.Add(null);
+            this._controller.ModelState.AddModelError("ErrorOld", "EmptyModel");
+            var actual = this._controller.Add(null);
 
             //assert model state has an additional error
             int errors = 0;
-            foreach (var state in this.controller.ModelState.Values)
+            foreach (var state in this._controller.ModelState.Values)
             {
                 errors += state.Errors.Count;
             }
@@ -105,9 +102,9 @@ namespace Azurite.Storehouse.Tests.Controllers
         public void AddPostTestWithValidModel()
         {
             var model = new UserW() { Username = "un" };
-            var actual = this.controller.Add(model);
+            var actual = this._controller.Add(model);
 
-            workerMock.Verify(m => m.Add(model));
+            _workerMock.Verify(m => m.Add(model));
 
             Assert.IsNotNull(actual);
             Assert.IsInstanceOfType(actual, typeof(RedirectResult));
@@ -116,7 +113,7 @@ namespace Azurite.Storehouse.Tests.Controllers
         [TestMethod]
         public void EditGetTest()
         {
-            var actual = this.controller.Edit(Guid.NewGuid());
+            var actual = this._controller.Edit(Guid.NewGuid());
 
             Assert.IsNotNull(actual);
             Assert.IsInstanceOfType(actual, typeof(ViewResult));
@@ -130,12 +127,12 @@ namespace Azurite.Storehouse.Tests.Controllers
         public void EditPostTestNoModel()
         {
             //force the model state to have an error
-            this.controller.ModelState.AddModelError("ErrorOld", "EmptyModel");
-            var actual = this.controller.Edit(null);
+            this._controller.ModelState.AddModelError("ErrorOld", "EmptyModel");
+            var actual = this._controller.Edit(null);
 
             //assert model state has an additional error
             int errors = 0;
-            foreach (var state in this.controller.ModelState.Values)
+            foreach (var state in this._controller.ModelState.Values)
             {
                 errors += state.Errors.Count;
             }
@@ -151,9 +148,9 @@ namespace Azurite.Storehouse.Tests.Controllers
         public void EditPostTestWithValidModel()
         {
             var model = new UserW() { Username = "un" };
-            var actual = this.controller.Edit(model);
+            var actual = this._controller.Edit(model);
 
-            workerMock.Verify(m => m.Edit(model));
+            _workerMock.Verify(m => m.Edit(model));
 
             Assert.IsNotNull(actual);
             Assert.IsInstanceOfType(actual, typeof(RedirectResult));
@@ -163,11 +160,11 @@ namespace Azurite.Storehouse.Tests.Controllers
         public void DeleteTest()
         {
             var id = Guid.NewGuid();
-            var actual = this.controller.Delete(id);
+            var actual = this._controller.Delete(id);
             Assert.IsNotNull(actual);
             Assert.IsInstanceOfType(actual, typeof(JsonResult));
 
-            workerMock.Verify(m => m.Delete(id));
+            _workerMock.Verify(m => m.Delete(id));
         }
     }
 }

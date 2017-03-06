@@ -1,10 +1,5 @@
 ﻿using Azurite.Infrastructure.Data.Abstractions;
 using Azurite.Infrastructure.Data.Contracts;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Azurite.Infrastructure.Data.Implementations
 {
@@ -14,7 +9,6 @@ namespace Azurite.Infrastructure.Data.Implementations
         public Repository(IDbFactory factory)
             : base(factory)
         {
-            
         }
     }
 }

@@ -1,31 +1,28 @@
-﻿using Azurite.Storehouse.Workers.Contracts;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Linq;
-using System.Web;
+using AutoMapper;
+using AutoMapper.QueryableExtensions;
+using Azurite.Storehouse.Workers.Contracts;
 using Azurite.Infrastructure.ResponseHandling;
 using Azurite.Storehouse.Wrappers;
 using Azurite.Storehouse.Data;
 using Azurite.Infrastructure.Data.Contracts;
-using AutoMapper;
-using AutoMapper.QueryableExtensions;
-using System.Threading.Tasks;
 using Azurite.Storehouse.Models.Helpers;
 
 namespace Azurite.Storehouse.Workers.Implementations
 {
     public class CurrencyWorker : ICurrencyWorker
     {
-        private readonly IRepository<CurrencyCours> rep;
+        private readonly IRepository<CurrencyCours> _rep;
 
         public CurrencyWorker(IRepository<CurrencyCours> rep)
         {
-            this.rep = rep;
+            this._rep = rep;
         }
 
         public CurrencyCoursW Get(int Id)
         {
-            var currency = rep.Get(Id);
+            var currency = _rep.Get(Id);
             var currencyW = Mapper.Map<CurrencyCoursW>(currency);
 
             return currencyW;
@@ -33,7 +30,7 @@ namespace Azurite.Storehouse.Workers.Implementations
 
         public IQueryable<CurrencyCoursW> GetAll()
         {
-            return rep.GetAll()
+            return _rep.GetAll()
                 .ProjectTo<CurrencyCoursW>();
         }
 
@@ -46,12 +43,12 @@ namespace Azurite.Storehouse.Workers.Implementations
         {
             try
             {
-                var currency = rep.Get(currencyW.Id);
+                var currency = _rep.Get(currencyW.Id);
                 currency.Code = currencyW.Code;
                 currency.Sign = currencyW.Sign;
                 currency.Value = currencyW.Value;
 
-                rep.Save();
+                _rep.Save();
 
                 return new Ticket(true);
             }
@@ -66,6 +63,5 @@ namespace Azurite.Storehouse.Workers.Implementations
         {
             throw new NotImplementedException();
         }
-
     }
 }

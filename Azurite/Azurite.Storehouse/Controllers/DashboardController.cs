@@ -1,29 +1,23 @@
-﻿using AutoMapper.QueryableExtensions;
+﻿using System.Data.Entity;
+using System;
+using System.Linq;
+using System.Web.Mvc;
+using AutoMapper.QueryableExtensions;
 using Azurite.Storehouse.Data;
 using Azurite.Storehouse.Models;
-using Azurite.Storehouse.Models.Http;
 using Azurite.Storehouse.Models.Infrastructure;
 using Azurite.Storehouse.Models.ViewModels;
-using Azurite.Storehouse.Services.Contracts;
-using Azurite.Storehouse.Services.Implementations;
 using Azurite.Storehouse.Wrappers.Dashboard;
-using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Web;
-using System.Web.Mvc;
 
 namespace Azurite.Storehouse.Controllers
 {
     public class DashboardController : Controller
     {
-        private readonly MarketPlaceEntities db;
+        private readonly MarketPlaceEntities _db;
 
         public DashboardController(IStorehouseDbFactory factory)
         {
-            this.db = factory.CreateConcrete();
+            this._db = factory.CreateConcrete();
         }
 
         public ActionResult Index()
@@ -31,27 +25,27 @@ namespace Azurite.Storehouse.Controllers
             var model = new DashboardViewModel();
 
             //counts
-            model.OrdersCounts.All = db.Orders.Count();
-            model.OrdersCounts.Issued = db.Orders.Where(o => o.StatusId == (int)OrderStatuses.Issued).Count();
-            model.OrdersCounts.InProcessing = db.Orders.Where(o => o.StatusId == (int)OrderStatuses.InProcessing).Count();
-            model.OrdersCounts.Completed = db.Orders.Where(o => o.StatusId == (int)OrderStatuses.Completed).Count();
-            model.OrdersCounts.Archived = db.Orders.Where(o => o.StatusId == (int)OrderStatuses.Archived).Count();
-            model.OrdersCounts.Cancelled = db.Orders.Where(o => o.StatusId == (int)OrderStatuses.Cancelled).Count();
+            model.OrdersCounts.All = _db.Orders.Count();
+            model.OrdersCounts.Issued = _db.Orders.Where(o => o.StatusId == (int)OrderStatuses.Issued).Count();
+            model.OrdersCounts.InProcessing = _db.Orders.Where(o => o.StatusId == (int)OrderStatuses.InProcessing).Count();
+            model.OrdersCounts.Completed = _db.Orders.Where(o => o.StatusId == (int)OrderStatuses.Completed).Count();
+            model.OrdersCounts.Archived = _db.Orders.Where(o => o.StatusId == (int)OrderStatuses.Archived).Count();
+            model.OrdersCounts.Cancelled = _db.Orders.Where(o => o.StatusId == (int)OrderStatuses.Cancelled).Count();
 
             //orders
-            model.InProgressOrders = db.Orders.Where(o => o.StatusId == (int)OrderStatuses.InProcessing)
+            model.InProgressOrders = _db.Orders.Where(o => o.StatusId == (int)OrderStatuses.InProcessing)
                 .ProjectTo<MiniOrder>().ToList();
-            model.IssuedOrders = db.Orders.Where(o => o.StatusId == (int)OrderStatuses.Issued)
+            model.IssuedOrders = _db.Orders.Where(o => o.StatusId == (int)OrderStatuses.Issued)
                 .ProjectTo<MiniOrder>().ToList();
-            model.CompletedOrders = db.Orders.Where(o => o.StatusId == (int)OrderStatuses.Completed)
+            model.CompletedOrders = _db.Orders.Where(o => o.StatusId == (int)OrderStatuses.Completed)
                 .ProjectTo<MiniOrder>().ToList();
 
             //products
-            model.DecreasingQuantityProducts = db.Products.Where(p => p.Quantity <= 5 && p.Quantity > 0)
+            model.DecreasingQuantityProducts = _db.Products.Where(p => p.Quantity <= 5 && p.Quantity > 0)
                 .ProjectTo<MiniProduct>().ToList();
-            model.ZeroQuantityProducts = db.Products.Where(p => p.Quantity == 0)
+            model.ZeroQuantityProducts = _db.Products.Where(p => p.Quantity == 0)
                 .ProjectTo<MiniProduct>().ToList();
-            model.InactiveProducts = db.Products.Where(p => p.Active == false)
+            model.InactiveProducts = _db.Products.Where(p => p.Active == false)
                 .ProjectTo<MiniProduct>().ToList();
 
             return View(model);
@@ -103,6 +97,7 @@ namespace Azurite.Storehouse.Controllers
 
                 nreport.Report.Add(day);
             }
+
             nreport.Report.Reverse(); //so today is the last day in the graph
 
             return Json(nreport, JsonRequestBehavior.AllowGet);
@@ -194,6 +189,7 @@ namespace Azurite.Storehouse.Controllers
 
                 nreport.Report.Add(day);
             }
+
             nreport.Report.Reverse(); //so today is the last day in the graph
 
             return Json(nreport, JsonRequestBehavior.AllowGet);
@@ -201,7 +197,7 @@ namespace Azurite.Storehouse.Controllers
 
         private IQueryable<Order> Orders()
         {
-            return db.Orders.Where(o => o.StatusId == (int)OrderStatuses.Completed ||
+            return _db.Orders.Where(o => o.StatusId == (int)OrderStatuses.Completed ||
                 o.StatusId == (int)OrderStatuses.Archived);
         }
     }

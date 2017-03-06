@@ -1,14 +1,11 @@
-﻿using Azurite.Storehouse.Services.Contracts;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Threading.Tasks;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using Newtonsoft.Json;
-using System.Net;
 using System.Text;
+using Newtonsoft.Json;
+using Azurite.Storehouse.Services.Contracts;
 
 namespace Azurite.Storehouse.Services.Implementations
 {
@@ -47,7 +44,6 @@ namespace Azurite.Storehouse.Services.Implementations
 
         public async Task<HttpResponseMessage> PostAsync(Uri uri, object data)
         {
-            //var content = ConvertToStringForm(data);
             var dataString = JsonConvert.SerializeObject(data);
             var content = new StringContent(dataString, Encoding.UTF8, "application/json");
 
@@ -62,9 +58,8 @@ namespace Azurite.Storehouse.Services.Implementations
         }
 
         public async Task<T> PostAsync<T>(Uri uri, object data)
-            where T: new()
+            where T : new()
         {
-            //var content = ConvertToStringForm(data);
             var dataString = JsonConvert.SerializeObject(data);
             var content = new StringContent(dataString, Encoding.UTF8, "application/json");
 
@@ -84,8 +79,9 @@ namespace Azurite.Storehouse.Services.Implementations
             }
         }
 
-        //Converts the object that is send as data in the http request to a FormUrlEncoded content
-        //so it can be easily send with the request
+        /// <summary>
+        /// Converts the object that is send as data in the http request to a FormUrlEncoded content so it can be easily send with the request.
+        /// </summary>
         private FormUrlEncodedContent ConvertToStringForm(object obj)
         {
             var type = obj.GetType();

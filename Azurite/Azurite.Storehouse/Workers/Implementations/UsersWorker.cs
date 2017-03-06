@@ -1,4 +1,8 @@
-﻿using AutoMapper;
+﻿using System;
+using System.Data.Entity.Infrastructure;
+using System.Data.SqlClient;
+using System.Linq;
+using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Azurite.Infrastructure.Data.Contracts;
 using Azurite.Infrastructure.ResponseHandling;
@@ -6,27 +10,21 @@ using Azurite.Storehouse.Data;
 using Azurite.Storehouse.Models.Helpers;
 using Azurite.Storehouse.Workers.Contracts;
 using Azurite.Storehouse.Wrappers;
-using System;
-using System.Collections.Generic;
-using System.Data.Entity.Infrastructure;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Web;
 
 namespace Azurite.Storehouse.Workers.Implementations
 {
     public class UsersWorker : IUsersWorker
     {
-        private readonly IRepository<User> rep;
+        private readonly IRepository<User> _rep;
 
         public UsersWorker(IRepository<User> rep)
         {
-            this.rep = rep;
+            this._rep = rep;
         }
 
         public UserW Get(Guid Id)
         {
-            var user = rep.Get(Id);
+            var user = _rep.Get(Id);
             var userW = Mapper.Map<UserW>(user);
 
             return userW;
@@ -34,7 +32,7 @@ namespace Azurite.Storehouse.Workers.Implementations
 
         public IQueryable<UserW> GetAll()
         {
-            return rep.GetAll()
+            return _rep.GetAll()
                 .Where(u => u.Username != "master") //ignore master!
                 .ProjectTo<UserW>();
         }
@@ -45,9 +43,9 @@ namespace Azurite.Storehouse.Workers.Implementations
             {
                 var user = Mapper.Map<User>(userW);
                 user.Id = Guid.NewGuid();
-                rep.Add(user);
+                _rep.Add(user);
 
-                rep.Save();
+                _rep.Save();
 
                 return new Ticket(true);
             }
@@ -62,14 +60,14 @@ namespace Azurite.Storehouse.Workers.Implementations
         {
             try
             {
-                var user = rep.Get(userW.Id);
+                var user = _rep.Get(userW.Id);
 
                 user.Username = userW.Username;
                 user.Password = userW.Password;
                 user.FirstName = userW.FirstName;
                 user.LastName = userW.LastName;
 
-                rep.Save();
+                _rep.Save();
 
                 return new Ticket(true);
             }
@@ -84,8 +82,8 @@ namespace Azurite.Storehouse.Workers.Implementations
         {
             try
             {
-                rep.Remove(Id);
-                rep.Save();
+                _rep.Remove(Id);
+                _rep.Save();
             }
             catch (DbUpdateException exc)
             {

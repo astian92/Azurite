@@ -1,19 +1,19 @@
-﻿using Azurite.Storehouse.Workers.Contracts;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Data.SqlClient;
+using System.Threading.Tasks;
+using System.Data.Entity.Infrastructure;
+using AutoMapper.QueryableExtensions;
+using AutoMapper;
+using Azurite.Storehouse.Workers.Contracts;
 using Azurite.Storehouse.Wrappers;
 using Azurite.Storehouse.Data;
 using Azurite.Infrastructure.Data.Contracts;
-using AutoMapper.QueryableExtensions;
 using Azurite.Storehouse.Models.Helpers;
-using AutoMapper;
 using Azurite.Infrastructure.ResponseHandling;
-using System.Data.Entity.Infrastructure;
-using System.Data.SqlClient;
 using Azurite.Storehouse.Services.Contracts;
-using System.Threading.Tasks;
 using Azurite.Storehouse.Config.Constants;
 using Azurite.Storehouse.Models.Http;
 
@@ -21,34 +21,32 @@ namespace Azurite.Storehouse.Workers.Implementations
 {
     public class ProductsWorker : IProductsWorker
     {
-        private readonly IRepository<Product> rep;
-        private readonly IRepository<Category> catRep;
-        private readonly IRepository<CategoryAttribute> catAttrRep;
-        private readonly IRepository<ProductAttribute> prodAttrRep;
-        private readonly IRepository<ProductImage> prodImgRep;
-        private readonly ICdnService cdnService;
+        private readonly IRepository<Product> _rep;
+        private readonly IRepository<Category> _catRep;
+        private readonly IRepository<CategoryAttribute> _catAttrRep;
+        private readonly IRepository<ProductAttribute> _prodAttrRep;
+        private readonly IRepository<ProductImage> _prodImgRep;
+        private readonly ICdnService _cdnService;
 
-        public ProductsWorker(IRepository<Product> rep, IRepository<Category> catRep,
-            IRepository<CategoryAttribute> catAttrRep, IRepository<ProductAttribute> prodAttrRep,
-             IRepository<ProductImage> prodImgRep, ICdnService service)
+        public ProductsWorker(IRepository<Product> rep, IRepository<Category> catRep, IRepository<CategoryAttribute> catAttrRep, IRepository<ProductAttribute> prodAttrRep, IRepository<ProductImage> prodImgRep, ICdnService service)
         {
-            this.rep = rep;
-            this.catRep = catRep;
-            this.catAttrRep = catAttrRep;
-            this.prodAttrRep = prodAttrRep;
-            this.prodImgRep = prodImgRep;
-            this.cdnService = service;
+            this._rep = rep;
+            this._catRep = catRep;
+            this._catAttrRep = catAttrRep;
+            this._prodAttrRep = prodAttrRep;
+            this._prodImgRep = prodImgRep;
+            this._cdnService = service;
         }
 
         public IQueryable<ProductIndexViewModel> GetAll()
         {
-            return rep.GetAll()
+            return _rep.GetAll()
                 .ProjectTo<ProductIndexViewModel>();
         }
 
         public List<DropDownItem> GetCategoriesDropDownItems()
         {
-            var items = catRep.GetAll()
+            var items = _catRep.GetAll()
                 .Select(c => new { Name = c.Name, Id = c.Id }) //to project only columns we want so it is a lighter query
                 .ToList() //to enumerate
                 .Select(c => new DropDownItem(c.Id.ToString(), c.Name))
@@ -59,7 +57,7 @@ namespace Azurite.Storehouse.Workers.Implementations
 
         public ProductW Get(Guid productId)
         {
-            var product = rep.Get(productId);
+            var product = _rep.Get(productId);
             var productW = Mapper.Map<ProductW>(product);
 
             var categoryAttributes = this.GetCategoryAttributes(product.CategoryId);
@@ -82,7 +80,7 @@ namespace Azurite.Storehouse.Workers.Implementations
 
         public List<CategoryAttributeW> GetCategoryAttributes(Guid categoryId)
         {
-            var category = catRep.Get(categoryId);
+            var category = _catRep.Get(categoryId);
 
             var attributes = new List<CategoryAttributeW>();
 
@@ -131,7 +129,7 @@ namespace Azurite.Storehouse.Workers.Implementations
             //then send them to the service:
             if (files.Count > 0)
             {
-                bool success = await cdnService.SaveFiles(files);
+                bool success = await _cdnService.SaveFiles(files);
 
                 if (success == false)
                 {
@@ -139,8 +137,8 @@ namespace Azurite.Storehouse.Workers.Implementations
                 }
             }
 
-            rep.Add(product);
-            rep.Save();
+            _rep.Add(product);
+            _rep.Save();
 
             if (ticket == null)
             {
@@ -154,7 +152,7 @@ namespace Azurite.Storehouse.Workers.Implementations
         {
             try
             {
-                var product = rep.Get(productW.Id);
+                var product = _rep.Get(productW.Id);
 
                 //1 Update all properties
                 product.CategoryId = productW.CategoryId;
@@ -188,22 +186,25 @@ namespace Azurite.Storehouse.Workers.Implementations
                 //then delete all that are not in new product
                 var productAttributes = product.ProductAttributes.ToList();
                 var oldAttributes = productAttributes.Where(pa => !productW.ProductAttributes.Any(pwa => pwa.AttributeId == pa.AttributeId));
-                prodAttrRep.RemoveRange(oldAttributes);
+                _prodAttrRep.RemoveRange(oldAttributes);
 
                 //now handle files ..
                 ITicket ticket = null;
+
                 //first get the ids of the files that remain and delete those that are no longer in the list
-                if (imageIds == null) //when there are NONE left we need an empty list
+                if (imageIds == null)
                 {
+                    //when there are NONE left we need an empty list
                     imageIds = new List<Guid>();
                 }
+
                 var removedFiles = product.ProductImages.Where(i => !imageIds.Any(imd => imd == i.Id)).ToList();
-                prodImgRep.RemoveRange(removedFiles);
+                _prodImgRep.RemoveRange(removedFiles);
 
                 //if there were files that were removed then send their ids to the CDN for removal
                 if (removedFiles.Count() > 0)
                 {
-                    bool success = await cdnService.DeleteFiles(removedFiles.Select(f => f.Id));
+                    bool success = await _cdnService.DeleteFiles(removedFiles.Select(f => f.Id));
 
                     if (success == false)
                     {
@@ -232,7 +233,7 @@ namespace Azurite.Storehouse.Workers.Implementations
                 //then send them to the service:
                 if (files.Count > 0)
                 {
-                    bool success = await cdnService.SaveFiles(files);
+                    bool success = await _cdnService.SaveFiles(files);
 
                     if (success == false)
                     {
@@ -240,7 +241,7 @@ namespace Azurite.Storehouse.Workers.Implementations
                     }
                 }
 
-                rep.Save();
+                _rep.Save();
 
                 if (ticket == null)
                 {
@@ -266,12 +267,12 @@ namespace Azurite.Storehouse.Workers.Implementations
         {
             try
             {
-                var product = rep.Get(Id);
+                var product = _rep.Get(Id);
                 var imageIds = product.ProductImages.Select(p => p.Id).ToList();
-                prodImgRep.RemoveRange(product.ProductImages);
+                _prodImgRep.RemoveRange(product.ProductImages);
 
                 //send images for deletion
-                var result = await cdnService.DeleteFiles(imageIds);
+                var result = await _cdnService.DeleteFiles(imageIds);
 
                 if (result == false)
                 {
@@ -280,8 +281,8 @@ namespace Azurite.Storehouse.Workers.Implementations
                     ElmahHelper.Handle(exc);
                 }
 
-                rep.Remove(Id);
-                rep.Save();
+                _rep.Remove(Id);
+                _rep.Save();
             }
             catch (DbUpdateException exc)
             {

@@ -1,36 +1,43 @@
-﻿using Azurite.Infrastructure.Mapping.Contracts;
-using Azurite.Store.Data;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using AutoMapper;
+using Azurite.Infrastructure.Mapping.Contracts;
+using Azurite.Store.Data;
 using Azurite.Store.Models.Helpers;
 
 namespace Azurite.Store.Wrappers
 {
     public class ProductW : IMap, IMapFrom<Product>, IHaveCustomMappings
     {
+        public ProductW()
+        {
+            ProductAttributes = new HashSet<ProductAttributeW>();
+            ProductImages = new HashSet<ProductImageW>();
+        }
+
         public Guid Id { get; set; }
+
         public Guid CategoryId { get; set; }
+
         public string Model { get; set; }
+
         public string Name { get; set; }
+
         public string Description { get; set; }
+
         public double Price { get; set; }
+
         public double Discount { get; set; }
+
         public int Active { get; set; }
 
         public int Quantity { get; set; }
 
         public virtual CategoryW Category { get; set; }
-        public virtual ICollection<ProductAttributeW> ProductAttributes { get; set; }
-        public virtual ICollection<ProductImageW> ProductImages { get; set; }
 
-        public ProductW()
-        {
-            this.ProductAttributes = new HashSet<ProductAttributeW>();
-            this.ProductImages = new HashSet<ProductImageW>();
-        }
+        public virtual ICollection<ProductAttributeW> ProductAttributes { get; set; }
+
+        public virtual ICollection<ProductImageW> ProductImages { get; set; }
 
         public void CreateMappings(IMapperConfigurationExpression configuration)
         {

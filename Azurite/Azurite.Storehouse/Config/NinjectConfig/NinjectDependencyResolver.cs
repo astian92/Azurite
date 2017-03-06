@@ -1,11 +1,8 @@
-﻿using Azurite.Infrastructure.Data.Contracts;
-using Azurite.Storehouse.Config.Streamline;
-using Ninject;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
+using Ninject;
+using Azurite.Storehouse.Config.Streamline;
 
 namespace Azurite.Storehouse.Config.NinjectConfig
 {

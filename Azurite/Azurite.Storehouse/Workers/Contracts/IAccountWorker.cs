@@ -1,8 +1,4 @@
 ﻿using Azurite.Storehouse.Models.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace Azurite.Storehouse.Workers.Contracts
 {

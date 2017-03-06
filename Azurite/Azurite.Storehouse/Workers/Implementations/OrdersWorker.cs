@@ -1,13 +1,12 @@
-﻿using Azurite.Storehouse.Workers.Contracts;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
+using AutoMapper.QueryableExtensions;
+using AutoMapper;
+using Azurite.Storehouse.Workers.Contracts;
 using Azurite.Storehouse.Wrappers;
 using Azurite.Infrastructure.Data.Contracts;
 using Azurite.Storehouse.Data;
-using AutoMapper.QueryableExtensions;
-using AutoMapper;
 using Azurite.Storehouse.Models;
 using Azurite.Infrastructure.ResponseHandling;
 
@@ -15,21 +14,20 @@ namespace Azurite.Storehouse.Workers.Implementations
 {
     public class OrdersWorker : IOrdersWorker
     {
-        private readonly IRepository<Order> rep;
-        private readonly IRepository<OrderStatus> orderStatusRep;
-        private readonly IRepository<Product> productsRep;
+        private readonly IRepository<Order> _rep;
+        private readonly IRepository<OrderStatus> _orderStatusRep;
+        private readonly IRepository<Product> _productsRep;
 
-        public OrdersWorker(IRepository<Order> rep, IRepository<OrderStatus> orderStatusRep,
-            IRepository<Product> productsRep)
+        public OrdersWorker(IRepository<Order> rep, IRepository<OrderStatus> orderStatusRep, IRepository<Product> productsRep)
         {
-            this.rep = rep;
-            this.orderStatusRep = orderStatusRep;
-            this.productsRep = productsRep;
+            this._rep = rep;
+            this._orderStatusRep = orderStatusRep;
+            this._productsRep = productsRep;
         }
 
         public OrderW Get(Guid id)
         {
-            var order = this.rep.Get(id);
+            var order = this._rep.Get(id);
             var orderW = Mapper.Map<OrderW>(order);
 
             return orderW;
@@ -37,25 +35,25 @@ namespace Azurite.Storehouse.Workers.Implementations
 
         public IQueryable<OrderW> GetAll()
         {
-            return rep.GetAll()
+            return _rep.GetAll()
                 .ProjectTo<OrderW>();
         }
 
         public IQueryable<OrderViewModel> GetAllVm()
         {
-            return rep.GetAll()
+            return _rep.GetAll()
                 .ProjectTo<OrderViewModel>();
         }
 
         public IList<OrderStatusW> GetOrderStatuses()
         {
-            return this.orderStatusRep.GetAll()
+            return this._orderStatusRep.GetAll()
                 .ProjectTo<OrderStatusW>().ToList();
         }
 
         public ITicket Update(Guid orderId, int statusId, string notes)
         {
-            var order = rep.Get(orderId);
+            var order = _rep.Get(orderId);
 
             if (order.StatusId != statusId)
             {
@@ -64,7 +62,7 @@ namespace Azurite.Storehouse.Workers.Implementations
                 if (ticket.IsOK)
                 {
                     order.StatusId = statusId;
-                    rep.Save();
+                    _rep.Save();
                 }
 
                 return ticket;
@@ -72,7 +70,7 @@ namespace Azurite.Storehouse.Workers.Implementations
             else if (order.Notes != notes)
             {
                 order.Notes = notes;
-                rep.Save();
+                _rep.Save();
             }
 
             return new Ticket(true);
@@ -85,7 +83,7 @@ namespace Azurite.Storehouse.Workers.Implementations
             {
                 if (order.StatusId == (int)OrderStatuses.Cancelled)
                 {
-                    var products = productsRep.GetAll();
+                    var products = _productsRep.GetAll();
                     foreach (var orderedProduct in order.OrderedProducts)
                     {
                         if (products.Any(p => p.Id == orderedProduct.ActualProductId))
@@ -102,9 +100,10 @@ namespace Azurite.Storehouse.Workers.Implementations
                     }
                 }
             }
-            else //was just cancelled
+            else
             {
-                var products = productsRep.GetAll();
+                //was just cancelled
+                var products = _productsRep.GetAll();
                 foreach (var orderedProduct in order.OrderedProducts)
                 {
                     if (products.Any(p => p.Id == orderedProduct.ActualProductId))

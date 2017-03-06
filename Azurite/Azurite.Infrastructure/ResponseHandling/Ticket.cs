@@ -1,17 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Azurite.Infrastructure.ResponseHandling
+﻿namespace Azurite.Infrastructure.ResponseHandling
 {
     public class Ticket : ITicket
     {
         /// <summary>
-        /// Shows wether or not the operation was a success
+        /// Shows whether or not the operation was a success.
         /// </summary>
         private bool isOK;
+
         public bool IsOK
         {
             get
@@ -21,9 +16,10 @@ namespace Azurite.Infrastructure.ResponseHandling
         }
 
         /// <summary>
-        /// When the error is known it should have its error code with it
+        /// When the error is known it should have its error code with it.
         /// </summary>
         private ErrorCodes code;
+
         public ErrorCodes Code
         {
             get
@@ -33,9 +29,10 @@ namespace Azurite.Infrastructure.ResponseHandling
         }
 
         /// <summary>
-        /// An inner ticket to save if there was another reason for this tickets results
+        /// An inner ticket to save if there was another reason for this tickets results.
         /// </summary>
         private ITicket inner;
+
         public ITicket Inner
         {
             get
@@ -45,9 +42,10 @@ namespace Azurite.Infrastructure.ResponseHandling
         }
 
         /// <summary>
-        /// A custom message from the ticket issuer
+        /// A custom message from the ticket issuer.
         /// </summary>
         private string message;
+
         public string Message
         {
             get
@@ -57,7 +55,7 @@ namespace Azurite.Infrastructure.ResponseHandling
         }
 
         /// <summary>
-        /// Creates a ticket with a status that says wether or not everything went ok - Ticket.IsOk = true/false
+        /// Creates a ticket with a status that says whether or not everything went ok - Ticket.IsOk = true/false.
         /// </summary>
         public Ticket(bool status)
         {
@@ -65,8 +63,7 @@ namespace Azurite.Infrastructure.ResponseHandling
         }
 
         /// <summary>
-        /// Creates a ticket with a status that says wether or not everything went ok - Ticket.IsOk = true/false
-        /// and adds a message to the ticket
+        /// Creates a ticket with a status that says whether or not everything went ok - Ticket.IsOk = true/false and adds a message to the ticket.
         /// </summary>
         public Ticket(bool status, string message)
         {
@@ -74,9 +71,8 @@ namespace Azurite.Infrastructure.ResponseHandling
             this.isOK = status;
         }
 
-
         /// <summary>
-        /// Creates a ticket with a IsOk = false and sets the ErrorCode and the message
+        /// Creates a ticket with a IsOk = false and sets the ErrorCode and the message.
         /// </summary>
         public Ticket(ErrorCodes code, string message)
             : this(false, message)
@@ -85,7 +81,7 @@ namespace Azurite.Infrastructure.ResponseHandling
         }
 
         /// <summary>
-        /// Creates a ticket with IsOk = false, sets the error code and the message and inserts an inner ticket (like an inner exception)
+        /// Creates a ticket with IsOk = false, sets the error code and the message and inserts an inner ticket (like an inner exception).
         /// </summary>
         public Ticket(ErrorCodes code, string message, ITicket inner)
             : this(code, message)

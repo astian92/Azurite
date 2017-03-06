@@ -1,14 +1,13 @@
-﻿using Azurite.Storehouse.Models.Helpers;
-using Azurite.Storehouse.Models.Helpers.Datatables;
-using Azurite.Storehouse.Workers.Contracts;
-using Azurite.Storehouse.Wrappers;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Mvc.Expressions;
+using Azurite.Storehouse.Models.Helpers.Datatables;
+using Azurite.Storehouse.Workers.Contracts;
+using Azurite.Storehouse.Wrappers;
 
 namespace Azurite.Storehouse.Controllers
 {
@@ -48,8 +47,9 @@ namespace Azurite.Storehouse.Controllers
             {
                 entities = Filter(entities, dtParams.FilterColIndex, dtParams.FilterAsc);
             }
-            else //defaultOrder
+            else
             {
+                //defaultOrder
                 entities = entities.OrderBy(e => e.Model);
             }
 
@@ -61,8 +61,7 @@ namespace Azurite.Storehouse.Controllers
                     data,
                     dtParams.Draw,
                     filteredRecords,
-                    totalRecords
-                );
+                    totalRecords);
 
             return Json(jsonResult);
         }
@@ -155,6 +154,7 @@ namespace Azurite.Storehouse.Controllers
                     {
                         entities = entities.OrderByDescending(e => e.Model);
                     }
+
                     break;
                 case 1:
                     if (asc == true)
@@ -165,6 +165,7 @@ namespace Azurite.Storehouse.Controllers
                     {
                         entities = entities.OrderByDescending(e => e.CategoryName);
                     }
+
                     break;
                 case 2:
                     if (asc == true)
@@ -175,6 +176,7 @@ namespace Azurite.Storehouse.Controllers
                     {
                         entities = entities.OrderByDescending(e => e.Name);
                     }
+
                     break;
                 case 3:
                     if (asc == true)
@@ -185,24 +187,13 @@ namespace Azurite.Storehouse.Controllers
                     {
                         entities = entities.OrderByDescending(e => e.Price);
                     }
+
                     break;
-                //case 4:
-                //    if (asc == true)
-                //    {
-                //        entities = entities.OrderBy(e => e.Quantity);
-                //    }
-                //    else
-                //    {
-                //        entities = entities.OrderByDescending(e => e.Quantity);
-                //    }
-                //    break;
                 default:
                     break;
             }
 
             return entities;
         }
-
-        
     }
 }

@@ -1,46 +1,41 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
+using System.Web;
+using System.Web.Routing;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Azurite.Store;
+using Moq;
 using Azurite.Store.Controllers;
 using Azurite.Store.Workers.Contracts;
-using Moq;
-using System.Web.Routing;
-using System.Web;
 
 namespace Azurite.Store.Tests.Controllers
 {
     [TestClass]
     public class HomeControllerTest
     {
-        private Mock<ICurrencyWorker> workerMock;
+        private HomeController _controller;
 
-        private ICurrencyWorker worker
-        {
-            get
-            {
-                return this.workerMock.Object;
-            }
-        }
-
-        private HomeController controller;
+        private Mock<ICurrencyWorker> _workerMock;
 
         public HomeControllerTest()
         {
-            this.workerMock = new Mock<ICurrencyWorker>();
-            this.controller = new HomeController(worker);
-            this.controller.ControllerContext = new ControllerContext(new Mock<HttpContextBase>().Object,
+            _workerMock = new Mock<ICurrencyWorker>();
+            _controller = new HomeController(Worker);
+            _controller.ControllerContext = new ControllerContext(new Mock<HttpContextBase>().Object,
                 new Mock<RouteData>().Object, new Mock<ControllerBase>().Object);
+        }
+
+        private ICurrencyWorker Worker
+        {
+            get
+            {
+                return _workerMock.Object;
+            }
         }
 
         [TestMethod]
         public void Index()
         {
             // Act
-            ViewResult result = controller.Index() as ViewResult;
+            ViewResult result = _controller.Index() as ViewResult;
 
             // Assert
             Assert.IsNotNull(result);
@@ -50,7 +45,7 @@ namespace Azurite.Store.Tests.Controllers
         public void Contact()
         {
             // Act
-            ViewResult result = controller.Contact() as ViewResult;
+            ViewResult result = _controller.Contact() as ViewResult;
 
             // Assert
             Assert.IsNotNull(result);

@@ -1,22 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Web;
+﻿using System.Web;
 
 namespace Azurite.Storehouse.Models.Helpers.Datatables
 {
     public class DtParameters
     {
-        public int Draw { get; set; }
-        public int Skip { get; set; }
-        public int PageSize { get; set; }
-        public bool IsBeingSearched { get; set; }
-        public string SearchValue { get; set; }
-        public bool IsBeingFiltered { get; set; }
-        public int FilterColIndex { get; set; }
-        public bool FilterAsc { get; set; }
-
         public DtParameters(HttpRequestBase request)
         {
             int draw = 0;
@@ -24,7 +11,8 @@ namespace Azurite.Storehouse.Models.Helpers.Datatables
             int pageSize = 0;
             int sortCol = 0;
 
-            if (request?.Form != null) //may need revision...
+            //may need revision...
+            if (request?.Form != null)
             {
                 var drawStr = request.Form["draw"];
                 int.TryParse(drawStr, out draw);
@@ -50,6 +38,7 @@ namespace Azurite.Storehouse.Models.Helpers.Datatables
                 {
                     this.IsBeingFiltered = true;
                 }
+
                 int.TryParse(sortColStr, out sortCol);
                 this.FilterColIndex = sortCol;
 
@@ -61,5 +50,20 @@ namespace Azurite.Storehouse.Models.Helpers.Datatables
             }
         }
 
+        public int Draw { get; set; }
+
+        public int Skip { get; set; }
+
+        public int PageSize { get; set; }
+
+        public bool IsBeingSearched { get; set; }
+
+        public string SearchValue { get; set; }
+
+        public bool IsBeingFiltered { get; set; }
+
+        public int FilterColIndex { get; set; }
+
+        public bool FilterAsc { get; set; }
     }
 }

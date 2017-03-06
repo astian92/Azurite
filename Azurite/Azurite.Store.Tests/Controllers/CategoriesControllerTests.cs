@@ -1,42 +1,40 @@
-﻿using Azurite.Store.Controllers;
-using Azurite.Store.Workers.Contracts;
-using Azurite.Store.Wrappers;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Web.Mvc;
 using System.Web.Routing;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
+using Azurite.Store.Controllers;
+using Azurite.Store.Workers.Contracts;
+using Azurite.Store.Wrappers;
 
 namespace Azurite.Store.Tests.Controllers
 {
     [TestClass]
     public class CategoriesControllerTests
     {
-        private Mock<ICategoryWorker> mockWorker;
+        private Mock<ICategoryWorker> _mockWorker;
 
-        private CategoriesController controller;
+        private CategoriesController _controller;
 
         public CategoriesControllerTests()
         {
-            mockWorker = new Mock<ICategoryWorker>();
-            mockWorker.Setup(x => x.GetAll()).Returns(new List<CategoryW>()
+            _mockWorker = new Mock<ICategoryWorker>();
+            _mockWorker.Setup(x => x.GetAll()).Returns(new List<CategoryW>()
             {
                 new CategoryW() { Id = Guid.NewGuid(), Name = "Обици", Description = "Златни обици" },
                 new CategoryW() { Id = Guid.NewGuid(), Name = "Пръстени", Description = "Сребърни пръстени" }
             }.AsQueryable());
 
-            mockWorker.Setup(x => x.GetCategory(It.IsAny<Guid>())).Returns(new CategoryW() { Id = Guid.NewGuid(), Name = "Обици", Description = "Златни обици" });
+            _mockWorker.Setup(x => x.GetCategory(It.IsAny<Guid>())).Returns(new CategoryW() { Id = Guid.NewGuid(), Name = "Обици", Description = "Златни обици" });
 
-            controller = new CategoriesController(mockWorker.Object);
+            _controller = new CategoriesController(_mockWorker.Object);
             var urlMock = new Mock<UrlHelper>();
             urlMock.Setup(m => m.Action(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<RouteValueDictionary>()))
                 .Returns<string, string, RouteValueDictionary>((a, c, r) => c + "/" + a);
 
-            this.controller.Url = urlMock.Object;
+            this._controller.Url = urlMock.Object;
         }
     }
 }

@@ -1,15 +1,10 @@
-﻿using Azurite.Infrastructure.Data.Contracts;
+﻿using System.Web;
+using Ninject;
+using Azurite.Infrastructure.Data.Contracts;
 using Azurite.Infrastructure.Data.Implementations;
 using Azurite.Infrastructure.ResponseHandling;
 using Azurite.Storehouse.Config.Streamline;
-using Azurite.Storehouse.Data;
 using Azurite.Storehouse.Models.Infrastructure;
-using Azurite.Storehouse.Wrappers;
-using Ninject;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace Azurite.Storehouse.Config
 {

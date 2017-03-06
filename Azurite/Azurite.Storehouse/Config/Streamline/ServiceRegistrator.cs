@@ -1,10 +1,8 @@
-﻿using Azurite.Storehouse.Config.Constants;
-using Ninject;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Linq;
 using System.Reflection;
-using System.Web;
+using Ninject;
+using Azurite.Storehouse.Config.Constants;
 
 namespace Azurite.Storehouse.Config.Streamline
 {

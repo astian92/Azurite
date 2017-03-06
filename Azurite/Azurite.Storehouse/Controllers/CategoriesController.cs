@@ -54,13 +54,6 @@ namespace Azurite.Storehouse.Controllers
                 return View(categoryW);
             }
 
-            //if (categoryW.CategoryAttributes == null || categoryW.CategoryAttributes.Count() == 0)
-            //{
-            //    ModelState.AddModelError("Missing attributes!", "Категорията задължително трябва да има атрибути!");
-            //    ViewBag.ParentId = new SelectList(GetCategoriesDropDownItems(), "Value", "Text");
-            //    return View(categoryW);
-            //}
-
             var ticket = await worker.Add(categoryW, photo);
 
             if (ticket.IsOK == false)
@@ -92,13 +85,6 @@ namespace Azurite.Storehouse.Controllers
                 ViewBag.ParentId = new SelectList(GetCategoriesDropDownItems(), "Value", "Text");
                 return View(categoryW);
             }
-
-            //if (categoryW.CategoryAttributes == null || categoryW.CategoryAttributes.Count() == 0)
-            //{
-            //    ModelState.AddModelError("Missing attributes!", "Категорията задължително трябва да има атрибути!");
-            //    ViewBag.ParentId = new SelectList(GetCategoriesDropDownItems(), "Value", "Text");
-            //    return View(categoryW);
-            //}
 
             var ticket = await worker.Edit(categoryW, photo, deleted);
 

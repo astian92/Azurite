@@ -1,14 +1,13 @@
-﻿using Azurite.Storehouse.Models;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web.Mvc;
+using System.Web.Mvc.Expressions;
+using Azurite.Storehouse.Models;
 using Azurite.Storehouse.Models.Helpers;
 using Azurite.Storehouse.Models.Helpers.Datatables;
 using Azurite.Storehouse.Workers.Contracts;
 using Azurite.Storehouse.Wrappers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using System.Web.Mvc.Expressions;
 
 namespace Azurite.Storehouse.Controllers
 {
@@ -37,8 +36,9 @@ namespace Azurite.Storehouse.Controllers
             {
                 entities = entities.Where(o => o.StatusId == orderStatusId);
             }
-            else //All = All without the cancelled and archived ones
+            else
             {
+                //All = All without the cancelled and archived ones
                 entities = entities.Where(o => o.StatusId != (int)OrderStatuses.Cancelled && o.StatusId != (int)OrderStatuses.Archived);
             }
 
@@ -56,8 +56,9 @@ namespace Azurite.Storehouse.Controllers
             {
                 entities = Filter(entities, dtParams.FilterColIndex, dtParams.FilterAsc);
             }
-            else //defaultOrder
+            else
             {
+                //defaultOrder
                 entities = entities.OrderByDescending(e => e.Date);
             }
 
@@ -69,8 +70,7 @@ namespace Azurite.Storehouse.Controllers
                     data,
                     dtParams.Draw,
                     filteredRecords,
-                    totalRecords
-                );
+                    totalRecords);
 
             return Json(jsonResult);
         }
@@ -92,7 +92,6 @@ namespace Azurite.Storehouse.Controllers
             if (ticket.IsOK == false)
             {
                 ModelState.AddModelError("QuantityError", ticket.Message);
-                //return Redirect(Url.Action<OrdersController>(c => c.Details(orderId)));
 
                 ViewBag.StatusId = new SelectList(GetOrderStatusesDropDownItems(), "Value", "Text");
                 var orderW = worker.Get(orderId);
@@ -116,6 +115,7 @@ namespace Azurite.Storehouse.Controllers
                     {
                         entities = entities.OrderByDescending(e => e.StatusId);
                     }
+
                     break;
                 case 1:
                     if (asc == true)
@@ -126,6 +126,7 @@ namespace Azurite.Storehouse.Controllers
                     {
                         entities = entities.OrderByDescending(e => e.CustomerName);
                     }
+
                     break;
                 case 2:
                     if (asc == true)
@@ -136,6 +137,7 @@ namespace Azurite.Storehouse.Controllers
                     {
                         entities = entities.OrderByDescending(e => e.Total);
                     }
+
                     break;
                 case 3:
                     if (asc == true)
@@ -146,6 +148,7 @@ namespace Azurite.Storehouse.Controllers
                     {
                         entities = entities.OrderByDescending(e => e.Date);
                     }
+
                     break;
                 default:
                     break;
@@ -170,8 +173,5 @@ namespace Azurite.Storehouse.Controllers
 
             return items;
         }
-
-
-
     }
 }

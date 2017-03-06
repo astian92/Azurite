@@ -1,21 +1,10 @@
-﻿using Azurite.Storehouse.Wrappers.Dashboard;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Collections.Generic;
+using Azurite.Storehouse.Wrappers.Dashboard;
 
 namespace Azurite.Storehouse.Models.ViewModels
 {
     public class DashboardViewModel
     {
-        public OrdersCountList OrdersCounts { get; set; }
-        public List<MiniOrder> IssuedOrders { get; set; }
-        public List<MiniOrder> InProgressOrders { get; set; }
-        public List<MiniOrder> CompletedOrders { get; set; }
-        public List<MiniProduct> DecreasingQuantityProducts { get; set; }
-        public List<MiniProduct> ZeroQuantityProducts { get; set; }
-        public List<MiniProduct> InactiveProducts { get; set; }
-
         public DashboardViewModel()
         {
             this.OrdersCounts = new OrdersCountList();
@@ -26,5 +15,19 @@ namespace Azurite.Storehouse.Models.ViewModels
             this.ZeroQuantityProducts = new List<MiniProduct>();
             this.InactiveProducts = new List<MiniProduct>();
         }
+
+        public OrdersCountList OrdersCounts { get; set; }
+
+        public List<MiniOrder> IssuedOrders { get; set; }
+
+        public List<MiniOrder> InProgressOrders { get; set; }
+
+        public List<MiniOrder> CompletedOrders { get; set; }
+
+        public List<MiniProduct> DecreasingQuantityProducts { get; set; }
+
+        public List<MiniProduct> ZeroQuantityProducts { get; set; }
+
+        public List<MiniProduct> InactiveProducts { get; set; }
     }
 }

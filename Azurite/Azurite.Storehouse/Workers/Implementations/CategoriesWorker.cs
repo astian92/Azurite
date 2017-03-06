@@ -1,45 +1,39 @@
-﻿using Azurite.Storehouse.Workers.Contracts;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Data.SqlClient;
+using System.Data.Entity.Infrastructure;
+using System.Threading.Tasks;
+using AutoMapper;
+using Azurite.Storehouse.Workers.Contracts;
 using Azurite.Storehouse.Data;
 using Azurite.Infrastructure.Data.Contracts;
 using Azurite.Storehouse.Wrappers;
-using AutoMapper.QueryableExtensions;
-using AutoMapper;
-using Azurite.Infrastructure.Data.Implementations;
-using Azurite.Storehouse.Models.Infrastructure;
-using System.Data.Entity;
 using Azurite.Infrastructure.ResponseHandling;
-using System.Data.SqlClient;
-using System.Data.Entity.Infrastructure;
-using System.Data.Entity.Validation;
 using Azurite.Storehouse.Models.Helpers;
 using Azurite.Storehouse.Services.Contracts;
-using System.Threading.Tasks;
 using Azurite.Storehouse.Config.Constants;
 using Azurite.Storehouse.Models.Http;
-using System.Diagnostics;
 
 namespace Azurite.Storehouse.Workers.Implementations
 {
     public class CategoriesWorker : ICategoriesWorker
     {
-        private readonly IRepository<Category> rep;
-        private readonly IRepository<CategoryAttribute> attrRep;
-        private readonly ICdnService cdnService;
+        private readonly IRepository<Category> _rep;
+        private readonly IRepository<CategoryAttribute> _attrRep;
+        private readonly ICdnService _cdnService;
 
         public CategoriesWorker(IRepository<Category> rep, IRepository<CategoryAttribute> attrRep, ICdnService cdnService)
         {
-            this.rep = rep;
-            this.attrRep = attrRep;
-            this.cdnService = cdnService;
+            this._rep = rep;
+            this._attrRep = attrRep;
+            this._cdnService = cdnService;
         }
 
         public CategoryW Get(Guid Id)
         {
-            var cat = rep.Get(Id);
+            var cat = _rep.Get(Id);
             var catW = Mapper.Map<CategoryW>(cat);
 
             return catW;
@@ -47,7 +41,7 @@ namespace Azurite.Storehouse.Workers.Implementations
 
         public IQueryable<CategoryW> GetAll()
         {
-            var categories = rep.GetAll();
+            var categories = _rep.GetAll();
             List<CategoryW> wrapped = new List<CategoryW>();
 
             //because I cant escape circular reference and ProjectTo does not work with max depth
@@ -62,7 +56,7 @@ namespace Azurite.Storehouse.Workers.Implementations
 
         public IQueryable<CategoryIndexViewModel> GetAllWithoutParents()
         {
-            var categories = rep.GetAll();
+            var categories = _rep.GetAll();
             List<CategoryIndexViewModel> wrapped = new List<CategoryIndexViewModel>();
 
             //this time projectTo breaks on testing! 
@@ -100,7 +94,7 @@ namespace Azurite.Storehouse.Workers.Implementations
 
                 if (files.Count > 0)
                 {
-                    bool success = await cdnService.SaveFiles(files);
+                    bool success = await _cdnService.SaveFiles(files);
 
                     if (success == false)
                     {
@@ -109,8 +103,8 @@ namespace Azurite.Storehouse.Workers.Implementations
                 }
             }
 
-            rep.Add(category);
-            rep.Save();
+            _rep.Add(category);
+            _rep.Save();
 
             if (ticket == null)
             {
@@ -124,7 +118,7 @@ namespace Azurite.Storehouse.Workers.Implementations
         {
             try
             {
-                var category = rep.Get(categoryW.Id);
+                var category = _rep.Get(categoryW.Id);
 
                 //1 update all properties
                 category.Name = categoryW.Name;
@@ -143,7 +137,7 @@ namespace Azurite.Storehouse.Workers.Implementations
                 //attrRep.Save();
                 //2.remove deleted items
                 var removed = category.CategoryAttributes.Where(ca => !categoryW.CategoryAttributes.Any(caw => caw.Id == ca.Id));
-                attrRep.RemoveRange(removed);
+                _attrRep.RemoveRange(removed);
 
                 //3. Update isActive on those that remain!
                 var remained = category.CategoryAttributes.Where(ca => categoryW.CategoryAttributes.Any(caw => caw.Id == ca.Id)).ToList();
@@ -163,9 +157,6 @@ namespace Azurite.Storehouse.Workers.Implementations
 
                 if (deleted == true)
                 {
-                    //implement a way to delete the existing file
-                    //cdnService.DeleteFiles()
-
                     category.ImagePath = null;
                 }
 
@@ -184,7 +175,7 @@ namespace Azurite.Storehouse.Workers.Implementations
 
                     if (files.Count > 0)
                     {
-                        bool success = await cdnService.SaveFiles(files);
+                        bool success = await _cdnService.SaveFiles(files);
 
                         if (success == false)
                         {
@@ -193,7 +184,7 @@ namespace Azurite.Storehouse.Workers.Implementations
                     }
                 }
 
-                rep.Save();
+                _rep.Save();
 
                 if (ticket == null)
                 {
@@ -219,8 +210,8 @@ namespace Azurite.Storehouse.Workers.Implementations
         {
             try
             {
-                rep.Remove(Id);
-                rep.Save();
+                _rep.Remove(Id);
+                _rep.Save();
             }
             catch (DbUpdateException exc)
             {

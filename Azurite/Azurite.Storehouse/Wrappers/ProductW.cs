@@ -1,15 +1,19 @@
-﻿using Azurite.Infrastructure.Mapping.Contracts;
-using Azurite.Storehouse.Data;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
+using Azurite.Infrastructure.Mapping.Contracts;
+using Azurite.Storehouse.Data;
 
 namespace Azurite.Storehouse.Wrappers
 {
     public class ProductW : IMap, IMapFrom<Product>
     {
+        public ProductW()
+        {
+            this.ProductAttributes = new HashSet<ProductAttributeW>();
+            this.ProductImages = new HashSet<ProductImageW>();
+        }
+
         public Guid Id { get; set; }
 
         [Required(ErrorMessage = "Полето \"Категория\" е задължително!")]
@@ -28,11 +32,9 @@ namespace Azurite.Storehouse.Wrappers
         [Display(Name = "Име-EN")]
         public string NameEN { get; set; }
 
-        //[Required(ErrorMessage = "Полето \"Описание\" е задължително!")]
         [Display(Name = "Описание")]
         public string Description { get; set; }
 
-        //[Required(ErrorMessage = "Полето \"Описание-EN\" е задължително!")]
         [Display(Name = "Описание-EN")]
         public string DescriptionEN { get; set; }
 
@@ -41,7 +43,6 @@ namespace Azurite.Storehouse.Wrappers
         [Display(Name = "Количество")]
         public int Quantity { get; set; }
 
-        //, ErrorMessageResourceName = "Полето \"Цена\" трябва да е число!"
         [Required(ErrorMessage = "Полето \"Цена\" е задължително!")]
         [Display(Name = "Цена")]
         public double Price { get; set; }
@@ -56,13 +57,9 @@ namespace Azurite.Storehouse.Wrappers
         public bool Active { get; set; }
 
         public virtual CategoryW Category { get; set; }
-        public virtual ICollection<ProductAttributeW> ProductAttributes { get; set; }
-        public virtual ICollection<ProductImageW> ProductImages { get; set; }
 
-        public ProductW()
-        {
-            this.ProductAttributes = new HashSet<ProductAttributeW>();
-            this.ProductImages = new HashSet<ProductImageW>();
-        }
+        public virtual ICollection<ProductAttributeW> ProductAttributes { get; set; }
+
+        public virtual ICollection<ProductImageW> ProductImages { get; set; }
     }
 }

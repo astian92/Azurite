@@ -1,21 +1,19 @@
-﻿using Azurite.Storehouse.Models.Helpers.Datatables;
+﻿using System;
+using System.Linq;
+using System.Web.Mvc;
+using Azurite.Storehouse.Models.Helpers.Datatables;
 using Azurite.Storehouse.Workers.Contracts;
 using Azurite.Storehouse.Wrappers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
 
 namespace Azurite.Storehouse.Controllers
 {
     public class CustomersController : Controller
     {
-        private readonly ICustomersWorker worker;
+        private readonly ICustomersWorker _worker;
 
         public CustomersController(ICustomersWorker worker)
         {
-            this.worker = worker;
+            this._worker = worker;
         }
 
         public ActionResult Index()
@@ -27,7 +25,7 @@ namespace Azurite.Storehouse.Controllers
         {
             var dtParams = new DtParameters(Request);
 
-            var entities = worker.GetAll();
+            var entities = _worker.GetAll();
             int totalRecords = entities.Count();
 
             if (dtParams.IsBeingSearched)
@@ -44,8 +42,9 @@ namespace Azurite.Storehouse.Controllers
             {
                 entities = Filter(entities, dtParams.FilterColIndex, dtParams.FilterAsc);
             }
-            else //defaultOrder
+            else
             {
+                //defaultOrder
                 entities = entities.OrderBy(e => e.FirstName);
             }
 
@@ -57,15 +56,14 @@ namespace Azurite.Storehouse.Controllers
                     data,
                     dtParams.Draw,
                     filteredRecords,
-                    totalRecords
-                );
+                    totalRecords);
 
             return Json(jsonResult);
         }
 
         public ActionResult Details(Guid Id)
         {
-            var customerW = worker.Get(Id);
+            var customerW = _worker.Get(Id);
             return View(customerW);
         }
 
@@ -82,6 +80,7 @@ namespace Azurite.Storehouse.Controllers
                     {
                         entities = entities.OrderByDescending(e => e.FirstName);
                     }
+
                     break;
                 case 1:
                     if (asc == true)
@@ -92,6 +91,7 @@ namespace Azurite.Storehouse.Controllers
                     {
                         entities = entities.OrderByDescending(e => e.LastName);
                     }
+
                     break;
                 case 2:
                     if (asc == true)
@@ -102,6 +102,7 @@ namespace Azurite.Storehouse.Controllers
                     {
                         entities = entities.OrderByDescending(e => e.Phone);
                     }
+
                     break;
                 case 3:
                     if (asc == true)
@@ -112,6 +113,7 @@ namespace Azurite.Storehouse.Controllers
                     {
                         entities = entities.OrderByDescending(e => e.Email);
                     }
+
                     break;
                 default:
                     break;

@@ -1,16 +1,12 @@
-﻿using Azurite.Infrastructure.Config;
-using Azurite.Store.Config.NinjectConfig;
-using Azurite.Store.Models.Helpers;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Globalization;
-using System.Linq;
 using System.Threading;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Optimization;
+using Azurite.Infrastructure.Config;
+using Azurite.Store.Config.NinjectConfig;
 using System.Web.Routing;
-using System.Web.Security;
 
 namespace Azurite.Store
 {
