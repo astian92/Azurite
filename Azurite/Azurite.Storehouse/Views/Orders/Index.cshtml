@@ -72,6 +72,12 @@
                 ],
                 columnDefs: [
                     {
+                        targets: 3,
+                        render: function (data, type, full, meta) {
+                            return data + " " + full.CurrencySign;
+                        }
+                    },
+                    {
                         targets: [-1],
                         searchable: false,
                         sortable: false,

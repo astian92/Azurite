@@ -21,6 +21,7 @@ using System.Threading.Tasks;
 using Azurite.Storehouse.Config.Constants;
 using Azurite.Storehouse.Models.Http;
 using System.Diagnostics;
+using System.IO;
 
 namespace Azurite.Storehouse.Workers.Implementations
 {
@@ -88,7 +89,9 @@ namespace Azurite.Storehouse.Workers.Implementations
             ITicket ticket = null;
             if (photo != null)
             {
-                category.ImagePath = ImportantVariables.CategoriesPrefix + photo.FileName;
+                var filename = Path.GetFileNameWithoutExtension(photo.FileName);
+                var extension = Path.GetExtension(photo.FileName);
+                category.ImagePath = ImportantVariables.CategoriesPrefix + filename + Guid.NewGuid() + extension;
 
                 List<HttpFile> files = new List<HttpFile>();
                 HttpFile file = new HttpFile();
@@ -172,7 +175,9 @@ namespace Azurite.Storehouse.Workers.Implementations
                 ITicket ticket = null;
                 if (photo != null)
                 {
-                    category.ImagePath = ImportantVariables.CategoriesPrefix + photo.FileName;
+                    var filename = Path.GetFileNameWithoutExtension(photo.FileName);
+                    var extension = Path.GetExtension(photo.FileName);
+                    category.ImagePath = ImportantVariables.CategoriesPrefix + filename + Guid.NewGuid() + extension;
 
                     List<HttpFile> files = new List<HttpFile>();
                     HttpFile file = new HttpFile();

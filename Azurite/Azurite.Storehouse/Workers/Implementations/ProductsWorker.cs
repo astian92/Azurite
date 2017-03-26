@@ -16,6 +16,7 @@ using Azurite.Storehouse.Services.Contracts;
 using System.Threading.Tasks;
 using Azurite.Storehouse.Config.Constants;
 using Azurite.Storehouse.Models.Http;
+using System.IO;
 
 namespace Azurite.Storehouse.Workers.Implementations
 {
@@ -116,7 +117,10 @@ namespace Azurite.Storehouse.Workers.Implementations
             {
                 var productImage = new ProductImage();
                 productImage.Id = Guid.NewGuid();
-                productImage.ImagePath = ImportantVariables.ProductsPrefix + photo.FileName;
+
+                var filename = Path.GetFileNameWithoutExtension(photo.FileName);
+                var extension = Path.GetExtension(photo.FileName);
+                productImage.ImagePath = ImportantVariables.ProductsPrefix + filename + Guid.NewGuid() + extension;
 
                 product.ProductImages.Add(productImage);
 
@@ -217,7 +221,10 @@ namespace Azurite.Storehouse.Workers.Implementations
                 {
                     var productImage = new ProductImage();
                     productImage.Id = Guid.NewGuid();
-                    productImage.ImagePath = ImportantVariables.ProductsPrefix + photo.FileName;
+
+                    var filename = Path.GetFileNameWithoutExtension(photo.FileName);
+                    var extension = Path.GetExtension(photo.FileName);
+                    productImage.ImagePath = ImportantVariables.ProductsPrefix + filename + Guid.NewGuid() + extension;
 
                     product.ProductImages.Add(productImage);
 

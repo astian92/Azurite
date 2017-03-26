@@ -30,6 +30,9 @@ namespace Azurite.Storehouse.Wrappers
         [Display(Name = "Бележки")]
         public string Notes { get; set; }
 
+        public int CurrencyId { get; set; }
+        public virtual CurrencyCoursW CurrencyCours { get; set; }
+
         public string DateStr
         {
             get

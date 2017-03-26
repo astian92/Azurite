@@ -40,7 +40,8 @@
                             <div class="form-group">
                                 @Html.LabelFor(model => model.Total, htmlAttributes: new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })
                                 <label class="col-md-9 col-sm-9 col-xs-12 content-label">
-                                    @Html.DisplayTextFor(model => model.Total) лв
+                                    @Html.DisplayTextFor(model => model.Total)
+                                    @Model.CurrencyCours.Sign
                                 </label>
                             </div>
                             <div class="form-group">
@@ -192,7 +193,7 @@
                                                 @product.ProductName
                                             </td>
                                             <td>
-                                                @product.Price лв
+                                                @product.Price 
                                             </td>
                                             <td>
                                                 @product.Quantity бр
@@ -201,7 +202,7 @@
                                                 @product.Discount %
                                             </td>
                                             <td>
-                                                <b>@product.Total лв</b>
+                                                <b>@product.Total @Model.CurrencyCours.Sign</b>
                                             </td>
                                         </tr>
                                     }

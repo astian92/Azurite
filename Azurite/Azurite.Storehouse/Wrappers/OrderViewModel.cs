@@ -19,6 +19,7 @@ namespace Azurite.Storehouse.Wrappers
         public DateTime Date { get; set; }
         public string CustomerName { get; set; }
         public virtual OrderStatusW OrderStatus { get; set; }
+        public string CurrencySign { get; set; }
 
         public string DateStr
         {
@@ -32,7 +33,8 @@ namespace Azurite.Storehouse.Wrappers
         {
             configuration.CreateMap<Order, OrderViewModel>()
                 //.ForMember(d => d.Date, conf => conf.MapFrom(s => s.Date.ToLocalTime()))
-                .ForMember(d => d.CustomerName, conf => conf.MapFrom(s => s.Customer.FirstName + " " + s.Customer.LastName));
+                .ForMember(d => d.CustomerName, conf => conf.MapFrom(s => s.Customer.FirstName + " " + s.Customer.LastName))
+                .ForMember(d => d.CurrencySign, conf => conf.MapFrom(s => s.CurrencyCours.Sign));
         }
     }
 }
