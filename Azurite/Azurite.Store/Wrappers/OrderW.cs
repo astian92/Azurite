@@ -15,6 +15,7 @@ namespace Azurite.Store.Wrappers
         public string Number { get; set; }
         public Guid CustomerId { get; set; }
         public int StatusId { get; set; }
+        public int CurrencyId { get; set; }
 
         [LocalizedDisplayName("Total", NameResourceType = typeof(ViewRes.Customer))]
         public double Total
@@ -34,6 +35,7 @@ namespace Azurite.Store.Wrappers
 
         public DateTime Date { get; set; }
 
+        public virtual CurrencyCours CurrencyCours { get; set; }
         public virtual CustomerW Customer { get; set; }
         public virtual ICollection<OrderedProductW> OrderedProducts { get; set; }
 

@@ -1,4 +1,5 @@
-﻿using Azurite.Store.Workers.Contracts;
+﻿using Azurite.Store.Common;
+using Azurite.Store.Workers.Contracts;
 using System;
 using System.Collections.Generic;
 using System.Globalization;

@@ -134,6 +134,8 @@ namespace Azurite.Store.Workers.Implementations
                 orderW.Date = DateTime.UtcNow;
                 var orderStatuses = orderStatusRep.GetAll();
                 orderW.StatusId = orderStatuses.OrderBy(x => x.Id).FirstOrDefault().Id;
+                var currencyCours = ApplicationHelpers.GetCurrentCurrency();
+                orderW.CurrencyId = currencyCours.Id;
 
                 var order = Mapper.Map<Order>(orderW);
                 try
