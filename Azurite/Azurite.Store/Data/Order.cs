@@ -28,7 +28,9 @@ namespace Azurite.Store.Data
         public string Comment { get; set; }
         public System.DateTime Date { get; set; }
         public string Notes { get; set; }
+        public int CurrencyId { get; set; }
     
+        public virtual CurrencyCours CurrencyCours { get; set; }
         public virtual Customer Customer { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrderedProduct> OrderedProducts { get; set; }
