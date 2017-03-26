@@ -79,6 +79,7 @@
           <Property Name="Comment" Type="ntext" />
           <Property Name="Date" Type="datetime" Nullable="false" />
           <Property Name="Notes" Type="text" />
+          <Property Name="CurrencyId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="OrderStatuses">
           <Key>
@@ -175,6 +176,18 @@
             </Principal>
             <Dependent Role="OrderedProducts">
               <PropertyRef Name="OrderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_CurrencyCourses">
+          <End Role="CurrencyCourses" Type="Self.CurrencyCourses" Multiplicity="1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CurrencyCourses">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="CurrencyId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -279,6 +292,10 @@
             <End Role="Orders" EntitySet="Orders" />
             <End Role="OrderedProducts" EntitySet="OrderedProducts" />
           </AssociationSet>
+          <AssociationSet Name="FK_Orders_CurrencyCourses" Association="Self.FK_Orders_CurrencyCourses">
+            <End Role="CurrencyCourses" EntitySet="CurrencyCourses" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
           <AssociationSet Name="FK_Orders_Customer" Association="Self.FK_Orders_Customer">
             <End Role="Customer" EntitySet="Customer" />
             <End Role="Orders" EntitySet="Orders" />
@@ -345,6 +362,10 @@
           </AssociationSet>
           <EntitySet Name="OrderedProducts" EntityType="MarketPlaceModel.OrderedProduct" />
           <EntitySet Name="Orders" EntityType="MarketPlaceModel.Order" />
+          <AssociationSet Name="FK_Orders_CurrencyCourses" Association="MarketPlaceModel.FK_Orders_CurrencyCourses">
+            <End Role="CurrencyCours" EntitySet="CurrencyCourses" />
+            <End Role="Order" EntitySet="Orders" />
+          </AssociationSet>
           <AssociationSet Name="FK_Orders_Customer" Association="MarketPlaceModel.FK_Orders_Customer">
             <End Role="Customer" EntitySet="Customers" />
             <End Role="Order" EntitySet="Orders" />
@@ -497,6 +518,7 @@
           <Property Name="Code" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="true" />
           <Property Name="Value" Type="Double" Nullable="false" />
           <Property Name="Sign" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Orders" Relationship="MarketPlaceModel.FK_Orders_CurrencyCourses" FromRole="CurrencyCours" ToRole="Order" />
         </EntityType>
         <EntityType Name="Product">
           <Key>
@@ -585,10 +607,24 @@
           <Property Name="Comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="CurrencyId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="CurrencyCours" Relationship="MarketPlaceModel.FK_Orders_CurrencyCourses" FromRole="Order" ToRole="CurrencyCours" />
           <NavigationProperty Name="Customer" Relationship="MarketPlaceModel.FK_Orders_Customer" FromRole="Order" ToRole="Customer" />
           <NavigationProperty Name="OrderedProducts" Relationship="MarketPlaceModel.FK_OrderedProducts_Orders" FromRole="Order" ToRole="OrderedProduct" />
           <NavigationProperty Name="OrderStatus" Relationship="MarketPlaceModel.FK_Orders_OrderStatuses" FromRole="Order" ToRole="OrderStatus" />
         </EntityType>
+        <Association Name="FK_Orders_CurrencyCourses">
+          <End Type="MarketPlaceModel.CurrencyCours" Role="CurrencyCours" Multiplicity="1" />
+          <End Type="MarketPlaceModel.Order" Role="Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CurrencyCours">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="CurrencyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Orders_Customer">
           <End Type="MarketPlaceModel.Customer" Role="Customer" Multiplicity="1" />
           <End Type="MarketPlaceModel.Order" Role="Order" Multiplicity="*" />
@@ -767,6 +803,7 @@
           <EntitySetMapping Name="Orders">
             <EntityTypeMapping TypeName="MarketPlaceModel.Order">
               <MappingFragment StoreEntitySet="Orders">
+                <ScalarProperty Name="CurrencyId" ColumnName="CurrencyId" />
                 <ScalarProperty Name="Notes" ColumnName="Notes" />
                 <ScalarProperty Name="Date" ColumnName="Date" />
                 <ScalarProperty Name="Comment" ColumnName="Comment" />

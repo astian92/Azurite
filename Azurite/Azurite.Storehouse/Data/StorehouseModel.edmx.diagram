@@ -22,7 +22,8 @@
         <AssociationConnector Association="MarketPlaceModel.FK_ProductAttributes_Product" />
         <AssociationConnector Association="MarketPlaceModel.FK_ProductImages_Product" />
         <EntityTypeShape EntityType="MarketPlaceModel.OrderedProduct" Width="1.5" PointX="11.875" PointY="0.875" />
-        <EntityTypeShape EntityType="MarketPlaceModel.Order" Width="1.5" PointX="10" PointY="5.625" />
+        <EntityTypeShape EntityType="MarketPlaceModel.Order" Width="1.5" PointX="10.625" PointY="6.5" />
+        <AssociationConnector Association="MarketPlaceModel.FK_Orders_CurrencyCourses" />
         <AssociationConnector Association="MarketPlaceModel.FK_Orders_Customer" />
         <AssociationConnector Association="MarketPlaceModel.FK_OrderedProducts_Orders" />
         <AssociationConnector Association="MarketPlaceModel.FK_Orders_OrderStatuses" />
