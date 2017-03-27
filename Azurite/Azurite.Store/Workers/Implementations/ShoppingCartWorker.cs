@@ -69,7 +69,7 @@ namespace Azurite.Store.Workers.Implementations
         public void AddProduct(Guid productId, int quantity)
         {
             var product = GetProduct(productId);
-            if(product.Quantity == 0)
+            if(product.Quantity > 0)
             {
                 var cartProducts = GetShoppingCart();
                 if(cartProducts.Any(p => p.ActualProductId == productId))
