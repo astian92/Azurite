@@ -36,8 +36,11 @@ namespace Azurite.Store.Controllers
             page--;
             var products = worker.GetProducts(categoryId);
 
-            var filteredByModel = products.Where(x => x.Model.ToLower().IndexOf(search.ToLower()) != -1
-                                    && productAttrValues == null || productAttrValues.Count() == 0 ? true : x.ProductAttributes.Any(a => productAttrValues.Contains(a.Value)));
+            var filteredByModel = products.Where(x => x.Model.ToLower().IndexOf(search.ToLower()) != -1);
+            if(productAttrValues != null && productAttrValues.Count() > 0)
+            {
+                filteredByModel = filteredByModel.Where(x => x.ProductAttributes.Any(a => productAttrValues.Contains(a.Value)));
+            }
 
             var orderedProducts = Enumerable.Empty<ProductW>();
             switch (orderBy)
