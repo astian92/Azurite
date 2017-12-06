@@ -1,0 +1,121 @@
+﻿@using Azurite.Store.Common
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewRes.SharedStrings.CompanyName - @ViewBag.Title</title>
+
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/Content/animate.min.css" rel="stylesheet" />
+    <link href="~/Content/azurite-theme.css" rel="stylesheet" />
+
+    <link rel="icon" type="image/png" sizes="32x32" href="~/Resources/Images/Favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="~/Resources/Images/Favicon/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="~/Resources/Images/Favicon/favicon-16x16.png">
+
+    @RenderSection("styles", false)
+    <script src="~/Scripts/jquery-3.1.0.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/App/Helpers/MVC.js"></script>
+    <script src="~/Scripts/App/shared.js"></script>
+</head>
+<body>
+    <header class="header-wrap">
+        <div class="header-top navbar navbar-gold">
+            <div class="container">
+                <div class="navbar-header">
+                    <a href="~/Home" class="navbar-brand">
+                        <img src="~/Resources/radianna-gold-logo-xxs-black.png" alt="Radianna Gold" class="img-responsive" />
+                    </a>
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <div id="navbar" class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="active"><a href="/Home"><i class="fa fa-home"></i> @ViewRes.SharedStrings.Home</a></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-th-list"></i> @ViewRes.SharedStrings.Collections <span class="caret"></span></a>
+                            @{ Html.RenderAction("GetCategoryMenu", "Categories", null); }
+                        </li>
+                        <li><a href="/Categories/Promotions"><i class="fa fa-tags"></i> @ViewRes.SharedStrings.Promotions</a></li>
+                        <li><a href="/Home/Contact"><i class="fa fa-map-marker"></i> @ViewRes.SharedStrings.Contact</a></li>
+                        <li><a href="/ShoppingCart"><i class="fa fa-shopping-cart"></i> @ViewRes.SharedStrings.ShoppingCart</a></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">@ViewRes.SharedStrings.LanguageAbbr (@Html.CurrentCurrency()) <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li class="dropdown-header">@ViewRes.SharedStrings.Currency</li>
+                                @{ Html.RenderAction("Currency", "Home", null); }
+                                <li role="separator" class="divider"></li>
+                                <li class="dropdown-header">@ViewRes.SharedStrings.Language</li>
+                                <li>@Html.ActionLink(ViewRes.SharedStrings.LanguageOptionBG, "Language", "Home", new { LanguageAbbr = "bg" }, null)</li>
+                                <li>@Html.ActionLink(ViewRes.SharedStrings.LanguageOptionEN, "Language", "Home", new { LanguageAbbr = "en" }, null)</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                @{ Html.RenderAction("GetCategoryMenu", "Categories", null); }
+            </div>
+        </div>
+    </header>
+    <div>
+        @RenderBody()
+    </div>
+    <footer>
+        <div class="footer-container">
+            <div class="container">
+                <div class="container">
+                    <div class="col-md-5">
+                        <h5>@ViewRes.SharedStrings.Follow</h5>
+                        @*<a href="http://twitter.com/outofthesandbox" target="_blank">
+                            <i class="fa fa-twitter-square fa-3x"></i>
+                        </a>*@
+                        <a href="https://facebook.com/radiannagold/" target="_blank">
+                            <i class="fa fa-facebook-square fa-3x"></i>
+                        </a>
+                        <a href="mailto:radiannagold@abv.bg" target="">
+                            <i class="fa fa-envelope-square fa-3x"></i>
+                        </a>
+                    </div>
+                    <div class="col-md-7">
+                        <ul class="footer_menu">
+                            <li><a href="/Home">@ViewRes.SharedStrings.Home</a></li>
+                            <li><a href="/Categories/Promotions">@ViewRes.SharedStrings.Promotions</a></li>
+                            <li><a href="/Home/Contact">@ViewRes.SharedStrings.Contact</a></li>
+                            <li><a href="/ShoppingCart">@ViewRes.SharedStrings.ShoppingCart</a></li>
+                        </ul>
+                        <p>@ViewRes.SharedStrings.SubscribeTxt</p>
+                        <div class="newsletter">
+                            <p class="message"></p>
+                            <form method="post" action="/contact#contact_form" id="contact_form" class="contact-form" accept-charset="UTF-8">
+                                <div class="input-group">
+                                    <input type="text" class="form-control form-control-lg" placeholder="@ViewRes.SharedStrings.SubscribePlaceholder" aria-describedby="subscribe">
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-secondary btn-gold" type="button">@ViewRes.SharedStrings.Subscribe</button>
+                                    </span>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            <div class="container">
+                <p class="pull-left">
+                    © @DateTime.Now.Year Radianna Gold. Designed and Developed By <a href="http://gemsolutions.eu" target="_blank">Gem Solutions</a>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    @RenderSection("scripts", false)
+</body>
+</html>

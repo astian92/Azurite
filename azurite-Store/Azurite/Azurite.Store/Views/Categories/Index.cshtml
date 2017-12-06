@@ -1,0 +1,74 @@
+﻿@model Azurite.Store.Wrappers.CategoryW
+
+@{
+    ViewBag.Title = "Collections";
+}
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="page-header">
+                <h3>@Model.Name</h3>
+                <input id="categoryId" name="categoryId" value="@Model.Id" type="hidden" />
+                <span class="devider"></span>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3 col-sm-4 col-xs-12 side-bar push-bottom-md">
+            <div class="panel-gold">
+                <div class="panel-heading">
+                    @ViewRes.CategoriesIndex.Collections
+
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#subCategoriesContainer" aria-expanded="false" aria-controls="navbar">
+                        <i class="fa fa-chevron-down"></i>
+                        <i class="fa fa-chevron-up"></i>
+                    </button>
+                </div>
+                <div id="subCategoriesContainer" class="side-nav navbar-collapse collapse">
+                    
+                </div>
+            </div>
+            <div id="categoriesAttrContainer">
+
+            </div>
+        </div>
+        <div class="col-md-9 col-sm-8 col-xs-12">
+            <div class="row">
+                <div class="filterArea">
+                    <div class="col-xs-4">
+                        <div class="dropdown">
+                            <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
+                                <span id="selected-order">Цена възх.</span>
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a href="#" class="orderBy" data-order="1">Цена възх.</a></li>
+                                <li><a href="#" class="orderBy" data-order="2">Цена низх.</a></li>
+                                <li><a href="#" class="orderBy" data-order="3">Отстъпка.</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-xs-8">
+                        <div class="input-group">
+                            <input id="search" type="text" class="form-control form-control-lg" placeholder="Search for model">
+                            <span class="input-group-btn">
+                                <button id="search-products" class="btn btn-gold" type="button"><i class="fa fa-search"></i></button>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div id="productsContainer">
+                    <div class="loader"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script src="~/Scripts/App/Categories/category_products.js"></script>
+
+}

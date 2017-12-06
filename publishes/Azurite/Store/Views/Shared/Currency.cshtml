@@ -1,0 +1,7 @@
+﻿@model IEnumerable<Azurite.Store.Wrappers.CurrencyCoursW>
+
+
+@foreach (var currency in Model)
+{
+    <li>@Html.ActionLink(currency.Code, "ChangeCurrency", "Home", new { currencyId = currency.Id }, null)</li>
+}

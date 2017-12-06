@@ -1,0 +1,131 @@
+﻿@model Azurite.Store.Wrappers.ProductW
+@using Azurite.Store.Common
+@using Azurite.Store.Wrappers
+
+@{
+    ViewBag.Title = "Details";
+}
+
+@{ 
+    var cdnUri = ApplicationHelpers.GetAppSetting("cdnUri");
+    var categoryAttrs = ViewBag.categoryAttrs as IQueryable<CategoryAttributeW>;
+}
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="page-header">
+                <!-- #region Breadcrumb -->
+                @*@Html.Raw(Html.BuildBreadcrumbNavigation())*@
+                <!-- #endregion -->
+            </div>
+        </div>
+    </div>
+    <div class="product-info">
+        <input id="categoryId" type="hidden" name="categoryId" value="@Model.CategoryId" />
+        <div class="col-md-7 images-block">
+            <div class="row">
+                <div class="col-xs-3 col-sm-2">
+                    <ul class="list-unstyled list-inline product-images">
+                        @foreach (var image in Model.ProductImages)
+                        {
+                            <li>
+                                <img id="img_@image.Id" src="@(cdnUri + image.ImagePath)" alt="" class="img-thumbnail" />
+                            </li>
+                        }
+                    </ul>
+                </div>
+                <div class="col-xs-9 col-sm-10">
+                    <img src="@(cdnUri + Model.ProductImages?.FirstOrDefault()?.ImagePath)" data-zoom-image="@(cdnUri + Model.ProductImages?.FirstOrDefault()?.ImagePath)" alt="@Model.Name" class="img-responsive img-preview" />
+                </div>
+            </div>
+        </div>
+        <div class="col-md-5 product-details">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="col-xs-12">
+                        <h2 class="product-name">@Model.Name</h2>
+                        <div class="price">
+                            @Html.Price(Model.Price, Model.Discount)
+                        </div>
+                        <p>@Model.Description</p>
+                        <ul class="list-unstyled">
+                            <li>
+                                <span>@ViewRes.ProductDetails.Model:</span>
+                                @Model.Model
+                            </li>
+                            <li>
+                                <span>@ViewRes.ProductDetails.Availability:</span>
+                                @*@if(Model.Quantity > 0)
+                                {*@
+                                    <strong class="label label-success">@ViewRes.ProductDetails.InStock</strong>
+                                @*}
+                                else
+                                {
+                                    <strong class="label label-default">@ViewRes.ProductDetails.OutOfStock</strong>
+                                }*@
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="cart-button">
+                        <div class="col-xs-12">
+                            <label for="quantity">@ViewRes.ProductDetails.Qty</label>
+                        </div>
+                        <div class="col-sm-3">
+                            <input id="qty_@Model.Id" type="number" min="1" class="form-control qty" value="1" />
+                        </div>
+                        <div class="col-sm-9">
+                            <button type="button" class="btn btn-cart" productId="@Model.Id">
+                                @ViewRes.SharedStrings.AddBtn
+                                <i class="fa fa-shopping-cart"></i>
+                            </button>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="bg-gray">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 push-bottom-lg">
+                <h4 class="space-top push-bottom-md">@ViewRes.ProductDetails.SpecTitle</h4>
+                <hr>
+                    <dl class="dl-horizontal">
+                        @foreach (var item in Model.ProductAttributes)
+                        {
+                            <dt>@(categoryAttrs?.FirstOrDefault(x => x.Id == item.AttributeId)?.AttributeName ?? "")</dt>
+                            <dd>@item.Value</dd>
+                        }
+                    </dl>
+                <hr>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="clearfix"></div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="page-header">
+                <h3>@ViewRes.ProductDetails.SubTitle</h3>
+                <span class="devider"></span>
+            </div>
+        </div>
+        <div id="related-products" class="col-xs-12">
+
+        </div>
+    </div>
+</div>
+
+<script src="~/Scripts/jquery.elevateZoom-3.0.8.min.js"></script>
+<script src="~/Scripts/App/Products/products_shared.js"></script>
+<script src="~/Scripts/App/Products/products.js"></script>
+
+
+    

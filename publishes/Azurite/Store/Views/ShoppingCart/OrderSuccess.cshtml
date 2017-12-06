@@ -1,0 +1,50 @@
+﻿
+@{
+    ViewBag.Title = "OrderSuccess";
+}
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="page-header">
+                <h3>@ViewRes.SCOrderSuccess.Title</h3>
+                <span class="devider"></span>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="panel">
+            <div class="panel-body">
+                <div class="col-md-offset-2 col-md-8">
+                    <p class="text-center push-bottom-lg">
+                        @ViewRes.SCOrderSuccess.Note
+                    </p>
+                    <div class="col-sm-offset-3 col-sm-6 push-bottom-lg">
+                        <a href="/Categories/Promotions" class="btn btn-default btn-block">@ViewRes.SharedStrings.ContinueShopBtn</a>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <div id="promotionsContainer">
+
+            </div>
+        </div>
+        <script>
+        $(document).ready(function () {
+            $('#promotionsContainer').html('');
+            $.ajax({
+                url: MVC.Products.GetPromoProductsFull,
+                dataType: 'html',
+                success: function (data) {
+                    $('#promotionsContainer').html(data);
+                }
+            });
+        });
+        </script>
+    </div>
+</div>

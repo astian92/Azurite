@@ -1,0 +1,35 @@
+﻿@model IEnumerable<Azurite.Store.Wrappers.ProductW>
+@using Azurite.Store.Common
+
+@{
+    ViewBag.Title = "Related Products";
+}
+
+@{ 
+    var cdnUri = ApplicationHelpers.GetAppSetting("cdnUri");
+}
+<div class="products-list">
+    @foreach (var item in Model)
+    {
+        <div class="col-xs-6 col-md-3 col-sm-6">
+            <div class="product-col">
+                <div class="image">
+                    <div class="cover"></div>
+                    <a href="/Products/Details/@item.Id">
+                        <img src="@(cdnUri + item.ProductImages?.FirstOrDefault()?.ImagePath)" alt="@item.Name" />
+                    </a>
+                </div>
+                <div class="caption">
+                    <h4>
+                        <a href="/Products/Details/@item.Id">
+                            @item.Name
+                        </a>
+                    </h4>
+                    <div class="price">
+                        @Html.Price(item.Price, item.Discount)
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>

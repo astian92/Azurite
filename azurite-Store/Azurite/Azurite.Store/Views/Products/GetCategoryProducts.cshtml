@@ -1,0 +1,89 @@
+﻿@model IPagedList<Azurite.Store.Wrappers.ProductW>
+
+@using PagedList.Mvc;
+@using PagedList;
+@using Azurite.Store.Common;
+
+@{ 
+    var cdnUri = ApplicationHelpers.GetAppSetting("cdnUri");
+}
+<div class="products-list">
+    @foreach (var item in Model)
+    {
+        <div class="col-xs-6 col-sm-4 col-md-3 animated fadeIn">
+            <div class="product-col">
+                <div class="image">
+                    <div class="cover"></div>
+                    <a href="/Products/Details/@item.Id">
+                        <img src="@(cdnUri + item.ProductImages?.FirstOrDefault()?.ImagePath)" alt="@item.Name" />
+                    </a>
+                </div>
+                <div class="caption">
+                    <h4>
+                        <a href="/Products/Details/@item.Id">
+                            @item.Name
+                        </a>
+                    </h4>
+                    <div class="price">
+                        @Html.Price(item.Price, item.Discount)
+                    </div>
+                    <div class="cart-button">
+                        <input id="qty_@item.Id" class="qty" type="hidden" value="1" />
+                        <button type="button" class="btn btn-cart" productId="@item.Id">
+                            @ViewRes.SharedStrings.AddBtn
+                            <i class="fa fa-shopping-cart"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+<div class="clearfix"></div>
+<div class="col-xs-12">
+    <div class="pull-right">
+        @Html.PagedListPager(Model, page => Url.Action("GetCategoryProducts", new { @page = page }), PagedListRenderOptions.ClassicPlusFirstAndLast)
+    </div>
+</div>
+
+<script src="~/Scripts/App/Products/products_shared.js"></script>
+<script>
+    $(document).ready(function () {
+        $(".pagination li a").click(function (e) {
+            e.preventDefault();
+            var href = $(this).attr('href');
+
+            if (href != undefined && href != '') {
+
+                var categoryId = '@ViewBag.categoryId';
+
+                var productAttrValues = [];
+                var productAttrValuesRaw = '@Html.Raw(ViewBag.productAttrValues)';
+                if (productAttrValuesRaw != undefined && productAttrValuesRaw != "") {
+                    productAttrValues = JSON.parse(productAttrValuesRaw);
+                }
+
+                var search = '@ViewBag.search';
+                var orderBy = '@ViewBag.orderBy';
+                var page = getUrlParameter(href, 'page');
+
+                $('#productsContainer').html(loader);
+                $.ajax({
+                    type: 'POST',
+                    url: MVC.Products.GetCategoryProductsFull,
+                    dataType: 'html',
+                    data: {
+                        categoryId: categoryId,
+                        productAttrValues: productAttrValues,
+                        search: search,
+                        orderBy: orderBy,
+                        page: page
+                    },
+                    success: function (data) {
+                        $('#productsContainer').html(data);
+                    }
+                });
+            }
+        });
+    });
+</script>
