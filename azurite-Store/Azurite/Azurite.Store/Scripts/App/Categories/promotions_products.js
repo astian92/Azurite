@@ -41,8 +41,18 @@ function loadSubCategories() {
 
 function loadProducts(value, orderBy) {
     //$('#productsContainer').html('');
+    var page = window.location.search.slice(1);
+    var pageNumber;
+
+    if (page) {
+        page = page.split('#')[0];
+        var arr = page.split('page');
+        pageNumber = arr[1].split('=')[1];
+    }
+
     $.ajax({
-        url: MVC.Products.GetAllPromoProductsFull + '?search=' + value + '&orderBy=' + orderBy,
+        type: 'GET',
+        url: MVC.Products.GetAllPromoProductsFull + '?' + page,
         dataType: 'html',
         success: function (data) {
             $('#productsContainer').html(data);
