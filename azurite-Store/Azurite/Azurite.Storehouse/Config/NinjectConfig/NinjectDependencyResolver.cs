@@ -1,4 +1,5 @@
-﻿using Azurite.Infrastructure.Data.Contracts;
+﻿using Azurite.Infrastructure.Config;
+using Azurite.Infrastructure.Data.Contracts;
 using Azurite.Storehouse.Config.Streamline;
 using Ninject;
 using System;
@@ -32,6 +33,7 @@ namespace Azurite.Storehouse.Config.NinjectConfig
         private void AddBindings()
         {
             ServiceRegistrator.RegisterAllServices(_kernel);
+            AutoMapperConfig.RegisterMappings();
         }
     }
 }

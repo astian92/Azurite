@@ -27,7 +27,6 @@
         <AssociationConnector Association="MarketPlaceModel.FK_Orders_Customer" />
         <AssociationConnector Association="MarketPlaceModel.FK_OrderedProducts_Orders" />
         <AssociationConnector Association="MarketPlaceModel.FK_Orders_OrderStatuses" />
-        <EntityTypeShape EntityType="MarketPlaceModel.ELMAH_Error" Width="1.5" PointX="7.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
