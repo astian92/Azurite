@@ -29,13 +29,16 @@
                     <div class="price">
                         @Html.Price(item.Price, item.Discount)
                     </div>
-                    <div class="cart-button">
-                        <input id="qty_@item.Id" class="qty" type="hidden" value="1" />
-                        <button type="button" class="btn btn-cart" productId="@item.Id">
-                            @ViewRes.SharedStrings.AddBtn
-                            <i class="fa fa-shopping-cart"></i>
-                        </button>
-                    </div>
+                    @if (!Constants.CART_HIDDEN)
+                    {
+                        <div class="cart-button">
+                            <input id="qty_@item.Id" class="qty" type="hidden" value="1" />
+                            <button type="button" class="btn btn-cart" productId="@item.Id">
+                                @ViewRes.SharedStrings.AddBtn
+                                <i class="fa fa-shopping-cart"></i>
+                            </button>
+                        </div>
+                    }
                 </div>
             </div>
         </div>

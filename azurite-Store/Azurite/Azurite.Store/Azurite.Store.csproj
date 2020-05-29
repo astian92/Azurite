@@ -169,6 +169,7 @@
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Common\ApplicationHelpers.cs" />
+    <Compile Include="Common\Constants.cs" />
     <Compile Include="Common\EmailServer.cs" />
     <Compile Include="Common\EmailServerConfig.cs" />
     <Compile Include="Common\LocalizedDisplayNameAttribute.cs" />

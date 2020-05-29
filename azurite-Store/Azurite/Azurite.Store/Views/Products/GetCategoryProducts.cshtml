@@ -27,13 +27,16 @@
                     <div class="price">
                         @Html.Price(item.Price, item.Discount)
                     </div>
-                    <div class="cart-button">
-                        <input id="qty_@item.Id" class="qty" type="hidden" value="1" />
-                        <button type="button" class="btn btn-cart" productId="@item.Id">
-                            @ViewRes.SharedStrings.AddBtn
-                            <i class="fa fa-shopping-cart"></i>
-                        </button>
-                    </div>
+                    @if (!Constants.CART_HIDDEN)
+                    {
+                        <div class="cart-button">
+                            <input id="qty_@item.Id" class="qty" type="hidden" value="1" />
+                            <button type="button" class="btn btn-cart" productId="@item.Id">
+                                @ViewRes.SharedStrings.AddBtn
+                                <i class="fa fa-shopping-cart"></i>
+                            </button>
+                        </div>
+                    }
                 </div>
             </div>
         </div>
@@ -42,13 +45,13 @@
 <div class="clearfix"></div>
 <div class="col-xs-12">
     <div class="pull-right">
-        @Html.PagedListPager(Model, page => Url.Action("GetCategoryProducts", new { @page = page }), PagedListRenderOptions.ClassicPlusFirstAndLast)
+        @Html.PagedListPager(Model, page => Url.Action("Index/" + ViewBag.categoryId, "Categories", new { @page = page }), PagedListRenderOptions.ClassicPlusFirstAndLast)
     </div>
 </div>
 
 <script src="~/Scripts/App/Products/products_shared.js"></script>
 <script>
-    $(document).ready(function () {
+    @*$(document).ready(function () {
         $(".pagination li a").click(function (e) {
             e.preventDefault();
             var href = $(this).attr('href');
@@ -85,5 +88,5 @@
                 });
             }
         });
-    });
+    });*@
 </script>

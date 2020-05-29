@@ -67,6 +67,16 @@ function loadCategoryAttr(categoryId) {
 
 function loadProducts(categoryId, productAttrValues, value, orderBy) {
     $('#productsContainer').html(loader);
+    var page = window.location.search.slice(1);
+    var pageNumber;
+
+    if (page) {
+        page = page.split('#')[0];
+        var arr = page.split('&');
+        pageNumber = arr[0].split('=')[1];
+        alert(pageNumber);
+    }
+
     $.ajax({
         type: 'POST',
         url: MVC.Products.GetCategoryProductsFull,
@@ -75,7 +85,8 @@ function loadProducts(categoryId, productAttrValues, value, orderBy) {
             categoryId: categoryId,
             productAttrValues: productAttrValues,
             search: value,
-            orderBy: orderBy
+            orderBy: orderBy,
+            page: pageNumber
         },
         success: function (data) {
             $('#productsContainer').html(data);
