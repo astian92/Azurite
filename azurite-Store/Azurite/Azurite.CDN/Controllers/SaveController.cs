@@ -1,14 +1,13 @@
-﻿using Azurite.CDN.Models;
-using Azurite.CDN.Models.Http;
-using Azurite.CDN.Services.Contracts;
-using Azurite.CDN.Workers.Contracts;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
+using Azurite.CDN.Models;
+using Azurite.CDN.Services.Contracts;
+using Azurite.CDN.Workers.Contracts;
+using log4net;
 
 namespace Azurite.CDN.Controllers
 {
@@ -17,21 +16,33 @@ namespace Azurite.CDN.Controllers
     {
         private readonly ISaveWorker worker;
         private readonly IKeyValidatorService keyValidator;
+        private readonly ILog logger;
 
-        public SaveController(ISaveWorker worker, IKeyValidatorService keyValidator)
+        public SaveController(ISaveWorker worker, IKeyValidatorService keyValidator, ILog logger)
         {
             this.worker = worker;
             this.keyValidator = keyValidator;
+            this.logger = logger;
         }
 
         [HttpPost]
         public async Task<HttpResponseMessage> Post(ProductFiles data)
         {
             keyValidator.Validate(data.Key);
+            logger.Info($"Entered saving files. Files to save: {data.Files.Count()}");
 
-            worker.SaveFiles(data.Files);
-            HttpResponseMessage result = new HttpResponseMessage(HttpStatusCode.OK);
-            return result;
+            try
+            {
+                worker.SaveFiles(data.Files);
+                HttpResponseMessage result = new HttpResponseMessage(HttpStatusCode.OK);
+                return result;
+            }
+            catch (Exception exc)
+            {
+                logger.Error("There was a problem saving file.", exc);
+                HttpResponseMessage result = new HttpResponseMessage(HttpStatusCode.InternalServerError);
+                return result;
+            }
         }
     }
 }

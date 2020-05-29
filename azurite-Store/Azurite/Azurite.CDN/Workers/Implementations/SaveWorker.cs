@@ -1,11 +1,8 @@
-﻿using Azurite.CDN.Workers.Contracts;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using Azurite.CDN.Models.Http;
-using System.Web.Hosting;
+﻿using System.Collections.Generic;
 using System.IO;
+using System.Web.Hosting;
+using Azurite.CDN.Models.Http;
+using Azurite.CDN.Workers.Contracts;
 
 namespace Azurite.CDN.Workers.Implementations
 {

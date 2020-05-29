@@ -5,12 +5,10 @@ namespace Azurite.CDN.App_Start
 {
     using System;
     using System.Web;
-
+    using Config.Streamline;
     using Microsoft.Web.Infrastructure.DynamicModuleHelper;
-
     using Ninject;
     using Ninject.Web.Common;
-    using Config.Streamline;
 
     public static class NinjectWebCommon 
     {
@@ -41,6 +39,7 @@ namespace Azurite.CDN.App_Start
         private static IKernel CreateKernel()
         {
             var kernel = new StandardKernel();
+
             try
             {
                 kernel.Bind<Func<IKernel>>().ToMethod(ctx => () => new Bootstrapper().Kernel);

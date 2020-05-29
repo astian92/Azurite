@@ -1,14 +1,10 @@
-﻿using Azurite.Storehouse.Services.Contracts;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Threading.Tasks;
+﻿using System;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using Newtonsoft.Json;
-using System.Net;
 using System.Text;
+using System.Threading.Tasks;
+using Azurite.Storehouse.Services.Contracts;
+using Newtonsoft.Json;
 
 namespace Azurite.Storehouse.Services.Implementations
 {
@@ -84,22 +80,22 @@ namespace Azurite.Storehouse.Services.Implementations
             }
         }
 
-        //Converts the object that is send as data in the http request to a FormUrlEncoded content
-        //so it can be easily send with the request
-        private FormUrlEncodedContent ConvertToStringForm(object obj)
-        {
-            var type = obj.GetType();
-            var props = type.GetProperties();
+        ////Converts the object that is send as data in the http request to a FormUrlEncoded content
+        ////so it can be easily send with the request
+        //private FormUrlEncodedContent ConvertToStringForm(object obj)
+        //{
+        //    var type = obj.GetType();
+        //    var props = type.GetProperties();
 
-            var list = new List<KeyValuePair<string, string>>();
+        //    var list = new List<KeyValuePair<string, string>>();
 
-            foreach (var prop in props)
-            {
-                var pair = new KeyValuePair<string, string>(prop.Name, prop.GetValue(obj).ToString());
-                list.Add(pair);
-            }
+        //    foreach (var prop in props)
+        //    {
+        //        var pair = new KeyValuePair<string, string>(prop.Name, prop.GetValue(obj).ToString());
+        //        list.Add(pair);
+        //    }
 
-            return new FormUrlEncodedContent(list);
-        }
+        //    return new FormUrlEncodedContent(list);
+        //}
     }
 }
