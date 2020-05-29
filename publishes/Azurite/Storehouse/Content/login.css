@@ -1,0 +1,25 @@
+﻿
+/*.login-box { 
+    max-width: 310px;
+    margin: 0 auto;
+    padding-top: 50px;
+}
+
+.header-name {
+    margin-bottom: 0px;
+    font-size: 90px;
+    color: #bebebe;
+}
+
+.header-par {
+    padding-top: 20px;
+    padding-bottom: 25px;
+}*/
+
+h1.title-message {
+    line-height: 25px;
+}
+
+.login-btn {
+    width: calc(100% - 76px);
+}

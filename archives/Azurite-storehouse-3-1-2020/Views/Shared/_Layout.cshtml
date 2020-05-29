@@ -1,0 +1,55 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title Admin</title>
+
+    @RenderSection("styles_before", required: false)
+
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/Content/gentelella/animate.min.css" rel="stylesheet" />
+    <link href="~/Content/gentelella/custom.min.css" rel="stylesheet" />
+    <link href="~/Content/shared.css" rel="stylesheet" />
+    
+    @RenderSection("styles", required: false)
+
+    <link href="~/Content/gentelella/gentelella-overrides.css" rel="stylesheet" /> @*so it overrides even scripts that are included in views!*@
+    <script src="~/Scripts/jquery.min.js"></script>
+</head>
+<body class="nav-md">
+
+    <div class="container body">
+
+        <div class="main_container">
+
+            @*Navigation:*@
+            @Html.Partial("_Navigation")
+
+            @*TopBar:*@
+            @Html.Partial("_TopNavbar")
+
+            <div class="right_col" role="main">
+                @RenderBody()
+            </div>
+        </div>
+
+    </div>
+
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/gentelella/custom.js"></script>
+    <script src="~/Scripts/App/MVC.js"></script>
+    <script src="~/Scripts/App/Helpers/miscellaneous.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            var navigation = $('.left_col');
+            var navHeight = navigation.height();
+            $('.right_col').css("min-height", navHeight);
+        });
+    </script>
+
+    @RenderSection("scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,346 @@
+﻿@model Azurite.Storehouse.Models.ViewModels.DashboardViewModel
+
+<style>
+    .jqstooltip {
+        width: auto !important;
+        height: auto !important;
+    }
+</style>
+
+<div class="row top_tiles" style="margin: 10px 0;">
+    <div class="col-md-3 col-sm-3 col-xs-6 tile">
+        <span>Годишни приходи</span>
+        <h2><span id="year_income"></span> лв</h2>
+        <span class="year_income" style="height: 160px;">
+            <canvas width="200" height="60" style="display: inline-block; vertical-align: top; width: 94px; height: 30px;"></canvas>
+        </span>
+    </div>
+    <div class="col-md-3 col-sm-3 col-xs-6 tile">
+        <span>Приходи последните 30 дни</span>
+        <h2><span id="month_income"></span> лв</h2>
+        <span class="month_income" style="height: 160px;">
+            <canvas width="200" height="60" style="display: inline-block; vertical-align: top; width: 94px; height: 30px;"></canvas>
+        </span>
+    </div>
+    <div class="col-md-3 col-sm-3 col-xs-6 tile">
+        <span>Седмични приходи</span>
+        <h2><span id="week_income"></span> лв</h2>
+        <span class="week_income" style="height: 160px;">
+            <canvas width="200" height="60" style="display: inline-block; vertical-align: top; width: 94px; height: 30px;"></canvas>
+        </span>
+    </div>
+    <div class="col-md-3 col-sm-3 col-xs-6 tile">
+        <span>Продадени продукти (30 дни)</span>
+        <h2> <span id="sold_items"></span></h2>
+        <span class="sold_items" style="height: 160px;">
+            <canvas width="200" height="60" style="display: inline-block; vertical-align: top; width: 94px; height: 30px;"></canvas>
+        </span>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-4 col-sm-4 col-xs-12">
+        <div class="x_panel tile fixed_height_320">
+            <div class="x_title">
+                <h2>Подадени поръчки</h2>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content fixed_height_content">
+                <table class="table table-striped">
+                    @foreach (var order in Model.IssuedOrders)
+                    {
+                        <tr>
+                            <td>
+                                <a href="@(Url.Action<OrdersController>(c => c.Details(order.Id)))">@order.Number</a>
+                            </td>
+                            <td>@order.Total</td>
+                            <td>@order.DateStr</td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 col-sm-4 col-xs-12">
+        <div class="x_panel tile fixed_height_320">
+            <div class="x_title">
+                <h2>Поръчки в обработка</h2>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content fixed_height_content">
+                <table class="table table-striped">
+                    @foreach (var order in Model.InProgressOrders)
+                    {
+                        <tr>
+                            <td>
+                                <a href="@(Url.Action<OrdersController>(c => c.Details(order.Id)))">@order.Number</a>
+                            </td>
+                            <td>@order.Total</td>
+                            <td>@order.DateStr</td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 col-sm-4 col-xs-12">
+        <div class="x_panel tile fixed_height_320">
+            <div class="x_title">
+                <h2>Готови за архивиране</h2>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content fixed_height_content">
+                <table class="table table-striped">
+                    @foreach (var order in Model.CompletedOrders)
+                    {
+                        <tr>
+                            <td>
+                                <a href="@(Url.Action<OrdersController>(c => c.Details(order.Id)))">@order.Number</a>
+                            </td>
+                            <td>@order.Total</td>
+                            <td>@order.DateStr</td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row tile_count">
+    <div class="animated flipInY col-md-2 col-sm-4 col-xs-4 tile_stats_count">
+        <div class="left"></div>
+        <div class="right">
+            <span class="count_top"><i class="fa fa-clipboard"></i> Всичко поръчки</span>
+            <div class="count">@Model.OrdersCounts.All</div>
+        </div>
+    </div>
+    <div class="animated flipInY col-md-2 col-sm-4 col-xs-4 tile_stats_count">
+        <div class="left"></div>
+        <div class="right">
+            <span class="count_top">Подадени</span>
+            <div class="count">@Model.OrdersCounts.Issued</div>
+        </div>
+    </div>
+    <div class="animated flipInY col-md-2 col-sm-4 col-xs-4 tile_stats_count">
+        <div class="left"></div>
+        <div class="right">
+            <span class="count_top">В обработка</span>
+            <div class="count">@Model.OrdersCounts.InProcessing</div>
+        </div>
+    </div>
+    <div class="animated flipInY col-md-2 col-sm-4 col-xs-4 tile_stats_count">
+        <div class="left"></div>
+        <div class="right">
+            <span class="count_top">Обработени</span>
+            <div class="count green">@Model.OrdersCounts.Completed</div>
+        </div>
+    </div>
+    <div class="animated flipInY col-md-2 col-sm-4 col-xs-4 tile_stats_count">
+        <div class="left"></div>
+        <div class="right">
+            <span class="count_top">Архивирани</span>
+            <div class="count">@Model.OrdersCounts.Archived</div>
+        </div>
+    </div>
+    <div class="animated flipInY col-md-2 col-sm-4 col-xs-4 tile_stats_count">
+        <div class="left"></div>
+        <div class="right">
+            <span class="count_top">Отказани</span>
+            <div class="count red">@Model.OrdersCounts.Cancelled</div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-4 col-sm-4 col-xs-12">
+        <div class="x_panel tile fixed_height_320">
+            <div class="x_title">
+                <h2>Намаляващи количества</h2>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content fixed_height_content">
+                <table class="table table-striped">
+                    @foreach (var product in Model.DecreasingQuantityProducts)
+                    {
+                        <tr>
+                            <td>
+                                <a href="@(Url.Action<ProductsController>(c => c.Edit(product.Id)))">@product.Model</a>
+                            </td>
+                            <td>@product.Name</td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 col-sm-4 col-xs-12">
+        <div class="x_panel tile fixed_height_320">
+            <div class="x_title">
+                <h2>Изчерпани</h2>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content fixed_height_content">
+                <table class="table table-striped">
+                    @foreach (var product in Model.ZeroQuantityProducts)
+                    {
+                        <tr>
+                            <td>
+                                <a href="@(Url.Action<ProductsController>(c => c.Edit(product.Id)))">@product.Model</a>
+                            </td>
+                            <td>@product.Name</td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 col-sm-4 col-xs-12">
+        <div class="x_panel tile fixed_height_320">
+            <div class="x_title">
+                <h2>Неактивни</h2>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content fixed_height_content">
+                <table class="table table-striped">
+                    @foreach (var product in Model.InactiveProducts)
+                    {
+                        <tr>
+                            <td>
+                                <a href="@(Url.Action<ProductsController>(c => c.Edit(product.Id)))">@product.Model</a>
+                            </td>
+                            <td>@product.Name</td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section scripts {
+    <script src="~/Scripts/sparkline/jquery.sparkline.min.js"></script>
+
+    <script>
+        $('document').ready(function () {
+
+            var yearPromise = Ajax.get(MVC.Dashboard.YearIncomeFull);
+            yearPromise.done(function (model) {
+                $('#year_income').text(model.Number);
+
+                $(".year_income").sparkline(model.Report, {
+                    type: 'bar',
+                    height: '40',
+                    barWidth: 15,
+                    //colorMap: {
+                    //    '7': '#a1a1a1'
+                    //},
+                    barSpacing: 2,
+                    barColor: '#26B99A',
+                    tooltipFormat: '{{offset:offset}} {{value}}',
+                    tooltipValueLookups: {
+                        'offset': {
+                            0: 'Jan',
+                            1: 'Feb',
+                            2: 'Mar',
+                            3: 'Apr',
+                            4: 'May',
+                            5: 'Jun',
+                            6: 'Jul',
+                            7: 'Aug',
+                            8: 'Sep',
+                            9: 'Oct',
+                            10: 'Nov',
+                            11: 'Dec'
+                        }
+                    },
+                });
+            });
+
+            var monthPromise = Ajax.get(MVC.Dashboard.MonthIncomeFull);
+            monthPromise.done(function (model) {
+                $('#month_income').text(model.Number);
+
+                var offsets = {};
+
+                for (var i = 0; i < 30; i++) {
+                    var date = Date();
+                    var propName = (30 - i) - 1;
+                    offsets[propName] = addDays(-i);
+                }
+
+                $(".month_income").sparkline(model.Report, {
+                    type: 'bar',
+                    height: '40',
+                    barWidth: 5,
+                    barSpacing: 2,
+                    barColor: '#26B99A',
+                    tooltipFormat: '{{offset:offset}} {{value}}',
+                    tooltipValueLookups: {
+                        'offset': offsets
+                    }
+                });
+            });
+
+            var weekPromise = Ajax.get(MVC.Dashboard.WeeklyIncomeFull);
+            weekPromise.done(function (model) {
+                $('#week_income').text(model.Number);
+
+                $(".week_income").sparkline(model.Report, {
+                    type: 'bar',
+                    height: '40',
+                    barWidth: 27,
+                    barSpacing: 2,
+                    barColor: '#26B99A',
+                    tooltipFormat: '{{offset:offset}} {{value}}',
+                    tooltipValueLookups: {
+                        'offset': {
+                            0: 'Mon',
+                            1: 'Tue',
+                            2: 'Wed',
+                            3: 'Thu',
+                            4: 'Fri',
+                            5: 'Sat',
+                            6: 'Sun',
+                        }
+                    },
+                });
+            });
+
+            var soldPromise = Ajax.get(MVC.Dashboard.SoldItemsFull);
+            soldPromise.done(function (model) {
+                $('#sold_items').text(model.Number);
+
+                var offsets = {};
+
+                for (var i = 0; i < 30; i++) {
+                    var date = Date();
+                    var propName = (30 - i) - 1;
+                    offsets[propName] = addDays(-i);
+                }
+
+                $(".sold_items").sparkline(model.Report, {
+                    type: 'bar',
+                    height: '40',
+                    barWidth: 5,
+                    barSpacing: 2,
+                    barColor: '#26B99A',
+                    tooltipFormat: '{{offset:offset}} {{value}}',
+                    tooltipValueLookups: {
+                        'offset': offsets
+                    }
+                });
+            });
+            
+        });
+
+        function addDays(n){
+            var t = new Date();
+            t.setDate(t.getDate() + n); 
+            var date = ((t.getDate() < 10) ? '0' + t.getDate() : t.getDate()) + "/" + (((t.getMonth() + 1) < 10) ? '0' + (t.getMonth() + 1) : (t.getMonth() + 1)) + "/" + t.getFullYear();
+
+            return date.toString();
+        }
+    </script>
+}
