@@ -1,20 +1,18 @@
-﻿using Azurite.Storehouse.Models.ViewModels;
-using Azurite.Storehouse.Workers.Contracts;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using System.Web.Mvc.Expressions;
 using System.Web.Security;
+using Azurite.Storehouse.Models.ViewModels;
+using Azurite.Storehouse.Workers.Contracts;
+using log4net;
 
 namespace Azurite.Storehouse.Controllers
 {
-    public class AccountController : Controller
+    public class AccountController : BaseController
     {
         private readonly IAccountWorker worker;
 
-        public AccountController(IAccountWorker worker)
+        public AccountController(IAccountWorker worker, ILog logger)
+            : base (logger)
         {
             this.worker = worker;
         }

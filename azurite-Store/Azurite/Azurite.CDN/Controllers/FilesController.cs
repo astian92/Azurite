@@ -6,11 +6,13 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Mvc;
 using Azurite.CDN.Attributes;
+using Azurite.CDN.Filters;
 using Azurite.CDN.Workers.Contracts;
 
 namespace Azurite.CDN.Controllers
 {
     [SessionState(System.Web.SessionState.SessionStateBehavior.ReadOnly)]
+    [GlobalExceptionFilter]
     public class FilesController : ApiController
     {
         private readonly IFilesWorker worker;

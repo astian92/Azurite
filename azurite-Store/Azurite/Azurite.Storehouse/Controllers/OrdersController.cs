@@ -1,22 +1,23 @@
-﻿using Azurite.Storehouse.Models;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web.Mvc;
+using System.Web.Mvc.Expressions;
+using Azurite.Storehouse.Models;
 using Azurite.Storehouse.Models.Helpers;
 using Azurite.Storehouse.Models.Helpers.Datatables;
 using Azurite.Storehouse.Workers.Contracts;
 using Azurite.Storehouse.Wrappers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using System.Web.Mvc.Expressions;
+using log4net;
 
 namespace Azurite.Storehouse.Controllers
 {
-    public class OrdersController : Controller
+    public class OrdersController : BaseController
     {
         private readonly IOrdersWorker worker;
 
-        public OrdersController(IOrdersWorker worker)
+        public OrdersController(IOrdersWorker worker, ILog logger)
+            : base(logger)
         {
             this.worker = worker;
         }

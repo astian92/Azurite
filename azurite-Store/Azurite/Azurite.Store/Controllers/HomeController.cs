@@ -1,21 +1,19 @@
-﻿using Azurite.Store.Common;
-using Azurite.Store.Workers.Contracts;
-using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
+﻿using System.Globalization;
 using System.Text;
 using System.Threading;
 using System.Web;
 using System.Web.Mvc;
+using Azurite.Store.Workers.Contracts;
+using log4net;
 
 namespace Azurite.Store.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
         private ICurrencyWorker worker;
 
-        public HomeController(ICurrencyWorker worker)
+        public HomeController(ICurrencyWorker worker, ILog logger)
+            : base(logger)
         {
             this.worker = worker;
         }

@@ -1,27 +1,23 @@
-﻿using AutoMapper.QueryableExtensions;
-using Azurite.Storehouse.Data;
-using Azurite.Storehouse.Models;
-using Azurite.Storehouse.Models.Http;
-using Azurite.Storehouse.Models.Infrastructure;
-using Azurite.Storehouse.Models.ViewModels;
-using Azurite.Storehouse.Services.Contracts;
-using Azurite.Storehouse.Services.Implementations;
-using Azurite.Storehouse.Wrappers.Dashboard;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Data.Entity;
 using System.Linq;
-using System.Threading.Tasks;
-using System.Web;
 using System.Web.Mvc;
+using AutoMapper.QueryableExtensions;
+using Azurite.Storehouse.Data;
+using Azurite.Storehouse.Models;
+using Azurite.Storehouse.Models.Infrastructure;
+using Azurite.Storehouse.Models.ViewModels;
+using Azurite.Storehouse.Wrappers.Dashboard;
+using log4net;
 
 namespace Azurite.Storehouse.Controllers
 {
-    public class DashboardController : Controller
+    public class DashboardController : BaseController
     {
         private readonly MarketPlaceEntities db;
 
-        public DashboardController(IStorehouseDbFactory factory)
+        public DashboardController(IStorehouseDbFactory factory, ILog logger)
+            : base(logger)
         {
             this.db = factory.CreateConcrete();
         }

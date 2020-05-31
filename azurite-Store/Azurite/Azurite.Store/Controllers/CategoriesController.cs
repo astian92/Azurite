@@ -1,18 +1,17 @@
-﻿using Azurite.Store.Workers.Contracts;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System;
 using System.Web.Mvc;
+using Azurite.Store.Workers.Contracts;
+using log4net;
 
 namespace Azurite.Store.Controllers
 {
     [SessionState(System.Web.SessionState.SessionStateBehavior.ReadOnly)]
-    public class CategoriesController : Controller
+    public class CategoriesController : BaseController
     {
         ICategoryWorker worker;
 
-        public CategoriesController(ICategoryWorker worker)
+        public CategoriesController(ICategoryWorker worker, ILog logger)
+            : base(logger)
         {
             this.worker = worker;
         }

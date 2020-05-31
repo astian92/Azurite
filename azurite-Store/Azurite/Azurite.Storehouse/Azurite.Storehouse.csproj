@@ -174,11 +174,13 @@
     <Compile Include="Config\Constants\NamespaceConstants.cs" />
     <Compile Include="Config\Constants\ServicePaths.cs" />
     <Compile Include="Config\InfrastructureDependencyConfig.cs" />
+    <Compile Include="Config\LoggerDependencyConfig.cs" />
     <Compile Include="Config\ServicesDependencyConfig.cs" />
     <Compile Include="Config\Streamline\IServiceRegistrator.cs" />
     <Compile Include="Config\Streamline\ServiceRegistrator.cs" />
     <Compile Include="Config\WorkersDependencyConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\CurrencyController.cs" />
     <Compile Include="Controllers\CustomersController.cs" />
@@ -240,7 +242,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Handlers\LoggingHandler.cs" />
     <Compile Include="Models\Helpers\Datatables\DtParameters.cs" />
     <Compile Include="Models\Helpers\Datatables\JqueryListResult.cs" />
     <Compile Include="Models\Helpers\DropDownItem.cs" />
@@ -1042,6 +1043,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Scripts\sweetalert\" />
+    <Folder Include="Views\Base\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\font-awesome\fonts\glyphicons-halflings-regular.woff" />

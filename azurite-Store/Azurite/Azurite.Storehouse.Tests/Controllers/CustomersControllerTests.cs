@@ -1,17 +1,16 @@
-﻿using Azurite.Storehouse.Controllers;
-using Azurite.Storehouse.Models.Helpers.Datatables;
-using Azurite.Storehouse.Workers.Contracts;
-using Azurite.Storehouse.Wrappers;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using Azurite.Storehouse.Controllers;
+using Azurite.Storehouse.Models.Helpers.Datatables;
+using Azurite.Storehouse.Workers.Contracts;
+using Azurite.Storehouse.Wrappers;
+using log4net;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
 
 namespace Azurite.Storehouse.Tests.Controllers
 {
@@ -40,7 +39,7 @@ namespace Azurite.Storehouse.Tests.Controllers
                 new CustomerIndexViewModel() { FirstName = "Fn2" },
             }.AsQueryable());
 
-            this.controller = new CustomersController(worker);
+            this.controller = new CustomersController(worker, new Mock<ILog>().Object);
             this.controller.ControllerContext = new ControllerContext(new Mock<HttpContextBase>().Object, 
                 new Mock<RouteData>().Object, new Mock<ControllerBase>().Object);
         }

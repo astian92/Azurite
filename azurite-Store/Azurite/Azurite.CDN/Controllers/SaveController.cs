@@ -4,6 +4,7 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
+using Azurite.CDN.Filters;
 using Azurite.CDN.Models;
 using Azurite.CDN.Services.Contracts;
 using Azurite.CDN.Workers.Contracts;
@@ -12,6 +13,7 @@ using log4net;
 namespace Azurite.CDN.Controllers
 {
     [System.Web.Mvc.SessionState(System.Web.SessionState.SessionStateBehavior.ReadOnly)]
+    [GlobalExceptionFilter]
     public class SaveController : ApiController
     {
         private readonly ISaveWorker worker;

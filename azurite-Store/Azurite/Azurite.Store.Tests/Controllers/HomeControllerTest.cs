@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Web;
 using System.Web.Mvc;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Azurite.Store;
+using System.Web.Routing;
 using Azurite.Store.Controllers;
 using Azurite.Store.Workers.Contracts;
+using log4net;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using System.Web.Routing;
-using System.Web;
 
 namespace Azurite.Store.Tests.Controllers
 {
@@ -31,7 +27,7 @@ namespace Azurite.Store.Tests.Controllers
         public HomeControllerTest()
         {
             this.workerMock = new Mock<ICurrencyWorker>();
-            this.controller = new HomeController(worker);
+            this.controller = new HomeController(worker, new Mock<ILog>().Object);
             this.controller.ControllerContext = new ControllerContext(new Mock<HttpContextBase>().Object,
                 new Mock<RouteData>().Object, new Mock<ControllerBase>().Object);
         }
