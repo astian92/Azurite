@@ -1,0 +1,37 @@
+2020-05-28 17:07:48,889 ERROR Azurite.CDN.Controllers.RemoveController - IT woooorks!!
+2020-05-28 17:08:00,560 ERROR ApplicationLogger - <Error><Message>An error has occurred.</Message><ExceptionMessage>MARTO</ExceptionMessage><ExceptionType>System.ArgumentException</ExceptionType><StackTrace>   at Azurite.CDN.Controllers.RemoveController.Get()
+   at lambda_method(Closure , Object , Object[] )
+   at System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.&lt;&gt;c__DisplayClass10.&lt;GetExecutor&gt;b__9(Object instance, Object[] methodParameters)
+   at System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.Execute(Object instance, Object[] arguments)
+   at System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ExecuteAsync(HttpControllerContext controllerContext, IDictionary`2 arguments, CancellationToken cancellationToken)
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Web.Http.Controllers.ApiControllerActionInvoker.&lt;InvokeActionAsyncCore&gt;d__0.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Web.Http.Controllers.ActionFilterResult.&lt;ExecuteAsync&gt;d__2.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Web.Http.Dispatcher.HttpControllerDispatcher.&lt;SendAsync&gt;d__1.MoveNext()</StackTrace></Error>
+2020-05-28 17:46:46,555 ERROR Azurite.CDN.Controllers.RemoveController - IT woooorks!!
+2020-05-28 17:46:48,246 ERROR ApplicationLogger - <Error><Message>An error has occurred.</Message><ExceptionMessage>MARTO</ExceptionMessage><ExceptionType>System.ArgumentException</ExceptionType><StackTrace>   at Azurite.CDN.Controllers.RemoveController.Get() in D:\Projects\Azurite\azurite-Store\Azurite\Azurite.CDN\Controllers\RemoveController.cs:line 41
+   at lambda_method(Closure , Object , Object[] )
+   at System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.&lt;&gt;c__DisplayClass10.&lt;GetExecutor&gt;b__9(Object instance, Object[] methodParameters)
+   at System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.Execute(Object instance, Object[] arguments)
+   at System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ExecuteAsync(HttpControllerContext controllerContext, IDictionary`2 arguments, CancellationToken cancellationToken)
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Web.Http.Controllers.ApiControllerActionInvoker.&lt;InvokeActionAsyncCore&gt;d__0.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Web.Http.Controllers.ActionFilterResult.&lt;ExecuteAsync&gt;d__2.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Web.Http.Dispatcher.HttpControllerDispatcher.&lt;SendAsync&gt;d__1.MoveNext()</StackTrace></Error>
+2020-05-28 17:49:58,606 ERROR ApplicationLogger - <Error><Message>The request is invalid.</Message><MessageDetail>The parameters dictionary contains a null entry for parameter 'productId' of non-nullable type 'System.Guid' for method 'System.Threading.Tasks.Task`1[System.Net.Http.HttpResponseMessage] Get(System.Guid)' in 'Azurite.CDN.Controllers.FilesController'. An optional parameter must be a reference type, a nullable type, or be declared as an optional parameter.</MessageDetail></Error>

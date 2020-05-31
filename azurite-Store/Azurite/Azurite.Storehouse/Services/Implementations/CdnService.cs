@@ -1,13 +1,10 @@
-﻿using Azurite.Storehouse.Config.Constants;
+﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using System.Web.Configuration;
+using Azurite.Storehouse.Config.Constants;
 using Azurite.Storehouse.Models.Http;
 using Azurite.Storehouse.Services.Contracts;
-using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Web;
-using System.Web.Configuration;
 
 namespace Azurite.Storehouse.Services.Implementations
 {
@@ -20,7 +17,6 @@ namespace Azurite.Storehouse.Services.Implementations
         public CdnService(IHttpService service)
         {
             this.httpService = service;
-            //cdnAddress = WebConfigurationManager.AppSettings["CdnAddress"];
             string keyStr = WebConfigurationManager.AppSettings["SecurityKey"];
             this.key = Guid.Parse(keyStr);
         }

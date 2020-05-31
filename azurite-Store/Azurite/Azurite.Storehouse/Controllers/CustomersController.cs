@@ -1,19 +1,19 @@
-﻿using Azurite.Storehouse.Models.Helpers.Datatables;
+﻿using System;
+using System.Linq;
+using System.Web.Mvc;
+using Azurite.Storehouse.Models.Helpers.Datatables;
 using Azurite.Storehouse.Workers.Contracts;
 using Azurite.Storehouse.Wrappers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+using log4net;
 
 namespace Azurite.Storehouse.Controllers
 {
-    public class CustomersController : Controller
+    public class CustomersController : BaseController
     {
         private readonly ICustomersWorker worker;
 
-        public CustomersController(ICustomersWorker worker)
+        public CustomersController(ICustomersWorker worker, ILog logger)
+            : base(logger)
         {
             this.worker = worker;
         }

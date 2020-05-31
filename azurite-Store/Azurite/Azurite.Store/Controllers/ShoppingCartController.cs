@@ -1,18 +1,17 @@
-﻿using Azurite.Store.Workers.Contracts;
-using Azurite.Store.Wrappers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System;
 using System.Web.Mvc;
+using Azurite.Store.Workers.Contracts;
+using Azurite.Store.Wrappers;
+using log4net;
 
 namespace Azurite.Store.Controllers
 {
-    public class ShoppingCartController : Controller
+    public class ShoppingCartController : BaseController
     {
         private IShoppingCartWorker worker;
 
-        public ShoppingCartController(IShoppingCartWorker worker)
+        public ShoppingCartController(IShoppingCartWorker worker, ILog logger)
+            : base(logger)
         {
             this.worker = worker;
         }

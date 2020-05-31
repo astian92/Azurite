@@ -12,7 +12,8 @@ namespace Azurite.Infrastructure.Data.Implementations
         where TEntity : class
     {
         public Repository(IDbFactory factory)
-            : base(factory)
+            : 
+            base(factory)
         {
             
         }

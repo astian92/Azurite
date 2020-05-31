@@ -1,16 +1,16 @@
-﻿using Azurite.Infrastructure.Config;
-using Azurite.Store.Config.NinjectConfig;
-using Azurite.Store.Models.Helpers;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Globalization;
-using System.Linq;
+using System.IO;
 using System.Threading;
 using System.Web;
+using System.Web.Hosting;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
-using System.Web.Security;
+using Azurite.Infrastructure.Config;
+using Azurite.Store.Config.NinjectConfig;
+using log4net;
+using log4net.Config;
 
 namespace Azurite.Store
 {
@@ -18,6 +18,7 @@ namespace Azurite.Store
     {
         protected void Application_Start()
         {
+            InitializeLogger();
             DependencyResolver.SetResolver(new NinjectDependencyResolver());
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
@@ -40,6 +41,17 @@ namespace Azurite.Store
                 Thread.CurrentThread.CurrentCulture = new CultureInfo("bg");
                 Thread.CurrentThread.CurrentUICulture = new CultureInfo("bg");
             }
+        }
+
+        private void InitializeLogger()
+        {
+            var logFilePath = HostingEnvironment.MapPath(@"~/Content/logs");
+            var logFileName = "errorLog"; // without the extension
+            var fullPath = Path.Combine(logFilePath, logFileName);
+            GlobalContext.Properties["LogFileName"] = fullPath;
+
+            // Initialize log4net
+            XmlConfigurator.Configure();
         }
     }
 }

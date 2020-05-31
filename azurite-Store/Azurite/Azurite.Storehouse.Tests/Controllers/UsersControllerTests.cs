@@ -1,17 +1,15 @@
-﻿using Azurite.Infrastructure.ResponseHandling;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web.Mvc;
+using System.Web.Routing;
 using Azurite.Storehouse.Controllers;
 using Azurite.Storehouse.Models.Helpers.Datatables;
 using Azurite.Storehouse.Workers.Contracts;
 using Azurite.Storehouse.Wrappers;
+using log4net;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Web.Mvc;
-using System.Web.Routing;
 
 namespace Azurite.Storehouse.Tests.Controllers
 {
@@ -40,7 +38,7 @@ namespace Azurite.Storehouse.Tests.Controllers
             }.AsQueryable());
             this.workerMock.Setup(m => m.Get(It.IsAny<Guid>())).Returns(new UserW() { Username = "Usn" });
 
-            this.controller = new UsersController(this.worker);
+            this.controller = new UsersController(this.worker, new Mock<ILog>().Object);
             var urlMock = new Mock<UrlHelper>();
             urlMock.Setup(m => m.Action(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<RouteValueDictionary>()))
                 .Returns<string, string, RouteValueDictionary>((a, c, r) => c + "/" + a);

@@ -1,24 +1,24 @@
-﻿using Azurite.Infrastructure.Data.Contracts;
-using Azurite.Storehouse.Models;
-using Azurite.Storehouse.Models.Helpers;
-using Azurite.Storehouse.Models.Helpers.Datatables;
-using Azurite.Storehouse.Workers.Contracts;
-using Azurite.Storehouse.Wrappers;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Mvc.Expressions;
+using Azurite.Storehouse.Models.Helpers;
+using Azurite.Storehouse.Models.Helpers.Datatables;
+using Azurite.Storehouse.Workers.Contracts;
+using Azurite.Storehouse.Wrappers;
+using log4net;
 
 namespace Azurite.Storehouse.Controllers
 {
-    public class CategoriesController : Controller
+    public class CategoriesController : BaseController
     {
         private ICategoriesWorker worker;
 
-        public CategoriesController(ICategoriesWorker worker)
+        public CategoriesController(ICategoriesWorker worker, ILog logger)
+            : base(logger)
         {
             this.worker = worker;
         }

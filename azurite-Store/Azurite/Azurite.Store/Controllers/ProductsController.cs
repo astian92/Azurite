@@ -1,19 +1,21 @@
-﻿using Azurite.Store.Workers.Contracts;
-using Azurite.Store.Wrappers;
-using Newtonsoft.Json;
-using PagedList;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
+using Azurite.Store.Workers.Contracts;
+using Azurite.Store.Wrappers;
+using log4net;
+using Newtonsoft.Json;
+using PagedList;
 
 namespace Azurite.Store.Controllers
 {
-    public class ProductsController : Controller
+    public class ProductsController : BaseController
     {
         private IProductWorker worker;
 
-        public ProductsController(IProductWorker worker)
+        public ProductsController(IProductWorker worker, ILog logger)
+            : base(logger)
         {
             this.worker = worker;
         }

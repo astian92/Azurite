@@ -1,14 +1,10 @@
-﻿using Azurite.Storehouse.Services.Contracts;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Threading.Tasks;
+﻿using System;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using Newtonsoft.Json;
-using System.Net;
 using System.Text;
+using System.Threading.Tasks;
+using Azurite.Storehouse.Services.Contracts;
+using Newtonsoft.Json;
 
 namespace Azurite.Storehouse.Services.Implementations
 {
@@ -47,59 +43,49 @@ namespace Azurite.Storehouse.Services.Implementations
 
         public async Task<HttpResponseMessage> PostAsync(Uri uri, object data)
         {
-            //var content = ConvertToStringForm(data);
-            var dataString = JsonConvert.SerializeObject(data);
-            var content = new StringContent(dataString, Encoding.UTF8, "application/json");
-
             using (var client = new HttpClient())
             {
-                client.DefaultRequestHeaders.Accept.Clear();
-                client.DefaultRequestHeaders.Accept
-                   .Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                using (var request = BuildRequest("POST", uri))
+                {
+                    string requestContent = JsonConvert.SerializeObject(data);
+                    request.Content = new StringContent(requestContent, Encoding.UTF8, "application/json");
 
-                return await client.PostAsync(uri, content);
+                    using (var response = await client.SendAsync(request))
+                    {
+                        return response;
+                    }
+                }
             }
         }
 
         public async Task<T> PostAsync<T>(Uri uri, object data)
             where T: new()
         {
-            //var content = ConvertToStringForm(data);
-            var dataString = JsonConvert.SerializeObject(data);
-            var content = new StringContent(dataString, Encoding.UTF8, "application/json");
-
             using (var client = new HttpClient())
             {
-                client.DefaultRequestHeaders.Accept.Clear();
-                client.DefaultRequestHeaders.Accept
-                    .Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                using (var request = BuildRequest("POST", uri))
+                {
+                    string requestContent = JsonConvert.SerializeObject(data);
+                    request.Content = new StringContent(requestContent, Encoding.UTF8, "application/json");
 
-                var message = await client.PostAsync(uri, content);
+                    using (var response = await client.SendAsync(request))
+                    {
+                        var content = await response.Content.ReadAsStringAsync();
+                        var result = JsonConvert.DeserializeObject<T>(content);
 
-                var contentStr = await message.Content.ReadAsStringAsync();
-                T result = new T();
-                result = JsonConvert.DeserializeAnonymousType<T>(contentStr, result);
-
-                return result;
+                        return result;
+                    }
+                }
             }
         }
 
-        //Converts the object that is send as data in the http request to a FormUrlEncoded content
-        //so it can be easily send with the request
-        private FormUrlEncodedContent ConvertToStringForm(object obj)
+        private HttpRequestMessage BuildRequest(string method, Uri uri)
         {
-            var type = obj.GetType();
-            var props = type.GetProperties();
+            var httpRequest = new HttpRequestMessage();
+            httpRequest.Method = new HttpMethod(method);
+            httpRequest.RequestUri = uri;
 
-            var list = new List<KeyValuePair<string, string>>();
-
-            foreach (var prop in props)
-            {
-                var pair = new KeyValuePair<string, string>(prop.Name, prop.GetValue(obj).ToString());
-                list.Add(pair);
-            }
-
-            return new FormUrlEncodedContent(list);
+            return httpRequest;
         }
     }
 }

@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web.Http;
+﻿using System.Web.Http;
+using Azurite.CDN.Config.Handlers;
+using log4net;
 
 namespace Azurite.CDN
 {
@@ -31,6 +30,9 @@ namespace Azurite.CDN
                 routeTemplate: "cdn/{controller}",
                 defaults: new { id = RouteParameter.Optional }
             );
+
+            var logger = LogManager.GetLogger("ApplicationLogger");
+            config.MessageHandlers.Add(new LoggingHandler(logger));
         }
     }
 }

@@ -1,0 +1,86 @@
+2020-05-31 12:36:11,256 INFO ApplicationLogger - Request GET http://localhost:8696/cdn/remove; Headers: [Connection - keep-alive][Accept - text/html;application/xhtml+xml;application/xml; q=0.9;image/webp;image/apng;*/*; q=0.8;application/signed-exchange; v=b3; q=0.9][Accept-Encoding - gzip;deflate;br][Accept-Language - en-GB;en; q=0.9;bg-BG; q=0.8;bg; q=0.7;en-US; q=0.6][Cookie - __RequestVerificationToken=PT8tDnJgR8taZJy7mIcNh9W5DzXTXh5vOvR4BeJkOfEgTazvA4WB2i2plGYGgTiLrzzN6WaEWAobYzsL5BM6MiqOmACelaKLjW7OCXguFPQ1][Host - localhost:8696][User-Agent - Mozilla/5.0;(Windows NT 10.0; Win64; x64);AppleWebKit/537.36;(KHTML, like Gecko);Chrome/83.0.4103.61;Safari/537.36][Upgrade-Insecure-Requests - 1][Purpose - prefetch][Sec-Fetch-Site - none][Sec-Fetch-Mode - navigate][Sec-Fetch-User - ?1][Sec-Fetch-Dest - document]; Body: ;
+2020-05-31 12:36:22,165 ERROR GlobalHandler - An unexpected exception ocurred: 
+System.NotImplementedException: The method or operation is not implemented.
+   at Azurite.CDN.Controllers.RemoveController.Get() in D:\Projects\Azurite\azurite-Store\Azurite\Azurite.CDN\Controllers\RemoveController.cs:line 40
+   at lambda_method(Closure , Object , Object[] )
+   at System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass10.<GetExecutor>b__9(Object instance, Object[] methodParameters)
+   at System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.Execute(Object instance, Object[] arguments)
+   at System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ExecuteAsync(HttpControllerContext controllerContext, IDictionary`2 arguments, CancellationToken cancellationToken)
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Web.Http.Controllers.ApiControllerActionInvoker.<InvokeActionAsyncCore>d__0.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Web.Http.Controllers.ActionFilterResult.<ExecuteAsync>d__2.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Web.Http.Controllers.ExceptionFilterResult.<ExecuteAsync>d__0.MoveNext()
+2020-05-31 12:36:37,684 ERROR ApplicationLogger - Model State: ; Exception: System.NotImplementedException; Message: The method or operation is not implemented.; StackTrace:    at Azurite.CDN.Controllers.RemoveController.Get() in D:\Projects\Azurite\azurite-Store\Azurite\Azurite.CDN\Controllers\RemoveController.cs:line 40
+   at lambda_method(Closure , Object , Object[] )
+   at System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass10.<GetExecutor>b__9(Object instance, Object[] methodParameters)
+   at System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.Execute(Object instance, Object[] arguments)
+   at System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ExecuteAsync(HttpControllerContext controllerContext, IDictionary`2 arguments, CancellationToken cancellationToken)
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Web.Http.Controllers.ApiControllerActionInvoker.<InvokeActionAsyncCore>d__0.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Web.Http.Controllers.ActionFilterResult.<ExecuteAsync>d__2.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Web.Http.Controllers.ExceptionFilterResult.<ExecuteAsync>d__0.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Web.Http.Controllers.ExceptionFilterResult.<ExecuteAsync>d__0.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Web.Http.Dispatcher.HttpControllerDispatcher.<SendAsync>d__1.MoveNext()
+2020-05-31 12:38:48,025 INFO ApplicationLogger - Request GET http://localhost:8696/cdn/remove; Headers: [Cache-Control - max-age=0][Connection - keep-alive][Accept - text/html;application/xhtml+xml;application/xml; q=0.9;image/webp;image/apng;*/*; q=0.8;application/signed-exchange; v=b3; q=0.9][Accept-Encoding - gzip;deflate;br][Accept-Language - en-GB;en; q=0.9;bg-BG; q=0.8;bg; q=0.7;en-US; q=0.6][Cookie - __RequestVerificationToken=PT8tDnJgR8taZJy7mIcNh9W5DzXTXh5vOvR4BeJkOfEgTazvA4WB2i2plGYGgTiLrzzN6WaEWAobYzsL5BM6MiqOmACelaKLjW7OCXguFPQ1][Host - localhost:8696][User-Agent - Mozilla/5.0;(Windows NT 10.0; Win64; x64);AppleWebKit/537.36;(KHTML, like Gecko);Chrome/83.0.4103.61;Safari/537.36][Upgrade-Insecure-Requests - 1][Sec-Fetch-Site - none][Sec-Fetch-Mode - navigate][Sec-Fetch-User - ?1][Sec-Fetch-Dest - document]; Body: ;
+2020-05-31 12:38:51,717 ERROR GlobalHandler - An unexpected exception ocurred: 
+System.NotImplementedException: The method or operation is not implemented.
+   at Azurite.CDN.Controllers.RemoveController.Get() in D:\Projects\Azurite\azurite-Store\Azurite\Azurite.CDN\Controllers\RemoveController.cs:line 40
+   at lambda_method(Closure , Object , Object[] )
+   at System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass10.<GetExecutor>b__9(Object instance, Object[] methodParameters)
+   at System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.Execute(Object instance, Object[] arguments)
+   at System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ExecuteAsync(HttpControllerContext controllerContext, IDictionary`2 arguments, CancellationToken cancellationToken)
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Web.Http.Controllers.ApiControllerActionInvoker.<InvokeActionAsyncCore>d__0.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Web.Http.Controllers.ActionFilterResult.<ExecuteAsync>d__2.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Web.Http.Controllers.ExceptionFilterResult.<ExecuteAsync>d__0.MoveNext()
+2020-05-31 12:38:53,752 ERROR ApplicationLogger - <Error><Message>An error has occurred.</Message><ExceptionMessage>The method or operation is not implemented.</ExceptionMessage><ExceptionType>System.NotImplementedException</ExceptionType><StackTrace>   at Azurite.CDN.Controllers.RemoveController.Get() in D:\Projects\Azurite\azurite-Store\Azurite\Azurite.CDN\Controllers\RemoveController.cs:line 40
+   at lambda_method(Closure , Object , Object[] )
+   at System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.&lt;&gt;c__DisplayClass10.&lt;GetExecutor&gt;b__9(Object instance, Object[] methodParameters)
+   at System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.Execute(Object instance, Object[] arguments)
+   at System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ExecuteAsync(HttpControllerContext controllerContext, IDictionary`2 arguments, CancellationToken cancellationToken)
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Web.Http.Controllers.ApiControllerActionInvoker.&lt;InvokeActionAsyncCore&gt;d__0.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Web.Http.Controllers.ActionFilterResult.&lt;ExecuteAsync&gt;d__2.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Web.Http.Controllers.ExceptionFilterResult.&lt;ExecuteAsync&gt;d__0.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Web.Http.Controllers.ExceptionFilterResult.&lt;ExecuteAsync&gt;d__0.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Web.Http.Dispatcher.HttpControllerDispatcher.&lt;SendAsync&gt;d__1.MoveNext()</StackTrace></Error>

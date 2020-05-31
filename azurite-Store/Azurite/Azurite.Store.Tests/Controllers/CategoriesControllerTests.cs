@@ -1,15 +1,14 @@
-﻿using Azurite.Store.Controllers;
-using Azurite.Store.Workers.Contracts;
-using Azurite.Store.Wrappers;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Web.Mvc;
 using System.Web.Routing;
+using Azurite.Store.Controllers;
+using Azurite.Store.Workers.Contracts;
+using Azurite.Store.Wrappers;
+using log4net;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
 
 namespace Azurite.Store.Tests.Controllers
 {
@@ -40,7 +39,7 @@ namespace Azurite.Store.Tests.Controllers
             mockWorker.Setup(x => x.GetAll()).Returns(catList.AsQueryable());
             mockWorker.Setup(x => x.GetCategory(It.IsAny<Guid>())).Returns(new CategoryW() { Id = Guid.NewGuid(), Name = "Обици", Description = "Златни обици" });
 
-            controller = new CategoriesController(worker);
+            controller = new CategoriesController(worker, new Mock<ILog>().Object);
             var urlMock = new Mock<UrlHelper>();
             urlMock.Setup(m => m.Action(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<RouteValueDictionary>()))
                 .Returns<string, string, RouteValueDictionary>((a, c, r) => c + "/" + a);

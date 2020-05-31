@@ -1,20 +1,18 @@
-﻿using Azurite.CDN.Data;
-using Azurite.CDN.Models.Http;
-using Azurite.CDN.Workers.Contracts;
-using Azurite.Infrastructure.Data.Contracts;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Mvc;
+using Azurite.CDN.Attributes;
+using Azurite.CDN.Filters;
+using Azurite.CDN.Workers.Contracts;
 
 namespace Azurite.CDN.Controllers
 {
     [SessionState(System.Web.SessionState.SessionStateBehavior.ReadOnly)]
+    [GlobalExceptionFilter]
     public class FilesController : ApiController
     {
         private readonly IFilesWorker worker;
@@ -24,6 +22,7 @@ namespace Azurite.CDN.Controllers
             this.worker = worker;
         }
 
+        [DisableResponseLogging]
         public async Task<HttpResponseMessage> Get(Guid productId)
         {
             var file = await worker.GetFileFromId(productId);
@@ -36,6 +35,7 @@ namespace Azurite.CDN.Controllers
         }
 
         // GET: api/Files
+        [DisableResponseLogging]
         public async Task<HttpResponseMessage> Get(string filename)
         {
             var file = await worker.GetFile(filename);
