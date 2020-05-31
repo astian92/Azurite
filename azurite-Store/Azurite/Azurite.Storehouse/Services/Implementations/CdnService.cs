@@ -17,7 +17,6 @@ namespace Azurite.Storehouse.Services.Implementations
         public CdnService(IHttpService service)
         {
             this.httpService = service;
-            //cdnAddress = WebConfigurationManager.AppSettings["CdnAddress"];
             string keyStr = WebConfigurationManager.AppSettings["SecurityKey"];
             this.key = Guid.Parse(keyStr);
         }

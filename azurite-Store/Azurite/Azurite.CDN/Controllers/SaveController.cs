@@ -28,8 +28,8 @@ namespace Azurite.CDN.Controllers
         [HttpPost]
         public async Task<HttpResponseMessage> Post(ProductFiles data)
         {
-            keyValidator.Validate(data.Key);
             logger.Info($"Entered saving files. Files to save: {data.Files.Count()}");
+            keyValidator.Validate(data.Key);
 
             try
             {

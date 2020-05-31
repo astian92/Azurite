@@ -64,6 +64,9 @@
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
       <Private>True</Private>
@@ -237,6 +240,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Handlers\LoggingHandler.cs" />
     <Compile Include="Models\Helpers\Datatables\DtParameters.cs" />
     <Compile Include="Models\Helpers\Datatables\JqueryListResult.cs" />
     <Compile Include="Models\Helpers\DropDownItem.cs" />
@@ -984,7 +988,9 @@
     <Content Include="Content\select2\src\scss\_dropdown.scss" />
     <Content Include="Content\select2\src\scss\_multiple.scss" />
     <Content Include="Content\select2\src\scss\_single.scss" />
+    <Content Include="libman.json" />
     <None Include="Properties\PublishProfiles\astian.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\datatables\datatables.min.js" />

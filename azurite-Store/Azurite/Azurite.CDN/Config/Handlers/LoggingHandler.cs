@@ -3,6 +3,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Web.Http;
 using Azurite.CDN.Attributes;
 using log4net;
 
@@ -27,18 +28,26 @@ namespace Azurite.CDN.Config.Handlers
 
                 var response = await base.SendAsync(request, cancellationToken);
 
-                // only log from save controller :( LATER CHANGE TO LOG POST request responses!
-                if (ShouldLogResponse(request))
+                if (ShouldLogResponse(request) && response.Content != null)
                 {
-                    var responseContent = await response.Content.ReadAsStringAsync();
-
                     if (response.IsSuccessStatusCode)
                     {
+                        var responseContent = await response.Content.ReadAsStringAsync();   
                         this.logger.Info($"Response: {responseContent};");
                     }
                     else
                     {
-                        this.logger.Error($"Response: {response.Content};");
+                        var httpError = await response.Content.ReadAsAsync<HttpError>();
+
+                        if (httpError != null && (httpError.Count > 0 || httpError.ExceptionMessage != null))
+                        {
+                            this.logger.Error($"Model State: {httpError.ModelState?.Message}; Exception: {httpError.ExceptionType}; Message: {httpError.ExceptionMessage}; StackTrace: {httpError.StackTrace}");
+                        }
+                        else
+                        {
+                            var responseContent = await response.Content.ReadAsStringAsync();
+                            this.logger.Error(responseContent);
+                        }
                     }
                 }
 

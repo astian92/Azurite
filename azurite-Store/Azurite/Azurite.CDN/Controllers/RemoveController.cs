@@ -1,5 +1,4 @@
-﻿using System;
-using System.Net;
+﻿using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using Azurite.CDN.Models.Http;
@@ -30,15 +29,6 @@ namespace Azurite.CDN.Controllers
 
             worker.DeleteFiles(multipleIds.Ids);
             return new HttpResponseMessage(HttpStatusCode.OK);
-        }
-
-        [HttpGet]
-        public HttpResponseMessage Get()
-        {
-            var exc = new ArgumentException("MARTO");
-            this.logger.Error("IT woooorks!!", exc);
-
-            throw exc;
         }
     }
 }

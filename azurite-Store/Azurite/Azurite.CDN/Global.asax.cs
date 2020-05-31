@@ -24,22 +24,12 @@ namespace Azurite.CDN
         private void InitializeLogger()
         {
             var logFilePath = HostingEnvironment.MapPath(@"~/Content/logs");
-            var logFileName = "errorLog";
-            // without the extension
+            var logFileName = "errorLog"; // without the extension
             var fullPath = Path.Combine(logFilePath, logFileName);
-
             GlobalContext.Properties["LogFileName"] = fullPath;
 
             // Initialize log4net
             XmlConfigurator.Configure();
-        }
-
-        protected void Application_Error()
-        {
-            var exception = Server.GetLastError();
-            var logger = LogManager.GetLogger("ApplicationLogger");
-
-            logger.Error("There was an error on application level.", exception);
         }
     }
 }
