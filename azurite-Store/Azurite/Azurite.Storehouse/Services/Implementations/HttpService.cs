@@ -4,7 +4,6 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using Azurite.Storehouse.Services.Contracts;
-using log4net;
 using Newtonsoft.Json;
 
 namespace Azurite.Storehouse.Services.Implementations
@@ -44,8 +43,6 @@ namespace Azurite.Storehouse.Services.Implementations
 
         public async Task<HttpResponseMessage> PostAsync(Uri uri, object data)
         {
-            var logger = LogManager.GetLogger("HttpLogger");
-
             using (var client = new HttpClient())
             {
                 using (var request = BuildRequest("POST", uri))
@@ -53,14 +50,8 @@ namespace Azurite.Storehouse.Services.Implementations
                     string requestContent = JsonConvert.SerializeObject(data);
                     request.Content = new StringContent(requestContent, Encoding.UTF8, "application/json");
 
-                    var requestInfo = JsonConvert.SerializeObject(request);
-                    logger.Info("ATTEMPTING TO SEND REQUEST: " + requestInfo);
-
                     using (var response = await client.SendAsync(request))
                     {
-                        var responseInfo = JsonConvert.SerializeObject(response);
-                        logger.Info("PROCESSING RESPONSE: " + responseInfo);
-
                         return response;
                     }
                 }
@@ -70,8 +61,6 @@ namespace Azurite.Storehouse.Services.Implementations
         public async Task<T> PostAsync<T>(Uri uri, object data)
             where T: new()
         {
-            var logger = LogManager.GetLogger("HttpLogger");
-
             using (var client = new HttpClient())
             {
                 using (var request = BuildRequest("POST", uri))
@@ -79,14 +68,8 @@ namespace Azurite.Storehouse.Services.Implementations
                     string requestContent = JsonConvert.SerializeObject(data);
                     request.Content = new StringContent(requestContent, Encoding.UTF8, "application/json");
 
-                    var requestInfo = JsonConvert.SerializeObject(request);
-                    logger.Info("ATTEMPTING TO SEND REQUEST: " + requestInfo);
-
                     using (var response = await client.SendAsync(request))
                     {
-                        var responseInfo = JsonConvert.SerializeObject(response);
-                        logger.Info("PROCESSING RESPONSE: " + responseInfo);
-
                         var content = await response.Content.ReadAsStringAsync();
                         var result = JsonConvert.DeserializeObject<T>(content);
 
